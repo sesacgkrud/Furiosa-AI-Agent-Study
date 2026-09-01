@@ -15,7 +15,7 @@ model.add(Dense(1, input_dim=1))
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
-model.fit(x, y, epochs=100)
+model.fit(x, y, epochs=300)
 
 #4. 평가, 예측
 loss = model.evaluate(x, y) # loss='mse'의 값

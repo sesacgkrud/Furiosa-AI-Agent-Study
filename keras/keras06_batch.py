@@ -8,7 +8,7 @@ y = np.array([1,2,3,5,4,6])
 
 #2. 모델 구성
 model = Sequential()
-model.add(Dense(500, input_dim=1))
+model.add(Dense(500, input_dim=1)) # input_dim=1 : 1개의 백터
 model.add(Dense(250)) # input_dim 생략 가능
 model.add(Dense(1)) # input_dim 생략 가능
 

@@ -15,8 +15,10 @@ model.add(Dense(1, input_dim=1)) # Dense(출력값, 입력값)
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam') # mse 방식으로 오차 도출, optimizer='adam' 85% 이상 평타 (default 개념)
-model.fit(x, y, epochs=1) # model.fit -> 훈련, epochs -> 반복 훈련 횟수
+model.fit(x, y, epochs=300) # model.fit -> 훈련, epochs -> 반복 훈련 횟수
 
 #4. 평가, 예측
 result = model.predict(np.array([4]))
 print("4의 예측값 :", result)
+
+# 4의 예측값 : [[4.10628]]
