@@ -8,7 +8,13 @@ from sklearn.metrics import r2_score, mean_squared_error
 import pandas as pd
 
 #1. 데이터
-path = "./_data/ddareung/" # 데이터가 있는 폴더 경로를 path 변수에 저장
+# path = "./_data/ddareung/" # 상대경로, 데이터가 있는 폴더 경로를 path 변수에 저장
+# path = "c:/furiosa_study/_data/ddareung/" # 절대경로
+# path = "c:\furiosa_study\_data\ddareung/" # /, \ 관계 없이 모두 가능, \사용 시 뒤 문자와 결합해서 예약어(\t, \n, \s)가 되는 경우 주의
+path = "c://furiosa_study//_data//ddareung//" # / 로 문제 있을 때 // 사용
+# path = "c:\\furiosa_study\\_data\\ddareung\\" # \\ 도 가능
+# path = "c://furiosa_study\\_data\\ddareung\\" # 섞어 사용도 가능, 가급적 비권장
+
 train_csv = pd.read_csv(path + "train.csv", index_col=0) # 데이터를 pandas 데이터 형태로 리턴, index_col=0 -> 첫번째 컬럼 = index 컬럼
 # print(train_csv) # [1459 rows x 11 columns] -> index(id열) 제거 후 -> [1459 rows x 10 columns]
 # count(y값) 있음
@@ -23,7 +29,7 @@ submission = pd.read_csv(path + "submission.csv", index_col=0)
 # print(submission) # [715 rows x 1 columns]
 
 # print(train_csv.shape) # (1459, 10)
-# print(test_csv.shape) # (715, 9)
+# print(test_csv.shape) # (715, 9) evaluate 사용 불가, test 데이터로 submission을 맞추야 하기 위한 파일
 # print(submission.shape) # (715, 1)
 
 # print(train_csv.columns)
@@ -34,7 +40,7 @@ Index(['hour', 'hour_bef_temperature', 'hour_bef_precipitation',
       dtype='str')
 '''
 
-# print(train_csv.info())
+# print(train_csv.info()) # 많은 결측치 존재
 '''
 <class 'pandas.DataFrame'>
 Index: 1459 entries, 3 to 2179
@@ -131,13 +137,13 @@ x_train, x_test, y_train, y_test = train_test_split(
 
 #2. 모델 구성
 model = Sequential()
-model.add(Dense(128, activation='relu'))
+model.add(Dense(128, input_dim=9, activation='relu'))
 model.add(Dense(64, activation='relu'))
 model.add(Dense(32, activation='relu'))
 model.add(Dense(1))
 
 #3. 컴파일, 훈련
-model.compile(loss="mse", optimizer='adam')
+model.compile(loss='mse', optimizer='adam')
 model.fit(x_train, y_train, epochs=1000, batch_size=16)
 
 print("========== ========== ========== ========== ==========")

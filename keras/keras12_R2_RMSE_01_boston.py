@@ -44,10 +44,10 @@ model.add(Dense(1))
 # 집값 하나를 예측해야 하므로 뉴런 1개 사용
 
 #3. 컴파일, 훈련
-model.compile(loss="mse", optimizer='adam')
+model.compile(loss='mse', optimizer='adam')
 # 모델 학습 방법 설정
 #
-# loss="mse"
+# loss='mse'
 # → 손실 함수로 평균제곱오차(MSE)를 사용
 # → 실제값과 예측값의 차이를 제곱해서 평균을 구함
 #
@@ -71,7 +71,7 @@ loss = model.evaluate(x_test, y_test)
 # x_test → 테스트 입력 데이터
 # y_test → 테스트 실제 정답
 #
-# 여기서는 compile에서 loss="mse"를 사용했기 때문에
+# 여기서는 compile에서 loss='mse'를 사용했기 때문에
 # 반환되는 loss 값은 MSE(평균제곱오차)
 
 print("loss :", loss)

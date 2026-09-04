@@ -24,7 +24,7 @@ model.add(Dense(16))
 model.add(Dense(1))
 
 #3. 컴파일, 훈련
-model.compile(loss="mse", optimizer='adam')
+model.compile(loss='mse', optimizer='adam')
 model.fit(x_train, y_train, epochs=2000, batch_size=16)
 
 print("========== ========== ========== ========== ==========")
