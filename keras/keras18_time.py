@@ -1,3 +1,5 @@
+# keras14_kaggle_bike1.py 베이스
+
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
 
 import numpy as np
@@ -7,6 +9,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
+import time
 
 #1. 데이터
 path = "./_data/kaggle_bike/"
@@ -56,7 +59,9 @@ model.add(Dense(1, activation='relu')) # 통상적으로 마지막에는 relu �
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
-model.fit(x_train, y_train, epochs=1000, batch_size=16)
+start_time = time.time() # 현재 시간 반환(=시작 시간)
+model.fit(x_train, y_train, epochs=2, batch_size=16)
+end_time = time.time() # 현재 시간 반환(=종료 시간)
 
 print("========== ========== ========== ========== ==========")
 
@@ -78,34 +83,12 @@ def RMSE(y_test, y_predict):
 rmse = RMSE(y_test, y_predict)
 print("RMSE :", rmse)
 
+print("소요 시간 :", round(end_time - start_time, 2), "초")
+
+'''
 ##### submission.csv 만들기 // count 컬럼에 값 넣기 #####
 y_submit = model.predict(test_csv)
 
 submission['count'] = y_submit
 submission.to_csv(path + "submit/" + "submit_0904_1620.csv")
-
-########################################################################
-
-# 1차 시도 (random_state=77, Dense=64,32,16,1, epochs=2000, batch_size=16)
-# loss(mse) : 23562.330078125
-# r2 : 0.2606160044670105
-# mse : 23562.328125
-# RMSE : 153.50025447861643
-
-# 2차 시도 (random_state=77, Dense=64,32,1, epochs=1000, batch_size=32)
-# loss(mse) : 20959.08203125
-# r2 : 0.3423055410385132
-# mse : 20959.0859375
-# RMSE : 144.77253170922998
-
-# 3차 시도 (random_state=100, Dense=32,16,1, epochs=1000, batch_size=16)
-# loss(mse) : 22091.6875
-# r2 : 0.3145309090614319
-# mse : 22091.689453125
-# RMSE : 148.63273345103022
-
-# 4차 시도 (random_state=100, Dense=32,16,1, epochs=1000, batch_size=16) -> 마지막 relu 추가
-# loss(mse) : 21878.287109375
-# r2 : 0.3211525082588196
-# mse : 21878.287109375
-# RMSE : 147.9131066179566
+'''

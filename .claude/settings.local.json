@@ -5,7 +5,13 @@
       "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth status 2>&1)",
       "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth login --web)",
       "PowerShell(Set-Location C:\\\\furiosa_study; & \"C:\\\\Program Files\\\\Git\\\\bin\\\\git.exe\" rev-parse --abbrev-ref --symbolic-full-name HEAD@{u})",
-      "PowerShell(Get-ChildItem -Recurse C:\\\\furiosa_study -File | Where-Object {$_.LastWriteTime -gt \\(Get-Date\\).AddDays\\(-1\\)} | Select-Object FullName, LastWriteTime)"
+      "PowerShell(Get-ChildItem -Recurse C:\\\\furiosa_study -File | Where-Object {$_.LastWriteTime -gt \\(Get-Date\\).AddDays\\(-1\\)} | Select-Object FullName, LastWriteTime)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(python3 *)",
+      "Bash(git restore *)",
+      "Bash(git reset *)"
     ]
   }
 }
