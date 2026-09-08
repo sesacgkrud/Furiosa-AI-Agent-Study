@@ -43,12 +43,23 @@ model.add(Dense(1, activation='relu')) # 통상적으로 마지막에는 relu �
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
+
+from tensorflow.keras.callbacks import EarlyStopping
+
+es = EarlyStopping(
+    monitor='val_loss',
+    mode='min',
+    patience=20,
+    restore_best_weights=True,
+)
+
 hist = model.fit(
     x_train, y_train,
     epochs=500,
     batch_size=16,
     validation_split=0.2,             # [추가] x_train 의 20%를 검증용으로 사용 -> val_loss 출력
     # validation_data=(x_val, y_val), # [방법 1] 로 x_val 을 만들었다면 위 줄 대신 이 줄을 쓴다
+    callbacks=[es],
 )
 
 print("========== ========== ========== ========== ==========")
@@ -100,5 +111,5 @@ plt.xlabel('loss')
 plt.grid() # 격자 표시 추가
 plt.show()
 
-# loss: 21725.1992 - val_loss: 22583.5430
-# loss: 21853.4062
+# loss: 22175.3379 - val_loss: 22727.3770
+# loss: 21894.7402

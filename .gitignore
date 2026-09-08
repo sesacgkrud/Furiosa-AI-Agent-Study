@@ -1,0 +1,8 @@
+# GitHub 파일 용량 제한(100MB) 초과 데이터셋 - Kaggle에서 직접 내려받아 사용
+# https://www.kaggle.com/competitions/santander-customer-transaction-prediction/data
+_data/kaggle_santander/train.csv
+_data/kaggle_santander/test.csv
+
+# Python
+__pycache__/
+*.pyc

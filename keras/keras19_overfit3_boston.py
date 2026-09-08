@@ -57,3 +57,6 @@ plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가
 plt.show()
+
+# loss: 5.4735 - val_loss: 19.2607
+# loss: 23.0719

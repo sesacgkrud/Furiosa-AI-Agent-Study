@@ -32,8 +32,19 @@ model.add(Dense(1))
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
-hist = model.fit(x_train, y_train, epochs=500, batch_size=16,
-          validation_split=0.3,
+
+from tensorflow.keras.callbacks import EarlyStopping
+es = EarlyStopping(
+    monitor='val_loss',
+    mode='min',
+    patience=20,
+    restore_best_weights=True,
+)
+hist = model.fit(x_train, y_train,
+                 epochs=500,
+                 batch_size=16,
+                 validation_split=0.3,
+                 callbacks=[es],
 )
 
 #4. 평가 예측
@@ -68,5 +79,5 @@ plt.xlabel('loss')
 plt.grid() # 격자 표시 추가
 plt.show()
 
-# loss: 2066.9373 - val_loss: 3627.6526
-# loss: 3002.0483
+# loss: 2520.1035 - val_loss: 3677.6003
+# loss : 2874.47216796875
