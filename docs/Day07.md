@@ -121,4 +121,4 @@ submission.to_csv(path + 'submit/' + 'submit_0908_1642.csv')
 
 ---
 
-[⬅️ Day06](Day06.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day06](Day06.md) · [🏠 전체 목차](../README.md) · [Day08 ➡️](Day08.md)
