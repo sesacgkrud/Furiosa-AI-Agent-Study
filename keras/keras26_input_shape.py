@@ -1,3 +1,5 @@
+# keras23_softmax1_OneHot_iris.py 베이스
+
 import numpy as np
 import pandas as pd
 import time
@@ -35,21 +37,6 @@ y = datasets['target'] # 정답 데이터 -> Iris는 3개의 종류를 분류
 
 # print(np.unique(y, return_counts=True)) # (array([0, 1, 2]), array([50, 50, 50])) -> 0, 1, 2라는 클래스가 존재하고 각각 50개씩 있음 (pandas의 value_counts()와 비슷한 역할)
 
-'''
-남자, 여자, 외계인
-[0,0,1,1,2] # (5,)
-->
-[[1,0,0],
- [1,0,0],
- [0,1,0],
- [0,1,0],
- [0,0,1]] # (5,3)
-
- [1,0,0] -> 여자
- [0,1,0] -> 남자
- [0,0,1] -> 외계인
-
-'''
 
 '''
 OneHot Encoding은 모델을 구성하거나 훈련하는 작업이 아니라,
@@ -97,8 +84,6 @@ print('\n===== sklearn One-Hot Encoding =====')
 print(y)
 print('y.shape :', y.shape)  # (150, 3)
 
-# exit()
-
 x_train, x_test, y_train, y_test = train_test_split(
     x, y,
     train_size=0.7,
@@ -110,14 +95,21 @@ x_train, x_test, y_train, y_test = train_test_split(
 print(x_train.shape, x_test.shape) # (120, 4) (30, 4)
 print(y_train.shape, y_test.shape) # (120, 3) (30, 3)
 
-# exit()
-
 #2. 모델 구성
 model = Sequential()
-model.add(Dense(30, input_dim=4, activation='relu')) # 뉴런 30개, 입력 데이터 feature 4개, 이 층의 활성화 함수로 ReLU 사용
+# model.add(Dense(30, input_dim=4, activation='relu')) # 뉴런 30개, 입력 데이터 feature 4개, 이 층의 활성화 함수로 ReLU 사용
+model.add(Dense(30, input_shape=(4,), activation='relu')) # 뉴런 30개, 입력 데이터 feature 4개, 이 층의 활성화 함수로 ReLU 사용
 model.add(Dense(20, activation='relu'))
 model.add(Dense(10, activation='relu'))
 model.add(Dense(3, activation='softmax')) # Iris의 클래스가 3개이기 때문에 3, ex) [2.3, 0.8, -1.2] -> 이런 형식으로 출력 (각 클래스일 확률) -- softmax --> [0.80, 0.18, 0.02]
+
+'''
+원데이터   -> input_shape
+(n,4)     -> (4,)
+(n,100,3) -> (100,3)
+(n,100,100,3) -> (100,100,3)
+이상 없음
+'''
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc']) # categorical_crossentropy -> 다중 분류에서 One-Hot Encoding된 정답과 softmax의 예측 결과를 비교해서 오차를 계산하는 손실 함수
@@ -147,7 +139,6 @@ print('acc :', round(result[1],3))
 y_predict = model.predict(x_test) # test 데이터의 정답을 모델에게 알려주지 않고, 입력값만 넣어서 예측
 
 # print(y_predict) # y_predict는 아직 0, 1, 2가 아님(현재 확률값)
-# exit()
 
 y_test_arg = np.argmax(y_test, axis=1) # argmax : 확률값 -> 클래스 번호로 변경 (y_test는 One-Hot 형태로 가장 큰 값 위치를 찾음)
 y_predict_arg = np.argmax(y_predict, axis=1) # 예측도 위와 동일
@@ -156,7 +147,7 @@ accuracy_score = accuracy_score(y_test_arg, y_predict_arg) # 실제 정답과 �
 print('accuracy_score :', accuracy_score)
 print('소요 시간 :', round(end_time - start_time), '초')
 
-# loss : 0.0652257427573204
-# acc : 1.0
-# accuracy_score : 1.0
+# loss : 0.07295681536197662
+# acc : 0.978
+# accuracy_score : 0.9777777777777777
 # 소요 시간 : 8 초

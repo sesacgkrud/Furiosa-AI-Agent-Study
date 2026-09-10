@@ -89,3 +89,7 @@ submission = pd.read_csv(path + 'sample_submission.csv', index_col=0)
 y_submit = model.predict(test_csv)
 submission['target'] = y_submit
 submission.to_csv(path + 'submit/' + 'submit_0908_1642.csv')
+
+# loss :  [0.23891602456569672, 0.9123333096504211]
+# acc : 0.9103
+# acc_score : 0.9123333333333333

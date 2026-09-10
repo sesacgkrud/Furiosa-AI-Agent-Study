@@ -16,6 +16,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day06](docs/Day06.md)** | Validation & 과적합 시각화 | 2026-09-07 | verbose, validation_data/split, History 시각화, EarlyStopping |
 | **[Day07](docs/Day07.md)** | EarlyStopping 확대 & 이진 분류 | 2026-09-08 | patience/restore_best_weights, sigmoid, binary_crossentropy, metrics, stratify |
 | **[Day08](docs/Day08.md)** | 다중 분류 & One-Hot Encoding | 2026-09-09 | softmax, categorical_crossentropy, to_categorical, OneHotEncoder, np.argmax |
+| **[Day09](docs/Day09.md)** | 데이터 스케일링 & 모델 구조 확인 | 2026-09-10 | MinMaxScaler, fit/transform, 데이터 누수, model.summary, input_shape |
 
 ---
 
@@ -32,6 +33,8 @@ C:\furiosa_study\
 │   ├── keras15_verbose.py ~ keras20_EarlyStopping1_...py       (Day06)
 │   ├── keras20_EarlyStopping2_diabetes.py ~ keras22_...py      (Day07)
 │   ├── keras23_softmax1_OneHot_iris.py ~ keras23_softmax4_...py (Day08)
+│   ├── keras24_kaggle_santander_categorical.py ~ keras27_...py  (Day09)
+│   ├── keras28_Scaler01_california.py ~ keras28_Scaler10_...py  (Day09)
 │   └── ...
 ├── _data/
 │   ├── ddareung/           (Dacon 따릉이 데이터)
@@ -40,7 +43,7 @@ C:\furiosa_study\
 ├── docs/                   (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day08.md
+│   └── ... Day09.md
 ├── README.md               (전체 목차)
 ├── .gitignore
 └── .vscode/
@@ -52,11 +55,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 8일 (Day01 ~ Day08)  
-**완료 시간:** 64시간  
-**완료율: 10.0%**
+**완료:** 9일 (Day01 ~ Day09)  
+**완료 시간:** 72시간  
+**완료율: 11.3%**
 
 ---
 
-**마지막 업데이트:** 2026-09-09  
-**최근 학습:** [Day08 - 다중 분류(Multiclass Classification)와 One-Hot Encoding](docs/Day08.md)
+**마지막 업데이트:** 2026-09-10  
+**최근 학습:** [Day09 - 데이터 스케일링(MinMaxScaler)과 모델 구조 확인](docs/Day09.md)

@@ -5,7 +5,6 @@ from sklearn.datasets import fetch_california_housing
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler   # [추가] 스케일링용
 import numpy as np
 
 #1. 데이터
@@ -19,16 +18,13 @@ x_train, x_test, y_train, y_test = train_test_split(
     random_state=100,
 )
 
-#################### [추가] 스케일링 - 그래프가 우하향 안 하던 가장 큰 원인 ####################
+#################### [참고] loss 그래프가 우하향 안 하는 이유 ####################
 # california 는 컬럼마다 값의 범위가 완전히 다르다.
 #   MedInc(소득) 0~15 / AveRooms 몇 개 / Population(인구) 수천 / AveOccup 는 1000 넘는 이상치까지
 # 값이 큰 컬럼 하나 때문에 gradient 가 그쪽으로만 크게 튀어서,
 # loss 가 내려가다가 갑자기 솟구치는(톱니 모양) 그래프가 된다. -> "대체로 우하향"이 안 보인다.
-# StandardScaler 로 컬럼마다 평균 0, 표준편차 1 로 맞춰주면 loss 가 매끄럽게 내려간다.
-scaler = StandardScaler()
-x_train = scaler.fit_transform(x_train)   # fit 은 train 으로만! (test 정보를 미리 보면 안 됨)
-x_test  = scaler.transform(x_test)        # test 는 train 이 만든 기준으로 "변환만" 한다
-###############################################################################################
+# -> 이 문제는 keras28_Scaler01_california.py 에서 MinMaxScaler 로 해결한다.
+################################################################################
 
 #2. 모델 구성
 model = Sequential()

@@ -87,13 +87,8 @@ x_train, x_test, y_train, y_test = train_test_split(
 #################### [참고] 스케일링 ####################
 # california 데이터는 컬럼별 값 범위가 크게 다르다.
 #   MedInc(소득)은 ~8 정도인데 Population(인구)은 수천 단위
-# 이러면 학습이 불안정하고 loss 가 잘 안 떨어진다. 나중에 배울 StandardScaler 를 쓰면
-# 성능이 크게 좋아진다. (아직 진도 전이라 주석으로만 남김)
-#
-# from sklearn.preprocessing import StandardScaler
-# scaler = StandardScaler()
-# x_train = scaler.fit_transform(x_train)   # train 으로만 fit! (test 정보를 미리 보면 안 됨)
-# x_test  = scaler.transform(x_test)
+# 이러면 학습이 불안정하고 loss 가 잘 안 떨어진다.
+# -> keras28_Scaler01_california.py 에서 MinMaxScaler 로 해결한다.
 #########################################################
 
 #2. 모델 구성

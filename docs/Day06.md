@@ -17,7 +17,6 @@
 - `hist.history['loss']`, `hist.history['val_loss']`를 Matplotlib으로 시각화하여 과적합(Overfitting) 판독
 - 과적합 판독 기준: `loss ↓ / val_loss ↓` = 정상 학습, `loss ↓ / val_loss ↑` = 과적합 시작
 - **EarlyStopping** 콜백으로 과적합 지점에서 훈련 자동 중단 (`monitor`, `mode`, `patience`, `restore_best_weights`)
-- 데이터 스케일링의 필요성 확인: `StandardScaler` 적용 전/후 loss 곡선 비교
 - 활성화 함수 없이 Dense를 여러 층 쌓으면 결국 선형 모델 1개와 동일함을 이해
 
 ### 학습 파일
@@ -32,7 +31,7 @@
 - `keras17_val4_dacon_ddareung.py`: Dacon 따릉이 + `validation_data` (방법 1), r2/mse/RMSE 평가
 - `keras17_val5_kaggle_bike.py`: Kaggle Bike Sharing + `validation_split` (방법 2), r2/mse/RMSE 평가
 - `keras18_time.py`: `time.time()`으로 훈련 시작/종료 시간을 재서 소요 시간 출력
-- `keras19_overfit1_california.py`: California Housing loss/val_loss 곡선 시각화 + `StandardScaler`/`relu` 적용 (train loss 0.75 → 0.025, val_loss 최저 0.281@49 epoch 이후 상승 = 과적합)
+- `keras19_overfit1_california.py`: California Housing loss/val_loss 곡선 시각화 + `relu` 적용 (val_loss가 어느 시점부터 상승하는 것을 보고 과적합 구간 확인)
 - `keras19_overfit2_diabetes.py`: Diabetes loss/val_loss 곡선 시각화 (초반 급락 구간을 `[10:]`로 잘라내고 표시)
 - `keras19_overfit3_boston.py`: Boston Housing loss/val_loss 곡선 시각화 (`[10:]` 구간)
 - `keras19_overfit4_dacon_ddareung.py`: 따릉이 loss/val_loss 곡선 시각화 + r2/mse/RMSE 평가
@@ -112,11 +111,6 @@ es = EarlyStopping(
 model.fit(x_train, y_train, epochs=99999999999, batch_size=32,
           validation_split=0.2, callbacks=[es])
 
-# 스케일링 - loss 곡선이 우하향하지 않을 때
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-x_train = scaler.fit_transform(x_train)   # fit은 train으로만! (test 정보를 미리 보면 안 됨)
-x_test  = scaler.transform(x_test)        # test는 train의 기준으로 변환만
 # 활성화 함수 없이 Dense만 쌓으면 선형 x 선형 = 선형 -> 직선 모델 1개와 동일
 model.add(Dense(100, input_dim=8, activation='relu'))
 ```
@@ -129,9 +123,8 @@ model.add(Dense(100, input_dim=8, activation='relu'))
 5. **History 시각화**: `hist = model.fit(...)` -> `hist.history['loss']`, `['val_loss']`를 그래프로 확인
 6. **과적합 판독**: 두 곡선이 벌어지는(val_loss가 상승하는) 지점이 훈련을 멈춰야 할 시점
 7. **EarlyStopping**: patience만큼 기다렸다가 중단하고, restore_best_weights로 최적 가중치 복원
-8. **스케일링의 효과**: 컬럼별 값 범위가 다르면 gradient가 폭주 -> StandardScaler로 loss 곡선이 매끄러워짐
-9. **활성화 함수의 필요성**: relu 없이 Dense만 쌓으면 층을 늘려도 선형 모델 1개와 같다
-10. **훈련 시간 측정**: `time.time()`으로 시작/종료 시각을 재서 모델별 소요 시간 비교
+8. **활성화 함수의 필요성**: relu 없이 Dense만 쌓으면 층을 늘려도 선형 모델 1개와 같다
+9. **훈련 시간 측정**: `time.time()`으로 시작/종료 시각을 재서 모델별 소요 시간 비교
 
 ---
 
