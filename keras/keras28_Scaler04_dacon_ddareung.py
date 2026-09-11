@@ -37,10 +37,18 @@ x_train, x_val, y_train, y_val = train_test_split(   # [추가] x_val, y_val 을
     random_state=77,
 )
 
-from sklearn.preprocessing import MinMaxScaler
-scaler = MinMaxScaler()
-scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
+# scaler = MinMaxScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+
+# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
+# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_train = scaler.fit_transform(x_train)
+
 x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
 
 #################### [수정] x_val 변환 누락 - 이번 실습에서 ddareung 만 결과가 망가진 원인 ####################
@@ -169,3 +177,24 @@ plt.show()
 #        x_val 한 줄을 빼먹었을 때 r2 -1.16 이었던 것과 비교하면,
 #        스케일링은 x_train / x_test / x_val 중 하나만 빠져도 결과가 통째로 망가진다는 것을 알 수 있다.
 #        따릉이는 hour(0~23), 온도, 습도, 미세먼지 농도처럼 컬럼 단위가 제각각이라 효과가 크다.
+
+# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
+
+# loss(mse) : 2522.88916015625
+# r2 : 0.6575140348819886
+# mse : 2522.8891052279823
+# RMSE : 50.22836952587633
+
+# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
+
+# loss(mse) : 2175.078369140625
+# r2 : 0.7047298300457296
+# mse : 2175.0786039356653
+# RMSE : 46.63773798047741
+
+# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
+
+# loss(mse) : 1870.7774658203125
+# r2 : 0.7460391594998328
+# mse : 1870.7775001280418
+# RMSE : 43.25248547919578

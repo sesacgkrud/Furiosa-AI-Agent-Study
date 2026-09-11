@@ -29,10 +29,18 @@ x_train, x_test, y_train, y_test = train_test_split(
     stratify=np.argmax(y, axis=1)
 )
 
-from sklearn.preprocessing import MinMaxScaler
-scaler = MinMaxScaler()
-scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
+# scaler = MinMaxScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+
+# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
+# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_train = scaler.fit_transform(x_train)
+
 x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0000000000000002
@@ -126,3 +134,21 @@ submission_csv.to_csv(
 #        스케일링으로 바로잡을 '범위 차이'가 애초에 없다. 효과가 없는 게 정상이다.
 #        [주의] test_csv 스케일링을 고쳤으므로 제출 파일은 다시 만들어야 한다.
 #        위 acc 는 x_test 기준이라 그대로 유효하지만, Kaggle 점수는 새로 제출해서 확인할 것.
+
+# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
+
+# loss :  [0.24281403422355652, 0.9108666777610779]
+# acc :  0.9109
+# acc_score :  0.9108666666666667
+
+# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
+
+# loss :  [0.23883703351020813, 0.9131166934967041]
+# acc :  0.9131
+# acc_score :  0.9131166666666667
+
+# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
+
+# loss :  [0.24184152483940125, 0.9115666747093201]
+# acc :  0.9116
+# acc_score :  0.9115666666666666

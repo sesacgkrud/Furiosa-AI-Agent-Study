@@ -33,10 +33,18 @@ x_train, x_test, y_train, y_test = train_test_split(
     stratify=y,
 )
 
-from sklearn.preprocessing import MinMaxScaler
-scaler = MinMaxScaler()
-scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
+# scaler = MinMaxScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+
+# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
+# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_train = scaler.fit_transform(x_train)
+
 x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
@@ -105,3 +113,24 @@ print('소요 시간 :', round(end_time - start_time), '초')
 #        [참고] 소요 시간이 16초 -> 116초로 늘어난 것도 스케일링 자체가 느려서가 아니다.
 #        스케일링 후 val_loss 가 더 오래 개선되니까 EarlyStopping(patience=50)이 늦게 걸린 것이다.
 #        즉 '더 오래 학습할 수 있었다'는 뜻이라 오히려 좋은 신호에 가깝다.
+
+# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
+
+# loss : 0.3034011721611023
+# acc : 0.963
+# accuracy_score : 0.9629629629629629
+# 소요 시간 : 115 초
+
+# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
+
+# loss : 0.0894383043050766
+# acc : 0.963
+# accuracy_score : 0.9629629629629629
+# 소요 시간 : 11 초
+
+# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
+
+# loss : 0.1231844425201416
+# acc : 0.963
+# accuracy_score : 0.9629629629629629
+# 소요 시간 : 115 초

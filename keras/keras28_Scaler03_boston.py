@@ -8,10 +8,18 @@ import numpy as np
 print(x_train.shape, x_test.shape) # (404, 13) (102, 13)
 print(y_train.shape, y_test.shape) # (404,) (102,)
 
-from sklearn.preprocessing import MinMaxScaler
-scaler = MinMaxScaler()
-scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
+# scaler = MinMaxScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+
+# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
+# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_train = scaler.fit_transform(x_train)
+
 x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0000000000000002
@@ -87,3 +95,15 @@ plt.show()
 
 # [결론] 22.8 -> 18.7 (약 18% 개선).
 #        boston 은 CRIM(0~89), TAX(187~711), B(0~396) 처럼 컬럼 범위가 제각각이라 효과가 있다.
+
+# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
+
+# loss : 20.864587783813477
+
+# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
+
+# loss : 20.24062728881836
+
+# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
+
+# loss : 21.350570678710938

@@ -2,7 +2,9 @@
 
 **학습 기간:** 2026-09-10
 
-### 핵심 학습 내용
+---
+
+## 핵심 학습 내용
 - **`model.summary()`** - 모델 구조와 **파라미터(param) 개수**를 층별로 확인
   - 파라미터 = `(입력 노드 수 × 출력 노드 수) + 출력 노드 수(bias)` - **bias까지 포함**해서 센다
   - 층마다 노드 하나당 bias가 1개씩 붙기 때문에 마지막에 출력 노드 수만큼 더해진다
@@ -47,27 +49,34 @@
   - 같은 데이터셋을 여러 방식으로 풀 때 파일명을 재사용하면 이전 실습의 제출 결과가 덮어써진다
   - Santander는 sigmoid(확률값) / softmax(0 또는 1) / 스케일링 적용본의 결과가 각각 달라서 파일을 따로 남겨야 점수 비교가 가능
 
-### 학습 파일
-- `keras24_kaggle_santander_categorical.py`: Santander 이진 분류를 **softmax 다중 분류 방식**으로 재구성 (200,000×200). `to_categorical(y, num_classes=2)`, `stratify=np.argmax(y, axis=1)`, 500-250-125-60-30-2 구조, patience=20, batch_size=32 (loss: 0.2437, acc: 0.9113, acc_score: 0.9113). `[수정]` keras22(sigmoid)가 만든 제출 파일을 덮어쓰던 파일명을 실습별 고유 이름으로 변경, `sample_submission.csv` 중복 로드 제거
-- `keras25_summary.py`: `model.summary()`로 파라미터 개수 확인. 3-4-3-1 구조로 층별 param이 6 / 16 / 15 / 4 (총 41개)가 나오는 과정을 bias 포함해서 계산
-- `keras26_input_shape.py`: Iris 다중 분류에서 `input_dim=4`를 `input_shape=(4,)`로 교체 (keras23_softmax1 베이스). 30-20-10-3 구조 (loss: 0.0730, acc: 0.978, accuracy_score: 0.9778, 8초)
-- `keras27_Scaler01_california.py`: 스케일링 입문. `MinMaxScaler` 알고리즘 `(원값 - Min) / (Max - Min)` 확인, 은닉층에 `relu` 추가. 우하향하지 않던 loss 그래프의 원인이 컬럼별 스케일 차이였음을 확인하고 `model.evaluate(x, y)`의 문제점 정리. 여기서는 split 전에 전체 `x`로 `fit` 했는데, 이것이 데이터 누수임을 확인하고 keras28에서 `fit(x_train)`으로 교정
-- `keras28_Scaler01_california.py`: California 회귀 (keras20 베이스) - **loss 0.635 -> 0.504 (약 20% 개선)**. `[수정]` 스케일링 안 된 `model.evaluate(x, y)` 제거
-- `keras28_Scaler02_diabetes.py`: Diabetes 회귀 (keras20 베이스) - loss 2874 -> 2971. sklearn이 이미 정규화해 배포하는 데이터라 효과 없음을 확인. `[수정]` 안 쓰는 `x_val` split이 x_train 크기를 결정하므로 지우면 안 되는 이유 주석 추가
-- `keras28_Scaler03_boston.py`: Boston 회귀 (keras20 베이스) - **loss 22.8 -> 18.7 (약 18% 개선)**. CRIM/TAX/B 등 컬럼 범위가 제각각이라 효과 있음
-- `keras28_Scaler04_dacon_ddareung.py`: Dacon 따릉이 회귀 (keras20 베이스) - `validation_data`용 `x_val`에 스케일링이 빠져 r2 -1.16 / RMSE 126으로 결과가 망가짐. `[수정]` `x_val = scaler.transform(x_val)` 추가 후 재실행하여 **loss 3192 -> 1995 (약 37% 개선), r2 0.7292, RMSE 44.67** 확보
-- `keras28_Scaler05_kaggle_bike.py`: Kaggle Bike 회귀 (keras20 베이스) - loss 21894 -> 22418. 컬럼 범위 차이가 작아 변화 없음. `[수정]` 출력층 `relu`는 문제지만 A/B 비교를 위해 그대로 두는 이유 주석 추가
-- `keras28_Scaler06_cancer.py`: Breast Cancer 이진 분류 (keras21 베이스) - acc_score 0.9240 -> 0.9708. mean area(143~2501)와 mean smoothness(0.05~0.16)가 섞여 있어 효과 기대. 다만 test 171개라 8개 차이
-- `keras28_Scaler07_santander.py`: Kaggle Santander 다중 분류 (keras24 베이스) - acc 0.9113 -> 0.9146. var_0~var_199가 이미 비슷한 크기라 변화 없음. `[수정]` 제출용 `test_csv` 스케일링 추가, 제출 파일명이 이전 파일을 덮어쓰던 문제 수정, `sample_submission.csv` 중복 로드 제거
-- `keras28_Scaler08_wine.py`: Wine 다중 분류 (keras23 베이스) - accuracy_score 0.9630 -> 0.9815. test 54개라 1개 차이로 신뢰하기 어려움
-- `keras28_Scaler09_fetch_covtype.py`: Covtype 다중 분류 (keras23 베이스) - **accuracy_score 0.8612 -> 0.9361, 목표 0.93 통과**. Elevation(1859~3858)과 0/1 컬럼이 섞여 있어 이번 실습에서 효과가 가장 확실했던 데이터
-- `keras28_Scaler10_digits.py`: Digits 다중 분류 (keras23 베이스) - accuracy_score 0.9652 -> 0.9736, 소요 시간 34초로 동일. 모든 컬럼이 픽셀 밝기 0~16으로 단위가 같아 변화가 없는 대조군. `x_test` Max가 2.67로 1을 넘는 것이 정상인 이유 주석 추가
-- `keras20_EarlyStopping1_california.py`: 스케일링 전 비교 기준이 되는 실행 결과 주석 추가 (수정)
-- `keras22_sigmoid_santander.py`: sigmoid 이진 분류 재실행 결과 주석 추가 - loss 0.2389, acc 0.9103, acc_score 0.9123 (수정)
-- `keras23_softmax1_OneHot_iris.py`: 주석 오타 `OneHot Encording` -> `OneHot Encoding` 수정 (수정)
-- `_data/kaggle_santander/submit/submit_0910_1042.csv`: Santander 제출 파일 (sigmoid 확률값 출력)
+---
 
-### 성과
+## 학습 파일
+
+| 파일 | 내용 |
+|---|---|
+| `keras24_kaggle_santander_categorical.py` | Santander 이진 분류를 **softmax 다중 분류 방식**으로 재구성 (200,000×200). `to_categorical(y, num_classes=2)`, `stratify=np.argmax(y, axis=1)`, 500-250-125-60-30-2 구조, patience=20, batch_size=32 (loss: 0.2437, acc: 0.9113, acc_score: 0.9113). `[수정]` keras22(sigmoid)가 만든 제출 파일을 덮어쓰던 파일명을 실습별 고유 이름으로 변경, `sample_submission.csv` 중복 로드 제거 |
+| `keras25_summary.py` | `model.summary()`로 파라미터 개수 확인. 3-4-3-1 구조로 층별 param이 6 / 16 / 15 / 4 (총 41개)가 나오는 과정을 bias 포함해서 계산 |
+| `keras26_input_shape.py` | Iris 다중 분류에서 `input_dim=4`를 `input_shape=(4,)`로 교체 (keras23_softmax1 베이스). 30-20-10-3 구조 (loss: 0.0730, acc: 0.978, accuracy_score: 0.9778, 8초) |
+| `keras27_Scaler01_california.py` | 스케일링 입문. `MinMaxScaler` 알고리즘 `(원값 - Min) / (Max - Min)` 확인, 은닉층에 `relu` 추가. 우하향하지 않던 loss 그래프의 원인이 컬럼별 스케일 차이였음을 확인하고 `model.evaluate(x, y)`의 문제점 정리. 여기서는 split 전에 전체 `x`로 `fit` 했는데, 이것이 데이터 누수임을 확인하고 keras28에서 `fit(x_train)`으로 교정 |
+| `keras28_Scaler01_california.py` | California 회귀 (keras20 베이스) - **loss 0.635 -> 0.504 (약 20% 개선)**. `[수정]` 스케일링 안 된 `model.evaluate(x, y)` 제거 |
+| `keras28_Scaler02_diabetes.py` | Diabetes 회귀 (keras20 베이스) - loss 2874 -> 2971. sklearn이 이미 정규화해 배포하는 데이터라 효과 없음을 확인. `[수정]` 안 쓰는 `x_val` split이 x_train 크기를 결정하므로 지우면 안 되는 이유 주석 추가 |
+| `keras28_Scaler03_boston.py` | Boston 회귀 (keras20 베이스) - **loss 22.8 -> 18.7 (약 18% 개선)**. CRIM/TAX/B 등 컬럼 범위가 제각각이라 효과 있음 |
+| `keras28_Scaler04_dacon_ddareung.py` | Dacon 따릉이 회귀 (keras20 베이스) - `validation_data`용 `x_val`에 스케일링이 빠져 r2 -1.16 / RMSE 126으로 결과가 망가짐. `[수정]` `x_val = scaler.transform(x_val)` 추가 후 재실행하여 **loss 3192 -> 1995 (약 37% 개선), r2 0.7292, RMSE 44.67** 확보 |
+| `keras28_Scaler05_kaggle_bike.py` | Kaggle Bike 회귀 (keras20 베이스) - loss 21894 -> 22418. 컬럼 범위 차이가 작아 변화 없음. `[수정]` 출력층 `relu`는 문제지만 A/B 비교를 위해 그대로 두는 이유 주석 추가 |
+| `keras28_Scaler06_cancer.py` | Breast Cancer 이진 분류 (keras21 베이스) - acc_score 0.9240 -> 0.9708. mean area(143~2501)와 mean smoothness(0.05~0.16)가 섞여 있어 효과 기대. 다만 test 171개라 8개 차이 |
+| `keras28_Scaler07_santander.py` | Kaggle Santander 다중 분류 (keras24 베이스) - acc 0.9113 -> 0.9146. var_0~var_199가 이미 비슷한 크기라 변화 없음. `[수정]` 제출용 `test_csv` 스케일링 추가, 제출 파일명이 이전 파일을 덮어쓰던 문제 수정, `sample_submission.csv` 중복 로드 제거 |
+| `keras28_Scaler08_wine.py` | Wine 다중 분류 (keras23 베이스) - accuracy_score 0.9630 -> 0.9815. test 54개라 1개 차이로 신뢰하기 어려움 |
+| `keras28_Scaler09_fetch_covtype.py` | Covtype 다중 분류 (keras23 베이스) - **accuracy_score 0.8612 -> 0.9361, 목표 0.93 통과**. Elevation(1859~3858)과 0/1 컬럼이 섞여 있어 이번 실습에서 효과가 가장 확실했던 데이터 |
+| `keras28_Scaler10_digits.py` | Digits 다중 분류 (keras23 베이스) - accuracy_score 0.9652 -> 0.9736, 소요 시간 34초로 동일. 모든 컬럼이 픽셀 밝기 0~16으로 단위가 같아 변화가 없는 대조군. `x_test` Max가 2.67로 1을 넘는 것이 정상인 이유 주석 추가 |
+| `keras20_EarlyStopping1_california.py` | 스케일링 전 비교 기준이 되는 실행 결과 주석 추가 (수정) |
+| `keras22_sigmoid_santander.py` | sigmoid 이진 분류 재실행 결과 주석 추가 - loss 0.2389, acc 0.9103, acc_score 0.9123 (수정) |
+| `keras23_softmax1_OneHot_iris.py` | 주석 오타 `OneHot Encording` -> `OneHot Encoding` 수정 (수정) |
+| `_data/kaggle_santander/submit/submit_0910_1042.csv` | Santander 제출 파일 (sigmoid 확률값 출력) |
+
+---
+
+## 성과
 - 회귀 5개 + 이진 분류 1개 + 다중 분류 4개, **총 10개 데이터셋에 MinMaxScaler를 일괄 적용해 성능 변화를 측정**
 - 스케일링만으로 covtype 정확도 0.861 -> 0.936을 달성해 목표치(0.93)를 통과
 - california 20%, boston 18%, 따릉이 37% loss 개선을 확인
@@ -78,9 +87,13 @@
 - 성능 비교에서 표본 크기와 seed 미고정 때문에 생기는 신뢰도 한계를 인식 (wine 1개 차이, cancer 8개 차이)
 - `model.summary()`로 파라미터 개수를 직접 계산하고 `input_shape` 표기법을 습득
 
-### 핵심 개념
+---
+
+## 핵심 개념
+
+### model.summary() - 파라미터 개수 세기
+
 ```python
-# ===== model.summary() - 파라미터 개수 세기 =====
 model = Sequential()
 model.add(Dense(3, input_dim=1))
 model.add(Dense(4))
@@ -95,20 +108,27 @@ model.summary()
 # Dense(1)              : (3 × 1) + 1 =  4
 #                              Total  = 41
 # bias 는 노드마다 1개씩 붙으므로 출력 노드 수만큼 더해준다
+```
 
+### input_dim vs input_shape
 
-# ===== input_dim vs input_shape =====
+```python
 # model.add(Dense(30, input_dim=4, activation='relu'))     # 1차원 입력만 가능
 model.add(Dense(30, input_shape=(4,), activation='relu'))  # 다차원까지 표현 가능
+```
 
-# 원데이터            -> input_shape
+### input_shape 표기법 - 맨 앞 데이터 개수(n)는 빼고 적는다
+
+```python
 # (n, 4)             -> (4,)
 # (n, 100, 3)        -> (100, 3)
 # (n, 100, 100, 3)   -> (100, 100, 3)
 # 맨 앞 데이터 개수(n)는 빼고 적는다
+```
 
+### 이진 분류를 softmax 로 풀기
 
-# ===== 이진 분류를 softmax 로 풀기 =====
+```python
 # sigmoid  : 출력 1개 / binary_crossentropy       / y 그대로
 # softmax  : 출력 2개 / categorical_crossentropy  / y 를 One-Hot
 
@@ -120,9 +140,11 @@ x_train, x_test, y_train, y_test = train_test_split(
     stratify=np.argmax(y, axis=1),   # y 가 One-Hot 이면 클래스 번호로 되돌려서 넘긴다
 )
 model.add(Dense(num_classes, activation='softmax'))
+```
 
+### MinMaxScaler - 왜 필요한가
 
-# ===== MinMaxScaler - 왜 필요한가 =====
+```python
 '''
 california 는 컬럼마다 값의 범위가 완전히 다르다.
   MedInc(소득) 0~15 / AveRooms 몇 개 / Population(인구) 수천 / AveOccup 는 1000 넘는 이상치까지
@@ -131,8 +153,11 @@ loss 가 내려가다 갑자기 솟구치는 톱니 모양 그래프가 된다.
 
 MinMaxScaler : (원값 - Min) / (Max - Min)  -> 0 ~ 1 로 수렴
 '''
+```
 
-# ===== 스케일링의 철칙 : fit 은 x_train 에만! =====
+### 스케일링의 철칙 : fit 은 x_train 에만!
+
+```python
 from sklearn.preprocessing import MinMaxScaler
 
 x_train, x_test, y_train, y_test = train_test_split(...)   # ① 먼저 나눈다
@@ -153,9 +178,11 @@ print('Min :', np.min(x_test),  'Max :', np.max(x_test))   # Min : -0.0012  Max 
 # x_test 가 0~1 을 벗어나는 것은 정상!
 # train 에 없던 더 큰 값이 test 에 있다는 뜻 -> fit 을 train 에만 했다는 증거다
 # (digits 는 가장자리 픽셀 때문에 Max 가 2.67 까지 나온다)
+```
 
+### 스케일링 누락 3대 버그 (① x_val / ② test_csv / ③ evaluate)
 
-# ===== 스케일링 누락 3대 버그 =====
+```python
 # ① x_val 누락
 #    모델은 0~1 로 학습 -> validation_data 에는 원본이 들어감
 #    -> val_loss 가 엉터리 -> EarlyStopping 이 엉뚱하게 멈춤
@@ -171,20 +198,28 @@ y_submit = model.predict(test_csv_scaled)   # ✅
 loss = model.evaluate(x_test, y_test)   # ✅ 0.5035
 # loss = model.evaluate(x, y)           # ❌ 89923 - 스케일 단위가 안 맞아서 터진 값
 #                                       #    게다가 x 에는 x_train 이 들어있어 평가로도 부적합
+```
 
+### A/B 테스트 - 한 번에 변수 하나만
 
-# ===== A/B 테스트 - 한 번에 변수 하나만 =====
+```python
 # 베이스 파일을 복사 -> 스케일러 블록만 추가
 # 모델 구조 / random_state / epochs / batch_size 는 절대 건드리지 않는다
 # 같이 바꾸면 무엇 때문에 성능이 변했는지 알 수 없다
+```
 
-# 결과 기록 형식
+### 결과 기록 형식
+
+```python
 # loss : 0.63498455286026                     <- 적용 전
 # ========== ========== ========== ==========  <- MinMaxScaler 적용 후
 # loss : 0.503523051738739                    <- 적용 후
 ```
 
-### 스케일링 적용 결과 정리 (10개 데이터셋)
+
+---
+
+## 스케일링 적용 결과 정리 (10개 데이터셋)
 
 | 파일 | 데이터 | 적용 전 | 적용 후 | 판단 |
 |---|---|---|---|---|
@@ -199,7 +234,9 @@ loss = model.evaluate(x_test, y_test)   # ✅ 0.5035
 | Scaler09 | Covtype | acc 0.8612 | **0.9361** | 효과 확실 - test 17만개, 목표 0.93 통과 |
 | Scaler10 | Digits | acc 0.9652 | 0.9736 | 변화 없음 - 픽셀 0~16 단위 통일 (대조군) |
 
-### 💡 주요 학습 포인트
+---
+
+## 💡 주요 학습 포인트
 1. **파라미터 개수**: `(입력 노드 × 출력 노드) + 출력 노드(bias)` - `model.summary()`로 층별 확인
 2. **`input_shape=(4,)`**: `input_dim=4`와 같지만 다차원 입력까지 표현 가능, 맨 앞 데이터 개수(n)는 빼고 적는다
 3. **이진 분류도 softmax로 가능**: 출력 2개 + `categorical_crossentropy` + `to_categorical` - 결과는 sigmoid와 비슷
@@ -217,4 +254,4 @@ loss = model.evaluate(x_test, y_test)   # ✅ 0.5035
 
 ---
 
-[⬅️ Day08](Day08.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day08](Day08.md) · [🏠 전체 목차](../README.md) · [Day10 ➡️](Day10.md)

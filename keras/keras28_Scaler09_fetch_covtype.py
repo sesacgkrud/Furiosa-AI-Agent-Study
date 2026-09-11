@@ -39,10 +39,18 @@ x_train, x_test, y_train, y_test = train_test_split(
     stratify=y,
 )
 
-from sklearn.preprocessing import MinMaxScaler
-scaler = MinMaxScaler()
-scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
+# scaler = MinMaxScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+
+# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
+# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_train = scaler.fit_transform(x_train)
+
 x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
@@ -115,3 +123,24 @@ print('소요 시간 :', round(end_time - start_time), '초')
 #        데이터가 58만개라 test 도 17만개 -> 이 정도 표본이면 0.861 -> 0.936 은 우연이 아니다.
 #        [참고] 시간이 1463초 -> 1110초로 줄어든 것도 같은 이유다. 더 빨리 수렴해서 EarlyStopping 이 일찍 걸렸다.
 #        목표였던 acc 0.93 도 스케일링만으로 넘겼다.
+
+# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
+
+# loss : 0.17114242911338806
+# acc : 0.936
+# accuracy_score : 0.9360657242518817
+# 소요 시간 : 866 초
+
+# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
+
+# loss : 0.22837351262569427
+# acc : 0.934
+# accuracy_score : 0.9338397282908023
+# 소요 시간 : 1091 초
+
+# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
+
+# loss : 0.15137867629528046
+# acc : 0.943
+# accuracy_score : 0.9426060216633009
+# 소요 시간 : 664 초

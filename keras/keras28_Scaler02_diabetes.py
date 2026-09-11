@@ -29,10 +29,18 @@ x_train, x_val, y_train, y_val = train_test_split(
     random_state=77,
 )
 
-from sklearn.preprocessing import MinMaxScaler
-scaler = MinMaxScaler()
-scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
+# scaler = MinMaxScaler()
+# scaler = StandardScaler()
+scaler = MaxAbsScaler()
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+
+# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
+# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_train = scaler.fit_transform(x_train)
+
 x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
@@ -106,3 +114,15 @@ plt.show()
 #        diabetes 는 sklearn 이 이미 각 컬럼을 정규화해서 배포하는 데이터셋이라
 #        (평균 0, 컬럼 제곱합 1) 스케일링을 더 해도 얻을 게 없다.
 #        '스케일이 이미 고른 데이터에는 효과가 없다'를 확인한 것 자체가 결과다.
+
+# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
+
+# loss : 3279.496337890625
+
+# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
+
+# loss : 3041.59130859375
+
+# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
+
+# loss : 3232.843505859375

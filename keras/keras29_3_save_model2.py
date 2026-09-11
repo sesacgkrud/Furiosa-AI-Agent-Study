@@ -1,8 +1,8 @@
-# keras27_Scaler01_california.py 베이스
+# keras29_2_load_model.py 베이스
 
 from sklearn.datasets import fetch_california_housing
 
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 import numpy as np
@@ -38,13 +38,25 @@ print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : -7.2267 Max : 
 print('Min :', np.min(x_test), 'Max :', np.max(x_test))   # Min : -7.6732 Max : 586.3726
 # 최대 이상치(1455.8)가 x_test(586.4) 쪽이 아니라 x_train 쪽에 있다
 # -> 그래서 이 조합은 훈련 loss 가 평가 loss 보다 높게 나오기도 한다
-# (스케일러를 MinMaxScaler 로 되돌리면 다시 Min 0.0 / Max 1.0 근처가 나온다)
 
-#2. 모델 구성
+# #2. 모델 구성
 model = Sequential()
 model.add(Dense(100, input_dim=8))
 model.add(Dense(50))
 model.add(Dense(1))
+
+# model.summary()
+
+########## [추가] 저장 위치를 훈련 '아래'로 옮긴다 ##########
+# keras29_1 은 여기서 save 를 했지만, 이 파일은 fit 아래에서 저장한다. (아래 save 주석 참고)
+path = './_save/keras29/'
+# model.save(path + 'keras29_1_save_model.h5') # 예전 방식
+# model.save(path + 'keras29_1_save_model.keras') # 최근 방식
+# model = load_model(path + 'keras29_1_save_model.keras')
+
+model.summary() # 아직 훈련 전이라 Total params 6,001 (가중치만)
+
+# exit()
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
@@ -63,6 +75,12 @@ hist = model.fit(x_train, y_train,
                  validation_split=0.2,
                  callbacks=[es],
                  )
+
+########## [추가] 훈련이 끝난 뒤에 저장 ##########
+# keras29_1 과 달리 save 가 fit '아래'에 있다.
+# 그래서 구조뿐 아니라 훈련된 가중치 + 옵티마이저 상태까지 저장된다. (6,001 -> 18,005)
+# EarlyStopping 의 restore_best_weights=True 로 되돌린 '최적 가중치'가 저장되는 것이다.
+model.save(path + 'keras29_3_save_model.keras')
 
 print("========== ========== ========== ========== ==========")
 
@@ -106,32 +124,11 @@ plt.xlabel('loss')
 plt.grid() # 격자 표시 추가
 plt.show()
 
-# loss : 0.63498455286026
-# loss : 0.6710934638977051
-
-# ========== ========== ========== ========== ========== <- MinMaxScaler 적용 후
-
-# loss : 0.503523051738739
-# loss : 0.5084022879600525
-# [수정] 아래에 있던 'loss : 89923.1484375' 는 스케일링 안 한 x 를 넣어서 나온 값이라 삭제했다.
-
-# [결론] 0.635 -> 0.504 (약 20% 개선). california 는 컬럼별 값 범위 차이가 커서 스케일링 효과가 크다.
-
-# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
-
-# loss : 0.5425562858581543
-
-# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
-
-# loss : 0.5589894652366638
-
-# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
-
-# loss : 0.6695248484611511
-# loss : 1.0735976696014404  <- 같은 코드 재실행 (2026-09-11)
-
-# [주의] 같은 코드인데 0.6695 / 1.0736 으로 크게 벌어진다.
-#        가중치 초기값 시드를 고정하지 않아서 실행할 때마다 생기는 편차인데,
-#        이 편차가 스케일러 간 차이(0.504 ~ 0.670)보다 커서
-#        한 번씩만 돌린 결과로 "어느 스케일러가 제일 좋다"를 단정할 수 없다.
-#        제대로 비교하려면 시드를 고정하거나, 스케일러마다 여러 번 돌려 평균을 봐야 한다.
+# ===== 실행 결과 (2026-09-11) =====
+# loss : 1.7271162271499634
+# 가중치 초기값을 고정하지 않아서 돌릴 때마다 값이 달라진다. (관측값 1.1605 / 1.7271)
+# 저장 파일도 마지막 실행 것으로 덮어써지므로,
+# keras29_4 는 이 파일을 실행한 '직후'에 돌려야 같은 값이 나온다.
+#
+# [수정] 아래에 있던 스케일러별 loss 비교 기록은 keras28_Scaler01_california.py 에서
+#        측정한 값이라 이 파일과 무관해서 지웠다. 스케일러 비교는 keras28 파일에 있다.

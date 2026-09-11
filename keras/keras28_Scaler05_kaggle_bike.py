@@ -33,10 +33,18 @@ x_train, x_test, y_train, y_test = train_test_split(
     random_state=100,   # shuffle 은 기본값 True -> 여기서 날짜 순서가 섞인다
 )
 
-from sklearn.preprocessing import MinMaxScaler
-scaler = MinMaxScaler()
-scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
+# scaler = MinMaxScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+
+# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
+# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_train = scaler.fit_transform(x_train)
+
 x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
@@ -141,3 +149,24 @@ plt.show()
 #        원래 범위 차이가 크지 않아서 스케일링으로 얻을 게 별로 없다.
 #        게다가 seed 를 고정하지 않아서 이 정도 차이는 실행할 때마다 생기는 편차 범위다.
 #        -> '좋아졌다/나빠졌다'라고 결론 내리면 안 되는 케이스.
+
+# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
+
+# loss(mse) : 21298.0078125
+# r2 : 0.31791210174560547
+# mse : 21298.005859375
+# RMSE : 145.9383632201451
+
+# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
+
+# loss(mse) : 21775.37109375
+# r2 : 0.3026239275932312
+# mse : 21775.375
+# RMSE : 147.5648162672932
+
+# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
+
+# loss(mse) : 22058.591796875
+# r2 : 0.2935537099838257
+# mse : 22058.58984375
+# RMSE : 148.5213447412526

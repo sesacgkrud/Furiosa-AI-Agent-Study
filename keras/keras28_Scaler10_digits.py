@@ -34,10 +34,18 @@ x_train, x_test, y_train, y_test = train_test_split(
     stratify=y,
 )
 
-from sklearn.preprocessing import MinMaxScaler
-scaler = MinMaxScaler()
-scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
+# scaler = MinMaxScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+
+# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
+# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_train = scaler.fit_transform(x_train)
+
 x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
@@ -114,3 +122,24 @@ print('소요 시간 :', round(end_time - start_time), '초')
 #        x_test 540개 기준으로 521개 -> 526개, 5개 차이라 실행할 때마다 생기는 편차 범위다.
 #        소요 시간도 34초로 동일하다.
 #        효과가 없는 것을 확인한 대조군 역할의 데이터다.
+
+# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
+
+# loss : 0.23934650421142578
+# acc : 0.944
+# accuracy_score : 0.9443671766342142
+# 소요 시간 : 30 초
+
+# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
+
+# loss : 0.16283389925956726
+# acc : 0.969
+# accuracy_score : 0.9694019471488178
+# 소요 시간 : 34 초
+
+# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
+
+# loss : 0.20674990117549896
+# acc : 0.937
+# accuracy_score : 0.9374130737134909
+# 소요 시간 : 29 초

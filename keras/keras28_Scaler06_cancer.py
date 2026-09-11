@@ -40,10 +40,18 @@ x_train, x_test, y_train, y_test = train_test_split(
     stratify=y, # y데이터를 stratify = y를 기준으로 데이터의 수가 동등하게 분배
 )
 
-from sklearn.preprocessing import MinMaxScaler
-scaler = MinMaxScaler()
-scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
+# scaler = MinMaxScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+
+# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
+# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_train = scaler.fit_transform(x_train)
+
 x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0000000000000002
@@ -148,3 +156,21 @@ print("acc_score :", acc_score)
 #        범위가 큰 컬럼과 mean smoothness(0.05~0.16) 처럼 작은 컬럼이 섞여 있어서 효과가 기대되는 데이터다.
 #        [주의] 다만 x_test 가 171개뿐이라 0.9240 -> 0.9708 은 맞힌 개수로 8개 차이다.
 #        seed 를 고정하지 않았으니 이 숫자 하나만으로 단정하지 말고 몇 번 더 돌려보고 판단할 것.
+
+# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
+
+# loss : 0.07083778083324432
+# acc : 0.9825
+# acc_score : 0.9824561403508771
+
+# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
+
+# loss : 0.07983746379613876
+# acc : 0.9649
+# acc_score : 0.9649122807017544
+
+# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
+
+# loss : 0.09062832593917847
+# acc : 0.9649
+# acc_score : 0.9649122807017544
