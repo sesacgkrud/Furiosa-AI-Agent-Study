@@ -1,0 +1,114 @@
+# keras34_hamsu05_kaggle_bike.py
+# https://www.kaggle.com/competitions/bike-sharing-demand/data
+# 구조 : keras34_hamsu00.py (함수형 모델) 기준 / 데이터, 모델 : keras33_dropout05_kaggle_bike.py 를 함수형으로 변환
+# 함수형 모델 : Input 으로 입력층을 만들고, '층(이전 층)' 형태로 하나씩 연결한 뒤 Model(inputs, outputs) 로 범위를 정한다
+#               층 구성이 같으면 Sequential 과 파라미터 수도 같은 똑같은 모델이다 (만드는 방법만 다르다)
+# Dropout : 훈련할 때마다 층 출력의 일부 노드를 랜덤으로 꺼서 특정 노드에만 의존하지 않게 한다 -> 과적합 방지
+#           evaluate / predict 때는 자동으로 꺼지고 모든 노드를 다 사용한다
+# [방법 2] validation_split 으로 fit 이 x_train 에서 알아서 val 을 떼어가게 하는 방식
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import RobustScaler
+from sklearn.metrics import r2_score, mean_squared_error
+from tensorflow.keras.models import Model                   # Model -> 함수형 모델
+from tensorflow.keras.layers import Dense, Dropout, Input   # Input -> 함수형 모델의 입력층
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+
+path = "./_data/kaggle_bike/"   # 데이터 폴더
+path_save = './_save/keras34/'  # 모델 저장 폴더
+
+#1. 데이터
+train_csv = pd.read_csv(path + "train.csv", index_col=0)   # [10886 rows x 11 columns] / 제출을 안 하므로 test.csv 는 읽지 않는다
+
+# casual + registered = count 라서 입력에 넣으면 정답을 알려주는 셈 -> 같이 뺀다
+x = train_csv.drop(['casual', 'registered', 'count'], axis=1)  # [10886 rows x 8 columns]
+y = train_csv['count']
+print(x.shape, y.shape) # (10886, 8) (10886,)
+
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y,
+    train_size=0.8,
+    random_state=100,
+)
+
+scaler = RobustScaler()                 # keras28 에서 4종 비교 후 RobustScaler 로 통일
+x_train = scaler.fit_transform(x_train) # x_train 으로 기준(중앙값, IQR)을 구하고 변환까지 한 번에
+x_test = scaler.transform(x_test)       # test 는 transform 만 (fit 하면 데이터 누수)
+
+print('Min :', np.min(x_train), 'Max :', np.max(x_train))
+print('Min :', np.min(x_test), 'Max :', np.max(x_test))
+
+#2. 모델 구성 (함수형) - keras33 과 층 / Dropout 위치 / 출력층 activation 이 똑같다
+input1 = Input(shape=(8,))                      # 입력층 : 컬럼 8개 (Sequential 의 input_dim=8)
+dense1 = Dense(32, activation='relu')(input1)   # (input1) -> input1 뒤에 연결
+drop1 = Dropout(0.2)(dense1)                    # dense1 출력의 20% 를 훈련 때마다 끈다
+
+dense2 = Dense(16, activation='relu')(drop1)
+drop2 = Dropout(0.2)(dense2)
+
+# 출력층 : keras33 과 똑같이 relu (원래 변환에서는 relu 가 빠져 있어서 keras33 과 다른 모델이 됐었다)
+# 출력층 relu 는 음수를 0 으로 잘라서 한번 0 에 갇히면 학습이 멈출 수 있다(dying ReLU) -> 바꿀 거면 별도 실험으로
+output1 = Dense(1, activation='relu')(drop2)
+
+model = Model(inputs=input1, outputs=output1)   # 시작(input1) ~ 끝(output1) 범위를 정해서 모델 완성
+model.summary()                                 # keras33 Sequential 과 Total params 가 같아야 제대로 변환한 것
+
+#3. 컴파일, 훈련
+model.compile(loss='mse', optimizer='adam')
+
+es = EarlyStopping(
+    monitor='val_loss',
+    mode='min',
+    patience=20,                # val_loss 가 20 epoch 동안 안 좋아지면 멈춘다
+    restore_best_weights=True,  # 멈춘 뒤 val_loss 가 가장 낮았던 가중치로 되돌린다
+    verbose=1,
+)
+
+mcp = ModelCheckpoint(
+    monitor='val_loss',         # es 와 같은 기준으로 '최고 epoch' 를 고른다
+    mode='auto',                # val_loss 는 낮을수록 좋으므로 auto(=min)
+    save_best_only=True,        # 최고 기록이 갱신될 때만 덮어쓴다 -> 마지막에 남는 파일 = 최고 epoch 모델
+    filepath=path_save + 'keras34_mcp5.keras',  # 파일 번호 규칙 : 05 -> mcp5
+    verbose=1,
+)
+
+hist = model.fit(x_train, y_train,
+                 epochs=500,
+                 batch_size=16,
+                 validation_split=0.2,  # [방법 2] x_train 의 20% 를 검증용으로 떼어 쓴다
+                 callbacks=[es, mcp],   # callbacks 에 넣어야 실제로 동작한다
+                 verbose=1,
+                 )
+
+print("========== ========== ========== ========== ==========")
+
+#4. 평가 예측 (훈련에도 검증에도 안 쓴 x_test 로만)
+loss = model.evaluate(x_test, y_test)
+print("loss(mse) :", loss)
+
+y_predict = model.predict(x_test)
+
+r2 = r2_score(y_test, y_predict)                # 1 에 가까울수록 좋다
+print("r2 :", r2)
+
+mse = mean_squared_error(y_test, y_predict)     # loss 가 mse 라서 위 loss 와 거의 같은 값
+print("mse :", mse)
+
+def RMSE(y_test, y_predict):
+    return np.sqrt(mean_squared_error(y_test, y_predict))  # mse 에 루트 -> '대여 수' 단위로 오차를 본다
+
+rmse = RMSE(y_test, y_predict)
+print("RMSE :", rmse)
+
+# ===== 이전 기록 =====
+# Sequential + Dropout (keras33_dropout05, 2026-09-14)  loss(mse) : 22479.798828125 / r2 : 0.2800641655921936
+# 함수형 (이전 실행, 출력층 relu 가 빠진 상태)          loss(mse) : 22109.919921875 / r2 : 0.29190969467163086
+
+# ===== 실행 결과 (2026-09-14, 함수형 + Dropout + MCP + r2/mse/rmse, keras33 과 같은 구성으로 수정 후) =====
+# loss(mse) : 22557.908203125
+# r2 : 0.27756255865097046
+# mse : 22557.91015625
+# RMSE : 150.19290980685474
+# (Epoch 59: early stopping / Restoring model weights from the end of the best epoch: 39.)

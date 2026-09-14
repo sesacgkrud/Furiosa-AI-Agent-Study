@@ -1,0 +1,12 @@
+01 california
+02 diabetes
+03 boston
+
+04 dacon_ddareung
+05 kaggle_bike
+06 cancer
+07 santander
+
+08 wine
+09 fetch_covtype
+10 digits

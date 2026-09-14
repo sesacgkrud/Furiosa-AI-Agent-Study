@@ -18,6 +18,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day08](docs/Day08.md)** | 다중 분류 & One-Hot Encoding | 2026-09-09 | softmax, categorical_crossentropy, to_categorical, OneHotEncoder, np.argmax |
 | **[Day09](docs/Day09.md)** | 데이터 스케일링 & 모델 구조 확인 | 2026-09-10 | MinMaxScaler, fit/transform, 데이터 누수, model.summary, input_shape |
 | **[Day10](docs/Day10.md)** | 스케일러 4종 비교 & 모델 저장/불러오기 | 2026-09-11 | StandardScaler, MaxAbsScaler, RobustScaler, model.save, load_model |
+| **[Day11](docs/Day11.md)** | 가중치 저장 & ModelCheckpoint & Dropout & 함수형 모델 | 2026-09-14 | save_weights/load_weights, ModelCheckpoint, save_best_only, Dropout, Input/Model |
 
 ---
 
@@ -37,9 +38,17 @@ C:\furiosa_study\
 │   ├── keras24_kaggle_santander_categorical.py ~ keras27_...py  (Day09)
 │   ├── keras28_Scaler01_california.py ~ keras28_Scaler10_...py  (Day09~Day10)
 │   ├── keras29_1_save_model.py ~ keras29_4_load_model2.py       (Day10)
+│   ├── keras29_5_save_weights.py ~ keras30_ModelCheckPoint3.py   (Day11)
+│   ├── keras31_MCP_save_02_diabetes.py ~ keras32_MCP_load_10_...py (Day11)
+│   ├── keras33_dropout01_california.py ~ keras33_dropout10_...py (Day11)
+│   ├── keras34_hamsu00.py ~ keras34_hamsu10_digits.py           (Day11)
 │   └── ...
 ├── _save/
-│   └── keras29/            (model.save 로 저장한 모델 파일)
+│   ├── keras29/            (model.save / save_weights 로 저장한 파일)
+│   ├── keras30/            (ModelCheckpoint 로 저장한 모델 파일)
+│   ├── keras31/            (MCP 저장 모델 + keras32 가 불러와서 다시 저장한 모델)
+│   ├── keras33/            (Dropout 적용 모델의 MCP 저장 파일)
+│   └── keras34/            (함수형 모델의 MCP 저장 파일)
 ├── _data/
 │   ├── ddareung/           (Dacon 따릉이 데이터)
 │   ├── kaggle_bike/        (Kaggle Bike Sharing 데이터)
@@ -47,7 +56,7 @@ C:\furiosa_study\
 ├── docs/                   (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day10.md
+│   └── ... Day11.md
 ├── README.md               (전체 목차)
 ├── .gitignore
 └── .vscode/
@@ -59,11 +68,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 10일 (Day01 ~ Day10)  
-**완료 시간:** 80시간  
-**완료율: 12.5%**
+**완료:** 11일 (Day01 ~ Day11)  
+**완료 시간:** 88시간  
+**완료율: 13.75%**
 
 ---
 
-**마지막 업데이트:** 2026-09-11  
-**최근 학습:** [Day10 - 스케일러 4종 비교와 모델 저장·불러오기(save/load)](docs/Day10.md)
+**마지막 업데이트:** 2026-09-14  
+**최근 학습:** [Day11 - 가중치 저장, ModelCheckpoint, Dropout, 함수형 모델](docs/Day11.md)
