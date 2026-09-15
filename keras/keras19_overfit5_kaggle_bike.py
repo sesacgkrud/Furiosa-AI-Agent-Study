@@ -1,3 +1,6 @@
+# keras19_overfit5_kaggle_bike.py
+# 과적합 확인 : loss 와 val_loss 를 같이 그려서 val_loss 가 올라가기 시작하는 지점을 찾는다
+
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
 # [방법 2] validation_split 으로 fit 이 x_train 에서 알아서 val 을 떼어가게 하는 방식
 

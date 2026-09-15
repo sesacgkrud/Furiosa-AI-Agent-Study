@@ -2,9 +2,25 @@
 
 **학습 기간:** 2026-09-11
 
+> 스케일러 4종을 10개 데이터셋에 전부 적용해 비교하고, **모델 저장/불러오기(save·load)** 를 저장 시점별로 실습했다.
+
 ---
 
-## 핵심 학습 내용
+## 🎯 한눈에 보기
+
+| 주제 | 핵심 한 줄 |
+|---|---|
+| 스케일러 4종 | MinMax `(x-Min)/(Max-Min)` / Standard `(x-평균)/표준편차` / MaxAbs `x/절댓값 최대` / Robust `(x-중앙값)/IQR` |
+| 0~1 로 수렴하는 것 | MinMax · MaxAbs 뿐. Standard · Robust 는 범위가 정해지지 않는다 |
+| 정답 스케일러 | 없다. 데이터마다 다르다 (covtype·따릉이 Robust / cancer·bike Standard) |
+| 1회 실행의 한계 | 같은 코드 재실행에서 california 0.6695 -> 1.0736 (시드 미고정) |
+| model.save | `fit` **전** 저장 = 구조만 / `fit` **후** 저장 = 가중치 + 옵티마이저 |
+| load_model | 훈련까지 끝난 파일은 `compile` 없이 바로 `evaluate` 가 된다 |
+| path 함정 | 폴더까지만 적고 반드시 `/` 로 끝낸다 |
+
+---
+
+## 📖 핵심 학습 내용
 
 ### 스케일러 3종 추가 (StandardScaler / MaxAbsScaler / RobustScaler)
 - Day09의 `MinMaxScaler`에 이어 스케일러 3종을 추가로 적용하고 **10개 데이터셋 전부에서 4종을 비교**
@@ -47,13 +63,13 @@
 
 ---
 
-## 학습 파일
+## 📂 학습 파일
 
 | 파일 | 내용 |
 |---|---|
 | `keras28_Scaler01_california.py` | California 회귀 - Standard 0.5426 / MaxAbs 0.5590 / Robust 0.6695 추가 측정. 재실행 시 Robust가 1.0736으로 벌어져 **seed 미고정 편차**를 확인하고 주의사항 기록. Min/Max 주석을 RobustScaler 실제 값으로 교정 (수정) |
 | `keras28_Scaler02_diabetes.py` | Diabetes 회귀 - Standard 3279 / MaxAbs 3042 / Robust 3233. 미적용(2874)이 가장 좋아 **이미 정규화된 데이터에는 효과가 없음**을 재확인 (수정) |
-| `keras28_Scaler03_boston.py` | Boston 회귀 - Standard 20.86 / MaxAbs 20.24 / Robust 21.35. CRIM(0~89) / TAX(187~711) / B(0~396)처럼 컬럼 범위가 제각각이라 4종 모두 미적용(22.8)보다 개선 (수정) |
+| `keras28_Scaler03_boston.py` | Boston 회귀 - Standard 20.86 / MaxAbs 20.24 / Robust 21.35. CRIM(0 ~ 89) / TAX(187 ~ 711) / B(0 ~ 396)처럼 컬럼 범위가 제각각이라 4종 모두 미적용(22.8)보다 개선 (수정) |
 | `keras28_Scaler04_dacon_ddareung.py` | 따릉이 회귀 - Standard r2 0.6575 / MaxAbs r2 0.7047 / **Robust r2 0.7460 (loss 1870.78, RMSE 43.25)로 최고 기록** (수정) |
 | `keras28_Scaler05_kaggle_bike.py` | Kaggle Bike 회귀 - **Standard 21298 (r2 0.3179)가 최고**, MaxAbs 21775 / Robust 22059. 편차가 작아 '좋아졌다'고 결론 내리면 안 되는 케이스 (수정) |
 | `keras28_Scaler06_cancer.py` | Breast Cancer 이진 분류 - **Standard acc_score 0.9825로 최고**, MaxAbs / Robust 모두 0.9649. test 171개라 숫자 하나로 단정하지 말 것을 주석에 기록 (수정) |
@@ -71,7 +87,7 @@
 
 ---
 
-## 스케일러 4종 비교 결과 (10개 데이터셋)
+## 📊 실행 결과 - 스케일러 4종 비교 (10개 데이터셋)
 
 ### 회귀 - loss (낮을수록 좋음)
 
@@ -112,7 +128,7 @@ Kaggle Bike r2: MinMax 0.2820 / **Standard 0.3179** / MaxAbs 0.3026 / Robust 0.2
 
 ---
 
-## 핵심 개념
+## 💻 핵심 개념
 
 ### 스케일러 4종 - 공식과 결과 범위
 

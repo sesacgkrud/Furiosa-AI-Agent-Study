@@ -1,3 +1,12 @@
+# keras23_softmax3_fetch_covtype.py
+# 산림 피복 7종 분류 : 58만 행짜리 큰 데이터라 훈련이 오래 걸린다
+# 라벨이 1 ~ 7 이라 to_categorical 을 쓰면 0 번 칸까지 만들어져 8칸이 된다 (0 번 칸은 항상 0)
+# 다중 분류 3종 세트
+#  1) y 를 원핫 인코딩 : 0, 1, 2 를 [1,0,0] [0,1,0] [0,0,1] 로 바꾼다 (숫자 크기에 순서 의미가 생기지 않게)
+#  2) 출력층 activation = softmax, 노드 수 = 클래스 개수 -> 칸별 확률이 나오고 다 더하면 1
+#  3) loss = 'categorical_crossentropy'
+# 정확도를 잴 때는 argmax 로 확률이 가장 큰 칸의 번호를 뽑아 정답 번호와 비교한다
+
 import numpy as np
 import pandas as pd
 import time

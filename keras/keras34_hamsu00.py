@@ -1,3 +1,8 @@
+# keras34_hamsu00.py
+# 같은 모델을 Sequential(순차적) 과 함수형 두 가지 방법으로 만들어서 summary 를 비교한다
+# 함수형 : Input 으로 입력층을 만들고 '층(이전 층)' 형태로 연결한 뒤 Model(inputs, outputs) 로 범위를 정한다
+# 층 구성이 같으면 두 모델의 Total params 도 똑같다 (만드는 방법만 다르다)
+
 from tensorflow.keras.models import Sequential, Model # Model -> 함수형 모델이라고 생각
 from tensorflow.keras.layers import Dense, Dropout, Input
 

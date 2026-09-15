@@ -1,3 +1,7 @@
+# keras12_R2_RMSE_02_california.py
+# 캘리포니아 집값에 r2 를 추가한다
+# r2(결정계수) : 1 에 가까울수록 잘 맞힌 것. loss(mse) 는 단위가 데이터마다 달라서 데이터끼리 비교가 안 되지만 r2 는 비교가 된다
+
 from sklearn.datasets import fetch_california_housing
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

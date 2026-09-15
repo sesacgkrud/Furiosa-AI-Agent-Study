@@ -1,3 +1,7 @@
+# keras15_verbose.py
+# verbose : fit 이 훈련 과정을 얼마나 출력할지 정한다 (0 = 출력 없음 / 1 = 기본, 진행바 / 2 = 진행바 없이 epoch 만)
+# 출력하는 데도 시간이 들기 때문에 데이터가 크면 verbose=0 이나 2 로 줄인다
+
 # keras09_train_test1.py 베이스
 
 import numpy as np

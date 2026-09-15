@@ -2,6 +2,9 @@
 # 구조 : keras34_hamsu00.py (함수형 모델) 기준 / 데이터, 모델 : keras33_dropout01_california.py
 # 함수형 모델 : Input 으로 입력층을 만들고, '층(이전 층)' 형태로 하나씩 연결한 뒤 Model(inputs, outputs) 로 범위를 정한다
 #               층 구성이 같으면 Sequential 과 파라미터 수도 같은 똑같은 모델이다 (만드는 방법만 다르다)
+#               단, 같은 것은 '구조(Total params)' 다. 가중치 초기값 / Dropout 이 끄는 노드 / 배치 섞기가 매번 랜덤이라
+#               시드를 고정하지 않으면 같은 코드를 두 번 돌려도 loss, acc 는 조금씩 다르게 나온다
+#               (random_state 는 train_test_split 의 데이터 분할만 고정한다)
 # Dropout : 훈련할 때마다 층 출력의 일부 노드를 랜덤으로 꺼서 특정 노드에만 의존하지 않게 한다 -> 과적합 방지
 #           evaluate / predict 때는 자동으로 꺼지고 모든 노드를 다 사용한다
 
@@ -46,7 +49,7 @@ drop2 = Dropout(0.3)(dense2)                    # dense2 출력의 30% 를 끈�
 output1 = Dense(1)(drop2)                       # 출력층 : 회귀라 activation 없음
 
 model = Model(inputs=input1, outputs=output1)   # 시작(input1) ~ 끝(output1) 범위를 정해서 모델 완성
-model.summary()                                 # keras33 Sequential 과 Total params 가 같아야 제대로 변환한 것
+model.summary()                                 # keras33 과 Total params 가 같아야 제대로 변환한 것 (keras33_dropout01 은 이미 함수형이라 코드가 거의 같다)
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
@@ -99,7 +102,7 @@ print("RMSE :", rmse)
 # Sequential + Dropout (keras33_dropout01, 2026-09-14)  loss : 0.2530974745750427 / r2 : 0.8080744359790722
 # 함수형 (이전 실행, MCP 는 keras30 폴더에 저장되던 상태)  loss : 0.243803933262825
 
-# ===== 실행 결과 (2026-09-14, 함수형 + Dropout + MCP + r2/mse/rmse, keras33 과 같은 구성으로 수정 후) =====
+# ===== 실행 결과 (2026-09-14, 함수형 + Dropout + MCP + r2/mse/rmse, keras33 과 같은 구성) =====
 # loss : 0.24989032745361328
 # r2 : 0.8105064205492282
 # mse : 0.24989034444439434

@@ -1,3 +1,8 @@
+# keras19_overfit2_diabetes.py
+# keras17_val2_diabetes.py 베이스
+# 과적합 확인 : loss 와 val_loss 를 같이 그려서 val_loss 가 올라가기 시작하는 지점을 찾는다
+# 당뇨 데이터는 442개로 작아서 val_loss 가 크게 출렁인다
+
 from sklearn.datasets import load_diabetes
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

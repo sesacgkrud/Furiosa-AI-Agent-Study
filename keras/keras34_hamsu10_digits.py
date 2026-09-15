@@ -2,6 +2,9 @@
 # 구조 : keras34_hamsu00.py (함수형 모델) 기준 / 데이터, 모델 : keras33_dropout10_digits.py 를 함수형으로 변환
 # 함수형 모델 : Input 으로 입력층을 만들고, '층(이전 층)' 형태로 하나씩 연결한 뒤 Model(inputs, outputs) 로 범위를 정한다
 #               층 구성이 같으면 Sequential 과 파라미터 수도 같은 똑같은 모델이다 (만드는 방법만 다르다)
+#               단, 같은 것은 '구조(Total params)' 다. 가중치 초기값 / Dropout 이 끄는 노드 / 배치 섞기가 매번 랜덤이라
+#               시드를 고정하지 않으면 같은 코드를 두 번 돌려도 loss, acc 는 조금씩 다르게 나온다
+#               (random_state 는 train_test_split 의 데이터 분할만 고정한다)
 # Dropout : 훈련할 때마다 층 출력의 일부 노드를 랜덤으로 꺼서 특정 노드에만 의존하지 않게 한다 -> 과적합 방지
 #           evaluate / predict 때는 자동으로 꺼지고 모든 노드를 다 사용한다
 
@@ -58,7 +61,7 @@ dense7 = Dense(15, activation='relu')(dense6)
 drop4 = Dropout(0.2)(dense7)
 
 # 다중 분류(원핫) 출력층은 softmax 가 반드시 있어야 칸별 확률(합 = 1)이 나온다
-# (원래는 빠져 있어서 loss 가 6.4 로 튀고 acc 가 0.099 = 10개 중 하나 찍기 수준으로 떨어졌다)
+# softmax 가 없으면 출력이 확률이 아닌 실수 값 그대로 나온다
 output1 = Dense(10, activation='softmax')(drop4)
 
 model = Model(inputs=input1, outputs=output1)   # 시작(input1) ~ 끝(output1) 범위를 정해서 모델 완성
@@ -122,9 +125,8 @@ print('accuracy_score :', acc_score)
 
 # ===== 이전 기록 =====
 # Sequential + Dropout (keras33_dropout10, 2026-09-14)  loss : 0.17552341520786285 / accuracy_score : 0.9694019471488178
-# 함수형 (이전 실행, softmax 누락 상태)                 loss : 6.388952255249023 / accuracy_score : 0.09874826147426982
 
-# ===== 실행 결과 (2026-09-14, 함수형 + Dropout + MCP + r2/mse/rmse, keras33 과 같은 구성으로 수정 후) =====
+# ===== 실행 결과 (2026-09-14, 함수형 + Dropout + MCP + r2/mse/rmse, keras33 과 같은 구성) =====
 # loss : 0.1807616651058197
 # acc : 0.967
 # r2 : 0.9387586858351249

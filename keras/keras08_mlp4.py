@@ -1,3 +1,7 @@
+# keras08_mlp4.py
+# 입력 1개 -> 출력 3개 모델 : input_dim=1, 마지막 Dense(3)
+# x.shape (10,) / y.shape (10, 3) 처럼 입력과 출력의 열 개수가 달라도 된다
+
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

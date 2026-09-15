@@ -1,3 +1,7 @@
+# keras08_mlp2_1.py
+# 입력 특성 3개(컬럼 3개) 짜리 MLP 실습 -> input_dim=3
+# 데이터를 행 단위로 쓰고 .T 로 (10, 3) 을 만드는 방식은 앞으로 계속 쓴다
+
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

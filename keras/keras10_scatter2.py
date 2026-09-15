@@ -1,3 +1,7 @@
+# keras10_scatter2.py
+# keras10_scatter1 보다 데이터를 20개로 늘리고 더 흩어지게 만들어서 예측선을 다시 그려 본다
+# 데이터가 흩어질수록 loss 는 커지고, 모델은 점들의 가운데를 지나는 선을 찾는다
+
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -10,7 +14,7 @@ y = np.array([1,2,4,3,5,7,9,3,8,12,13, 8,14,15, 9, 6,17,23,21,20])
 
 x_train, x_test, y_train, y_test = train_test_split(
     x, y,
-    random_state=321,
+    random_state=321,     # train_size 를 안 쓰면 기본값 0.75 로 나뉜다
 )
 
 #2. 모델 구성

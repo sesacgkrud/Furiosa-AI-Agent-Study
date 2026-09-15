@@ -2,31 +2,57 @@
 
 **학습 기간:** 2026-09-08
 
+> EarlyStopping 을 5개 데이터셋에 확대 적용하고, **회귀에서 분류로** 넘어가 이진 분류를 처음 구현했다.
+
 ---
 
-## 핵심 학습 내용
-- EarlyStopping을 California 외 4개 데이터셋(Diabetes, Boston, 따릉이, Kaggle Bike)으로 확대 적용
-- `patience=20`, `restore_best_weights=True` 조합으로 최적 가중치 복원 실습
-- EarlyStopping 적용 전(keras19 과적합 시각화) / 후(keras20)의 loss·val_loss 값을 파일 하단에 주석으로 기록해 비교
-- **회귀(Regression)와 분류(Classification)의 차이** 이해 - 연속값 예측 vs 0/1 판별
-- 이진 분류 3종 세트: 출력층 `activation='sigmoid'` + `loss='binary_crossentropy'` + `metrics=['acc']`
-- sigmoid 함수는 결과를 0~1 사이 확률로 압축 -> 0.5 기준으로 반올림해 0 또는 1로 판정
-- `binary_crossentropy`(이진 교차 엔트로피)를 이진 분류 손실함수로 사용 (회귀의 mse 대신)
-- `metrics`는 **훈련(가중치 갱신)에 관여하지 않는 참고용 지표** - `['acc']`와 `['accuracy']`는 동일
-- `metrics` 추가 시 `model.evaluate()`의 반환값이 스칼라가 아닌 **리스트 `[loss, acc]`** 로 바뀜
-- 데이터 불균형(Imbalanced Data) 확인 방법 3가지: `np.unique(y, return_counts=True)`, `pd.DataFrame(y).value_counts()`, `pd.Series(y).value_counts()`
+## 🎯 한눈에 보기
+
+| 주제 | 핵심 한 줄 |
+|---|---|
+| 회귀 vs 분류 | 회귀 = 연속값 예측 / 분류 = 0이냐 1이냐 판별 |
+| 이진 분류 3종 세트 | 출력층 `sigmoid` + `loss='binary_crossentropy'` + `metrics=['acc']` |
+| sigmoid | 결과를 0~1 확률로 압축 -> 0.5 기준으로 반올림해 0 또는 1 |
+| metrics | 훈련에 영향 없는 참고 지표. 넣으면 `evaluate` 반환값이 `[loss, acc]` 리스트 |
+| stratify=y | 클래스 비율을 유지한 채 분할 (불균형 데이터 필수) |
+| accuracy_score | `np.round()` 로 0/1 변환하지 않으면 ValueError |
+
+---
+
+## 📖 핵심 학습 내용
+
+### EarlyStopping 확대 적용
+- California 외 4개 데이터셋(Diabetes, Boston, 따릉이, Kaggle Bike)에 확대 적용
+- `patience=20` + `restore_best_weights=True` 조합으로 최적 가중치 복원
+- 적용 전(keras19) / 후(keras20)의 loss·val_loss를 파일 하단에 주석으로 기록해 비교
+
+### 회귀 vs 분류
+- **회귀** = 연속값(집값, 대여량)을 맞힌다 / **분류** = 0이냐 1이냐를 판별한다
+- 바뀌는 것은 출력층 activation + loss 두 가지
+
+### 이진 분류 3종 세트
+1. 출력층 `activation='sigmoid'` - 결과를 0~1 확률로 압축 -> 0.5 기준 반올림해 0 또는 1
+2. `loss='binary_crossentropy'` - 확률이 정답에서 멀수록 크게 벌점 (회귀의 mse 대신)
+3. `metrics=['acc']` - **훈련에 관여하지 않는 참고 지표** (`['accuracy']` 와 동일)
+   - 넣는 순간 `model.evaluate()` 반환값이 스칼라가 아닌 **리스트 `[loss, acc]`** 로 바뀐다
+
+### 데이터 불균형(Imbalanced Data)
+- 확인 방법 3가지 : `np.unique(y, return_counts=True)` / `pd.DataFrame(y).value_counts()` / `pd.Series(y).value_counts()`
 - `train_test_split(stratify=y)` - y의 클래스 비율을 train/test에 동일하게 유지해서 분할
-- `accuracy_score(y_test, y_predict)` 사용 시 `np.round()`로 0/1 변환 필수
-  (변환 없이 넣으면 `ValueError: Classification metrics can't handle a mix of binary and continuous targets`)
-- `datasets.DESCR`, `datasets.feature_names`로 데이터셋 설명 및 컬럼명 확인
-- sklearn 유방암 데이터셋 `load_breast_cancer()` 활용 (569 샘플, 30개 특성, 0:212 / 1:357)
-- Kaggle Santander 대규모 이진 분류 데이터 처리 (200,000 샘플, 200개 특성, 0:179,902 / 1:20,098)
-- 상대경로(`./_data/...`)와 절대경로(`c:/furiosa_study/_data/...`) 차이 및 사용 구분
-- 분류 문제의 제출 파일(submission.csv) 생성 방법
+- Santander는 0:179,902 / 1:20,098 로 불균형이 심하다
+
+### accuracy_score의 함정
+- `np.round()` 로 0/1 변환을 하지 않으면
+  `ValueError: Classification metrics can't handle a mix of binary and continuous targets`
+
+### 그 외
+- `datasets.DESCR` / `datasets.feature_names` 로 데이터셋 설명과 컬럼명 확인
+- 상대경로(`./_data/...`)는 실행 위치에 따라 깨질 수 있고, 절대경로(`c:/furiosa_study/_data/...`)는 항상 동일
+- 분류 문제의 제출 파일(submission.csv) 생성
 
 ---
 
-## 학습 파일
+## 📂 학습 파일
 
 | 파일 | 내용 |
 |---|---|
@@ -53,7 +79,7 @@
 
 ---
 
-## 핵심 개념
+## 💻 핵심 개념
 
 ```python
 # EarlyStopping 확대 적용 (patience=20)

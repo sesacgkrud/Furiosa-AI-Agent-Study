@@ -1,3 +1,6 @@
+# keras05_deep2.py
+# 두 번째 층부터는 input_dim 을 생략한다 (앞 층의 출력 개수를 케라스가 알아서 입력으로 잡는다)
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np

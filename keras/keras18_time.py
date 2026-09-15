@@ -1,3 +1,7 @@
+# keras18_time.py
+# 훈련에 걸린 시간 재기 : fit 앞뒤에서 time.time() 을 찍고 그 차이를 본다
+# 같은 데이터라도 batch_size / epochs / verbose 에 따라 시간이 달라진다
+
 # keras14_kaggle_bike1.py 베이스
 
 # https://www.kaggle.com/competitions/bike-sharing-demand/data

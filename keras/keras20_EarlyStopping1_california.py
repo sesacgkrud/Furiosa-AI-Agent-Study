@@ -1,3 +1,8 @@
+# keras20_EarlyStopping1_california.py
+# EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
+# restore_best_weights=True : 멈춘 시점이 아니라 val_loss 가 가장 낮았던 epoch 의 가중치로 되돌린다
+# -> 그래서 epochs 를 크게 줘도 과적합 직전에서 알아서 끊어 준다
+
 # keras19_overfit1_california.py 베이스
 
 from sklearn.datasets import fetch_california_housing

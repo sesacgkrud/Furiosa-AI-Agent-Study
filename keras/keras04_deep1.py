@@ -1,3 +1,7 @@
+# keras04_deep1.py
+# 딥러닝(deep) : Dense 층을 여러 개 쌓아서 입력 -> 은닉층 -> 출력으로 연결한다
+# 앞 층의 출력 개수가 다음 층의 입력 개수가 된다 (500 -> 300 -> 1)
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np

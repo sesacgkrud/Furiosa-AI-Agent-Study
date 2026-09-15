@@ -2,28 +2,61 @@
 
 **학습 기간:** 2026-09-07
 
----
-
-## 핵심 학습 내용
-- `verbose` 옵션으로 훈련 로그 출력 제어 (0: 생략, 1: 기본, 2: progress bar 생략, 그 외: epoch만 표시)
-- Validation(검증) 데이터의 개념과 역할 이해 (train=공부 / val=모의고사 / test=수능)
-- 검증 데이터는 반드시 `x_train` 안에서 떼어내야 함 (`x_test`를 val로 쓰면 데이터 누수)
-- **[방법 1]** `train_test_split()`을 2번 사용해 `x_val`을 직접 만들고 `validation_data=(x_val, y_val)`로 전달
-- **[방법 2]** `validation_split=0.2` 한 줄로 `fit()`이 `x_train`에서 알아서 검증 데이터를 분리
-- 두 방법의 차이와 함정: `validation_split`은 `x_train`의 **맨 뒤에서부터 섞지 않고** 순서대로 자름 (정렬된 데이터면 val이 한쪽으로 치우침)
-- `validation_data`와 `validation_split`을 함께 쓰면 `validation_data`가 우선 적용됨
-- `validation_split`의 비율 기준은 전체 데이터가 아니라 `x_train`
-- Keras 내장 데이터셋 `boston_housing.load_data()` 활용 (이미 train/test로 분리되어 반환)
-- `time` 모듈을 이용한 훈련 소요 시간 측정
-- `hist = model.fit(...)`의 반환값(History 객체)과 `hist.history` 딕셔너리 구조 이해
-- `hist.history['loss']`, `hist.history['val_loss']`를 Matplotlib으로 시각화하여 과적합(Overfitting) 판독
-- 과적합 판독 기준: `loss ↓ / val_loss ↓` = 정상 학습, `loss ↓ / val_loss ↑` = 과적합 시작
-- **EarlyStopping** 콜백으로 과적합 지점에서 훈련 자동 중단 (`monitor`, `mode`, `patience`, `restore_best_weights`)
-- 활성화 함수 없이 Dense를 여러 층 쌓으면 결국 선형 모델 1개와 동일함을 이해
+> 검증(validation) 데이터를 떼어내 **val_loss** 를 보고, loss 곡선을 그려 과적합 시점을 눈으로 확인했다.
 
 ---
 
-## 학습 파일
+## 🎯 한눈에 보기
+
+| 주제 | 핵심 한 줄 |
+|---|---|
+| verbose | 훈련 로그 출력량 조절 (0=생략 / 1=기본 / 2=진행바 없음) |
+| validation | train 중 일부를 떼어 매 epoch 성적을 재는 데이터. **반드시 x_train 에서** 떼어낸다 |
+| [방법 1] validation_data | `train_test_split` 을 2번 써서 x_val 을 직접 만든다 |
+| [방법 2] validation_split | `fit` 이 x_train 뒤에서 순서대로 떼어간다 (섞지 않음) |
+| 과적합 판독 | loss ↓ / val_loss ↑ 로 벌어지는 지점부터 과적합 |
+| EarlyStopping | val_loss 가 patience 만큼 안 좋아지면 중단 + 최적 가중치 복원 |
+| 활성화 함수 | relu 없이 Dense 만 쌓으면 층을 늘려도 직선 모델 1개와 같다 |
+
+---
+
+## 📖 핵심 학습 내용
+
+### verbose - 훈련 로그 출력 제어
+- `0` 생략 / `1` 기본(진행바) / `2` 진행바 생략 / 그 외 epoch 번호만
+- 출력하는 데도 시간이 들기 때문에 데이터가 크면 0이나 2로 줄인다
+
+### Validation(검증) 데이터
+- **train = 공부 / val = 모의고사 / test = 수능** - val은 매 epoch 성적을 재는 데이터
+- 검증 데이터는 반드시 `x_train` 안에서 떼어낸다 (`x_test` 를 val로 쓰면 데이터 누수)
+- val_loss는 가중치 갱신에 쓰이지 않고, 과적합을 미리 알아채는 기준이 된다
+
+### 검증 데이터를 만드는 2가지 방법
+- **[방법 1] `validation_data=(x_val, y_val)`** - `train_test_split()` 을 2번 써서 x_val을 직접 만든다
+- **[방법 2] `validation_split=0.2`** - `fit()` 이 `x_train` 에서 알아서 떼어간다
+- 방법 2의 함정
+  - `x_train` 의 **맨 뒤에서부터 섞지 않고** 순서대로 자른다 (정렬된 데이터면 val이 한쪽으로 치우친다)
+  - 비율 기준은 전체가 아니라 `x_train`
+  - `validation_data` 와 같이 쓰면 `validation_data` 가 우선한다
+
+### History로 과적합 판독
+- `hist = model.fit(...)` 의 반환값에 epoch별 기록이 들어 있다 -> `hist.history['loss']`, `['val_loss']`
+- Matplotlib으로 두 곡선을 같이 그린다
+- `loss ↓ / val_loss ↓` = 정상 학습, **`loss ↓ / val_loss ↑` = 과적합 시작**
+
+### EarlyStopping
+- 과적합 지점에서 훈련을 자동으로 중단하는 콜백
+- `monitor='val_loss'` / `mode='min'` / `patience` (참고 기다리는 횟수) / `restore_best_weights=True`
+- `callbacks=[es]` 에 넣어야 실제로 동작한다
+
+### 그 외
+- Keras 내장 `boston_housing.load_data()` - 이미 train/test로 나뉘어 반환된다
+- `time.time()` 으로 훈련 소요 시간 측정
+- 활성화 함수 없이 Dense만 쌓으면 **선형 × 선형 = 선형** -> 층을 늘려도 직선 모델 1개와 같다
+
+---
+
+## 📂 학습 파일
 
 | 파일 | 내용 |
 |---|---|
@@ -57,7 +90,7 @@
 
 ---
 
-## 핵심 개념
+## 💻 핵심 개념
 
 ```python
 # verbose 옵션

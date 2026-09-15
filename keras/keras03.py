@@ -1,3 +1,7 @@
+# keras03.py
+# y 값을 [1,2,4,3,5] 로 바꿔서 일직선으로 못 맞추는 데이터를 준다 -> loss 가 0 까지 내려가지 않는다
+# 이럴 때는 epochs 를 늘려가며 loss 를 목표치까지 낮추는 연습을 한다
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np

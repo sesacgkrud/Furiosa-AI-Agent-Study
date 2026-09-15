@@ -1,3 +1,7 @@
+# keras08_mlp2_2.py
+# range() 로 데이터를 만드는 연습 : np.array(range(1, 11)) -> 1 ~ 10
+# [실습] 컬럼 3개를 넣어 [10, 31, 211] 의 예측값이 11 에 가까워지게 만든다
+
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

@@ -1,3 +1,7 @@
+# keras16_validation3_train_test.py
+# [실습] train_test_split 을 두 번 써서 train / val / test 로 나눈다
+# 첫 번째로 train 과 나머지를 자르고, 남은 나머지를 다시 반으로 잘라 val 과 test 를 만든다
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np

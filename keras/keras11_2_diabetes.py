@@ -1,3 +1,7 @@
+# keras11_2_diabetes.py
+# 당뇨 수치 데이터(회귀) : 특성 10개로 1년 뒤 병의 진행도를 예측한다
+# 데이터가 442개로 적어서 random_state 에 따라 loss 가 크게 흔들린다
+
 from sklearn.datasets import fetch_california_housing, load_diabetes
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

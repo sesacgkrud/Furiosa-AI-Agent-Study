@@ -1,3 +1,8 @@
+# keras14_kaggle_bike1.py
+# 캐글 자전거 대여량 예측 : 따릉이와 같은 흐름이지만 x 를 만들 때 지워야 할 컬럼이 더 있다
+# casual + registered = count 라서 둘을 x 에 남기면 정답을 그대로 알려 주는 셈이 된다 -> 3개를 같이 drop
+# 제출용 test.csv 에는 이 두 컬럼이 아예 없어서 컬럼 수(8개)를 맞추려면 반드시 지워야 한다
+
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
 
 import numpy as np
@@ -37,7 +42,7 @@ submission = pd.read_csv(path + "sampleSubmission.csv", index_col=0)
 
 #################### x, y 분리 ####################
 
-x = train_csv.drop(['casual', 'registered', 'count'], axis=1)
+x = train_csv.drop(['casual', 'registered', 'count'], axis=1)   # axis=1 : 컬럼 방향으로 지운다
 # print(x) # [10886 rows x 8 columns]
 
 y = train_csv['count']

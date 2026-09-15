@@ -1,3 +1,8 @@
+# keras16_validation1.py
+# validation(검증) 데이터를 추가한다 : train 6개 / val 2개 / test 2개로 나눈다
+# val_loss : 훈련 중에 매 epoch 마다 "안 배운 데이터" 로 재 보는 성적 -> 과적합을 미리 알아채는 기준이 된다
+# test 는 마지막 평가에만 쓰고, 훈련 중에는 절대 보지 않는다
+
 # keras09_train_test1.py 베이스
 
 import numpy as np

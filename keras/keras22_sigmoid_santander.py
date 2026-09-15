@@ -1,3 +1,7 @@
+# keras22_sigmoid_santander.py
+# 산탄데르 고객 거래 예측 (캐글) : keras21 의 이진 분류를 20만 행 x 200 컬럼짜리 실제 대회 데이터에 적용한다
+# 제출은 sigmoid 가 내놓은 확률값(0.22...) 을 그대로 저장한다
+
 # https://www.kaggle.com/competitions/santander-customer-transaction-prediction/data
 
 import numpy as np

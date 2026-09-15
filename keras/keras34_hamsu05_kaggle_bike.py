@@ -3,6 +3,9 @@
 # 구조 : keras34_hamsu00.py (함수형 모델) 기준 / 데이터, 모델 : keras33_dropout05_kaggle_bike.py 를 함수형으로 변환
 # 함수형 모델 : Input 으로 입력층을 만들고, '층(이전 층)' 형태로 하나씩 연결한 뒤 Model(inputs, outputs) 로 범위를 정한다
 #               층 구성이 같으면 Sequential 과 파라미터 수도 같은 똑같은 모델이다 (만드는 방법만 다르다)
+#               단, 같은 것은 '구조(Total params)' 다. 가중치 초기값 / Dropout 이 끄는 노드 / 배치 섞기가 매번 랜덤이라
+#               시드를 고정하지 않으면 같은 코드를 두 번 돌려도 loss, acc 는 조금씩 다르게 나온다
+#               (random_state 는 train_test_split 의 데이터 분할만 고정한다)
 # Dropout : 훈련할 때마다 층 출력의 일부 노드를 랜덤으로 꺼서 특정 노드에만 의존하지 않게 한다 -> 과적합 방지
 #           evaluate / predict 때는 자동으로 꺼지고 모든 노드를 다 사용한다
 # [방법 2] validation_split 으로 fit 이 x_train 에서 알아서 val 을 떼어가게 하는 방식
@@ -48,7 +51,7 @@ drop1 = Dropout(0.2)(dense1)                    # dense1 출력의 20% 를 훈�
 dense2 = Dense(16, activation='relu')(drop1)
 drop2 = Dropout(0.2)(dense2)
 
-# 출력층 : keras33 과 똑같이 relu (원래 변환에서는 relu 가 빠져 있어서 keras33 과 다른 모델이 됐었다)
+# 출력층 : keras33 과 똑같이 relu 를 쓴다 (활성화를 안 쓰면 층 구성이 같아도 다른 모델이 된다)
 # 출력층 relu 는 음수를 0 으로 잘라서 한번 0 에 갇히면 학습이 멈출 수 있다(dying ReLU) -> 바꿀 거면 별도 실험으로
 output1 = Dense(1, activation='relu')(drop2)
 
@@ -104,9 +107,8 @@ print("RMSE :", rmse)
 
 # ===== 이전 기록 =====
 # Sequential + Dropout (keras33_dropout05, 2026-09-14)  loss(mse) : 22479.798828125 / r2 : 0.2800641655921936
-# 함수형 (이전 실행, 출력층 relu 가 빠진 상태)          loss(mse) : 22109.919921875 / r2 : 0.29190969467163086
 
-# ===== 실행 결과 (2026-09-14, 함수형 + Dropout + MCP + r2/mse/rmse, keras33 과 같은 구성으로 수정 후) =====
+# ===== 실행 결과 (2026-09-14, 함수형 + Dropout + MCP + r2/mse/rmse, keras33 과 같은 구성) =====
 # loss(mse) : 22557.908203125
 # r2 : 0.27756255865097046
 # mse : 22557.91015625

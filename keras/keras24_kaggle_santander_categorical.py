@@ -1,3 +1,8 @@
+# keras24_kaggle_santander_categorical.py
+# keras22 에서 sigmoid(이진 분류)로 풀었던 산탄데르를 softmax(다중 분류) 방식으로 다시 푼다
+# 답이 0 / 1 두 개뿐이어도 원핫 + softmax(2칸) 으로 풀 수 있다 -> 두 방식의 캐글 점수를 비교하는 것이 목적
+# 제출 값도 달라진다 : sigmoid 는 확률(0.22...), 여기는 argmax 를 거친 0 또는 1
+
 import numpy as np
 import pandas as pd
 import time
@@ -79,15 +84,15 @@ print('acc_score : ', acc_score)
 y_submit = model.predict(test_csv)
 y_submit = np.argmax(y_submit, axis=1)
 
-# [수정] 맨 위에서 이미 submission_csv 로 같은 파일을 읽었는데 여기서 또 읽고 있었다. 중복이라 위의 것을 재사용한다.
+# 맨 위에서 읽어 둔 submission_csv 를 그대로 재사용한다 (같은 파일을 두 번 읽을 필요가 없다)
 submission_csv['target'] = y_submit
 
-# [수정] 저장 파일명이 submit_0908_1642.csv 로 되어 있었다.
-#        그 파일은 keras22_sigmoid_santander.py(sigmoid 이진 분류)가 만든 제출 파일인데,
-#        이 파일(softmax 다중 분류)을 실행할 때마다 그 결과를 덮어써 버렸다.
-#        sigmoid 는 확률값(0.22...)을, 여기 softmax + argmax 는 0/1 을 저장하므로 내용도 완전히 다르다.
-#        -> 실습마다 제출 파일을 따로 남겨야 sigmoid 방식과 softmax 방식의 점수를 비교할 수 있다.
-#        규칙: submit_날짜_시간_실습이름.csv 로 실습마다 고유한 이름을 준다.
+# 제출 파일은 실습마다 고유한 이름으로 저장한다.
+# keras22_sigmoid_santander.py(sigmoid 이진 분류)와 이 파일(softmax 다중 분류)은
+# 저장하는 값의 성격이 다르다.
+# sigmoid 는 확률값(0.22...)을, softmax + argmax 는 0/1 을 저장한다.
+# -> 파일명이 겹치면 서로 덮어써서 두 방식의 점수를 비교할 수 없다.
+# 규칙 : submit_날짜_시간_실습이름.csv
 submission_csv.to_csv(
     path + 'submit/' + 'submit_0910_1104_categorical.csv'
 )

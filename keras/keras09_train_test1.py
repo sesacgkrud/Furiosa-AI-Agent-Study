@@ -1,3 +1,8 @@
+# keras09_train_test1.py
+# train / test 분리 : 훈련은 x_train 으로만 하고, 평가는 한 번도 안 본 x_test 로 한다
+# 훈련에 쓴 데이터로 평가하면 외운 답을 다시 맞히는 셈이라 성능을 제대로 알 수 없다
+# 여기서는 7 : 3 을 손으로 잘라서 나눈다
+
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

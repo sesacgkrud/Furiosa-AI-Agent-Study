@@ -1,3 +1,10 @@
+# keras13_ddareung01.py
+# 따릉이 대여량 예측 (데이콘) : csv 파일로 된 실제 대회 데이터를 처음 다뤄 본다
+# 핵심 3가지
+#  1) pd.read_csv(index_col=0) 로 id 열을 인덱스로 빼서 컬럼 수를 맞춘다
+#  2) 결측치(빈 칸)를 dropna() 로 지운다 -> 1459 행 -> 1328 행
+#  3) train_csv 를 x(특성 9개) 와 y(count) 로 직접 나눈다
+
 # https://dacon.io/competitions/open/235576/overview/description
 
 import numpy as np
@@ -137,7 +144,7 @@ x_train, x_test, y_train, y_test = train_test_split(
 
 #2. 모델 구성
 model = Sequential()
-model.add(Dense(128, input_dim=9, activation='relu'))
+model.add(Dense(128, input_dim=9, activation='relu'))   # relu : 음수를 0 으로 만드는 활성화 함수, 은닉층에 쓰면 학습이 잘 된다
 model.add(Dense(64, activation='relu'))
 model.add(Dense(32, activation='relu'))
 model.add(Dense(1))

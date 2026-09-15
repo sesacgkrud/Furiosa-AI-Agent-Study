@@ -1,3 +1,7 @@
+# keras10_scatter1.py
+# 일직선이 아닌 데이터를 훈련시키고 matplotlib 으로 결과를 눈으로 확인한다
+# scatter = 실제 데이터 점, plot(빨간 선) = 모델이 예측한 값 -> 선이 점들 사이를 지나가면 잘 학습된 것
+
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

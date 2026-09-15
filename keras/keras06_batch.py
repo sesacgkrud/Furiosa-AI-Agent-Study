@@ -1,3 +1,7 @@
+# keras06_batch.py
+# batch_size : 데이터를 몇 개씩 잘라서 가중치를 갱신할지 정한다 (기본값 32)
+#              작게 자를수록 1 epoch 안에서 갱신 횟수가 늘어난다 -> 훈련은 촘촘해지지만 시간이 오래 걸린다
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
@@ -15,7 +19,7 @@ model.add(Dense(1)) # input_dim 생략 가능
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
 # model.fit(x, y, epochs=800, batch_size=3) # 3개씩 잘라서 훈련, 결과에서 2/2 -> 1 epochs를 2번으로 나눠 훈련했다는 의미
-model.fit(x, y, epochs=800, batch_size=3) # 4개씩 잘라서 훈련, 결과에서 2/2 -> 1 epochs를 2번으로 나눠 훈련했다는 의미 (4개, 2개)
+model.fit(x, y, epochs=800, batch_size=3) # 3개씩 잘라서 훈련, 결과에서 2/2 -> 데이터 6개를 3개씩 2번으로 나눠 훈련했다는 의미
 
 #4. 평가, 예측
 loss = model.evaluate(x, y)

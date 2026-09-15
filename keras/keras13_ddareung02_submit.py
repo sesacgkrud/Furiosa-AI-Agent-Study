@@ -1,3 +1,8 @@
+# keras13_ddareung02_submit.py
+# keras13_ddareung01 에 제출(submission) 파일 만들기까지 추가한다
+# 제출용 test_csv 는 정답(count)이 없어서 evaluate 를 못 쓴다 -> predict 결과를 submission 의 count 칸에 넣어 저장한다
+# 결측치 처리 2번째 방법 : fillna(평균값) -> test_csv 는 행을 지우면 제출 개수(715)가 안 맞으므로 지우지 않고 채운다
+
 # https://dacon.io/competitions/open/235576/overview/description
 
 import numpy as np

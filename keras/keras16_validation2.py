@@ -1,3 +1,6 @@
+# keras16_validation2.py
+# [실습] 1 ~ 16 을 슬라이싱으로 train 8개 / val 4개 / test 4개로 자른다
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np

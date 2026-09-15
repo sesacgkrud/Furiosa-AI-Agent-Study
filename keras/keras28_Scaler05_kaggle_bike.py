@@ -1,3 +1,10 @@
+# keras28_Scaler05_kaggle_bike.py
+# 캐글 자전거 (회귀)
+# 스케일러 4종 비교 (MinMax / Standard / MaxAbs / Robust) - 파일 아래쪽에 스케일러별 결과를 기록해 둔다
+# 순서가 중요하다 : train_test_split 을 먼저 하고 -> scaler.fit(x_train) -> x_test 는 transform 만
+#  fit 은 변환 기준(Min/Max, 평균, 중앙값 등)을 구하는 단계라 x_train 으로만 해야 한다
+#  x_test 로 fit 하면 아직 보면 안 되는 평가 데이터의 정보가 기준에 섞인다 (데이터 누수)
+
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
 # [방법 2] validation_split 으로 fit 이 x_train 에서 알아서 val 을 떼어가게 하는 방식
 
@@ -57,12 +64,12 @@ model = Sequential()
 model.add(Dense(32, input_dim=8, activation='relu'))
 model.add(Dense(16, activation='relu'))
 model.add(Dense(1, activation='relu')) # 통상적으로 마지막에는 relu 넣지 않음
-# [수정] 이 출력층 relu 는 문제가 맞다. 음수 출력을 0 으로 잘라버려서
-#        한번 0 이 되면 기울기도 0 이라 그 뉴런이 다시 살아나지 못한다(dying ReLU).
-#        다만 이번 파일의 목적은 'MinMaxScaler 만 넣었을 때 성능이 어떻게 변하나' 이므로
-#        여기서 activation 까지 같이 바꾸면 무엇 때문에 성능이 변했는지 알 수 없게 된다.
-#        (한 번에 변수 하나만 바꾼다 = A/B 테스트의 기본)
-#        -> 지금은 그대로 두고, activation 제거는 별도 파일에서 따로 실험할 것.
+# 출력층 relu 는 음수 출력을 0 으로 잘라버려서
+# 한번 0 이 되면 기울기도 0 이라 그 뉴런이 다시 살아나지 못한다(dying ReLU).
+# 다만 이번 파일의 목적은 'MinMaxScaler 만 넣었을 때 성능이 어떻게 변하나' 이므로
+# 여기서 activation 까지 같이 바꾸면 무엇 때문에 성능이 변했는지 알 수 없게 된다.
+# (한 번에 변수 하나만 바꾼다 = A/B 테스트의 기본)
+# -> 지금은 그대로 두고, activation 제거는 별도 파일에서 따로 실험한다.
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')

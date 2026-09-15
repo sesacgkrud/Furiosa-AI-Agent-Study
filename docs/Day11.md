@@ -2,9 +2,26 @@
 
 **학습 기간:** 2026-09-14
 
+> 가중치만 저장하기, **ModelCheckpoint**, **Dropout**, **함수형 모델** 까지 네 가지를 10개 데이터셋에 적용했다.
+
 ---
 
-## 핵심 학습 내용
+## 🎯 한눈에 보기
+
+| 주제 | 핵심 한 줄 |
+|---|---|
+| save_weights | 가중치만 저장. 모델 구조와 `compile` 은 코드에 있어야 한다 (`.weights.h5`) |
+| ModelCheckpoint | 훈련 중 val_loss 최고 기록 갱신 시에만 파일로 저장 (`save_best_only=True`) |
+| 콜백은 callbacks 에 | 만들기만 하고 리스트에 안 넣으면 파일이 하나도 안 생긴다 |
+| save = load 확인 | 불러온 모델의 평가값이 **소수점까지 같아야** 제대로 저장된 것 |
+| load 파일의 #1 데이터 | save 파일과 한 글자도 달라지면 안 된다 (split·dropna·scaler) |
+| Dropout | 훈련할 때만 노드 일부를 랜덤으로 끈다. 파라미터 0개, evaluate 때는 꺼진다 |
+| 함수형 모델 | `Input` -> `층(이전 층)` -> `Model(inputs, outputs)`. Sequential 과 Total params 동일 |
+| 같은 모델, 다른 결과 | 시드를 고정하지 않으면 **같은 코드도 실행할 때마다 값이 다르다** |
+
+---
+
+## 📖 핵심 학습 내용
 
 ### 가중치만 저장·불러오기 (save_weights / load_weights)
 - Day10의 `model.save()`는 모델 전체를 저장했다면, **`model.save_weights()`는 가중치만** 저장한다
@@ -70,9 +87,23 @@
   - wine은 Dropout 위치·비율이 keras33과 달랐고, bike는 출력층 `relu`가 빠져 있었다
 - 수정 후 **10개 모두 keras33과 Total params / 출력층 activation / Dropout 비율이 같은 것을 확인**
 
+### 같은 모델인데 결과가 다른 이유 - 시드
+- keras33(Sequential) 과 keras34(함수형)의 기록값이 서로 달라서 원인을 확인
+- **층 구성이 같으면 같은 것은 `Total params`(구조)이고, 훈련 결과 숫자는 같을 수 없다**
+  - 랜덤 요소 3가지 : **가중치 초기값**(glorot_uniform), **Dropout이 끄는 노드**, **배치 섞기**
+  - `random_state` 는 `train_test_split` 의 **데이터 분할만** 고정한다
+- 검증
+  - keras33_dropout01 과 keras34_hamsu01은 **모델 코드가 한 글자도 다르지 않은데도**(둘 다 함수형, 저장 경로만 다름) loss가 0.2531 / 0.2499로 다르다
+  - 같은 층 구성으로 시드 없이 4번 실행 -> 매번 다른 loss / 같은 시드를 주고 실행 -> Sequential과 함수형이 **같은 값**
+- 판단 기준
+  - `Total params` 가 다르다 -> 변환이 잘못된 것 (층 연결 누락, 노드 수 오타)
+  - `Total params` 는 같은데 loss가 몇 % 다르다 -> **정상**
+  - `Total params` 는 같은데 acc가 0.9 -> 0.09로 무너진다 -> 출력층 activation 같은 다른 문제
+- 확인한 내용은 keras34 / keras35 파일 헤더에 주석으로 정리
+
 ---
 
-## 학습 파일
+## 📂 학습 파일
 
 | 파일 | 내용 |
 |---|---|
@@ -99,7 +130,7 @@
 
 ---
 
-## 실행 결과
+## 📊 실행 결과
 
 ### MCP save(keras31) = load(keras32) - 9쌍 모두 소수점까지 동일
 
@@ -142,10 +173,11 @@
 - 모든 데이터셋에 **r2 / mse / RMSE 출력 추가**
 - 10개 데이터셋에 `Dropout`을 적용하고 MCP 저장 경로를 데이터별 폴더로 분리
 - Sequential 모델 10개를 **함수형 모델로 변환**하고, 출력층 activation 누락으로 acc가 0.09까지 떨어진 원인을 찾아 수정 -> 10개 모두 Total params 일치 확인
+- keras33 / keras34의 결과가 다른 원인이 **시드 미고정**임을 실험으로 확인 (같은 시드를 주면 Sequential과 함수형의 값이 같아진다)
 
 ---
 
-## 핵심 개념
+## 💻 핵심 개념
 
 ### save_weights / load_weights - 가중치만 저장
 
@@ -312,6 +344,21 @@ output1 = Dense(1, activation='sigmoid')(drop3)
 output1 = Dense(10, activation='softmax')(drop4)    # ✅
 ```
 
+### 같은 모델인데 값이 다른 이유
+
+```python
+# 같은 것 : Total params (구조)
+# 다른 것 : loss / acc  <- 아래 3가지가 실행할 때마다 랜덤이기 때문
+#   1) 가중치 초기값 (glorot_uniform)
+#   2) Dropout 이 끄는 노드
+#   3) fit 의 배치 섞기
+# random_state 는 train_test_split 의 데이터 분할만 고정한다
+
+# 숫자까지 똑같이 재현하고 싶다면
+import tensorflow as tf
+tf.keras.utils.set_random_seed(337)   # 이 한 줄이면 Sequential 과 함수형이 같은 값이 나온다
+```
+
 ---
 
 ## 💡 주요 학습 포인트
@@ -327,8 +374,9 @@ output1 = Dense(10, activation='softmax')(drop4)    # ✅
 9. **Dropout은 훈련 때만 동작한다**: 파라미터 0개, evaluate / predict 때는 모든 노드 사용
 10. **함수형 = `Input` -> `층(이전 층)` -> `Model(inputs, outputs)`**: 층 구성이 같으면 Sequential과 Total params가 같다
 11. **함수형으로 옮길 때 출력층 activation을 빠뜨리지 않는다**: softmax / sigmoid가 없으면 acc가 0.09 수준으로 무너진다
-12. **seed 미고정 편차**: keras33과 keras34는 같은 모델인데도 결과가 달랐다. 1회 실행으로 Dropout / 함수형의 우열을 단정하지 않는다
+12. **같은 모델이어도 결과 숫자는 다르다**: 같은 것은 `Total params`(구조)이고, 시드를 고정하지 않으면 값은 매번 달라진다. keras33과 keras34가 그 증거이므로 1회 실행으로 Dropout / 함수형의 우열을 단정하지 않는다
+13. **`random_state` 의 범위**: 데이터 분할만 고정할 뿐 가중치 초기값 / Dropout / 배치 섞기는 고정하지 않는다
 
 ---
 
-[⬅️ Day10](Day10.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day10](Day10.md) · [🏠 전체 목차](../README.md) · [Day12 ➡️](Day12.md)

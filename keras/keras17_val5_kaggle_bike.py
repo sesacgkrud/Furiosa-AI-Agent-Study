@@ -1,3 +1,5 @@
+# keras17_val5_kaggle_bike.py
+
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
 # [방법 2] validation_split 으로 fit 이 x_train 에서 알아서 val 을 떼어가게 하는 방식
 

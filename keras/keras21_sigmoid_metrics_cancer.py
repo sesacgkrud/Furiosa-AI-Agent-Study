@@ -1,3 +1,10 @@
+# keras21_sigmoid_metrics_cancer.py
+# 이진 분류 첫 실습 (유방암 : 악성 0 / 양성 1) - 회귀와 달라지는 3가지
+#  1) 출력층 activation = sigmoid  -> 결과를 0 ~ 1 사이 확률로 눌러 준다
+#  2) loss = 'binary_crossentropy' -> 확률이 정답에서 멀수록 크게 벌점을 준다 (mse 대신)
+#  3) metrics=['acc']              -> 훈련 중에 정확도를 같이 찍어 본다 (loss 와 달리 훈련에는 영향 없음)
+# stratify=y : train / test 를 나눌 때 0 과 1 의 비율을 똑같이 유지한다
+
 import numpy as np
 import pandas as pd
 import time

@@ -1,3 +1,7 @@
+# keras11_1_california.py
+# 사이킷런이 주는 실제 데이터(캘리포니아 집값)로 처음 훈련해 본다 (회귀 : 집값이라는 숫자를 맞힌다)
+# datasets.data = x(특성 8개), datasets.target = y(정답) -> x 의 열 개수가 곧 input_dim
+
 from sklearn.datasets import fetch_california_housing
 
 # import 가 안 되는 경우

@@ -1,3 +1,8 @@
+# keras20_EarlyStopping2_diabetes.py
+# keras19_overfit2_diabetes.py 베이스
+# EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
+# restore_best_weights=True : 멈춘 시점이 아니라 val_loss 가 가장 낮았던 epoch 의 가중치로 되돌린다
+
 from sklearn.datasets import load_diabetes
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

@@ -1,3 +1,7 @@
+# keras20_EarlyStopping5_kaggle_bike.py
+# EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
+# restore_best_weights=True : 멈춘 시점이 아니라 val_loss 가 가장 낮았던 epoch 의 가중치로 되돌린다
+
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
 # [방법 2] validation_split 으로 fit 이 x_train 에서 알아서 val 을 떼어가게 하는 방식
 

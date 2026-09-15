@@ -1,3 +1,7 @@
+# keras20_EarlyStopping4_dacon_ddareung.py
+# EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
+# restore_best_weights=True : 멈춘 시점이 아니라 val_loss 가 가장 낮았던 epoch 의 가중치로 되돌린다
+
 # https://dacon.io/competitions/open/235576/overview/description
 # [방법 1] train_test_split 을 2번 써서 x_val 을 직접 만들고 validation_data 로 넘기는 방식
 

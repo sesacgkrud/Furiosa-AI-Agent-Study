@@ -1,3 +1,7 @@
+# keras12_R2_RMSE_03_diabetes.py
+# 당뇨 데이터에 r2 를 추가한다
+# loss(mse) 가 2900 처럼 커도 r2 로 보면 실제 성능이 얼마나 되는지 알 수 있다
+
 from sklearn.datasets import load_diabetes
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

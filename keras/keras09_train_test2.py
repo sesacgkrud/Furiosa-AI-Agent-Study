@@ -1,3 +1,7 @@
+# keras09_train_test2.py
+# keras09_train_test1 의 손수 만든 배열 대신 슬라이싱([:7], [7:]) 으로 7 : 3 을 나눈다
+# 다만 앞에서 7개 / 뒤에서 3개로 순서대로 잘리기 때문에 데이터가 섞이지는 않는다
+
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

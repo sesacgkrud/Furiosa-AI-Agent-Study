@@ -1,3 +1,7 @@
+# keras16_validation4_split.py
+# validation_split : x_val 을 따로 만들지 않고 fit 이 x_train 의 일부를 검증용으로 떼어 쓰게 한다
+# 주의 : train 을 나눈 뒤 다시 떼어 가는 것이라 실제 훈련에 쓰이는 데이터는 그만큼 줄어든다
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np

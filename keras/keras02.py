@@ -1,3 +1,7 @@
+# keras02.py
+# keras01 에 evaluate(평가) 를 추가한다
+# evaluate : 훈련이 끝난 모델에 데이터를 넣어 loss 를 다시 계산한다 (여기서는 훈련 데이터를 그대로 넣어서 확인)
+
 # from tensorflow.python.keras.models import Sequential # python을 입력하면 노란 줄이 없어지는데, python 버전에 따라 실행하면 에러가 발생하기도 함
 # from tensorflow.python.keras.layers import Dense # python을 입력하면 노란 줄이 없어지는데, python 버전에 따라 실행하면 에러가 발생하기도 함
 

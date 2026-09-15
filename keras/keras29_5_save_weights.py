@@ -1,3 +1,8 @@
+# keras29_5_save_weights.py
+# save_weights() : 가중치(숫자)만 저장한다. 모델 구조는 저장되지 않는다
+# 확장자는 .weights.h5 로 끝나야 한다
+# fit 앞에서 저장하면 초기 가중치(save1), fit 뒤에서 저장하면 훈련된 가중치(save2)가 된다
+
 # keras29_3_save_model2.py 베이스
 
 from sklearn.datasets import fetch_california_housing
@@ -32,8 +37,7 @@ x_train = scaler.fit_transform(x_train) # 위 두 줄(fit + transform)을 한 �
 
 x_test = scaler.transform(x_test) # test 는 transform 만! fit 을 또 하면 평가 데이터 기준이 섞인다 (데이터 누수)
 
-# [수정] 아래 주석은 MinMaxScaler 를 쓰던 시절의 값이라 지금 출력과 맞지 않아 실제 값으로 고쳤다.
-#        RobustScaler = (원값 - 중앙값) / IQR 이라서 0~1 로 수렴하지 않고 이상치가 그대로 남는다.
+# RobustScaler = (원값 - 중앙값) / IQR 이라서 MinMaxScaler 처럼 0~1 로 수렴하지 않고 이상치가 그대로 남는다
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : -7.2267 Max : 1455.8382
 print('Min :', np.min(x_test), 'Max :', np.max(x_test))   # Min : -7.6732 Max : 586.3726
 # 최대 이상치(1455.8)가 x_test(586.4) 쪽이 아니라 x_train 쪽에 있다
@@ -89,13 +93,12 @@ loss = model.evaluate(x_test, y_test)
 print("loss :", loss)
 
 #4. 평가 예측
-# [수정] 원본에는 여기에 loss = model.evaluate(x, y) 가 있었는데 두 가지 문제로 삭제했다.
-#        1) x 는 스케일링을 안 한 원본이다. 모델은 0~1 로 변환된 값으로 학습했는데
-#           평가에만 원본(MedInc 0~15, Population 수천)을 넣으니 loss 가 89923 처럼 터졌다.
-#           -> 모델이 나쁜 게 아니라 자와 대상의 단위가 안 맞은 것. 성능 비교와 무관한 숫자다.
-#        2) x 안에는 x_train 이 그대로 들어있다. (시험지에 답안지가 섞인 상태)
-#           평가는 훈련에도 검증에도 안 쓴 x_test 로만 해야 하므로 위의 evaluate 하나면 충분하다.
-#        전체 데이터로 굳이 확인하고 싶다면 scaler.transform(x) 로 같은 기준으로 변환해서 넣어야 한다.
+# 평가는 훈련에도 검증에도 안 쓴 x_test 로만 한다 -> 위의 evaluate 하나면 충분하다
+#  1) x 는 스케일링을 안 한 원본이다. 모델은 변환된 값으로 학습했는데
+#     평가에만 원본(MedInc 0~15, Population 수천)을 넣으면 loss 가 89923 처럼 커진다
+#     -> 모델이 나쁜 게 아니라 자와 대상의 단위가 안 맞는 것이라 성능 비교와 무관한 숫자다
+#  2) x 안에는 x_train 이 그대로 들어있다 (시험지에 답안지가 섞인 상태)
+#  전체 데이터로 굳이 확인하고 싶다면 scaler.transform(x) 로 같은 기준으로 변환해서 넣는다
 
 print("========================= history =========================")
 print(hist)
@@ -131,8 +134,7 @@ plt.show()
 # 저장 파일도 마지막 실행 것으로 덮어써지므로,
 # keras29_4 는 이 파일을 실행한 '직후'에 돌려야 같은 값이 나온다.
 #
-# [수정] 아래에 있던 스케일러별 loss 비교 기록은 keras28_Scaler01_california.py 에서
-#        측정한 값이라 이 파일과 무관해서 지웠다. 스케일러 비교는 keras28 파일에 있다.
+# 스케일러별 loss 비교 기록은 keras28_Scaler01_california.py 에 있다
 
 # ========== ========== ========== ========== ========== <- weights.h5 적용 후
 

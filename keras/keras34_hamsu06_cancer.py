@@ -2,6 +2,9 @@
 # 구조 : keras34_hamsu00.py (함수형 모델) 기준 / 데이터, 모델 : keras33_dropout06_cancer.py 를 함수형으로 변환
 # 함수형 모델 : Input 으로 입력층을 만들고, '층(이전 층)' 형태로 하나씩 연결한 뒤 Model(inputs, outputs) 로 범위를 정한다
 #               층 구성이 같으면 Sequential 과 파라미터 수도 같은 똑같은 모델이다 (만드는 방법만 다르다)
+#               단, 같은 것은 '구조(Total params)' 다. 가중치 초기값 / Dropout 이 끄는 노드 / 배치 섞기가 매번 랜덤이라
+#               시드를 고정하지 않으면 같은 코드를 두 번 돌려도 loss, acc 는 조금씩 다르게 나온다
+#               (random_state 는 train_test_split 의 데이터 분할만 고정한다)
 # Dropout : 훈련할 때마다 층 출력의 일부 노드를 랜덤으로 꺼서 특정 노드에만 의존하지 않게 한다 -> 과적합 방지
 #           evaluate / predict 때는 자동으로 꺼지고 모든 노드를 다 사용한다
 
@@ -45,12 +48,12 @@ dense2 = Dense(16, activation='relu')(drop1)
 drop2 = Dropout(0.3)(dense2)
 
 # 변수 이름은 층마다 새로 붙인다 (dense3 / drop3)
-# 원래는 dense2 / drop2 이름을 다시 쓰고 (drop1) 에 연결해서 16 층이 모델에서 빠져 있었다
+# 앞 층과 같은 이름을 다시 쓰면 그 변수가 덮어써져서 해당 층이 모델 연결에서 빠진다
 dense3 = Dense(8, activation='relu')(drop2)     # 바로 앞 층인 drop2 에 연결해야 32 -> 16 -> 8 순서가 된다
 drop3 = Dropout(0.3)(dense3)
 
 # 이진 분류 출력층은 sigmoid 가 반드시 있어야 0~1 확률이 나온다
-# (원래는 빠져 있어서 출력이 음수 / 1 초과로 나왔고, 반올림한 값이 0, 1 이 아니라 acc_score 가 0.33 으로 떨어졌다)
+# sigmoid 가 없으면 출력이 음수나 1 초과로 나와서 반올림해도 0, 1 이 되지 않는다
 output1 = Dense(1, activation='sigmoid')(drop3)
 
 model = Model(inputs=input1, outputs=output1)   # 시작(input1) ~ 끝(output1) 범위를 정해서 모델 완성
@@ -111,9 +114,8 @@ print("acc_score :", acc_score)
 
 # ===== 이전 기록 =====
 # Sequential + Dropout (keras33_dropout06, 2026-09-14)    loss : 0.0966392457485199 / acc_score : 0.9473684210526315
-# 함수형 (이전 실행, sigmoid 누락 + 16 층 연결 빠진 상태)  loss : 0.19262878596782684 / acc : 0.883 / acc_score : 0.3333333333333333
 
-# ===== 실행 결과 (2026-09-14, 함수형 + Dropout + MCP + r2/mse/rmse, keras33 과 같은 구성으로 수정 후) =====
+# ===== 실행 결과 (2026-09-14, 함수형 + Dropout + MCP + r2/mse/rmse, keras33 과 같은 구성) =====
 # loss : 0.10246408730745316
 # acc : 0.9532
 # r2 : 0.860884964466095

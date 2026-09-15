@@ -1,3 +1,6 @@
+# keras19_overfit4_dacon_ddareung.py
+# 과적합 확인 : loss 와 val_loss 를 같이 그려서 val_loss 가 올라가기 시작하는 지점을 찾는다
+
 # https://dacon.io/competitions/open/235576/overview/description
 # [방법 1] train_test_split 을 2번 써서 x_val 을 직접 만들고 validation_data 로 넘기는 방식
 

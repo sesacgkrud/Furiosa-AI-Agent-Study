@@ -1,3 +1,10 @@
+# keras28_Scaler04_dacon_ddareung.py
+# 따릉이 (회귀, [방법 1] - x_val 을 직접 만들어 validation_data 로 넘긴다)
+# 스케일러 4종 비교 (MinMax / Standard / MaxAbs / Robust) - 파일 아래쪽에 스케일러별 결과를 기록해 둔다
+# 순서가 중요하다 : train_test_split 을 먼저 하고 -> scaler.fit(x_train) -> x_test 는 transform 만
+#  fit 은 변환 기준(Min/Max, 평균, 중앙값 등)을 구하는 단계라 x_train 으로만 해야 한다
+#  x_test 로 fit 하면 아직 보면 안 되는 평가 데이터의 정보가 기준에 섞인다 (데이터 누수)
+
 # https://dacon.io/competitions/open/235576/overview/description
 # [방법 1] train_test_split 을 2번 써서 x_val 을 직접 만들고 validation_data 로 넘기는 방식
 
@@ -51,15 +58,14 @@ x_train = scaler.fit_transform(x_train)
 
 x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
 
-#################### [수정] x_val 변환 누락 - 이번 실습에서 ddareung 만 결과가 망가진 원인 ####################
-# 이 파일은 [방법 1] 이라 x_val 을 직접 만들어서 validation_data 로 넘기는데,
-# x_train / x_test 만 transform 하고 x_val 을 빼먹었다.
-# 그래서 모델은 0~1 로 스케일된 값으로 학습하는데 검증에는 원본 스케일 값이 들어가고 있었다.
+#################### x_val 도 같은 scaler 로 변환한다 ####################
+# 이 파일은 [방법 1] 이라 x_val 을 직접 만들어서 validation_data 로 넘긴다.
+# x_train / x_test 만 transform 하고 x_val 을 빼먹으면
+# 모델은 0~1 로 스케일된 값으로 학습하는데 검증에는 원본 스케일 값이 들어간다.
 #   -> val_loss 가 학습 loss 와 완전히 다른 세계의 숫자가 되고
 #   -> EarlyStopping 이 그 엉터리 val_loss 를 보고 엉뚱한 시점에 멈추고
 #   -> restore_best_weights=True 가 '가짜 최저점'의 나쁜 가중치를 복원한다.
-# 그 결과가 아래 기록해둔 r2 -1.16 (= 평균값만 찍는 것보다 못함), RMSE 126 이다.
-# 즉 MinMaxScaler 가 나빠서가 아니라 이 한 줄이 없어서 생긴 문제였다.
+# 아래에 기록해둔 r2 -1.16 (= 평균값만 찍는 것보다 못함), RMSE 126 이 그 상태의 결과다.
 #
 # 주의: 여기서도 scaler.fit 은 다시 하지 않는다.
 #       fit 은 위에서 x_train 으로만 했으므로 scaler 안에는 x_train 의 Min/Max 가 저장돼 있고,
@@ -71,7 +77,7 @@ x_val = scaler.transform(x_val)
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
 print('Min :', np.min(x_test), 'Max :', np.max(x_test)) # Min : -0.022222222222222227 Max : 1.0
-print('Min :', np.min(x_val), 'Max :', np.max(x_val)) # [수정] val 도 0~1 근처로 들어왔는지 같이 확인
+print('Min :', np.min(x_val), 'Max :', np.max(x_val)) # val 도 0~1 근처로 들어왔는지 같이 확인
 
 # print(x_train.shape, x_val.shape, x_test.shape)
 
@@ -163,10 +169,9 @@ plt.show()
 # mse : 15935.10207654089
 # RMSE : 126.23431418018197
 
-# [수정] 위 결과는 x_val 스케일링이 빠진 상태에서 나온 값이라 스케일링 성능 비교에 쓸 수 없다.
-#        x_val = scaler.transform(x_val) 추가 후 다시 실행해서 아래에 결과를 기록할 것.
+# (위 결과는 x_val 스케일링 없이 나온 값이라 스케일링 성능 비교에는 쓰지 않는다)
 
-# ========== ========== ========== ========== ========== <- x_val 수정 후 (최종 결과)
+# ========== ========== ========== ========== ========== <- x_val 까지 스케일링한 최종 결과
 
 # loss(mse) : 1995.118408203125
 # r2 : 0.7291596889111879

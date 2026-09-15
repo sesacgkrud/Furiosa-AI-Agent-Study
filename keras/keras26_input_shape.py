@@ -1,3 +1,9 @@
+# keras26_input_shape.py
+# input_dim 대신 input_shape 를 쓴다
+#  input_dim=4  -> 컬럼 개수만 쓸 수 있다 (2차원 데이터 전용)
+#  input_shape=(4,) -> 행 개수를 뺀 나머지 모양을 그대로 적는다
+# 이미지처럼 차원이 늘어나면(예: (28, 28, 1)) input_dim 으로는 표현할 수 없어서 input_shape 를 써야 한다
+
 # keras23_softmax1_OneHot_iris.py 베이스
 
 import numpy as np

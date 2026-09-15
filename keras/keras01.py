@@ -1,3 +1,7 @@
+# keras01.py
+# 딥러닝 첫 모델 : y = x 인 데이터로 Sequential 모델을 만들고 훈련 -> 예측까지 4단계를 한 번에 본다
+# 4단계 : #1 데이터 -> #2 모델 구성 -> #3 컴파일, 훈련 -> #4 평가, 예측 (이 순서는 앞으로 모든 파일에서 똑같다)
+
 import tensorflow as tf # tensorflow를 가져오고 약어로 tf로 명명, AI에서 써야하는 기능을 대부분 가지고 있음
 print(tf.__version__) # tensorflow 라이브러리 버전 출력
 

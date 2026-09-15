@@ -1,3 +1,10 @@
+# keras28_Scaler07_santander.py
+# 산탄데르 (이진 분류, 제출 파일 생성)
+# 스케일러 4종 비교 (MinMax / Standard / MaxAbs / Robust) - 파일 아래쪽에 스케일러별 결과를 기록해 둔다
+# 순서가 중요하다 : train_test_split 을 먼저 하고 -> scaler.fit(x_train) -> x_test 는 transform 만
+#  fit 은 변환 기준(Min/Max, 평균, 중앙값 등)을 구하는 단계라 x_train 으로만 해야 한다
+#  x_test 로 fit 하면 아직 보면 안 되는 평가 데이터의 정보가 기준에 섞인다 (데이터 누수)
+
 import numpy as np
 import pandas as pd
 import time
@@ -93,10 +100,10 @@ y_test_label = np.argmax(y_test, axis=1)
 acc_score = accuracy_score(y_test_label, y_predict)
 print('acc_score : ', acc_score)
 
-#################### [수정] test_csv 스케일링 누락 ####################
-# 모델은 0~1 로 변환된 x_train 으로 학습했는데, 제출용 예측에만 원본 test_csv 를 넣고 있었다.
-# x_test 로 잰 acc 0.9146 은 (x_test 는 변환했으므로) 맞는 값이지만,
-# 실제로 저장한 제출 csv 는 학습 때와 단위가 다른 입력으로 뽑은 엉터리 예측이었다.
+#################### 제출용 test_csv 도 같은 scaler 로 변환한다 ####################
+# 모델은 0~1 로 변환된 x_train 으로 학습하므로 제출용 예측에 원본 test_csv 를 그대로 넣으면 안 된다.
+# x_test 로 잰 acc 는 (x_test 는 변환했으므로) 맞는 값이어도,
+# 저장되는 제출 csv 만 학습 때와 단위가 다른 입력으로 뽑은 예측이 된다.
 # 여기서도 scaler.fit 은 절대 다시 하지 않는다.
 # scaler 안에 저장된 x_train 의 Min/Max 를 공식에 대입해 값만 바꾼다. (Min/Max 를 새로 구하지 않는다)
 # test_csv 로 fit 하면 훈련 때와 다른 Min/Max 로 변환되어 학습한 모델과 단위가 어긋난다.
@@ -106,15 +113,13 @@ test_csv_scaled = scaler.transform(test_csv)
 y_submit = model.predict(test_csv_scaled)
 y_submit = np.argmax(y_submit, axis=1)
 
-# [수정] 맨 위에서 이미 submission_csv 로 같은 파일을 읽었는데 여기서 또 읽고 있었다. 중복이라 위의 것을 재사용한다.
+# 맨 위에서 읽어 둔 submission_csv 를 그대로 재사용한다 (같은 파일을 두 번 읽을 필요가 없다)
 submission_csv['target'] = y_submit
 
-# [수정] 저장 파일명이 submit_0908_1642.csv 로 되어 있어서
-#        스케일링 적용 전(keras24)에 만들어 둔 제출 파일을 덮어써 버렸다.
-#        before / after 의 Kaggle 점수를 비교하는 게 이 실습의 목적이므로
-#        이전 파일은 남겨두고 새 이름으로 저장해야 한다.
-#        (덮어쓴 원본은 git 에 커밋돼 있으니 되살릴 수 있다:
-#         git checkout -- _data/kaggle_santander/submit/submit_0908_1642.csv)
+# 제출 파일은 실습마다 다른 이름으로 저장한다.
+# 스케일링 적용 전(keras24)의 제출 파일과 캐글 점수를 비교하는 것이 이 실습의 목적이므로
+# 이전 파일은 남겨두고 새 이름(_scaler)으로 저장한다.
+# 규칙 : submit_날짜_시간_실습이름.csv
 submission_csv.to_csv(
     path + 'submit/' + 'submit_0910_1724_scaler.csv'
 )

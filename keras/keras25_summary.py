@@ -1,3 +1,7 @@
+# keras25_summary.py
+# model.summary() : 층 구조와 파라미터(가중치) 개수를 표로 보여 준다
+# 한 층의 파라미터 수 = (입력 개수 x 출력 개수) + 출력 개수(bias)
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 

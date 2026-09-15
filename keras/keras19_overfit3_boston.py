@@ -1,3 +1,7 @@
+# keras19_overfit3_boston.py
+# keras17_val3_boston.py 베이스
+# 과적합 확인 : loss 와 val_loss 를 같이 그려서 val_loss 가 올라가기 시작하는 지점을 찾는다
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.datasets import boston_housing

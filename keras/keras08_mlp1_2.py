@@ -1,3 +1,7 @@
+# keras08_mlp1_2.py
+# keras08_mlp1_1 과 같은 데이터를 (2, 5) 로 만든 뒤 전치(T)해서 (5, 2) 로 돌려 쓴다
+# 전치 : 행과 열을 바꾼다 -> x.T 또는 x.transpose() (둘 다 결과는 같다)
+
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

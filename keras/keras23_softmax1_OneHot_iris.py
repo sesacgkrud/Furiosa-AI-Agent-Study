@@ -1,3 +1,12 @@
+# keras23_softmax1_OneHot_iris.py
+# 다중 분류 첫 실습 (붓꽃 3종 : setosa / versicolor / virginica)
+# 다중 분류 3종 세트
+#  1) y 를 원핫 인코딩 : 0, 1, 2 를 [1,0,0] [0,1,0] [0,0,1] 로 바꾼다 (숫자 크기에 순서 의미가 생기지 않게)
+#  2) 출력층 activation = softmax, 노드 수 = 클래스 개수 -> 칸별 확률이 나오고 다 더하면 1
+#  3) loss = 'categorical_crossentropy'
+# 정확도를 잴 때는 argmax 로 확률이 가장 큰 칸의 번호를 뽑아 정답 번호와 비교한다
+# 원핫 만드는 방법 3가지를 모두 적어 두고 비교한다 (tensorflow to_categorical / pandas get_dummies / sklearn OneHotEncoder)
+
 import numpy as np
 import pandas as pd
 import time

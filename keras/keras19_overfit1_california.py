@@ -1,3 +1,8 @@
+# keras19_overfit1_california.py
+# 과적합(overfit) 확인 : fit 의 결과를 hist 에 받아서 loss 와 val_loss 를 그래프로 그린다
+# hist.history 안에 epoch 별 loss / val_loss 가 리스트로 들어있다
+# loss 는 계속 내려가는데 val_loss 가 어느 순간부터 올라가면 그 지점부터 과적합이다
+
 # keras17_val1_california.py 베이스
 
 from sklearn.datasets import fetch_california_housing
@@ -28,9 +33,9 @@ x_train, x_test, y_train, y_test = train_test_split(
 
 #2. 모델 구성
 model = Sequential()
-# [수정] 활성화 함수가 하나도 없으면 층을 아무리 쌓아도 결국 y = wx + b 짜리 "직선 모델" 1개와 같다.
-#        (선형 x 선형 = 선형) 그래서 표현력이 부족해 loss 가 어느 선에서 더 못 내려가고 출렁인다.
-#        은닉층에는 relu 를 붙이고, 회귀의 출력층에는 activation 을 안 붙인다.
+# 활성화 함수가 하나도 없으면 층을 아무리 쌓아도 결국 y = wx + b 짜리 "직선 모델" 1개와 같다
+# (선형 x 선형 = 선형) 그래서 표현력이 부족해 loss 가 어느 선에서 더 못 내려가고 출렁인다
+# -> 은닉층에는 relu 를 붙이고, 회귀의 출력층에는 activation 을 안 붙인다
 model.add(Dense(100, input_dim=8, activation='relu'))
 model.add(Dense(75, activation='relu'))
 model.add(Dense(50, activation='relu'))
@@ -48,12 +53,9 @@ loss = model.evaluate(x_test, y_test)
 print("loss :", loss)
 
 #4. 평가 예측
-# [수정] 원본은 model.evaluate(x, y) 였는데 두 가지가 문제였다.
-#        1) x 는 스케일링이 안 된 원본이라 학습 때와 기준이 달라 loss 가 엉뚱하게 나온다.
-#        2) x 안에는 train 데이터가 이미 들어있어서(= 시험문제에 답안지 포함) 평가 의미가 없다.
-#        전체 데이터로 확인하고 싶다면 최소한 같은 scaler 로 변환해서 넣어야 한다.
-loss_all = model.evaluate(scaler.transform(x), y)
-print("loss(전체 데이터, 참고용) :", loss_all)
+# 평가는 훈련에도 검증에도 안 쓴 x_test 로만 한다 -> 위의 evaluate 하나면 충분하다
+# 전체 데이터(x)를 그대로 넣으면 훈련에 쓴 데이터가 섞여 있어서(시험문제에 답안지 포함) 평가 의미가 없다
+# (이 파일에는 스케일러가 없다. 스케일링은 keras27 부터 다룬다)
 
 print("========================= history =========================")
 print(hist)
@@ -79,7 +81,7 @@ plt.legend(loc='upper right') # 우측 상단에 라벨 표시
 plt.title('California(캘리포니아) Loss')
 
 plt.xlabel('epochs')
-plt.ylabel('loss')   # [수정] 원본은 xlabel 이 두 번이라 x축 라벨이 'loss' 로 덮여쓰이고 y축은 비어 있었다
+plt.ylabel('loss')   # y축은 loss, x축은 epochs
 
 plt.grid() # 격자 표시 추가
 plt.show()

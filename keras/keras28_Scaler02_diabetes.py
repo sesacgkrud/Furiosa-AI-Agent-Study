@@ -1,3 +1,10 @@
+# keras28_Scaler02_diabetes.py
+# 당뇨 (회귀)
+# 스케일러 4종 비교 (MinMax / Standard / MaxAbs / Robust) - 파일 아래쪽에 스케일러별 결과를 기록해 둔다
+# 순서가 중요하다 : train_test_split 을 먼저 하고 -> scaler.fit(x_train) -> x_test 는 transform 만
+#  fit 은 변환 기준(Min/Max, 평균, 중앙값 등)을 구하는 단계라 x_train 으로만 해야 한다
+#  x_test 로 fit 하면 아직 보면 안 되는 평가 데이터의 정보가 기준에 섞인다 (데이터 누수)
+
 from sklearn.datasets import load_diabetes
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -17,12 +24,12 @@ x_train, x_test, y_train, y_test = train_test_split(
     random_state=77,
 )
 
-# [수정] 이 x_val / y_val 은 아래 fit 에서 실제로 쓰지 않는다. (validation_split=0.3 으로 대체됨)
-#        그런데 '안 쓰니까 지우자' 하면 안 된다.
-#        이 split 때문에 x_train 이 전체의 0.7 x 0.7 = 49% 로 줄어드는데,
-#        지우면 훈련 데이터 양 자체가 달라져서 베이스(keras20)와의 성능 비교가 성립하지 않는다.
-#        즉 지금은 'val 을 만드는 줄'이 아니라 'x_train 을 한 번 더 자르는 줄'로 남아있는 것이다.
-#        x_val 을 진짜로 쓰고 싶다면 keras28_Scaler04 처럼 스케일링까지 해서 validation_data 로 넘길 것.
+# 이 x_val / y_val 은 아래 fit 에서 실제로 쓰지 않는다 (validation_split=0.3 으로 대체)
+# 그래도 이 split 을 지우면 안 된다.
+# 이 split 때문에 x_train 이 전체의 0.7 x 0.7 = 49% 로 줄어드는데,
+# 지우면 훈련 데이터 양 자체가 달라져서 베이스(keras20)와의 성능 비교가 성립하지 않는다.
+# 즉 지금은 'val 을 만드는 줄'이 아니라 'x_train 을 한 번 더 자르는 줄'이다.
+# x_val 을 진짜로 쓰려면 keras28_Scaler04 처럼 스케일링까지 해서 validation_data 로 넘긴다.
 x_train, x_val, y_train, y_val = train_test_split(
     x_train, y_train,
     train_size=0.7,

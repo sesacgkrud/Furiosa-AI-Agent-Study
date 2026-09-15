@@ -1,3 +1,9 @@
+# keras12_R2_RMSE_01_boston.py
+# 회귀 평가지표 3종을 처음 정리한 파일 (한 줄씩 주석을 달아 둔 기준 파일)
+# r2   : 1 에 가까울수록 좋다 (데이터가 달라도 서로 비교할 수 있다)
+# mse  : 오차를 제곱해서 평균 낸 값 -> loss='mse' 로 훈련했다면 evaluate 의 loss 와 같은 값이 나온다
+# RMSE : mse 에 루트를 씌운 값 -> 정답과 단위가 같아져서 "평균 몇 만큼 틀렸는지" 로 읽을 수 있다
+
 from tensorflow.keras.models import Sequential # 순차적으로 층을 쌓는 신경망 모델을 불러옴
 from tensorflow.keras.layers import Dense # 완전연결층(Dense)을 불러옴
 from tensorflow.keras.datasets import boston_housing # 보스턴 주택 가격 데이터를 불러옴

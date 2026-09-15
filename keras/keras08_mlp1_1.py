@@ -1,3 +1,7 @@
+# keras08_mlp1_1.py
+# MLP(다층 퍼셉트론) : 입력 컬럼(특성)이 2개 이상인 데이터를 다룬다
+# 케라스는 데이터를 (행 = 데이터 개수, 열 = 특성 개수) 로 읽는다 -> input_dim 에는 "열의 개수" 를 넣는다
+
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

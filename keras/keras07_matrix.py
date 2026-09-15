@@ -1,3 +1,7 @@
+# keras07_matrix.py
+# numpy shape 읽는 법 : 대괄호 [ 가 열린 깊이 = 차원 수, 각 자리의 숫자 = 그 차원의 원소 개수
+# 모델의 input_dim / input_shape 를 맞추려면 데이터의 shape 부터 정확히 볼 수 있어야 한다
+
 import numpy as np
 
 x1 = np.array([1,2,3]) # 스칼라 데이터 3개 있는 1차원 데이터

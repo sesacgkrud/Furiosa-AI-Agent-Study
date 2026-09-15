@@ -1,3 +1,7 @@
+# keras11_3_boston_tf.py
+# 보스턴 집값 데이터(회귀) : 케라스가 주는 데이터는 처음부터 train / test 로 나뉘어서 들어온다
+# 그래서 train_test_split 없이 바로 쓴다
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.datasets import boston_housing
