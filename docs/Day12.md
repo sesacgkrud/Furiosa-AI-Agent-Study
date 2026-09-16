@@ -252,4 +252,4 @@ print(np.max(x_train), np.min(x_train))    # 1.0 -1.0
 
 ---
 
-[⬅️ Day11](Day11.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day11](Day11.md) · [🏠 전체 목차](../README.md) · [Day13 ➡️](Day13.md)

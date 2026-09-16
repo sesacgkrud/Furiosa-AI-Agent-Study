@@ -9,8 +9,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D
 
 model = Sequential()
-model.add(Conv2D(10, (2,2), input_shape=(5,5,1))) # (2,2) = 필터 크기
-model.add(Conv2D(5, (2,2)))
+model.add(Conv2D(10, (2,2), input_shape=(5,5,1)))   # 10 = 필터 개수, (2,2) = 커널 크기, (5,5,1) = (가로, 세로, 채널)
+model.add(Conv2D(5, (2,2)))                         # 두 번째 층부터는 input_shape 를 쓰지 않는다 (앞 층 출력이 그대로 입력)
 
 model.summary()
 # _________________________________________________________________

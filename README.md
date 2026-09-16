@@ -20,6 +20,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day10](docs/Day10.md)** | 스케일러 4종 비교 & 모델 저장/불러오기 | 2026-09-11 | StandardScaler, MaxAbsScaler, RobustScaler, model.save, load_model |
 | **[Day11](docs/Day11.md)** | 가중치 저장 & ModelCheckpoint & Dropout & 함수형 모델 | 2026-09-14 | save_weights/load_weights, ModelCheckpoint, save_best_only, Dropout, Input/Model, 시드 고정 |
 | **[Day12](docs/Day12.md)** | CPU/GPU 속도 비교 & CNN 입문 | 2026-09-15 | list_physical_devices, 소요 시간 비교, Conv2D, mnist, 이미지 스케일링 |
+| **[Day13](docs/Day13.md)** | CNN 이미지 분류 실습 & padding · strides · MaxPooling | 2026-09-16 | Flatten, 4차원 reshape, fashion_mnist, cifar10/100, padding, strides, MaxPooling2D, val_acc |
 
 ---
 
@@ -40,7 +41,8 @@ C:\furiosa_study\
 │   ├── keras28_Scaler01_california.py ~ keras28_Scaler10_...py  (Day09~Day10)
 │   ├── keras29_1_save_model.py ~ keras29_4_load_model2.py       (Day10)
 │   ├── keras29_5_save_weights.py ~ keras34_hamsu10_digits.py    (Day11)
-│   └── keras35_gpu_test00.py ~ keras36_cnn3_mnist.py            (Day12)
+│   ├── keras35_gpu_test00.py ~ keras36_cnn2_mnist_imshow.py     (Day12)
+│   └── keras36_cnn3_mnist1.py ~ keras39_MaxPolling0.py          (Day13)
 ├── _save/
 │   ├── keras29/            (model.save / save_weights 로 저장한 파일)
 │   ├── keras30/            (ModelCheckpoint 로 저장한 모델 파일)
@@ -54,7 +56,7 @@ C:\furiosa_study\
 ├── docs/                   (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day12.md
+│   └── ... Day13.md
 ├── README.md               (전체 목차)
 ├── .gitignore
 └── .vscode/
@@ -66,11 +68,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 12일 (Day01 ~ Day12)  
-**완료 시간:** 96시간  
-**완료율: 15.00%**
+**완료:** 13일 (Day01 ~ Day13)  
+**완료 시간:** 104시간  
+**완료율: 16.25%**
 
 ---
 
-**마지막 업데이트:** 2026-09-15  
-**최근 학습:** [Day12 - CPU/GPU 속도 비교와 CNN 입문](docs/Day12.md)
+**마지막 업데이트:** 2026-09-16  
+**최근 학습:** [Day13 - CNN 이미지 분류 실습과 padding · strides · MaxPooling](docs/Day13.md)
