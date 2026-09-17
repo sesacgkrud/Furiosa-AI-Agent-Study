@@ -18,7 +18,7 @@ import time
 from sklearn.metrics import accuracy_score
 from tensorflow.keras.datasets import cifar100
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, Dense, Dropout, Flatten, MaxPooling2D
+from tensorflow.keras.layers import Conv2D, Dense, Dropout, Flatten, MaxPooling2D, GlobalAveragePooling2D
 from tensorflow.keras.callbacks import EarlyStopping
 
 # 1. 데이터
@@ -38,6 +38,9 @@ x_test = (x_test - 127.5)/127.5
 print(np.max(x_train), np.min(x_train)) # 1.0 -1.0
 print(np.max(x_test), np.min(x_test))   # 1.0 -1.0
 
+x_train = x_train.reshape(-1, 32 * 32 * 1) # 4차원 -> 2차원으로 변경 (DNN으로 만들기 위해서)
+x_test = x_test.reshape(-1, 32 * 32 * 1)
+
 ########## y 원핫 인코딩 ##########
 # 클래스가 0 ~ 99 라 원핫 결과가 100 컬럼이 된다
 from sklearn.preprocessing import OneHotEncoder
@@ -47,29 +50,26 @@ y_train = y_train.reshape(-1,1)    # cifar 의 y 는 이미 (50000, 1) 2차원�
 y_test = y_test.reshape(-1,1)
 
 y_train = ohe.fit_transform(y_train)
-y_test = ohe.fit_transform(y_test)
+y_test = ohe.transform(y_test)
 
 print(y_train.shape, y_test.shape) # (50000, 100) (10000, 100)
 
 #2. 모델 구성
 # padding 없는 (3,3) Conv2D -> 가로 세로 2씩 감소 / MaxPooling2D() -> 절반
 model = Sequential()
-model.add(Conv2D(32, (3,3), activation='relu', input_shape=(32, 32, 3)))    # 출력 : (30, 30, 32)  param 896 = (3x3x3+1)x32
-model.add(Conv2D(32, kernel_size=(3,3), activation='relu'))                 # 출력 : (28, 28, 32)
-                                                                            # 출력 : (14, 14, 32)  2x2 중 최대값만 -> 절반, param 0
-model.add(Dropout(0.25))
-model.add(Conv2D(64, kernel_size=(3,3), activation='relu'))                 # 출력 : (12, 12, 64)
-model.add(Conv2D(64, kernel_size=(3,3), activation='relu'))                 # 출력 : (10, 10, 64)
-model.add(Dropout(0.25))
-model.add(Conv2D(128, kernel_size=(3,3), activation='relu'))                # 출력 : (8, 8, 128)
-model.add(Conv2D(128, kernel_size=(3,3), activation='relu'))                # 출력 : (6, 6, 128)
-                                                                            # 출력 : (3, 3, 128)
-model.add(Dropout(0.25))
-model.add(Flatten())                                                        # (3,3,128) -> 1152. 4차원을 2차원으로 펴준다 (값과 순서가 그대로라 reshape 와 같다)
-
-model.add(Dense(units=256, activation='relu'))                              # units = Dense 의 첫 번째 인자 이름 (Dense(256) 과 같다)
+model.add(Dense(256, activation='relu', input_shape=(32 * 32, 3)))    # 출력 : (30, 30, 32)  param 896 = (3x3x3+1)x32
+model.add(Dense(256, activation='relu'))
+model.add(Dense(128, activation='relu'))
+model.add(Dense(128, activation='relu'))
 model.add(Dropout(0.4))
-model.add(Dense(units=128, activation='relu'))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(32, activation='relu'))
+model.add(Dropout(0.3))
+model.add(Dense(16, activation='relu'))
+model.add(Dense(16, activation='relu'))
+model.add(Dropout(0.2))
 
 model.add(Dense(100, activation='softmax'))                                 # 100종 분류 -> 출력 100개 + softmax
 model.summary()
@@ -121,9 +121,19 @@ print('소요 시간 :', round(end_time - start_time, 2), '초')
 # accuracy_score : 0.2693
 # 소요 시간 : 394.21 초
 
-# ===== GPU 기록 (2차) =====
-# 도전 중...
+# ===== GPU 기록 (2차) ===== <- MaxPooling 적용
+# loss : 2.2390894889831543
+# acc : 0.43709999322891235
+# accuracy_score : 0.4371
+# 소요 시간 : 227.8 초
 
-# 목표 : acc 0.4  -> 1차 0.2693 으로 미달
-# -> 찍어서 맞힐 확률이 1/100 = 0.01 이므로 0.2693 도 학습은 된 상태
-# -> 같은 구조의 cifar10 은 0.7267. 이미지는 같고 클래스만 10배라 종류당 데이터가 1/10 로 줄어든 영향
+# ===== GPU 기록 ===== <- GlobalAveragePooling2D 적용
+# loss : 2.1279296875
+# acc : 0.46209999918937683
+# accuracy_score : 0.4621
+# 소요 시간 : 227.22 초
+
+# ===== GPU 기록 ===== <- DNN
+
+
+# 목표 : CNN을 이겨라

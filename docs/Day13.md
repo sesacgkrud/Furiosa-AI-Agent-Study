@@ -301,4 +301,4 @@ model.add(Flatten())                                                       # 115
 
 ---
 
-[⬅️ Day12](Day12.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day12](Day12.md) · [🏠 전체 목차](../README.md) · [Day14 ➡️](Day14.md)
