@@ -333,4 +333,4 @@ hist = model.fit(x_train, y_train,
 
 ---
 
-[⬅️ Day13](Day13.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day13](Day13.md) · [🏠 전체 목차](../README.md) · [Day15 ➡️](Day15.md)

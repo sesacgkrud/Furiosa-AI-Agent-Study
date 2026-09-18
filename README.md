@@ -22,6 +22,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day12](docs/Day12.md)** | CPU/GPU 속도 비교 & CNN 입문 | 2026-09-15 | list_physical_devices, 소요 시간 비교, Conv2D, mnist, 이미지 스케일링 |
 | **[Day13](docs/Day13.md)** | CNN 이미지 분류 실습 & padding · strides · MaxPooling | 2026-09-16 | Flatten, 4차원 reshape, fashion_mnist, cifar10/100, padding, strides, MaxPooling2D, val_acc |
 | **[Day14](docs/Day14.md)** | MaxPooling · GAP 적용 & DNN vs CNN & 정형 데이터 Conv2D | 2026-09-17 | MaxPooling2D, GlobalAveragePooling2D, DNN reshape, BatchNormalization, 정형 데이터 4차원 reshape, (2,1) 커널 |
+| **[Day15](docs/Day15.md)** | 함수형 전환 & ImageDataGenerator & npy 저장/불러오기 | 2026-09-18 | Input/Model, flow_from_directory, DirectoryIterator, sigmoid, batch_size/OOM, ModelCheckpoint, np.save/np.load |
 
 ---
 
@@ -44,21 +45,23 @@ C:\furiosa_study\
 │   ├── keras29_5_save_weights.py ~ keras34_hamsu10_digits.py    (Day11)
 │   ├── keras35_gpu_test00.py ~ keras36_cnn2_mnist_imshow.py     (Day12)
 │   ├── keras36_cnn3_mnist1.py ~ keras39_MaxPolling0.py          (Day13)
-│   └── keras39_MaxPooling1_mnist.py ~ keras42_cnn10_digits.py   (Day14)
-├── _save/
-│   ├── keras29/            (model.save / save_weights 로 저장한 파일)
-│   ├── keras30/            (ModelCheckpoint 로 저장한 모델 파일)
-│   ├── keras31/            (MCP 저장 모델 + keras32 가 불러와서 다시 저장한 모델)
-│   ├── keras33/            (Dropout 적용 모델의 MCP 저장 파일)
-│   └── keras34/            (함수형 모델의 MCP 저장 파일 / keras35 GPU 테스트 / keras42 Conv2D 모델도 여기에 저장)
+│   ├── keras39_MaxPooling1_mnist.py ~ keras42_cnn10_digits.py   (Day14)
+│   └── keras43_hamsu01_mnist.py ~ keras45_04_catdog_load_npy.py (Day15)
+├── _save/                  (저장한 모델 / 가중치 - .gitignore 제외)
+│   ├── keras29/ ~ keras34/ (model.save / save_weights / ModelCheckpoint 저장 파일)
+│   ├── keras44/            (cat_dog MCP 저장 파일)
+│   └── keras45/            (npy 실습 MCP 저장 파일)
 ├── _data/
 │   ├── ddareung/           (Dacon 따릉이 데이터)
 │   ├── kaggle_bike/        (Kaggle Bike Sharing 데이터)
-│   └── kaggle_santander/   (Kaggle Santander 고객 거래 예측 데이터)
+│   ├── kaggle_santander/   (Kaggle Santander 고객 거래 예측 데이터 - .gitignore 제외)
+│   ├── image/              (brain MRI / cat_dog 이미지 - .gitignore 제외)
+│   ├── brain_npy/          (brain 이미지를 npy 로 저장 - .gitignore 제외)
+│   └── kaggle_cat_dog_npy/ (cat_dog 이미지를 npy 로 저장 - .gitignore 제외)
 ├── docs/                   (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day14.md
+│   └── ... Day15.md
 ├── README.md               (전체 목차)
 ├── .gitignore
 └── .vscode/
@@ -70,11 +73,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 14일 (Day01 ~ Day14)  
-**완료 시간:** 112시간  
-**완료율: 17.5%**
+**완료:** 15일 (Day01 ~ Day15)  
+**완료 시간:** 120시간  
+**완료율: 18.75%**
 
 ---
 
-**마지막 업데이트:** 2026-09-17  
-**최근 학습:** [Day14 - MaxPooling · GlobalAveragePooling 적용, DNN vs CNN 비교, 정형 데이터에 Conv2D 적용](docs/Day14.md)
+**마지막 업데이트:** 2026-09-18  
+**최근 학습:** [Day15 - 이미지 DNN 함수형 전환, ImageDataGenerator로 폴더 이미지 읽기, npy 저장/불러오기](docs/Day15.md)

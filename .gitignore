@@ -1,7 +1,20 @@
-# GitHub 파일 용량 제한(100MB) 초과 데이터셋 - Kaggle에서 직접 내려받아 사용
-# https://www.kaggle.com/competitions/santander-customer-transaction-prediction/data
-_data/kaggle_santander/train.csv
-_data/kaggle_santander/test.csv
+# GitHub 파일 용량 제한(100MB) - 코드와 문서만 올리고 데이터 / 모델 파일은 올리지 않는다
+# 아래 폴더들은 각자 내려받거나 코드를 실행하면 다시 만들어진다
+
+# 데이터셋
+# Kaggle Santander : https://www.kaggle.com/competitions/santander-customer-transaction-prediction/data
+_data/kaggle_santander/
+# 이미지 데이터 (brain / cat_dog)
+_data/image/
+# ImageDataGenerator 결과를 저장한 npy (keras45) - cat_dog x_train 은 약 960MB
+_data/brain_npy/
+_data/kaggle_cat_dog_npy/
+# 그 외 데이터 폴더의 대용량 산출물
+_data/temp/
+_data/**/submit/
+
+# 저장한 모델 / 가중치 파일
+_save/
 
 # Python
 __pycache__/
