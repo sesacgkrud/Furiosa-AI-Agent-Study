@@ -6,9 +6,8 @@
 _data/kaggle_santander/
 # 이미지 데이터 (brain / cat_dog)
 _data/image/
-# ImageDataGenerator 결과를 저장한 npy (keras45) - cat_dog x_train 은 약 960MB
-_data/brain_npy/
-_data/kaggle_cat_dog_npy/
+# ImageDataGenerator 결과를 저장한 npy (keras45 / keras46) - cat_dog x_train 은 약 960MB
+_data/*_npy/
 # 그 외 데이터 폴더의 대용량 산출물
 _data/temp/
 _data/**/submit/

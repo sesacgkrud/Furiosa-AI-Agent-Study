@@ -23,6 +23,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day13](docs/Day13.md)** | CNN 이미지 분류 실습 & padding · strides · MaxPooling | 2026-09-16 | Flatten, 4차원 reshape, fashion_mnist, cifar10/100, padding, strides, MaxPooling2D, val_acc |
 | **[Day14](docs/Day14.md)** | MaxPooling · GAP 적용 & DNN vs CNN & 정형 데이터 Conv2D | 2026-09-17 | MaxPooling2D, GlobalAveragePooling2D, DNN reshape, BatchNormalization, 정형 데이터 4차원 reshape, (2,1) 커널 |
 | **[Day15](docs/Day15.md)** | 함수형 전환 & ImageDataGenerator & npy 저장/불러오기 | 2026-09-18 | Input/Model, flow_from_directory, DirectoryIterator, sigmoid, batch_size/OOM, ModelCheckpoint, np.save/np.load |
+| **[Day16](docs/Day16.md)** | 내 폴더 이미지 분류 & npy 저장/훈련/예측 분리 & 이미지 증폭 | 2026-09-21 | class_mode categorical, class_indices, train_test_split/stratify, load_img/img_to_array, np.expand_dims, model.save/load_model, datagen.flow |
 
 ---
 
@@ -46,22 +47,24 @@ C:\furiosa_study\
 │   ├── keras35_gpu_test00.py ~ keras36_cnn2_mnist_imshow.py     (Day12)
 │   ├── keras36_cnn3_mnist1.py ~ keras39_MaxPolling0.py          (Day13)
 │   ├── keras39_MaxPooling1_mnist.py ~ keras42_cnn10_digits.py   (Day14)
-│   └── keras43_hamsu01_mnist.py ~ keras45_04_catdog_load_npy.py (Day15)
+│   ├── keras43_hamsu01_mnist.py ~ keras45_04_catdog_load_npy.py (Day15)
+│   └── keras46_01_save_npy_horse.py ~ keras50_flow1.py           (Day16)
 ├── _save/                  (저장한 모델 / 가중치 - .gitignore 제외)
 │   ├── keras29/ ~ keras34/ (model.save / save_weights / ModelCheckpoint 저장 파일)
 │   ├── keras44/            (cat_dog MCP 저장 파일)
-│   └── keras45/            (npy 실습 MCP 저장 파일)
+│   ├── keras45/            (npy 실습 MCP 저장 파일)
+│   ├── keras46/            (horse-human / rps MCP 저장 파일)
+│   └── keras47/            (npy 로 훈련한 모델 저장 파일)
 ├── _data/
 │   ├── ddareung/           (Dacon 따릉이 데이터)
 │   ├── kaggle_bike/        (Kaggle Bike Sharing 데이터)
 │   ├── kaggle_santander/   (Kaggle Santander 고객 거래 예측 데이터 - .gitignore 제외)
-│   ├── image/              (brain MRI / cat_dog 이미지 - .gitignore 제외)
-│   ├── brain_npy/          (brain 이미지를 npy 로 저장 - .gitignore 제외)
-│   └── kaggle_cat_dog_npy/ (cat_dog 이미지를 npy 로 저장 - .gitignore 제외)
+│   ├── image/              (brain / cat_dog / horse-human / rps / man_woman 이미지 - .gitignore 제외)
+│   └── *_npy/              (이미지를 npy 로 저장한 폴더 - .gitignore 제외)
 ├── docs/                   (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day15.md
+│   └── ... Day16.md
 ├── README.md               (전체 목차)
 ├── .gitignore
 └── .vscode/
@@ -73,11 +76,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 15일 (Day01 ~ Day15)  
-**완료 시간:** 120시간  
-**완료율: 18.75%**
+**완료:** 16일 (Day01 ~ Day16)  
+**완료 시간:** 128시간  
+**완료율: 20%**
 
 ---
 
-**마지막 업데이트:** 2026-09-18  
-**최근 학습:** [Day15 - 이미지 DNN 함수형 전환, ImageDataGenerator로 폴더 이미지 읽기, npy 저장/불러오기](docs/Day15.md)
+**마지막 업데이트:** 2026-09-21  
+**최근 학습:** [Day16 - 내 폴더 이미지로 분류하기(softmax 확장), npy 저장/불러오기 분리, 사진 한 장 예측, 이미지 증폭](docs/Day16.md)

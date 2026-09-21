@@ -83,6 +83,11 @@ model.summary()
 
 #3. 컴파일, 훈련
 # 이진 분류라 loss 는 binary_crossentropy (softmax + categorical_crossentropy 자리)
+# optimizer='adam' 은 learning_rate 0.001 이 기본값이다
+#  - cat_dog 은 이 값이 커서 훈련 초반에 한쪽으로 쏠린 뒤 loss 0.693(반반 찍는 상태)에서 멈춘다
+#  - learning_rate 를 0.0001 로 낮추면 acc 0.5 -> 0.78 까지 올라간다 (아래 참고 코드)
+#    from tensorflow.keras.optimizers import Adam
+#    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.0001), metrics=['acc'])
 model.compile(loss='binary_crossentropy', optimizer='adam',
               metrics=['acc'])
 

@@ -346,4 +346,4 @@ print('npy 로드 시간 :', round(end_time2 - start_time2, 2), '초')          
 
 ---
 
-[⬅️ Day14](Day14.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day14](Day14.md) · [🏠 전체 목차](../README.md) · [Day16 ➡️](Day16.md)
