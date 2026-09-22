@@ -24,6 +24,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day14](docs/Day14.md)** | MaxPooling · GAP 적용 & DNN vs CNN & 정형 데이터 Conv2D | 2026-09-17 | MaxPooling2D, GlobalAveragePooling2D, DNN reshape, BatchNormalization, 정형 데이터 4차원 reshape, (2,1) 커널 |
 | **[Day15](docs/Day15.md)** | 함수형 전환 & ImageDataGenerator & npy 저장/불러오기 | 2026-09-18 | Input/Model, flow_from_directory, DirectoryIterator, sigmoid, batch_size/OOM, ModelCheckpoint, np.save/np.load |
 | **[Day16](docs/Day16.md)** | 내 폴더 이미지 분류 & npy 저장/훈련/예측 분리 & 이미지 증폭 | 2026-09-21 | class_mode categorical, class_indices, train_test_split/stratify, load_img/img_to_array, np.expand_dims, model.save/load_model, datagen.flow |
+| **[Day17](docs/Day17.md)** | 이미지 증폭으로 훈련 데이터 늘리기 & 클래스 불균형 맞추기 | 2026-09-22 | np.tile, flow(x, y) 튜플, randint/choice(replace=False), np.concatenate, 증폭 후 스케일링, np.where, validation_split vs validation_data |
 
 ---
 
@@ -48,13 +49,15 @@ C:\furiosa_study\
 │   ├── keras36_cnn3_mnist1.py ~ keras39_MaxPolling0.py          (Day13)
 │   ├── keras39_MaxPooling1_mnist.py ~ keras42_cnn10_digits.py   (Day14)
 │   ├── keras43_hamsu01_mnist.py ~ keras45_04_catdog_load_npy.py (Day15)
-│   └── keras46_01_save_npy_horse.py ~ keras50_flow1.py           (Day16)
+│   ├── keras46_01_save_npy_horse.py ~ keras50_flow1.py           (Day16)
+│   └── keras50_flow2_next.py ~ keras51_augment5_man_woman_여자만.py (Day17)
 ├── _save/                  (저장한 모델 / 가중치 - .gitignore 제외)
 │   ├── keras29/ ~ keras34/ (model.save / save_weights / ModelCheckpoint 저장 파일)
 │   ├── keras44/            (cat_dog MCP 저장 파일)
 │   ├── keras45/            (npy 실습 MCP 저장 파일)
 │   ├── keras46/            (horse-human / rps MCP 저장 파일)
-│   └── keras47/            (npy 로 훈련한 모델 저장 파일)
+│   ├── keras47/            (npy 로 훈련한 모델 저장 파일)
+│   └── keras51/            (man_woman 증폭 실습 MCP 저장 파일)
 ├── _data/
 │   ├── ddareung/           (Dacon 따릉이 데이터)
 │   ├── kaggle_bike/        (Kaggle Bike Sharing 데이터)
@@ -64,7 +67,7 @@ C:\furiosa_study\
 ├── docs/                   (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day16.md
+│   └── ... Day17.md
 ├── README.md               (전체 목차)
 ├── .gitignore
 └── .vscode/
@@ -76,11 +79,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 16일 (Day01 ~ Day16)  
-**완료 시간:** 128시간  
-**완료율: 20%**
+**완료:** 17일 (Day01 ~ Day17)  
+**완료 시간:** 136시간  
+**완료율: 21%**
 
 ---
 
-**마지막 업데이트:** 2026-09-21  
-**최근 학습:** [Day16 - 내 폴더 이미지로 분류하기(softmax 확장), npy 저장/불러오기 분리, 사진 한 장 예측, 이미지 증폭](docs/Day16.md)
+**마지막 업데이트:** 2026-09-22  
+**최근 학습:** [Day17 - 이미지 증폭(augmentation)으로 훈련 데이터 늘리기, 클래스 불균형 맞추기](docs/Day17.md)
