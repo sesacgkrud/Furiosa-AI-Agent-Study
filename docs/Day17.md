@@ -270,4 +270,4 @@ model.fit(x_train, y_train, epochs=100, batch_size=32,
 
 ---
 
-[⬅️ Day16](Day16.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day16](Day16.md) · [🏠 전체 목차](../README.md) · [Day18 ➡️](Day18.md)

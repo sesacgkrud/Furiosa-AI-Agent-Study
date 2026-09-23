@@ -1,0 +1,182 @@
+# keras52_ReduceLR09_fetch_covtype.py
+# 산림 피복 (다중 분류) - ReduceLROnPlateau 로 훈련 도중 learning_rate 를 줄인다
+# 스케일러(RobustScaler)와 learning_rate 후보는 keras52_optimizer 파일 그대로다
+#
+# [ 오늘 추가되는 곳은 콜백 하나다 ]
+#  keras52_optimizer 는 learning_rate 를 처음부터 끝까지 고정했다
+#  하지만 한 값으로 두 가지를 다 할 수는 없다
+#   초반에는 크게 움직여 빨리 내려가야 하고, 최저점 근처에서는 작게 움직여야 지나치지 않는다
+#
+# [ ReduceLROnPlateau : 훈련 도중 learning_rate 를 줄여 준다 ]
+#  plateau = 고원. val_loss 가 더 이상 줄지 않고 평평해지는 구간을 말한다
+#  monitor 가 patience 동안 좋아지지 않으면 learning_rate 에 factor 를 곱한다
+#   factor=0.5 -> 0.0005 -> 절반 -> 또 절반 ... 으로 떨어진다
+#  EarlyStopping 과 역할이 다르다 : es 는 '멈춘다', rlr 은 '보폭을 줄여 더 해 본다'
+#   그래서 rlr 의 patience 를 es 보다 짧게 줘야 "줄여 보고 -> 그래도 안 되면 멈춘다" 순서가 된다
+#  이 파일 : 시작 learning_rate = 0.0005 / es patience = 20 / rlr patience = 20
+#   -> 둘이 같아서 lr 이 줄어드는 바로 그 epoch 에 es 도 같이 걸린다
+#
+# keras28_Scaler09_fetch_covtype.py 베이스
+
+import numpy as np
+import pandas as pd
+import time
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
+
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.datasets import fetch_covtype
+
+#1. 데이터
+datasets = fetch_covtype()
+
+x = datasets.data
+y = datasets['target']
+
+from tensorflow.keras.utils import to_categorical
+y = to_categorical(y)
+
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y,
+    train_size=0.7,
+    random_state=42,
+    shuffle=True,
+    stratify=y,
+)
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+
+x_train = scaler.fit_transform(x_train)
+x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
+
+print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
+print('Min :', np.min(x_test), 'Max :', np.max(x_test)) # Min : 0.0 Max : 1.0050359712230217
+
+#2. 모델 구성
+model = Sequential()
+model.add(Dense(300, input_dim=54, activation='relu'))
+model.add(Dense(200, activation='relu'))
+model.add(Dense(100, activation='relu'))
+model.add(Dense(100, activation='relu'))
+model.add(Dense(100, activation='relu'))
+model.add(Dense(8, activation='softmax'))
+
+#3. 컴파일, 훈련
+# optimizer 를 문자열('adam') 이 아니라 객체로 만들어 넘겨야 learning_rate 를 바꿀 수 있다
+from tensorflow.keras.optimizers import Adam
+# learning_rate = 0.01
+# learning_rate = 0.001    # optimizer Adam default value
+# learning_rate = 0.00001
+# learning_rate = 0.005
+# learning_rate = 0.05
+# learning_rate = 0.009
+learning_rate = 0.0005
+
+model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=learning_rate), metrics=['acc'])
+es = EarlyStopping(
+    monitor='val_loss',
+    mode='auto',
+    patience=20,
+    restore_best_weights=True,
+)
+
+# val_loss 가 patience 동안 좋아지지 않으면 learning_rate 에 factor 를 곱해 줄인다
+# verbose=1 -> 줄어드는 순간 'ReduceLROnPlateau reducing learning rate to ...' 가 찍힌다
+rlr = ReduceLROnPlateau(
+    monitor='val_loss',
+    mode='auto',
+    patience=20,
+    verbose=1,
+    factor=0.5,
+)
+
+start_time = time.time()
+model.fit(x_train, y_train,
+          epochs=1000,
+          batch_size=32,
+          verbose=1,
+          validation_split=0.3,
+          callbacks=[es, rlr],
+)
+end_time = time.time()
+
+#4. 평가 예측
+result = model.evaluate(x_test, y_test, )
+print('loss :', result[0])
+print('acc :', round(result[1],3))
+
+y_predict = model.predict(x_test)
+
+y_test_arg = np.argmax(y_test, axis=1)
+y_predict_arg = np.argmax(y_predict, axis=1)
+
+accuracy_score = accuracy_score(y_test_arg, y_predict_arg)
+print('accuracy_score :', accuracy_score)
+print('소요 시간 :', round(end_time - start_time), '초')
+
+# [목표] acc = 0.93 이상 합격
+# [참고] 데이터 50만개, 시간 측정, batch_size 작게 주지 말 것
+
+# 시간 오래 걸림, 이 예제의 경우 0부터 시작하는 to_categorical 적합하지 않음 (다른 방법으로 시도하기)
+# loss : 0.34686315059661865
+# acc : 0.861
+# accuracy_score : 0.8611735817881403
+# 소요 시간 : 1463 초
+
+# ========== ========== ========== ========== ========== <- MinMaxScaler 적용 후
+
+# loss : 0.1859578788280487
+# acc : 0.936
+# accuracy_score : 0.9361001468698366
+# 소요 시간 : 1110 초
+
+# [결론] 0.861 -> 0.936. 이번 실습에서 스케일링 효과가 가장 확실하게 나온 데이터다.
+#        covtype 은 Elevation(1859~3858), Horizontal_Distance(0~7000) 같은 큰 값 컬럼과
+#        Wilderness_Area / Soil_Type 처럼 0 아니면 1 인 컬럼이 한 테이블에 섞여 있다.
+#        스케일링 전에는 값이 큰 컬럼 쪽으로만 gradient 가 크게 튀어서 학습이 제대로 안 됐던 것.
+#        데이터가 58만개라 test 도 17만개 -> 이 정도 표본이면 0.861 -> 0.936 은 우연이 아니다.
+#        [참고] 시간이 1463초 -> 1110초로 줄어든 것도 같은 이유다. 더 빨리 수렴해서 EarlyStopping 이 일찍 걸렸다.
+#        목표였던 acc 0.93 도 스케일링만으로 넘겼다.
+
+# ========== ========== ========== ========== ========== <- StandardScaler 적용 후
+
+# loss : 0.17114242911338806
+# acc : 0.936
+# accuracy_score : 0.9360657242518817
+# 소요 시간 : 866 초
+
+# ========== ========== ========== ========== ========== <- MaxAbsScaler 적용 후
+
+# loss : 0.22837351262569427
+# acc : 0.934
+# accuracy_score : 0.9338397282908023
+# 소요 시간 : 1091 초
+
+# ========== ========== ========== ========== ========== <- RobustScaler 적용 후
+
+# loss : 0.15137867629528046
+# acc : 0.943
+# accuracy_score : 0.9426060216633009
+# 소요 시간 : 664 초
+
+# ========== ========== ========== ========== ========== <- learning rate 적용 후
+
+# loss : 0.15072979032993317
+# acc : 0.945
+# accuracy_score : 0.9452565632458234
+# 소요 시간 : 1231 초
+
+# ========== ========== ========== ========== ========== <- ReduceLROnPlateau 적용 후
+
+# loss : 0.14917446672916412
+# acc : 0.948
+# accuracy_score : 0.9479472645492932
+# 소요 시간 : 1828 초
+
+# [결론] 0.0005 고정 0.9453 / 1231초 -> ReduceLROnPlateau 0.9479 / 1828초.
+#        covtype 의 이번 실습 최고 기록이다 (스케일링 0.936 -> lr 0.945 -> rlr 0.948).
+#        다만 시간도 계속 늘어나서, 점수 0.003 을 600초와 바꾼 셈이다.
