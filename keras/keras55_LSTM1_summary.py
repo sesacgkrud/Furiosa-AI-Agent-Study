@@ -21,7 +21,7 @@
 
 import numpy as np
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, SimpleRNN, LSTM
+from tensorflow.keras.layers import Dense, SimpleRNN, LSTM, GRU
 
 #1. 데이터
 datasets = np.array([1,2,3,4,5,6,7,8,9,10])
@@ -47,7 +47,8 @@ model = Sequential()
 # SimpleRNN 을 LSTM 으로 바꿔 끼우기만 하면 된다 (입출력 모양이 같아서 뒤 코드는 그대로)
 # model.add(SimpleRNN(units=10, input_shape=(3, 1)))
 # model.add(SimpleRNN(10, input_shape=(3, 1)))
-model.add(LSTM(10, input_shape=(3, 1)))
+# model.add(LSTM(10, input_shape=(3, 1)))
+model.add(GRU(10, input_shape=(3, 1)))
 
 # 3차원으로 들어가서 1(벡터) 또는 2(Metrics)차원으로 나옴 -> 바로 Dense와 연결 가능
 model.add(Dense(7, activation='relu'))
@@ -74,3 +75,19 @@ model.summary()
 #  LSTM      : 120 * 4                         = 480
 #  Dense(7)  : 앞 층 10 * 7 + 7                = 77   (RNN2 는 앞 층이 5라서 42였다)
 #  Dense(1)  : 7 * 1 + 1                       = 8
+
+
+# GRU Summary Result
+# _________________________________________________________________
+#  Layer (type)                Output Shape              Param #   
+# =================================================================
+#  gru (GRU)                   (None, 10)                390       
+                                                                 
+#  dense (Dense)               (None, 7)                 77        
+                                                                 
+#  dense_1 (Dense)             (None, 1)                 8         
+                                                                 
+# =================================================================
+# Total params: 475
+# Trainable params: 475
+# Non-trainable params: 0
