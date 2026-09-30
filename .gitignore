@@ -4,6 +4,8 @@
 # 데이터셋
 # Kaggle Santander : https://www.kaggle.com/competitions/santander-customer-transaction-prediction/data
 _data/kaggle_santander/
+# Kaggle Jena Climate : https://www.kaggle.com/datasets/stytch16/jena-climate-2009-2016
+_data/kaggle_jena/
 # 이미지 데이터 (brain / cat_dog)
 _data/image/
 # ImageDataGenerator 결과를 저장한 npy (keras45 / keras46) - cat_dog x_train 은 약 960MB

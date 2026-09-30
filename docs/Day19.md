@@ -313,4 +313,4 @@ units=10, features=1 → 3 × (10 + 100 + 20) = 390
 
 ---
 
-[⬅️ Day18](Day18.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day18](Day18.md) · [🏠 전체 목차](../README.md) · [Day20 ➡️](Day20.md)
