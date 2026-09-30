@@ -28,6 +28,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day18](docs/Day18.md)** | learning_rate 직접 지정 & ReduceLROnPlateau & RNN · LSTM 입문 | 2026-09-23 | Adam(learning_rate), ReduceLROnPlateau, factor/patience, es vs rlr, SimpleRNN, (N, timesteps, features), input_length/input_dim, LSTM 파라미터 4배 |
 | **[Day19](docs/Day19.md)** | GRU 파라미터 & split 함수로 시계열 자르기 & 범위 밖 예측 개선 | 2026-09-28 | GRU 파라미터 390, split_x, bbb[:, :-1] / bbb[:, -1], (6, 5, 2) 3차원 슬라이싱, input_shape=(4, 2), 스케일링, activation='linear', 수정 전/후 비교 |
 | **[Day20](docs/Day20.md)** | split 함수로 여러 값 예측 & return_sequences · Flatten & Jena 기후 시계열 예측 | 2026-09-29 | split_x(size-1) 예측 데이터, reshape(-1, 2) → (N, 5, 2), Dense(2), return_sequences, ndim 에러, RNN + Flatten, Kaggle Jena Climate, 144칸 어긋난 x/y, 2차원 스케일링, float32 npy, Dense(144), RMSE |
+| **[Day21](docs/Day21.md)** | Bidirectional RNN & Jena 기온 예측 비교 & LangChain 입문 | 2026-09-30 | Bidirectional, units × 2, 파라미터 × 2, model.add 누락, Bi-LSTM, LSTM vs Bidirectional, ChatOpenAI, invoke, API 키 관리, os.environ, .env / load_dotenv, base_url, PromptTemplate, LCEL, StrOutputParser |
 
 ---
 
@@ -56,7 +57,10 @@ C:\furiosa_study\
 │   ├── keras50_flow2_next.py ~ keras51_augment5_...py                (Day17)
 │   ├── keras52_optimizer01_california.py ~ keras55_LSTM1_summary.py  (Day18)
 │   ├── keras55_LSTM2_scale.py ~ keras56_split2_samcode.py            (Day19)
-│   └── keras56_split3.py ~ keras58_kaggle_jena2.py                   (Day20)
+│   ├── keras56_split3.py ~ keras58_kaggle_jena2.py                   (Day20)
+│   └── keras59_Bidirectional1.py ~ keras59_Bidirectional3_jena.py    (Day21)
+├── RAG/                    (LangChain 실습)
+│   └── rag01_key_insert.py ~ rag09_out_parser02.py                   (Day21)
 ├── _save/                  (저장한 모델 / 가중치 - .gitignore 제외)
 │   ├── keras29/ ~ keras34/ (model.save / save_weights / ModelCheckpoint 저장 파일)
 │   ├── keras44/            (cat_dog MCP 저장 파일)
@@ -64,7 +68,8 @@ C:\furiosa_study\
 │   ├── keras46/            (horse-human / rps MCP 저장 파일)
 │   ├── keras47/            (npy 로 훈련한 모델 저장 파일)
 │   ├── keras51/            (man_woman 증폭 실습 MCP 저장 파일)
-│   └── keras58/            (Jena Climate 시계열 MCP 저장 파일)
+│   ├── keras58/            (Jena Climate 시계열 MCP 저장 파일)
+│   └── keras59/            (Jena Climate Bidirectional MCP 저장 파일)
 ├── _data/
 │   ├── ddareung/           (Dacon 따릉이 데이터)
 │   ├── kaggle_bike/        (Kaggle Bike Sharing 데이터)
@@ -75,8 +80,9 @@ C:\furiosa_study\
 ├── docs/                   (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day20.md
+│   └── ... Day21.md
 ├── README.md               (전체 목차)
+├── .env                    (API 키 - .gitignore 제외)
 ├── .gitignore
 └── .vscode/
 ```
@@ -87,11 +93,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 20일 (Day01 ~ Day20)  
-**완료 시간:** 160시간  
-**완료율: 25%**
+**완료:** 21일 (Day01 ~ Day21)  
+**완료 시간:** 168시간  
+**완료율: 26%**
 
 ---
 
 **마지막 업데이트:** 2026-09-30  
-**최근 학습:** [Day20 - split 함수로 여러 값 예측, return_sequences · Flatten, Jena 기후 시계열 예측](docs/Day20.md)
+**최근 학습:** [Day21 - Bidirectional RNN, Jena 기온 예측 비교, LangChain 입문](docs/Day21.md)

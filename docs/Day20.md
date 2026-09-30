@@ -427,4 +427,4 @@ rmse = np.sqrt(mean_squared_error(y_cor, y_predict))
 
 ---
 
-[⬅️ Day19](Day19.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day19](Day19.md) · [🏠 전체 목차](../README.md) · [Day21 ➡️](Day21.md)

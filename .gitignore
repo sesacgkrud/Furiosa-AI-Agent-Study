@@ -14,6 +14,9 @@ _data/*_npy/
 _data/temp/
 _data/**/submit/
 
+# API 키 (.env) - 키는 코드에 적지 않고 .env 에만 보관
+.env
+
 # 저장한 모델 / 가중치 파일
 _save/
 
