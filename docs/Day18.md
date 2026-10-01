@@ -227,7 +227,7 @@ LSTM 은 그 덩어리가 4개 (cell state 후보 + forget / input / output 게�
 | `keras54_RNN2_summary.py` | SimpleRNN 파라미터 계산 (units 5 → 35), Output Shape 2차원 확인 |
 | `keras54_RNN3_input_length.py` | `input_length` / `input_dim`으로 나눠 쓰는 표기법 |
 | `keras55_LSTM1_summary.py` | LSTM 파라미터 480 = SimpleRNN 120의 4배 확인 |
-| `keras/dataset.txt` | 11 mnist ~ 15 man_woman 추가 (이미지 5종을 번호 체계에 합류) (수정) |
+| `keras1/dataset.txt` | 11 mnist ~ 15 man_woman 추가 (이미지 5종을 번호 체계에 합류) (수정) |
 | `keras27_Scaler01_california.py` | 현재 코드로 재실행해 기록 갱신 (RMSE 0.5023) (수정) |
 | `docs/Day18.md` | Day18 학습 기록 신규 작성 |
 | `docs/Day17.md` | 하단 nav에 Day18 링크 추가 (수정) |
@@ -390,7 +390,7 @@ units=10, features=1
 - `es.patience`와 `rlr.patience`의 대소 관계에 따라 rlr이 작동조차 못 할 수 있다는 것을 man_woman에서 확인
 - SimpleRNN으로 시계열 데이터를 직접 잘라 만들고 `(N, timesteps, features)` 3차원 입력을 익힘
 - SimpleRNN / LSTM의 파라미터를 손으로 계산해 `model.summary()`와 대조 (35 / 480)
-- `keras/dataset.txt`에 11 mnist ~ 15 man_woman을 추가해 이미지 데이터셋까지 번호 체계에 합류
+- `keras1/dataset.txt`에 11 mnist ~ 15 man_woman을 추가해 이미지 데이터셋까지 번호 체계에 합류
 
 ---
 

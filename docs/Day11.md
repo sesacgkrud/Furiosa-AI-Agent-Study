@@ -117,7 +117,7 @@
 | `keras33_dropout01_california.py` ~ `keras33_dropout10_digits.py` | 10개 데이터셋 Dropout 적용 + MCP 저장(`_save/keras33/`) + r2 / mse / RMSE. 01은 함수형, 나머지 Sequential. 02 ~ 04 신규 작성 |
 | `keras34_hamsu00.py` | Sequential과 함수형(`Input` / `Model`)으로 같은 구조를 만들어 비교 |
 | `keras34_hamsu01_california.py` ~ `keras34_hamsu10_digits.py` | keras33을 함수형으로 변환 + MCP 저장(`_save/keras34/`). 출력층 activation 누락 / 층 연결 오류 수정, 02 ~ 04 신규 작성, ` copy` 붙은 파일명(01 / 08 / 09) 정리 |
-| `keras/dataset.txt` | 실습 데이터셋 번호 목록 (01 california ~ 10 digits) |
+| `keras1/dataset.txt` | 실습 데이터셋 번호 목록 (01 california ~ 10 digits) |
 | `_save/keras29/keras29_5_save1.weights.h5`, `keras29_5_save2.weights.h5` | save_weights 결과물 (훈련 전 / 훈련 후) |
 | `_save/keras30/` | `keras30_mcp1.keras`, `k30_0914_1323_0038_0.5591.keras` (MCP 저장 결과물) |
 | `_save/keras31/` | `keras31_mcp2 ~ 10.keras` (MCP 저장) + `k32_NN_날짜_loss.keras` (keras32가 불러와 다시 저장) |

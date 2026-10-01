@@ -319,9 +319,9 @@ prompt = PromptTemplate.from_template(template=template)
 
 | 파일 | 내용 |
 |---|---|
-| `keras/keras59_Bidirectional1.py` | `Bidirectional(SimpleRNN(10))` 파라미터 240, `(None, 20)`, 11 예측 10.85 → 10.70 |
-| `keras/keras59_Bidirectional2.py` | 간격이 큰 시계열에 Bidirectional 적용, 모델 구성 개선 (`[주석 이유]`), 80 예측 72.06 → 79.84 |
-| `keras/keras59_Bidirectional3_jena.py` | Jena 기온 예측, `Bidirectional(LSTM(64))` 파라미터 39936, LSTM과 test loss / RMSE / 시간 비교 |
+| `keras1/keras59_Bidirectional1.py` | `Bidirectional(SimpleRNN(10))` 파라미터 240, `(None, 20)`, 11 예측 10.85 → 10.70 |
+| `keras1/keras59_Bidirectional2.py` | 간격이 큰 시계열에 Bidirectional 적용, 모델 구성 개선 (`[주석 이유]`), 80 예측 72.06 → 79.84 |
+| `keras1/keras59_Bidirectional3_jena.py` | Jena 기온 예측, `Bidirectional(LSTM(64))` 파라미터 39936, LSTM과 test loss / RMSE / 시간 비교 |
 | `RAG/rag01_key_insert.py` | `ChatOpenAI`에 API 키 직접 입력, `invoke`, 응답 객체 구조 (키는 예시 값으로 변경) |
 | `RAG/rag02_environ01.py` | `os.environ["OPENAI_API_KEY"]`로 키 등록 후 호출 (키는 예시 값으로 변경) |
 | `RAG/rag03_env_check.py` | 코드의 키 줄을 주석 처리하고 시스템 환경 변수로만 호출 |
@@ -475,4 +475,4 @@ PromptTemplate  →  ChatOpenAI  →  StrOutputParser
 
 ---
 
-[⬅️ Day20](Day20.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day20](Day20.md) · [🏠 전체 목차](../README.md) · [Day22 ➡️](Day22.md)
