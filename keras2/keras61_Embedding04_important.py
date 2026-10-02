@@ -88,7 +88,7 @@ print(padded_x.shape)                      # (15, 5)
 from tensorflow.keras.layers import Dense, Embedding, SimpleRNN
 model = Sequential()
 
-#################### 임베딩1 ####################
+#################### 임베딩 Layer 1 ####################
 # input_dim = 단어 사전 크기 = 단어 종류 31개 + padding 0번 1개 = 32 (= len(token.word_index) + 1)
 #   이보다 작으면 큰 번호의 단어가 사전 범위를 벗어남
 #   -> CPU 에서는 에러, GPU 에서는 에러 없이 0 벡터로 처리돼서 틀린 줄도 모르고 지나감
@@ -135,11 +135,11 @@ model.summary()
 # SimpleRNN 이 단어 5개를 순서대로 읽고 마지막 상태 1개 (None, 10) 만 출력 -> 문장 하나에 답 1개 (None, 1)
 
 
-# 임베딩2, 임베딩3 은 임베딩1 과 "같은 모델을 다르게 쓰는 방법" -> 한 번에 하나만 사용
-#   -> 셋을 같이 쓰면 임베딩1 모델 뒤에 Embedding, SimpleRNN, Dense 가 계속 이어 붙음 (Dense 출력 뒤에 또 Embedding)
-#   -> 써 보고 싶은 방법만 주석을 풀고 위의 임베딩1 을 주석 처리해서 사용
+# 임베딩 Layer 2, 임베딩 Layer 3 은 임베딩 Layer 1 과 "같은 모델을 다르게 쓰는 방법" -> 한 번에 하나만 사용
+#   -> 셋을 같이 쓰면 임베딩 Layer 1 모델 뒤에 Embedding, SimpleRNN, Dense 가 계속 이어 붙음 (Dense 출력 뒤에 또 Embedding)
+#   -> 써 보고 싶은 방법만 주석을 풀고 위의 임베딩 Layer 1 을 주석 처리해서 사용
 
-#################### 임베딩2 ####################
+#################### 임베딩 Layer 2 ####################
 # model = Sequential()
 # model.add(Embedding(input_dim=32, output_dim=100))   # input_length 생략 가능
 #                     # 단어 사전 크기, 출력 차원
@@ -151,7 +151,7 @@ model.summary()
 #        -> Param 수는 input_dim x output_dim 이라 input_length 와 상관없이 똑같이 3,200
 
 
-#################### 임베딩3 ####################
+#################### 임베딩 Layer 3 ####################
 # model = Sequential()
 # model.add(Embedding(32, 100))                 # input_dim, output_dim 이름 생략 가능 (순서 : 앞이 input_dim, 뒤가 output_dim)
 # model.add(Embedding(32, 100, 5))              # 에러 -> ValueError: Could not interpret initializer identifier: 5

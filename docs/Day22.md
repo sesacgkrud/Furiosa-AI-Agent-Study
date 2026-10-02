@@ -496,4 +496,4 @@ vector = embeddings.embed_query('문장')        # float 리스트
 
 ---
 
-[⬅️ Day21](Day21.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day21](Day21.md) · [🏠 전체 목차](../README.md) · [Day23 ➡️](Day23.md)
