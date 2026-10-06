@@ -482,4 +482,4 @@ LSTM(10),  feature 32 → 4 × (10 × 42 + 10)    = 1,720
 
 ---
 
-[⬅️ Day22](Day22.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day22](Day22.md) · [🏠 전체 목차](../README.md) · [Day24 ➡️](Day24.md)

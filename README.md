@@ -31,6 +31,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day21](docs/Day21.md)** | Bidirectional RNN & Jena 기온 예측 비교 & LangChain 입문 | 2026-09-30 | Bidirectional, units × 2, 파라미터 × 2, model.add 누락, Bi-LSTM, LSTM vs Bidirectional, ChatOpenAI, invoke, API 키 관리, os.environ, .env / load_dotenv, base_url, PromptTemplate, LCEL, StrOutputParser |
 | **[Day22](docs/Day22.md)** | Tokenizer와 One-Hot & 텍스트 감정 분류 (DNN · LSTM · One-Hot LSTM) & Embedding 층 & OpenAI 임베딩 | 2026-10-01 | Tokenizer, fit_on_texts, word_index, texts_to_sequences, pad_sequences, Embedding, OpenAIEmbeddings, embed_query, dimensions |
 | **[Day23](docs/Day23.md)** | Reuters · IMDB 텍스트 분류 & sparse_categorical_crossentropy & 표 데이터 LSTM & Reshape 층 | 2026-10-02 | reuters, imdb, num_words, test_split, sparse_categorical_crossentropy, Reshape, target_shape |
+| **[Day24](docs/Day24.md)** | Jena 기온 예측 Conv2D · Conv1D & Conv1D padding='same' & Chroma 벡터 DB 저장 · 검색 · Retriever | 2026-10-06 | Conv1D, TextLoader, RecursiveCharacterTextSplitter, chunk_size, chunk_overlap, load_and_split, split_documents, glob, Chroma, from_documents, persist_directory, similarity_search, as_retriever |
 
 ---
 
@@ -61,12 +62,14 @@ C:\furiosa_study\
 │   ├── keras55_LSTM2_scale.py ~ keras56_split2_samcode.py            (Day19)
 │   ├── keras56_split3.py ~ keras58_kaggle_jena2.py                   (Day20)
 │   └── keras59_Bidirectional1.py ~ keras59_Bidirectional3_jena.py    (Day21)
-├─── keras2/                                                          (Day22 ~ Day23 Keras 실습)
+├─── keras2/                                                          (Day22 ~ Day24 Keras 실습)
 │   ├── keras60_Tokenizer1.py ~ keras61_Embedding04_important.py      (Day22)
-│   └── keras62_1_reuters.py ~ keras65_Reshape2.py                    (Day23)
+│   ├── keras62_1_reuters.py ~ keras65_Reshape2.py                    (Day23)
+│   └── keras66_jena_CNN.py ~ keras67_Conv1D_3_jena.py                (Day24)
 ├─── RAG/                                                             (LangChain 실습)
 │   ├── rag01_key_insert.py ~ rag09_out_parser02.py                   (Day21)
-│   └── rag10_Embedding01.py ~ rag10_Embedding02.py                   (Day22)
+│   ├── rag10_Embedding01.py ~ rag10_Embedding02.py                   (Day22)
+│   └── rag11_Chroma01_save.py ~ rag12_Chroma03_save.py               (Day24)
 ├─── _save/                                                           (저장한 모델 / 가중치 - .gitignore 제외)
 │   ├── keras29/ ~ keras34/                                           (model.save / save_weights / ModelCheckpoint 저장 파일)
 │   ├── keras44/                                                      (cat_dog MCP 저장 파일)
@@ -77,18 +80,24 @@ C:\furiosa_study\
 │   ├── keras58/                                                      (Jena Climate 시계열 MCP 저장 파일)
 │   ├── keras59/                                                      (Jena Climate Bidirectional MCP 저장 파일)
 │   ├── keras62/                                                      (Reuters / IMDB MCP · save_weights 저장 파일)
-│   └── keras64/                                                      (표 데이터 LSTM MCP 저장 파일)
+│   ├── keras64/                                                      (표 데이터 LSTM MCP 저장 파일)
+│   ├── keras66/                                                      (Jena Climate Conv2D MCP 저장 파일)
+│   └── keras67/                                                      (Jena Climate Conv1D MCP 저장 파일)
 ├─── _data/
+│   ├── rag_data/                                                     (RAG 실습용 텍스트 - samsung / nvidia / AI for All)
 │   ├── ddareung/                                                     (Dacon 따릉이 데이터)
 │   ├── kaggle_bike/                                                  (Kaggle Bike Sharing 데이터)
 │   ├── kaggle_santander/                                             (Kaggle Santander 고객 거래 예측 데이터 - .gitignore 제외)
 │   ├── kaggle_jena/                                                  (Kaggle Jena Climate 기상 시계열 데이터 - .gitignore 제외)
 │   ├── image/                                                        (brain / cat_dog / horse-human / rps / man_woman 이미지 - .gitignore 제외)
 │   └── *_npy/                                                        (이미지를 npy 로 저장한 폴더 - .gitignore 제외)
+├─── _db/                                                             (Chroma 벡터 DB - .gitignore 제외)
+│   ├── Chroma11/                                                     (rag11 저장 DB)
+│   └── Chroma12/                                                     (rag12 저장 DB)
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day23.md
+│   └── ... Day24.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -101,11 +110,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 23일 (Day01 ~ Day23)  
-**완료 시간:** 184시간  
-**완료율: 29%**
+**완료:** 24일 (Day01 ~ Day24)  
+**완료 시간:** 192시간  
+**완료율: 30%**
 
 ---
 
-**마지막 업데이트:** 2026-10-02  
-**최근 학습:** [Day23 - Reuters · IMDB 텍스트 분류, sparse_categorical_crossentropy, 표 데이터 LSTM, Reshape 층](docs/Day23.md)
+**마지막 업데이트:** 2026-10-06  
+**최근 학습:** [Day24 - Jena 기온 예측 Conv2D · Conv1D, Conv1D padding='same', Chroma 벡터 DB 저장 · 검색 · Retriever](docs/Day24.md)
