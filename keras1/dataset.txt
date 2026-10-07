@@ -16,3 +16,5 @@
 13 cifar10
 14 cifar100
 15 man_woman
+
+16 jena

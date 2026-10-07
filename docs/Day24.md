@@ -366,4 +366,4 @@ similarity_search(query, k)  /  as_retriever(search_kwargs={'k':2}).invoke(query
 
 ---
 
-[⬅️ Day23](Day23.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day23](Day23.md) · [🏠 전체 목차](../README.md) · [Day25 ➡️](Day25.md)
