@@ -33,6 +33,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day23](docs/Day23.md)** | Reuters · IMDB 텍스트 분류 & sparse_categorical_crossentropy & 표 데이터 LSTM & Reshape 층 | 2026-10-02 | reuters, imdb, num_words, test_split, sparse_categorical_crossentropy, Reshape, target_shape |
 | **[Day24](docs/Day24.md)** | Jena 기온 예측 Conv2D · Conv1D & Conv1D padding='same' & Chroma 벡터 DB 저장 · 검색 · Retriever | 2026-10-06 | Conv1D, TextLoader, RecursiveCharacterTextSplitter, chunk_size, chunk_overlap, load_and_split, split_documents, glob, Chroma, from_documents, persist_directory, similarity_search, as_retriever |
 | **[Day25](docs/Day25.md)** | Conv1D · MaxPooling1D 데이터셋 적용 & RAG 체인 · Gradio 챗봇 & FAISS 벡터 DB 저장 · 불러오기 | 2026-10-07 | MaxPooling1D, ChatPromptTemplate, create_stuff_documents_chain, create_retrieval_chain, Gradio ChatInterface, FAISS, save_local, load_local, similarity_score_threshold |
+| **[Day26](docs/Day26.md)** | 앙상블 모델 (다중 입력 · 다중 출력) & PDF RAG 챗봇 & HuggingFace 로컬 임베딩 (bge-m3 · Qwen3) | 2026-10-08 | Concatenate, concatenate, Model(inputs=[...], outputs=[...]), PyPDFLoader, HuggingFaceEmbeddings, bge-m3, Qwen3-Embedding-0.6B |
 
 ---
 
@@ -63,16 +64,18 @@ C:\furiosa_study\
 │   ├── keras55_LSTM2_scale.py ~ keras56_split2_samcode.py            (Day19)
 │   ├── keras56_split3.py ~ keras58_kaggle_jena2.py                   (Day20)
 │   └── keras59_Bidirectional1.py ~ keras59_Bidirectional3_jena.py    (Day21)
-├─── keras2/                                                          (Day22 ~ Day25 Keras 실습)
+├─── keras2/                                                          (Day22 ~ Day26 Keras 실습)
 │   ├── keras60_Tokenizer1.py ~ keras61_Embedding04_important.py      (Day22)
 │   ├── keras62_1_reuters.py ~ keras65_Reshape2.py                    (Day23)
 │   ├── keras66_jena_CNN.py ~ keras67_Conv1D_3_jena.py                (Day24)
-│   └── keras68_Conv1D_02_diabetes.py ~ keras68_Conv1D_14_...py       (Day25)
+│   ├── keras68_Conv1D_02_diabetes.py ~ keras68_Conv1D_14_...py       (Day25)
+│   └── keras69_ensemble1.py ~ keras69_ensemble3.py                   (Day26)
 ├─── RAG/                                                             (LangChain 실습)
 │   ├── rag01_key_insert.py ~ rag09_out_parser02.py                   (Day21)
 │   ├── rag10_Embedding01.py ~ rag10_Embedding02.py                   (Day22)
 │   ├── rag11_Chroma01_save.py ~ rag12_Chroma03_save.py               (Day24)
-│   └── rag12_Chroma04_load.py ~ rag18_FAISS_gradio_...py             (Day25)
+│   ├── rag12_Chroma04_load.py ~ rag18_FAISS_gradio_...py             (Day25)
+│   └── rag19_PyPDF_1.py ~ rag20_embedding4_ChatBot.py                (Day26)
 ├─── _save/                                                           (저장한 모델 / 가중치 - .gitignore 제외)
 │   ├── keras29/ ~ keras34/                                           (model.save / save_weights / ModelCheckpoint 저장 파일)
 │   ├── keras44/                                                      (cat_dog MCP 저장 파일)
@@ -89,6 +92,7 @@ C:\furiosa_study\
 │   └── keras68/                                                      (표 · 이미지 데이터 Conv1D MCP 저장 파일)
 ├─── _data/
 │   ├── rag_data/                                                     (RAG 실습용 텍스트 - samsung / nvidia / AI for All)
+│   ├── Attention Is All You Need.pdf                                 (RAG 실습용 PDF 논문 - rag19 · rag20)
 │   ├── ddareung/                                                     (Dacon 따릉이 데이터)
 │   ├── kaggle_bike/                                                  (Kaggle Bike Sharing 데이터)
 │   ├── kaggle_santander/                                             (Kaggle Santander 고객 거래 예측 데이터 - .gitignore 제외)
@@ -98,11 +102,13 @@ C:\furiosa_study\
 ├─── _db/                                                             (Chroma · FAISS 벡터 DB - .gitignore 제외)
 │   ├── Chroma11/                                                     (rag11 저장 DB)
 │   ├── Chroma12/                                                     (rag12 저장 DB)
-│   └── Faiss17/                                                      (rag17 저장 FAISS DB)
+│   ├── Faiss17/                                                      (rag17 저장 FAISS DB)
+│   ├── Faiss19/                                                      (rag19 저장 FAISS DB - OpenAI 1536 차원)
+│   └── Faiss20/                                                      (rag20 저장 FAISS DB - Qwen3 1024 차원)
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day25.md
+│   └── ... Day26.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -115,11 +121,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 25일 (Day01 ~ Day25)  
-**완료 시간:** 200시간  
-**완료율: 31%**
+**완료:** 26일 (Day01 ~ Day26)  
+**완료 시간:** 208시간  
+**완료율: 33%**
 
 ---
 
-**마지막 업데이트:** 2026-10-07  
-**최근 학습:** [Day25 - Conv1D · MaxPooling1D 데이터셋 적용, RAG 체인 · Gradio 챗봇, FAISS 벡터 DB 저장 · 불러오기](docs/Day25.md)
+**마지막 업데이트:** 2026-10-08  
+**최근 학습:** [Day26 - 앙상블 모델 (다중 입력 · 다중 출력, Concatenate), PDF RAG 챗봇, HuggingFace 로컬 임베딩 (bge-m3 · Qwen3)](docs/Day26.md)
