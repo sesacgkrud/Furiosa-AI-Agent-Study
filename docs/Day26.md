@@ -386,4 +386,4 @@ rag20 : Qwen3 (1024)         ─▶  ./_db/Faiss20  ─▶  Qwen3 로 검색    
 
 ---
 
-[⬅️ Day25](Day25.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day25](Day25.md) · [🏠 전체 목차](../README.md) · [Day27 ➡️](Day27.md)
