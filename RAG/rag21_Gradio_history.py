@@ -45,16 +45,19 @@ embeddings = HuggingFaceEmbeddings(
 )
 
 #05. FAISS
-db = FAISS.from_documents(
-    documents=split_doc,
-    embedding=embeddings,
-)
+# [변경] ./_db/Faiss20 에 이미 저장해 두었으므로 만들기 · 저장은 주석 처리하고 불러오기만 한다
+#  → 실행할 때마다 205개 청크를 CPU 로 다시 임베딩하지 않아서 Gradio URL 이 바로 나온다
+#  (PDF · chunk_size · 임베딩 모델을 바꾸면 주석을 풀고 한 번 다시 저장해야 한다)
+# db = FAISS.from_documents(
+#     documents=split_doc,
+#     embedding=embeddings,
+# )
 
 DB_PATH = './_db/Faiss20'
-db.save_local(
-    folder_path=DB_PATH,
-    index_name='transformer_index20'
-)
+# db.save_local(
+#     folder_path=DB_PATH,
+#     index_name='transformer_index20'
+# )
 
 db = FAISS.load_local(
     folder_path=DB_PATH,
@@ -63,10 +66,8 @@ db = FAISS.load_local(
     allow_dangerous_deserialization=True,
 )
 
-retriever = db.as_retriever(
-    search_type='similarity_score_threshold',
-    search_kwargs={'k': 4, 'score_threshold': 0.2},
-)
+# [변경] similarity_score_threshold 거르기 없이, 질문과 가장 비슷한 문서 4개를 그대로 가져온다
+retriever = db.as_retriever(search_kwargs={'k': 4})
 
 #06. 답변 모델
 model = ChatOpenAI(

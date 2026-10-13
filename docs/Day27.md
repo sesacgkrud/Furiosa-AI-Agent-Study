@@ -377,4 +377,4 @@ Gradio history [{'role': 'user', ...}, {'role': 'assistant', ...}, ...]
 
 ---
 
-[⬅️ Day26](Day26.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day26](Day26.md) · [🏠 전체 목차](../README.md) · [Day28 ➡️](Day28.md)
