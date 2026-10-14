@@ -1,4 +1,4 @@
-# keras73_vgg16_cifar10.py 베이스 (VGG16 · 전이학습 · 동결 설명은 cifar10 파일 참고)
+# keras73_vgg16_01_cifar10.py 베이스 (VGG16 · 전이학습 · 동결 설명은 cifar10 파일 참고)
 # keras40_GAP04_cifar100.py (이전 cifar100 최고 기록 0.4621) 와 비교한다
 #
 # cifar10 과 달라진 점

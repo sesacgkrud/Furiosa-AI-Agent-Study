@@ -15,6 +15,12 @@
 12 fashion
 13 cifar10
 14 cifar100
-15 man_woman
 
-16 jena
+15 man_horse
+16 rps
+
+17 man_woman
+18 cat_dog
+
+
+19 jena

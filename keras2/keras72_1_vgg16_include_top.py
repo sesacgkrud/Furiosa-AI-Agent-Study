@@ -11,7 +11,7 @@
 # 지금까지와의 차이
 #  - 지금까지는 Conv2D, Dense 를 직접 쌓고 가중치는 랜덤값에서 시작해서 훈련했다
 #  - VGG16 은 층 구성과 훈련된 가중치를 한 줄로 불러온다 → 이 가중치를 내 데이터에 다시 쓰는 것이 전이학습
-#    (실제로 cifar10 · cifar100 에 붙여 훈련한 것은 keras73_vgg16_cifar10.py / keras73_vgg16_cifar100.py)
+#    (실제로 cifar10 · cifar100 에 붙여 훈련한 것은 keras73_vgg16_01_cifar10.py / keras73_vgg16_02_cifar100.py)
 
 import numpy as np
 from tensorflow.keras.models import Sequential
@@ -237,7 +237,7 @@ model.summary()
 ############### include_top=False ###############
 #1. FC layer 없어짐 (직접 아래에 fc layer를 명시 해주면 됨)
 #   → imagenet 의 1000종 분류용 Dense 대신, 내 데이터의 클래스 수에 맞는 Flatten + Dense 를 붙인다
-#     (keras73_vgg16_cifar10 : Flatten → Dense(100) → Dense(100) → Dense(10, softmax))
+#     (keras73_vgg16_01_cifar10 : Flatten → Dense(100) → Dense(100) → Dense(10, softmax))
 #2. input_shape를 원하는 데이터 shape로 변경
 #   → include_top=True 는 224x224 만 되지만, False 면 cifar10 의 (32, 32, 3) 처럼 내 데이터 크기를 넣을 수 있다
 #     (MaxPooling 을 5번 거치므로 가로 세로는 32 이상이어야 한다 : 32 → 16 → 8 → 4 → 2 → 1)

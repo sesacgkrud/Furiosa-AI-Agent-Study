@@ -36,6 +36,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day26](docs/Day26.md)** | 앙상블 모델 (다중 입력 · 다중 출력) & PDF RAG 챗봇 & HuggingFace 로컬 임베딩 (bge-m3 · Qwen3) | 2026-10-08 | Concatenate, concatenate, Model(inputs=[...], outputs=[...]), PyPDFLoader, HuggingFaceEmbeddings, bge-m3, Qwen3-Embedding-0.6B |
 | **[Day27](docs/Day27.md)** | 단일 입력 다중 출력 모델 & 주가 데이터 LSTM · Conv1D 앙상블 (삼성전자 시가 예측 · 가중치 제출) & 대화 기억 RAG 챗봇 | 2026-10-12 | thousands, [::-1], MessagesPlaceholder, HumanMessage, AIMessage, partial, create_history_aware_retriever |
 | **[Day28](docs/Day28.md)** | 가중치 확인 · 동결 (trainable) & VGG16 전이학습 (cifar10 · cifar100) & RAG 검색 문서 확인 · score_threshold · 프롬프트 규칙 | 2026-10-13 | model.weights, trainable_weights, trainable, keras.applications, VGG16, weights='imagenet', include_top |
+| **[Day29](docs/Day29.md)** | VGG16 전이학습 이미지 데이터셋 적용 & 층별 trainable · 부분 동결 & keras.applications 전이학습 모델 비교 (model_list) | 2026-10-14 | model.layers, layers[i].trainable, set_option, VGG19, ResNet50, DenseNet201, MobileNetV2, InceptionV3, Xception, filterwarnings |
 
 ---
 
@@ -66,14 +67,15 @@ C:\furiosa_study\
 │   ├── keras55_LSTM2_scale.py ~ keras56_split2_samcode.py            (Day19)
 │   ├── keras56_split3.py ~ keras58_kaggle_jena2.py                   (Day20)
 │   └── keras59_Bidirectional1.py ~ keras59_Bidirectional3_jena.py    (Day21)
-├─── keras2/                                                          (Day22 ~ Day28 Keras 실습)
+├─── keras2/                                                          (Day22 ~ Day29 Keras 실습)
 │   ├── keras60_Tokenizer1.py ~ keras61_Embedding04_important.py      (Day22)
 │   ├── keras62_1_reuters.py ~ keras65_Reshape2.py                    (Day23)
 │   ├── keras66_jena_CNN.py ~ keras67_Conv1D_3_jena.py                (Day24)
 │   ├── keras68_Conv1D_02_diabetes.py ~ keras68_Conv1D_14_...py       (Day25)
 │   ├── keras69_ensemble1.py ~ keras69_ensemble3.py                   (Day26)
 │   ├── keras69_ensemble4.py ~ keras70_samsung4_...py                 (Day27)
-│   └── keras71_trainable_weights1.py ~ keras73_vgg16_cifar100.py     (Day28)
+│   ├── keras71_trainable_weights1.py ~ keras73_vgg16_02_cifar100.py  (Day28)
+│   └── keras73_vgg16_03_man_horse.py ~ keras76_all_T_06_cat_dog.py   (Day29)
 ├─── RAG/                                                             (LangChain 실습)
 │   ├── rag01_key_insert.py ~ rag09_out_parser02.py                   (Day21)
 │   ├── rag10_Embedding01.py ~ rag10_Embedding02.py                   (Day22)
@@ -96,7 +98,8 @@ C:\furiosa_study\
 │   ├── keras66/                                                      (Jena Climate Conv2D MCP 저장 파일)
 │   ├── keras67/                                                      (Jena Climate Conv1D MCP 저장 파일)
 │   ├── keras68/                                                      (표 · 이미지 데이터 Conv1D MCP 저장 파일)
-│   └── keras70/                                                      (삼성전자 시가 앙상블 save_weights 가중치)
+│   ├── keras70/                                                      (삼성전자 시가 앙상블 save_weights 가중치)
+│   └── keras73/                                                      (VGG16 전이학습 이미지 데이터셋 MCP 저장 파일)
 ├─── _data/
 │   ├── rag_data/                                                     (RAG 실습용 텍스트 - samsung / nvidia / AI for All)
 │   ├── Attention Is All You Need.pdf                                 (RAG 실습용 PDF 논문 - rag19 · rag20)
@@ -116,7 +119,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day28.md
+│   └── ... Day29.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -129,11 +132,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 28일 (Day01 ~ Day28)  
-**완료 시간:** 224시간  
-**완료율: 35%**
+**완료:** 29일 (Day01 ~ Day29)  
+**완료 시간:** 232시간  
+**완료율: 36%**
 
 ---
 
-**마지막 업데이트:** 2026-10-13  
-**최근 학습:** [Day28 - 가중치 확인 · 동결 (trainable), VGG16 전이학습 (cifar10 · cifar100), RAG 검색 문서 확인 · score_threshold · 프롬프트 규칙](docs/Day28.md)
+**마지막 업데이트:** 2026-10-14  
+**최근 학습:** [Day29 - VGG16 전이학습 이미지 데이터셋 적용, 층별 trainable · 부분 동결, keras.applications 전이학습 모델 비교](docs/Day29.md)

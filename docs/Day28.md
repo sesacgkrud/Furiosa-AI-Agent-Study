@@ -119,7 +119,7 @@ model = VGG16(
   2. `input_shape`를 원하는 데이터 크기로 바꿀 수 있다 : `(100, 100, 3)` → 100 → 50 → 25 → 12 → 6 → 3, 출력 `(3, 3, 512)`
   - Conv2D 파라미터는 입력 크기와 상관없어서 `(224, 224, 3)`이든 `(100, 100, 3)`이든 14,714,688로 같다
 
-### 5. VGG16 전이학습 cifar10 (keras73_vgg16_cifar10)
+### 5. VGG16 전이학습 cifar10 (keras73_vgg16_01_cifar10)
 
 Day14 `keras40_GAP03_cifar10`(이전 cifar10 최고 0.7727)의 데이터 · 훈련 · 평가 코드에 VGG16을 붙였다.
 
@@ -155,7 +155,7 @@ model.add(Dense(10, activation='softmax'))
 
 - Total params는 동결해도 14,777,098 그대로 → 가중치는 있지만 훈련만 안 되는 것 (keras71과 같은 원리)
 
-### 6. VGG16 전이학습 cifar100 (keras73_vgg16_cifar100)
+### 6. VGG16 전이학습 cifar100 (keras73_vgg16_02_cifar100)
 
 cifar10 VGG16 코드에서 데이터를 cifar100으로, 마지막 층을 `Dense(100, activation='softmax')`로 바꿨다 (이전 최고 Day14 `keras40_GAP04_cifar100` 0.4621).
 
@@ -240,8 +240,8 @@ prompt = ChatPromptTemplate.from_messages([
 | `keras2/keras71_trainable_weights2.py` | Dense 7층 모델을 동결 O / 동결 X로 100 epoch 훈련해 예측값 비교 |
 | `keras2/keras71_trainable_weights3.py` | x=1, y=1로 1000 epoch 훈련 후 `model.weights`만으로 예측값 1.0002013을 수식으로 계산 |
 | `keras2/keras72_1_vgg16_include_top.py` | `VGG16()` 기본 구조 · 파라미터, `include_top=False` + `input_shape=(100, 100, 3)` 구조 비교 |
-| `keras2/keras73_vgg16_cifar10.py` | VGG16 전이학습 cifar10, 동결 O 0.6266 / 동결 X 0.8158 (이전 최고 0.7727) |
-| `keras2/keras73_vgg16_cifar100.py` | VGG16 전이학습 cifar100, 동결 O 0.381 / 동결 X 0.01 (이전 최고 0.4621) |
+| `keras2/keras73_vgg16_01_cifar10.py` | VGG16 전이학습 cifar10, 동결 O 0.6266 / 동결 X 0.8158 (이전 최고 0.7727) |
+| `keras2/keras73_vgg16_02_cifar100.py` | VGG16 전이학습 cifar100, 동결 O 0.381 / 동결 X 0.01 (이전 최고 0.4621) |
 | `RAG/rag22_Gradio_1_doc_check.py` | `response['context']`로 실제 검색된 문서 2개를 터미널에 출력 |
 | `RAG/rag22_Gradio_2_Similarity.py` | `similarity_score_threshold` 0.7 → 모든 질문 검색 결과 0개, 0개면 `NO_ANSWER` |
 | `RAG/rag22_Gradio_3_prompt.py` | 인사 · 이전 대화 규칙 추가, threshold 0.2 |
@@ -264,7 +264,7 @@ prompt = ChatPromptTemplate.from_messages([
 | 4 | 3.9999237 | -1.2523676 |
 | 5 | 4.9996247 | -1.565459 |
 
-### VGG16 cifar10 (keras73_vgg16_cifar10)
+### VGG16 cifar10 (keras73_vgg16_01_cifar10)
 
 | 모델 | Trainable params | EarlyStopping | test acc | 소요 시간 |
 |---|:---:|:---:|:---:|:---:|
@@ -272,7 +272,7 @@ prompt = ChatPromptTemplate.from_messages([
 | VGG16 동결 O | 62,410 | Epoch 68 | 0.6266 | 276.84초 |
 | VGG16 동결 X | 14,777,098 | Epoch 46 | **0.8158** | 1011.2초 |
 
-### VGG16 cifar100 (keras73_vgg16_cifar100)
+### VGG16 cifar100 (keras73_vgg16_02_cifar100)
 
 | 모델 | Trainable params | EarlyStopping | test acc | 소요 시간 |
 |---|:---:|:---:|:---:|:---:|
@@ -366,4 +366,4 @@ include_top=False (32, 32, 3)   ─▶ block1 ~ block5 ─▶ (1, 1, 512)  ─�
 
 ---
 
-[⬅️ Day27](Day27.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day27](Day27.md) · [🏠 전체 목차](../README.md) · [Day29 ➡️](Day29.md)
