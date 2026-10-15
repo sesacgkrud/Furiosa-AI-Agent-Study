@@ -374,4 +374,4 @@ for model_i in model_list:
 
 ---
 
-[⬅️ Day28](Day28.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day28](Day28.md) · [🏠 전체 목차](../README.md) · [Day30 ➡️](Day30.md)

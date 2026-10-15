@@ -37,6 +37,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day27](docs/Day27.md)** | 단일 입력 다중 출력 모델 & 주가 데이터 LSTM · Conv1D 앙상블 (삼성전자 시가 예측 · 가중치 제출) & 대화 기억 RAG 챗봇 | 2026-10-12 | thousands, [::-1], MessagesPlaceholder, HumanMessage, AIMessage, partial, create_history_aware_retriever |
 | **[Day28](docs/Day28.md)** | 가중치 확인 · 동결 (trainable) & VGG16 전이학습 (cifar10 · cifar100) & RAG 검색 문서 확인 · score_threshold · 프롬프트 규칙 | 2026-10-13 | model.weights, trainable_weights, trainable, keras.applications, VGG16, weights='imagenet', include_top |
 | **[Day29](docs/Day29.md)** | VGG16 전이학습 이미지 데이터셋 적용 & 층별 trainable · 부분 동결 & keras.applications 전이학습 모델 비교 (model_list) | 2026-10-14 | model.layers, layers[i].trainable, set_option, VGG19, ResNet50, DenseNet201, MobileNetV2, InceptionV3, Xception, filterwarnings |
+| **[Day30](docs/Day30.md)** | BM25 키워드 검색 & Chroma 벡터 검색 & EnsembleRetriever hybrid 검색 | 2026-10-15 | BM25, BM25Retriever, rank_bm25, EnsembleRetriever, hybrid 검색 |
 
 ---
 
@@ -83,7 +84,8 @@ C:\furiosa_study\
 │   ├── rag12_Chroma04_load.py ~ rag18_FAISS_gradio_...py             (Day25)
 │   ├── rag19_PyPDF_1.py ~ rag20_embedding4_ChatBot.py                (Day26)
 │   ├── rag21_Gradio_history.py                                       (Day27)
-│   └── rag22_Gradio_1_doc_check.py ~ rag22_Gradio_3_prompt.py        (Day28)
+│   ├── rag22_Gradio_1_doc_check.py ~ rag22_Gradio_3_prompt.py        (Day28)
+│   └── rag23_01_bm25_search.py ~ rag23_03_hybrid_search.py           (Day30)
 ├─── _save/                                                           (저장한 모델 / 가중치 - .gitignore 제외)
 │   ├── keras29/ ~ keras34/                                           (model.save / save_weights / ModelCheckpoint 저장 파일)
 │   ├── keras44/                                                      (cat_dog MCP 저장 파일)
@@ -112,14 +114,14 @@ C:\furiosa_study\
 │   └── *_npy/                                                        (이미지를 npy 로 저장한 폴더 - .gitignore 제외)
 ├─── _db/                                                             (Chroma · FAISS 벡터 DB - .gitignore 제외)
 │   ├── Chroma11/                                                     (rag11 저장 DB)
-│   ├── Chroma12/                                                     (rag12 저장 DB)
+│   ├── Chroma12/                                                     (rag12 저장 DB, rag23_02 문서 추가 · rag23_03 불러오기)
 │   ├── Faiss17/                                                      (rag17 저장 FAISS DB)
 │   ├── Faiss19/                                                      (rag19 저장 FAISS DB - OpenAI 1536 차원)
 │   └── Faiss20/                                                      (rag20 저장 FAISS DB - Qwen3 1024 차원, rag21 · rag22 불러오기)
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day29.md
+│   └── ... Day30.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -132,11 +134,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 29일 (Day01 ~ Day29)  
-**완료 시간:** 232시간  
-**완료율: 36%**
+**완료:** 30일 (Day01 ~ Day30)  
+**완료 시간:** 240시간  
+**완료율: 38%**
 
 ---
 
-**마지막 업데이트:** 2026-10-14  
-**최근 학습:** [Day29 - VGG16 전이학습 이미지 데이터셋 적용, 층별 trainable · 부분 동결, keras.applications 전이학습 모델 비교](docs/Day29.md)
+**마지막 업데이트:** 2026-10-15  
+**최근 학습:** [Day30 - BM25 키워드 검색, Chroma 벡터 검색, EnsembleRetriever hybrid 검색](docs/Day30.md)

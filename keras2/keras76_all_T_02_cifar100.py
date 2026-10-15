@@ -72,7 +72,7 @@ for model_i in model_list:
               y_train,
               epochs=9999999,
               batch_size=32,
-              verbose=0,
+              verbose=1,                  # cifar100 훈련 진행 상황을 epoch 마다 확인
               validation_split = 0.2,
               callbacks=[es]
     )
