@@ -276,4 +276,4 @@ EnsembleRetriever(retrievers=[...], weights=[...])
 
 ---
 
-[⬅️ Day29](Day29.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day29](Day29.md) · [🏠 전체 목차](../README.md) · [Day31 ➡️](Day31.md)
