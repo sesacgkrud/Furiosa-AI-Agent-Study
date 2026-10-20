@@ -40,6 +40,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day30](docs/Day30.md)** | BM25 키워드 검색 & Chroma 벡터 검색 & EnsembleRetriever hybrid 검색 | 2026-10-15 | BM25, BM25Retriever, rank_bm25, EnsembleRetriever, hybrid 검색 |
 | **[Day31](docs/Day31.md)** | 미니 프로젝트 시작 | 2026-10-16 | - |
 | **[Day32](docs/Day32.md)** | LangGraph 입문 (TypedDict State & add_messages Reducer & StateGraph Node · Edge 챗봇) | 2026-10-19 | TypedDict, Annotated, add_messages, Reducer, StateGraph, add_node, add_edge, START, END, compile |
+| **[Day33](docs/Day33.md)** | LangGraph Tool Calling (TavilySearch · DuckDuckGo 웹 검색 & ToolNode · tools_condition 조건부 Edge & 그래프 이미지 저장) | 2026-10-20 | bind_tools, TavilySearch, DuckDuckGoSearchRun, ToolNode, tools_condition, add_conditional_edges, get_graph, draw_mermaid_png |
 
 ---
 
@@ -89,7 +90,8 @@ C:\furiosa_study\
 │   ├── rag22_Gradio_1_doc_check.py ~ rag22_Gradio_3_prompt.py        (Day28)
 │   └── rag23_01_bm25_search.py ~ rag23_03_hybrid_search.py           (Day30)
 ├─── LangGraph/                                                       (LangGraph 실습)
-│   └── lg01_TypedDict.py ~ lg04_Node_Edge_Add.py                     (Day32)
+│   ├── lg01_TypedDict.py ~ lg04_Node_Edge_Add.py                     (Day32)
+│   └── lg05_ToolNode.py ~ lg07_ToolNode_graph.py                     (Day33)
 ├─── _save/                                                           (저장한 모델 / 가중치 - .gitignore 제외)
 │   ├── keras29/ ~ keras34/                                           (model.save / save_weights / ModelCheckpoint 저장 파일)
 │   ├── keras44/                                                      (cat_dog MCP 저장 파일)
@@ -105,7 +107,8 @@ C:\furiosa_study\
 │   ├── keras67/                                                      (Jena Climate Conv1D MCP 저장 파일)
 │   ├── keras68/                                                      (표 · 이미지 데이터 Conv1D MCP 저장 파일)
 │   ├── keras70/                                                      (삼성전자 시가 앙상블 save_weights 가중치)
-│   └── keras73/                                                      (VGG16 전이학습 이미지 데이터셋 MCP 저장 파일)
+│   ├── keras73/                                                      (VGG16 전이학습 이미지 데이터셋 MCP 저장 파일)
+│   └── image/                                                        (LangGraph 그래프 구조 PNG - lg07)
 ├─── _data/
 │   ├── rag_data/                                                     (RAG 실습용 텍스트 - samsung / nvidia / AI for All)
 │   ├── Attention Is All You Need.pdf                                 (RAG 실습용 PDF 논문 - rag19 · rag20)
@@ -125,7 +128,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day32.md
+│   └── ... Day33.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -138,11 +141,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 32일 (Day01 ~ Day32)  
-**완료 시간:** 256시간  
-**완료율: 40%**
+**완료:** 33일 (Day01 ~ Day33)  
+**완료 시간:** 264시간  
+**완료율: 41%**
 
 ---
 
-**마지막 업데이트:** 2026-10-19  
-**최근 학습:** [Day32 - LangGraph 입문 (TypedDict State, add_messages Reducer, StateGraph Node · Edge 챗봇)](docs/Day32.md)
+**마지막 업데이트:** 2026-10-20  
+**최근 학습:** [Day33 - LangGraph Tool Calling (TavilySearch · DuckDuckGo 웹 검색, ToolNode, tools_condition 조건부 Edge, 그래프 이미지 저장)](docs/Day33.md)

@@ -258,4 +258,4 @@ add_messages([Human id=3], [AI id=3])  →  [AI id=3]                (id 같음 
 
 ---
 
-[⬅️ Day31](Day31.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day31](Day31.md) · [🏠 전체 목차](../README.md) · [Day33 ➡️](Day33.md)

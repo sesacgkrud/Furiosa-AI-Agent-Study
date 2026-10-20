@@ -33,6 +33,7 @@ from langchain_core.messages import AIMessage, HumanMessage
 #################### 1. State 정의 ###################
 
 class State(TypedDict) :
+    # messages : list   # 이렇게 하면 계속 덮어써짐
     messages : Annotated[list, add_messages]
     aaa : str
     bbb : str
