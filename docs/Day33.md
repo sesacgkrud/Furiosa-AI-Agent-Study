@@ -144,7 +144,7 @@ llm_with_tools = llm.bind_tools(tools)
 - LLM이 질문을 보고 **어떤 Tool을 부를지 스스로 고른다** (하나만 또는 둘 다)
 - `ToolNode(tools)`도 두 Tool을 모두 가지고 있어 tool_calls의 Tool 이름(`tavily_search` / `duckduckgo_search`)으로 찾아 실행한다
 
-### 4. 그래프 이미지 저장 (lg07_ToolNode_graph)
+### 4. 그래프 이미지 저장 (lg07_ToolNode_graph01)
 
 lg05를 베이스로 그래프 실행은 주석 처리하고 그래프 구조를 이미지로 저장했다.
 
@@ -200,7 +200,7 @@ class State(TypedDict) :
 | `LangGraph/lg05_ToolNode.py` | `TavilySearch` 웹 검색 Tool + `bind_tools`, `ToolNode` tools 노드, `add_conditional_edges` · `tools_condition`, tools → chatbot |
 | `LangGraph/lg06_01_ddg.py` | Tool을 `DuckDuckGoSearchRun`으로 바꿔 같은 그래프 실행 (API 키 불필요) |
 | `LangGraph/lg06_02_ddg_2ea.py` | `TavilySearch` + `DuckDuckGoSearchRun` Tool 2개를 함께 `bind_tools` · `ToolNode` |
-| `LangGraph/lg07_ToolNode_graph.py` | `get_graph().draw_mermaid_png()` + `with open(..., 'wb')`로 그래프 구조 PNG 저장 |
+| `LangGraph/lg07_ToolNode_graph01.py` | `get_graph().draw_mermaid_png()` + `with open(..., 'wb')`로 그래프 구조 PNG 저장 |
 | `LangGraph/lg04_Node_Edge_Add.py` | `# messages : list   # 이렇게 하면 계속 덮어써짐` 주석 추가 (수정) |
 | `docs/Day33.md` | Day33 학습 기록 신규 작성 |
 | `docs/Day32.md` | 하단 nav에 Day33 링크 추가 (수정) |
@@ -284,4 +284,4 @@ add_conditional_edges('chatbot', tools_condition)    함수 결과('tools' / END
 
 ---
 
-[⬅️ Day32](Day32.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day32](Day32.md) · [🏠 전체 목차](../README.md) · [Day34 ➡️](Day34.md)
