@@ -5,7 +5,7 @@
 #
 #                 ┌──▶ search   : TavilySearch 로 웹 검색          ──┐
 #        START ───┤                                                    ├──▶ merge : 두 결과를 합쳐 assistant 메시지로 ──▶ END
-#                 └──▶ analysis : LLM 이 기존 지식으로 질문 분석    ──┘
+#                 └──▶ analysis : LLM 이 기존 지식으로 질문 분석     ──┘
 #
 # - 질문은 messages 로 받는다 → 각 노드에서 state['messages'][-1].content 로 마지막(사용자) 메시지를 꺼낸다
 # - search, analysis 는 State 의 search_result / analysis_result 키에 따로 결과를 쓰고,
@@ -77,7 +77,7 @@ def analysis_agent(state : State):
     return {'analysis_result' : response.content}
 
 # 결과 통합 에이전트
-def merge_agent(state : State):
+def merge_agent(state : State):                    # 단순 concat
     result = (
         state['search_result'] + '\n\n' +
         '==============================' + '\n' +

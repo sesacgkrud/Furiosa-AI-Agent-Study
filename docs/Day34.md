@@ -209,7 +209,7 @@ AI 반도체 수요 증가가 성장 요인이다.
             __end__
 ```
 
-### 5. 웹 검색 + LLM 분석 병렬 실행 (lg09_Parallel_Execution_absorption2)
+### 5. 웹 검색 + LLM 분석 병렬 실행 (lg09_Parallel_Execution_absorption2_concat)
 
 lg08_Memory02를 베이스로 absorption1의 병렬 그래프에 실제 Tavily 웹 검색과 LLM 분석을 넣었다.
 
@@ -296,7 +296,7 @@ Assistant : {'query': '엔비디아의 미래 전망에 대해 알려줘', ..., 
 | `LangGraph/lg08_Memory01.py` | 메모리 없이 invoke 두 번 → 두번째 질문에서 이름을 기억하지 못함 |
 | `LangGraph/lg08_Memory02.py` | `InMemorySaver` + `compile(checkpointer=memory)` + `config`(`thread_id`)로 이전 대화 기억 |
 | `LangGraph/lg09_Parallel_Execution_absorption1.py` | START → search · analysis 병렬 실행 → merge 병합 (정해진 문장으로 흐름 확인) |
-| `LangGraph/lg09_Parallel_Execution_absorption2.py` | search(Tavily 웹 검색) · analysis(LLM 분석) 병렬 실행 → merge에서 합쳐 assistant 메시지로 |
+| `LangGraph/lg09_Parallel_Execution_absorption2_concat.py` | search(Tavily 웹 검색) · analysis(LLM 분석) 병렬 실행 → merge에서 합쳐 assistant 메시지로 |
 | `LangGraph/lg07_ToolNode_graph01.py` | `lg07_ToolNode_graph.py`에서 이름 변경 (수정) |
 | `docs/Day34.md` | Day34 학습 기록 신규 작성 |
 | `docs/Day33.md` | lg07 파일 이름 변경 반영, 하단 nav에 Day34 링크 추가 (수정) |
@@ -312,7 +312,7 @@ Assistant : {'query': '엔비디아의 미래 전망에 대해 알려줘', ..., 
 | lg08_Memory01 | 두번째 질문 : `아직 이름을 말씀해 주신 적이 없어요.` |
 | lg08_Memory02 | 두번째 질문 : `Mr. Song이라고 하셨어요.` |
 | lg09_absorption1 | search · analysis 실행 후 두 문장을 합친 `final_result` 출력, 그래프 `__start__ → analysis / search → merge → __end__` |
-| lg09_absorption2 | Tavily 검색 결과 + `=====` + LLM 분석 답변이 하나의 assistant 메시지로 출력 |
+| lg09_absorption2_concat | Tavily 검색 결과 + `=====` + LLM 분석 답변이 하나의 assistant 메시지로 출력 |
 
 ---
 
@@ -382,4 +382,4 @@ State 키 : search → search_result, analysis → analysis_result (다른 키) 
 
 ---
 
-[⬅️ Day33](Day33.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day33](Day33.md) · [🏠 전체 목차](../README.md) · [Day35 ➡️](Day35.md)
