@@ -43,6 +43,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day33](docs/Day33.md)** | LangGraph Tool Calling (TavilySearch · DuckDuckGo 웹 검색 & ToolNode · tools_condition 조건부 Edge & 그래프 이미지 저장) | 2026-10-20 | bind_tools, TavilySearch, DuckDuckGoSearchRun, ToolNode, tools_condition, add_conditional_edges, get_graph, draw_mermaid_png |
 | **[Day34](docs/Day34.md)** | LangGraph 그래프 이미지 출력 & InMemorySaver 대화 메모리 & 병렬 실행 (Parallel Execution) | 2026-10-21 | BytesIO, Image.open, InMemorySaver, checkpointer, thread_id, Parallel Execution |
 | **[Day35](docs/Day35.md)** | LangGraph 병렬 결과 LLM 통합 (merge) & 머신러닝 트리 모델 feature_importances_ & XGBoost F score / Gain score | 2026-10-22 | DecisionTreeClassifier, RandomForestClassifier, GradientBoostingClassifier, XGBClassifier, XGBRegressor, model.score, feature_importances_, get_score, plot_importance |
+| **[Day36](docs/Day36.md)** | Hermes Agent 설치 | 2026-10-23 | Hermes Agent |
 
 ---
 
@@ -134,7 +135,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day35.md
+│   └── ... Day36.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -147,11 +148,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 35일 (Day01 ~ Day35)  
-**완료 시간:** 280시간  
-**완료율: 44%**
+**완료:** 36일 (Day01 ~ Day36)  
+**완료 시간:** 288시간  
+**완료율: 45%**
 
 ---
 
-**마지막 업데이트:** 2026-10-22  
-**최근 학습:** [Day35 - LangGraph 병렬 결과 LLM 통합 (merge) & 머신러닝 트리 모델 feature_importances_ · XGBoost F score / Gain score](docs/Day35.md)
+**마지막 업데이트:** 2026-10-23  
+**최근 학습:** [Day36 - Hermes Agent 설치](docs/Day36.md)

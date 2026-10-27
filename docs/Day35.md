@@ -280,4 +280,4 @@ plot_importance(model, importance_type=...)              → 막대 그래프
 
 ---
 
-[⬅️ Day34](Day34.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day34](Day34.md) · [🏠 전체 목차](../README.md) · [Day36 ➡️](Day36.md)
