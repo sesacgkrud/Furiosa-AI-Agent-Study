@@ -16,4 +16,4 @@
 
 ---
 
-[⬅️ Day38](Day38.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day38](Day38.md) · [🏠 전체 목차](../README.md) · [Day40 ➡️](Day40.md)
