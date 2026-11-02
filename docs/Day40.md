@@ -22,4 +22,4 @@
 
 ---
 
-[⬅️ Day39](Day39.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day39](Day39.md) · [🏠 전체 목차](../README.md) · [Day41 ➡️](Day41.md)
