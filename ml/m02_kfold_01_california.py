@@ -20,7 +20,7 @@ kfold = KFold(n_splits=n_split, shuffle=True, random_state=333)
 #2. 모델 구성
 model = DecisionTreeRegressor()
 
-#3. 훈련 · 평가
+#3. 훈련, 평가
 scores = cross_val_score(model, x, y, cv=kfold) # Regressor 기준 : R2(결정계수) 반환
 
 print("r2 : ", scores, "\n평균 r2 : ", round(np.mean(scores), 2))

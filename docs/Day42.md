@@ -41,7 +41,7 @@ kfold = KFold(n_splits=n_split, shuffle=True, random_state=333)     # 5 조각, 
 #2. 모델 구성
 model = DecisionTreeClassifier()
 
-#3. 훈련 · 평가
+#3. 훈련, 평가
 scores = cross_val_score(model, x, y, cv=kfold)     # Classifier 기준 : fold 별 accuracy 5 개 반환
 
 print("acc : ", scores, "\n평균 acc : ", round(np.mean(scores), 2))
@@ -200,4 +200,4 @@ np.mean(scores)                                     # Classifier → accuracy �
 
 ---
 
-[⬅️ Day41](Day41.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day41](Day41.md) · [🏠 전체 목차](../README.md) · [Day43 ➡️](Day43.md)
