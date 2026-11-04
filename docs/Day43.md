@@ -431,4 +431,4 @@ for name, model in all:
 
 ---
 
-[⬅️ Day42](Day42.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day42](Day42.md) · [🏠 전체 목차](../README.md) · [Day44 ➡️](Day44.md)
