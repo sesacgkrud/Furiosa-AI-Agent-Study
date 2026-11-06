@@ -53,6 +53,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day43](docs/Day43.md)** | KFold 교차 검증 Kaggle 데이터 적용 & train_test_split + cross_val_predict & all_estimators 전체 모델 비교 (KFold) · furiosa-llm LLM · Tool calling | 2026-11-03 | cross_val_predict, all_estimators, type_filter, LLM, SamplingParams, tools, tool_choice, fxb |
 | **[Day44](docs/Day44.md)** | Ollama 설치 & Gemma4 E2B · Qwen3-4B 양자화 실행 | 2026-11-04 | Ollama, Gemma4 E2B, Qwen3-4B, 양자화 |
 | **[Day45](docs/Day45.md)** | 파이썬 모듈 · 패키지 import & 데이터셋별 all_estimators 최고 모델 비교 & for 문 하이퍼파라미터 튜닝 · GridSearchCV & furiosa-llm LangChain 연결 · 스트리밍 | 2026-11-05 | import, from ~ import, \_\_name\_\_, StratifiedKFold, GridSearchCV, best_params_, best_score_, llm.stream, stream=True, time.perf_counter |
+| **[Day46](docs/Day46.md)** | RandomizedSearchCV 하이퍼파라미터 탐색 & KerasRegressor 신경망 하이퍼파라미터 튜닝 | 2026-11-06 | RandomizedSearchCV, param_distributions, n_iter, KerasRegressor |
 
 ---
 
@@ -83,7 +84,7 @@ C:\furiosa_study\
 │   ├── keras55_LSTM2_scale.py ~ keras56_split2_samcode.py            (Day19)
 │   ├── keras56_split3.py ~ keras58_kaggle_jena2.py                   (Day20)
 │   └── keras59_Bidirectional1.py ~ keras59_Bidirectional3_jena.py    (Day21)
-├─── keras2/                                                          (Day22 ~ Day29 Keras 실습)
+├─── keras2/                                                          (Day22 ~ Day29 · Day46 Keras 실습)
 │   ├── keras60_Tokenizer1.py ~ keras61_Embedding04_important.py      (Day22)
 │   ├── keras62_1_reuters.py ~ keras65_Reshape2.py                    (Day23)
 │   ├── keras66_jena_CNN.py ~ keras67_Conv1D_3_jena.py                (Day24)
@@ -91,7 +92,8 @@ C:\furiosa_study\
 │   ├── keras69_ensemble1.py ~ keras69_ensemble3.py                   (Day26)
 │   ├── keras69_ensemble4.py ~ keras70_samsung4_...py                 (Day27)
 │   ├── keras71_trainable_weights1.py ~ keras73_vgg16_02_cifar100.py  (Day28)
-│   └── keras73_vgg16_03_man_horse.py ~ keras76_all_T_06_cat_dog.py   (Day29)
+│   ├── keras73_vgg16_03_man_horse.py ~ keras76_all_T_06_cat_dog.py   (Day29)
+│   └── keras77_hyperParameter02_diabets.py                           (Day46)
 ├─── RAG/                                                             (LangChain 실습)
 │   ├── rag01_key_insert.py ~ rag09_out_parser02.py                   (Day21)
 │   ├── rag10_Embedding01.py ~ rag10_Embedding02.py                   (Day22)
@@ -110,7 +112,8 @@ C:\furiosa_study\
 │   ├── m01_feature_importances01.py ~ m01_..._04_graph.py            (Day35)
 │   ├── m02_kfold_00_iris.py ~ m02_kfold_01_california.py             (Day42)
 │   ├── m02_kfold_05_kaggle_bike.py ~ m05_all_estimators2_kfold.py    (Day43)
-│   └── m06_all_estimators1_to_data.py ~ m08_GridSearchCV_02_...py    (Day45)
+│   ├── m06_all_estimators1_to_data.py ~ m08_GridSearchCV_02_...py    (Day45)
+│   └── m09_RandomSearchCV_00.py ~ m09_RandomSearchCV_02_diabetes.py  (Day46)
 ├─── rngd/                                                            (Furiosa RNGD 실습)
 │   ├── f01_furiosa_test.py                                           (Day42)
 │   ├── f02_tutorial.py ~ f04_fxb_direct_select.py                    (Day43)
@@ -154,7 +157,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day45.md
+│   └── ... Day46.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -167,11 +170,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 45일 (Day01 ~ Day45)  
-**완료 시간:** 360시간  
-**완료율: 56%**
+**완료:** 46일 (Day01 ~ Day46)  
+**완료 시간:** 368시간  
+**완료율: 58%**
 
 ---
 
-**마지막 업데이트:** 2026-11-05  
-**최근 학습:** [Day45 - 파이썬 모듈 · 패키지 import & 데이터셋별 all_estimators 최고 모델 비교 & for 문 하이퍼파라미터 튜닝 · GridSearchCV & furiosa-llm LangChain 연결 · 스트리밍](docs/Day45.md)
+**마지막 업데이트:** 2026-11-06  
+**최근 학습:** [Day46 - RandomizedSearchCV 하이퍼파라미터 탐색 & KerasRegressor 신경망 하이퍼파라미터 튜닝](docs/Day46.md)

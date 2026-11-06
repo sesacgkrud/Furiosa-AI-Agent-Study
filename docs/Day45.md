@@ -685,4 +685,4 @@ LangChain  : llm.invoke(질문)  → response.content  (다 만들어진 뒤 한
 
 ---
 
-[⬅️ Day44](Day44.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day44](Day44.md) · [🏠 전체 목차](../README.md) · [Day46 ➡️](Day46.md)
