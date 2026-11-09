@@ -1,3 +1,7 @@
+# keras56_split2_samcode.py
+# [목적] keras56_split2 와 같은 실습을 수업 코드 방식으로 다시 작성 (y = bbb[:, -1, -1] → 마지막 시점의 마지막 열)
+# [흐름] split_x → (6, 4, 2) → x / 10 → LSTM(linear) → -1 예측
+
 import numpy as np
 
 a = np.array([[1,2,3,4,5,6,7,8,9,10],

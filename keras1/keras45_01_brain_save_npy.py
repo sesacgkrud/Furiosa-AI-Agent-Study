@@ -1,5 +1,5 @@
 # keras45_01_brain_save_npy.py
-# keras44_ImageDataGenerator2.py 베이스 - brain 데이터를 ImageDataGenerator 로 읽어 npy 로 저장한다
+# [목적] keras44_ImageDataGenerator2.py 베이스 - brain 데이터를 ImageDataGenerator 로 읽어 npy 로 저장한다
 # ImageDataGenerator 로 폴더에서 이미지를 읽는 데 시간이 걸리므로, 한 번 읽은 결과를 npy 로 저장해 두고
 # 다음부터는 keras45_02 처럼 np.load 로 바로 불러 쓴다
 
@@ -21,7 +21,7 @@ train_datagen = ImageDataGenerator(
     ######### 원 데이터 왜곡 없도록 주석 처리 #########
     # horizontal_flip=True,                   # 수평 뒤집기 (필수x)
     # vertical_flip=True,                     # 수직 뒤집기 (필수x)
-    # width_shift_range=0.1,                  # 평형 이동 (필수x)
+    # width_shift_range=0.1,                  # 평행 이동 (필수x)
     # height_shift_range=0.1,                 # (필수x)
     # rotation_range=5,                       # 각도 조절 (정해진 각도만큼 이미지 회전) (필수x)
     # zoom_range=1.2,                         # (필수x)

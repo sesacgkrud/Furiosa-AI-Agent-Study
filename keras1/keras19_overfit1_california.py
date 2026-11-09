@@ -1,5 +1,5 @@
 # keras19_overfit1_california.py
-# 과적합(overfit) 확인 : fit 의 결과를 hist 에 받아서 loss 와 val_loss 를 그래프로 그린다
+# [목적] 과적합(overfit) 확인 : fit 의 결과를 hist 에 받아서 loss 와 val_loss 를 그래프로 그린다
 # hist.history 안에 epoch 별 loss / val_loss 가 리스트로 들어있다
 # loss 는 계속 내려가는데 val_loss 가 어느 순간부터 올라가면 그 지점부터 과적합이다
 
@@ -44,6 +44,7 @@ model.add(Dense(1))
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
+# fit 은 History 객체를 돌려준다 → hist.history = {'loss': [...], 'val_loss': [...]} epoch 별 값
 hist = model.fit(x_train, y_train, epochs=500, batch_size=32,
           validation_split=0.2)
 

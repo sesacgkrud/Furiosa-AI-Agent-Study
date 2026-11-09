@@ -1,4 +1,7 @@
 # keras35_gpu_test00.py
+#
+# [목적] tf.config.list_physical_devices('GPU') 로 텐서플로가 GPU 를 인식하는지 확인
+
 # 텐서플로가 GPU 를 잡고 있는지 확인하는 파일
 # list_physical_devices('GPU') 가 빈 리스트면 CPU 로만 돌아간다
 

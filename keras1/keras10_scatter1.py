@@ -1,5 +1,5 @@
 # keras10_scatter1.py
-# 일직선이 아닌 데이터를 훈련시키고 matplotlib 으로 결과를 눈으로 확인한다
+# [목적] 일직선이 아닌 데이터를 훈련시키고 matplotlib 으로 결과를 눈으로 확인한다
 # scatter = 실제 데이터 점, plot(빨간 선) = 모델이 예측한 값 -> 선이 점들 사이를 지나가면 잘 학습된 것
 
 import numpy as np
@@ -32,8 +32,8 @@ x_train, x_test, y_train, y_test = train_test_split(
 
 print("x_train :", x_train) # x_train : [10  9  4  7  6  3  1]
 print("x_test :", x_test) # x_test : [5 8 2]
-print("y_train :", y_train) # y_train : [10  9  4  7  6  3  1]
-print("y_test :", y_test) # y_test : [5 8 2]
+print("y_train :", y_train) # y_train : [10  6  4  7  5  3  1]
+print("y_test :", y_test) # y_test : [7 8 2]
 
 #2. 모델 구성
 model = Sequential()
@@ -57,6 +57,7 @@ print("loss :", loss)
 result = model.predict(np.array([11]))
 print("11의 예측값 :", result)
 
+# x 전체 10 개의 예측값 -> 빨간 선으로 그릴 값
 result = model.predict(x)
 
 # 그래프 그리기

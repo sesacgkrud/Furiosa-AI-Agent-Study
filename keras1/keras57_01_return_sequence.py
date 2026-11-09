@@ -1,3 +1,7 @@
+# keras57_01_return_sequence.py
+# [목적] return_sequences=True 로 LSTM 을 2 층 쌓는 방법 (3차원 출력이 있어야 다음 LSTM 에 넣을 수 있다) 과 파라미터 수 확인
+# [흐름] x (13, 3, 1) → LSTM(10, return_sequences=True) → LSTM(8) → Dense → 80 예측
+
 import numpy as np
 
 from tensorflow.keras.models import Sequential

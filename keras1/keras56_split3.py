@@ -1,3 +1,7 @@
+# keras56_split3.py
+# [목적] 1 ~ 100 시계열을 split_x 로 (95, 5, 1) 로 만들어 LSTM 으로 훈련하고, 96 ~ 105 로 101 ~ 106 여섯 개를 예측 (목표 loss 0.1 이하)
+# [흐름] split_x(size 6) → x 5 개 / y 1 개 → x_predict 도 split_x(size 5) → / 100 스케일링 → LSTM(linear) + EarlyStopping(loss) → 예측
+
 import numpy as np
 
 from tensorflow.keras.models import Sequential

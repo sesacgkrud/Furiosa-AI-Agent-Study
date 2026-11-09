@@ -1,5 +1,5 @@
 # keras12_R2_RMSE_03_diabetes.py
-# 당뇨 데이터에 r2 를 추가한다
+# [목적] 당뇨 데이터에 r2 를 추가한다
 # loss(mse) 가 2900 처럼 커도 r2 로 보면 실제 성능이 얼마나 되는지 알 수 있다
 
 from sklearn.datasets import load_diabetes
@@ -44,6 +44,7 @@ from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_predict)
 print("r2 :", r2)
 
+# 목표 0.62 에 못 미친 결과 (0.46) - 데이터가 적고 특성이 약해서 r2 가 잘 오르지 않는다
 # R2 기준 : 0.62 이상
 
 # loss : 2913.689208984375

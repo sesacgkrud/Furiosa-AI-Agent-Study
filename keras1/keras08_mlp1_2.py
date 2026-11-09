@@ -1,5 +1,5 @@
 # keras08_mlp1_2.py
-# keras08_mlp1_1 과 같은 데이터를 (2, 5) 로 만든 뒤 전치(T)해서 (5, 2) 로 돌려 쓴다
+# [목적] keras08_mlp1_1 과 같은 데이터를 (2, 5) 로 만든 뒤 전치(T)해서 (5, 2) 로 돌려 쓴다
 # 전치 : 행과 열을 바꾼다 -> x.T 또는 x.transpose() (둘 다 결과는 같다)
 
 import tensorflow as tf
@@ -20,8 +20,8 @@ x = x.T # (5, 2)
 
 y = np.array([1,2,3,4,5]) # (5,)
 
-print(x.shape) # (5, 2) -> 행렬
-print(y.shape) # (5,) -> 행렬
+print(x.shape) # (5, 2) -> 행렬 (2 차원)
+print(y.shape) # (5,) -> 벡터 (1 차원)
 
 #2. 모델 구성
 model = Sequential()

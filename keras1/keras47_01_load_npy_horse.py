@@ -1,5 +1,5 @@
 # keras47_01_load_npy_horse.py
-# horse-human 이미지 2종 분류 - keras46_01 이 저장한 npy 를 불러와 훈련한다
+# [목적] horse-human 이미지 2종 분류 - keras46_01 이 저장한 npy 를 불러와 훈련한다
 #
 # [ 이 파일이 하는 일 ]
 #  1) 같은 데이터를 두 방법으로 준비해 시간을 비교한다

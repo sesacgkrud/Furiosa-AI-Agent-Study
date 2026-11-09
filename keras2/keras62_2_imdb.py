@@ -1,3 +1,8 @@
+# keras62_2_imdb.py
+# [목적] IMDB 영화 리뷰(단어 번호 리스트) 의 긍정 / 부정 이진 분류 — Embedding + LSTM + sigmoid (목표 acc 0.6)
+# [흐름] imdb.load_data(num_words=1000) → pad_sequences(maxlen=250) → Embedding(1000, 100) → LSTM(64) → sigmoid
+#        → EarlyStopping + ModelCheckpoint → 평가 (np.round 로 0 / 1)
+
 from tensorflow.keras.datasets import imdb
 
 import numpy as np
@@ -35,6 +40,7 @@ print(x_train.shape, x_test.shape)     # (25000, 250) (25000, 250)
 
 # 2. 모델 구성
 model = Sequential()
+# input_length 는 Keras 3 에서 쓰지 않는 인자라 경고만 나오고 무시된다 (입력 길이는 데이터에서 자동으로 잡힌다)
 model.add(Embedding(input_dim=1000, output_dim=100, input_length=250))   # num_words=1000 -> 단어 번호 0 ~ 999
 model.add(LSTM(64))
 model.add(Dropout(0.3))

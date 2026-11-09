@@ -1,5 +1,5 @@
 # keras50_flow1.py
-# 사진 한 장을 ImageDataGenerator 로 변형해 여러 장으로 늘린다 (증폭 / augmentation)
+# [목적] 사진 한 장을 ImageDataGenerator 로 변형해 여러 장으로 늘린다 (증폭 / augmentation)
 #
 # [ 왜 증폭을 하는가 ]
 #  훈련 데이터가 적으면 모델이 그 사진들을 통째로 외워 버린다 (과적합)

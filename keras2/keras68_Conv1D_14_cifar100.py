@@ -1,3 +1,7 @@
+# keras68_Conv1D_14_cifar100.py
+# [목적] cifar100 (다중 분류) 데이터를 Conv1D 로 학습 — 3차원 입력 (N, 32, 96) - 이미지 한 행(32 픽셀 x RGB 3) 을 한 시점으로
+# [흐름] 데이터 → split → 스케일링 → reshape → Conv1D (padding='same') 층 → Flatten → Dense → EarlyStopping → 평가 (Conv2D · LSTM 결과와 비교)
+
 import numpy as np
 import pandas as pd
 import time

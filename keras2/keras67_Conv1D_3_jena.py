@@ -1,4 +1,8 @@
 # keras66_jena_CNN.py 베이스 → Conv2D 를 3차원 입력 Conv1D 로 바꿔서 비교
+#
+# [목적] keras66 의 Conv2D(4차원) 를 Conv1D(3차원) 로 바꿔 Jena 다음 하루 기온 예측 RMSE · 시간 비교
+# [흐름] split_x 로 (N, 144, 13) 그대로 → Conv1D 2 층 (padding='same') → Flatten → Dense(144)
+
 # y = 'T (degC)' 기온 (keras58_kaggle_jena1 에서 풍향 → 기온으로 바꿔 저장한 npy)
 
 import os

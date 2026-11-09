@@ -1,4 +1,9 @@
 # rag22_Gradio_1_doc_check.py 베이스
+#
+# [목적] similarity_score_threshold 로 유사도가 낮은 문서를 빼 보는 실습 (기준 0.7) (Day24)
+# [흐름] rag22_1 의 retriever 에 score_threshold 추가 → 검색 문서가 0 개면 NO_ANSWER 반환
+# ※ Qwen3 임베딩 점수는 논문 질문도 0.42 ~ 0.59 라서, 0.7 이면 모든 질문이 0 개가 된다 (다음 파일에서 0.2 로 조정)
+
 # [변경] similarity_score_threshold 로 유사도 점수가 낮은 문서는 검색 결과에서 뺀다 (score_threshold 0.7)
 
 import os

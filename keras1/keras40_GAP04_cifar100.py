@@ -1,5 +1,6 @@
-# keras36_cnn6_cifar100.py
-# cifar100 컬러 이미지 100종 분류 (목표 acc 0.4)
+# keras40_GAP04_cifar100.py
+# [목적] keras39_MaxPooling4_cifar100 의 Flatten 을 GlobalAveragePooling2D 로 바꿔 파라미터 수와 성능을 비교 (목표 acc 0.4)
+# 아래 설명 블록은 베이스 파일에서 복사된 내용 (이 파일에서 새로 바뀐 점은 바로 위 [목적] 참고)
 # keras36_cnn5_cifar10.py 베이스 - 이미지는 cifar10 과 똑같이 32x32 컬러 5만 장이고 정답 종류만 10개 -> 100개
 #  - 클래스는 10배인데 장수는 그대로라 한 종류당 훈련 이미지가 5000장 -> 500장으로 줄어 훨씬 어렵다
 #  - 마지막 Dense 가 100 이 되고 원핫도 (50000, 100) 이 된다
@@ -54,6 +55,8 @@ print(y_train.shape, y_test.shape) # (50000, 100) (10000, 100)
 #2. 모델 구성
 # padding 없는 (3,3) Conv2D -> 가로 세로 2씩 감소 / MaxPooling2D() -> 절반
 model = Sequential()
+# ※ input_shape=(32 * 32 * 3) 은 괄호만 씌운 정수 3072 (튜플이 아님) → Conv2D 에는 (32, 32, 3) 처럼 (가로, 세로, 채널) 튜플을 줘야 한다
+#    지금 코드 그대로면 모델을 만들 때 오류가 난다 (아래 GAP 결과 0.4621 은 (32, 32, 3) 으로 실행했을 때의 기록)
 model.add(Conv2D(32, (3,3), activation='relu', input_shape=(32 * 32 * 3)))    # 출력 : (30, 30, 32)  param 896 = (3x3x3+1)x32
 model.add(Conv2D(32, kernel_size=(3,3), activation='relu'))                 # 출력 : (28, 28, 32)
 model.add(MaxPooling2D())  
@@ -68,6 +71,7 @@ model.add(MaxPooling2D())
                                                                             # 출력 : (3, 3, 128)
 model.add(Dropout(0.25))
 # model.add(Flatten())                                                        # (3,3,128) -> 1152. 4차원을 2차원으로 펴준다 (값과 순서가 그대로라 reshape 와 같다)
+# GlobalAveragePooling2D : 채널마다 (가로 x 세로) 전체의 평균 1 개만 남긴다 → 채널 128 개 = 값 128 개 (Flatten 처럼 전부 펴지 않아 다음 Dense 파라미터가 크게 준다)
 model.add(GlobalAveragePooling2D())
 
 model.add(Dense(units=256, activation='relu'))                              # units = Dense 의 첫 번째 인자 이름 (Dense(256) 과 같다)
@@ -76,9 +80,9 @@ model.add(Dense(units=128, activation='relu'))
 
 model.add(Dense(100, activation='softmax'))                                 # 100종 분류 -> 출력 100개 + softmax
 model.summary()
-# Total params: 627,972
-#  -> flatten(1152) -> dense(256) = 1152 x 256 + 256 = 295,168
-#     MaxPooling 없던 1차 모델은 이 자리가 25088 x 256 + 256 = 6,422,784 였다
+# Total params: 365,828  (이 파일의 층 구성으로 계산한 값)
+#  -> GAP 출력 128 → dense(256) = 128 x 256 + 256 = 33,024
+#     Flatten(1152) 을 쓴 keras39_MaxPooling4 는 이 자리가 295,168, Total params 627,972 였다
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam',

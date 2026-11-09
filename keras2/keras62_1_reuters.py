@@ -1,3 +1,8 @@
+# keras62_1_reuters.py
+# [목적] 로이터 뉴스 기사(단어 번호 리스트) 를 46 개 주제로 분류 — Embedding + LSTM 다중 분류 (목표 acc 0.67)
+# [흐름] reuters.load_data(num_words=1000) → pad_sequences(maxlen=200) → y to_categorical(46) → Embedding(1000, 200) → LSTM(128) → softmax 46
+#        → EarlyStopping + ModelCheckpoint → save_weights → 평가 (argmax 로 정답 번호 비교)
+
 from tensorflow.keras.datasets import reuters
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.utils import to_categorical

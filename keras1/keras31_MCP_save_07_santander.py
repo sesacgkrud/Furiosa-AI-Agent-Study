@@ -1,4 +1,8 @@
 # keras31_MCP_save_07_santander.py
+#
+# [목적] 산탄데르 (이진 분류) 데이터를 RobustScaler 로 전처리해 훈련하면서 ModelCheckpoint 로 val_loss 최고 epoch 모델을 keras31_mcp7.keras 로 저장
+# [흐름] 데이터 → split → RobustScaler → 모델 → EarlyStopping + ModelCheckpoint 로 fit → x_test 평가
+
 # https://www.kaggle.com/competitions/santander-customer-transaction-prediction/data
 # 구조 : keras30_ModelCheckPoint1.py 기준 / 데이터, 모델 : keras28_Scaler07_santander.py
 # 짝 파일 : keras32_MCP_load_07_santander.py

@@ -1,3 +1,7 @@
+# keras59_Bidirectional2.py
+# [목적] keras55_LSTM2_scale 의 80 예측 문제를 Bidirectional(LSTM(128)) 로 다시 풀어 본다 (정방향 + 역방향으로 시계열을 읽는다)
+# [흐름] x (13, 3, 1) → Bidirectional(LSTM(128)) (None, 256) → Dense 5 층 → 80 예측
+
 import numpy as np
 
 from tensorflow.keras.models import Sequential
@@ -64,6 +68,7 @@ y_predict = model.predict(x_predict)
 
 print('[80] 예측 결과', y_predict)
 
+# 아래 3 줄은 Bidirectional 적용 전 keras55_LSTM2_scale (SimpleRNN) 결과를 복사해 둔 것
 # 목표 : 79.5
 # loss : 0.115653857588768
 # [80] 예측 결과 [[78.97944]]

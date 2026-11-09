@@ -1,5 +1,5 @@
 # keras52_ReduceLR12_fashion.py
-# fashion_mnist (다중 분류, 함수형 DNN) - ReduceLROnPlateau 로 훈련 도중 learning_rate 를 줄인다
+# [목적] fashion_mnist (다중 분류, 함수형 DNN) - ReduceLROnPlateau 로 훈련 도중 learning_rate 를 줄인다
 # 증폭(keras51_augment1) 까지 끝낸 함수형 DNN 에 learning_rate + ReduceLROnPlateau 를 붙인다
 #
 # [ 오늘 추가되는 곳은 콜백 하나다 ]

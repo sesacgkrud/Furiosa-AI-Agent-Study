@@ -1,5 +1,5 @@
 # keras08_mlp1_1.py
-# MLP(다층 퍼셉트론) : 입력 컬럼(특성)이 2개 이상인 데이터를 다룬다
+# [목적] MLP(다층 퍼셉트론) : 입력 컬럼(특성)이 2개 이상인 데이터를 다룬다
 # 케라스는 데이터를 (행 = 데이터 개수, 열 = 특성 개수) 로 읽는다 -> input_dim 에는 "열의 개수" 를 넣는다
 
 import tensorflow as tf
@@ -13,8 +13,8 @@ import numpy as np
 x = np.array([[1,6], [2,7], [3,8], [4,9], [5,10]]) # (5, 2) -> 올바른 예
 y = np.array([1,2,3,4,5]) # (5,)
 
-print(x.shape) # (5, 2) -> 행렬
-print(y.shape) # (5,) -> 행렬
+print(x.shape) # (5, 2) -> 행렬 (2 차원 : 데이터 5 개 x 컬럼 2 개)
+print(y.shape) # (5,) -> 벡터 (1 차원 : 정답 5 개)
 
 #2. 모델 구성
 model = Sequential()
@@ -31,6 +31,7 @@ model.fit(x, y, epochs=100, batch_size=3)
 #4. 평가 예측
 loss = model.evaluate(x, y)
 print('loss :', loss)
+# 예측할 데이터도 훈련 데이터와 같은 열 개수(2) 의 2 차원으로 넣는다
 result = model.predict(np.array([[6, 11]])) # (1,2)
 print("[6, 11]의 예측값 :", result)
 

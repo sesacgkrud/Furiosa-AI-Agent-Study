@@ -1,5 +1,5 @@
 # keras29_3_save_model2.py
-# 같은 model.save() 라도 fit "아래"에서 저장하면 훈련까지 끝난 가중치가 같이 저장된다
+# [목적] 같은 model.save() 라도 fit "아래"에서 저장하면 훈련까지 끝난 가중치가 같이 저장된다
 # -> 이 파일이 만든 .keras 는 불러오자마자 evaluate / predict 가 된다
 
 # keras29_2_load_model.py 베이스

@@ -1,5 +1,5 @@
 # keras52_optimizer12_fashion.py
-# fashion_mnist (다중 분류, 함수형 DNN) - optimizer 의 learning_rate 를 직접 지정해 본다
+# [목적] fashion_mnist (다중 분류, 함수형 DNN) - optimizer 의 learning_rate 를 직접 지정해 본다
 # 증폭(keras51_augment1) 까지 끝낸 함수형 DNN 에 learning_rate 만 바꿔 붙인다
 #
 # [ 오늘 바뀌는 곳은 compile 한 줄이다 ]

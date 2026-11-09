@@ -1,6 +1,6 @@
 # keras28_Scaler01_california.py
 # keras27_Scaler01_california.py 베이스 (스케일링 순서를 바로잡은 기준 파일)
-# 스케일러 4종 비교 (MinMax / Standard / MaxAbs / Robust) - 파일 아래쪽에 스케일러별 결과를 기록해 둔다
+# [목적] 스케일러 4종 비교 (MinMax / Standard / MaxAbs / Robust) - 파일 아래쪽에 스케일러별 결과를 기록해 둔다
 # 순서가 중요하다 : train_test_split 을 먼저 하고 -> scaler.fit(x_train) -> x_test 는 transform 만
 #  fit 은 변환 기준(Min/Max, 평균, 중앙값 등)을 구하는 단계라 x_train 으로만 해야 한다
 #  x_test 로 fit 하면 아직 보면 안 되는 평가 데이터의 정보가 기준에 섞인다 (데이터 누수)
@@ -23,6 +23,8 @@ x_train, x_test, y_train, y_test = train_test_split(
     random_state=100,
 )
 
+# MinMaxScaler : (x - min) / (max - min) → 0 ~ 1 / StandardScaler : (x - 평균) / 표준편차 → 평균 0, 표준편차 1
+# MaxAbsScaler : x / |x| 의 최댓값 → -1 ~ 1 / RobustScaler : (x - 중앙값) / IQR → 이상치 영향이 적다
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
 # scaler = MinMaxScaler()
 # scaler = StandardScaler()
@@ -104,6 +106,7 @@ plt.legend(loc='upper right') # 우측 상단에 라벨 표시
 plt.title('California(캘리포니아) Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가

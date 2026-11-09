@@ -1,5 +1,5 @@
 # keras08_mlp3_1.py
-# 출력(y)이 2개인 다중 출력 모델 : y.shape 가 (10, 2) 이면 마지막 Dense 도 2 여야 한다
+# [목적] 출력(y)이 2개인 다중 출력 모델 : y.shape 가 (10, 2) 이면 마지막 Dense 도 2 여야 한다
 # 입력 개수는 input_dim, 출력 개수는 마지막 Dense 의 숫자로 맞춘다
 
 import numpy as np

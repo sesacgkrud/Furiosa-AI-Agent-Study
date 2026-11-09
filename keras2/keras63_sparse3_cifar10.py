@@ -1,4 +1,8 @@
 # keras1/keras36_cnn5_cifar10.py 베이스
+#
+# [목적] cifar10 에 sparse_categorical_crossentropy 적용 (y 원핫 생략, y 는 (N, 1) 그대로)
+# [흐름] keras36_cnn5_cifar10 과 같은 모델 → OneHotEncoder 부분 삭제 → loss 만 sparse 로 변경
+
 
 import numpy as np
 import pandas as pd

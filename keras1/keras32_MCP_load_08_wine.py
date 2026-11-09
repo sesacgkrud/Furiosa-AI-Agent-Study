@@ -1,4 +1,8 @@
 # keras32_MCP_load_08_wine.py
+#
+# [목적] keras31 이 저장한 와인 (다중 분류) 모델(keras31_mcp8.keras) 을 load_model 로 불러와 같은 전처리의 x_test 로 평가만 한다
+# [흐름] keras31 과 똑같은 데이터 · split · scaler → load_model → evaluate (compile · fit 없음)
+
 # 구조 : keras30_ModelCheckPoint2_load.py 기준
 # 짝 파일 : keras31_MCP_save_08_wine.py -> 반드시 그 파일을 먼저 실행해서 keras31_mcp8.keras 를 만들어야 한다.
 #   불러온 모델로 평가한 값이 keras31 실행 결과와 소수점까지 같아야 한다.

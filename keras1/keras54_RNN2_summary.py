@@ -1,5 +1,5 @@
 # keras54_RNN2_summary.py
-# SimpleRNN 의 파라미터 개수를 summary 로 확인한다 - keras54_RNN1.py 베이스
+# [목적] SimpleRNN 의 파라미터 개수를 summary 로 확인한다 - keras54_RNN1.py 베이스
 #
 # [ 왜 층을 줄였나 ]
 #  RNN1 은 Dense 를 10층 쌓아서 summary 가 길다

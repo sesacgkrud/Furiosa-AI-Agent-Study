@@ -1,5 +1,5 @@
 # keras23_softmax2_wine.py
-# 와인 3종 분류 (13개 특성)
+# [목적] 와인 3종 분류 (13개 특성)
 # 다중 분류 3종 세트
 #  1) y 를 원핫 인코딩 : 0, 1, 2 를 [1,0,0] [0,1,0] [0,0,1] 로 바꾼다 (숫자 크기에 순서 의미가 생기지 않게)
 #  2) 출력층 activation = softmax, 노드 수 = 클래스 개수 -> 칸별 확률이 나오고 다 더하면 1
@@ -30,6 +30,7 @@ y = datasets['target']
 
 ########## OneHot Encording 1. (to_categorical) ##########
 from tensorflow.keras.utils import to_categorical
+# y 0 / 1 / 2 → (178, 3) 원핫
 y = to_categorical(y)
 # print(y.shape) # (178, 3)
 

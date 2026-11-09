@@ -1,4 +1,9 @@
 # keras1/keras42_cnn1_california.py 베이스
+#
+# [목적] keras42 의 캘리포니아 집값 (회귀) Conv2D 모델을 LSTM 으로 바꿔, 컬럼(또는 이미지 행) 을 시점으로 순서대로 읽게 하고 결과 비교
+# [흐름] 데이터 → split → 스케일링 → reshape (N, 8, 1) → LSTM → Dense → EarlyStopping (+ ModelCheckpoint) → 평가
+# ※ [LSTM] 표시 주석이 베이스(keras42 / keras43) 에서 바뀐 부분
+
 
 import numpy as np
 import time

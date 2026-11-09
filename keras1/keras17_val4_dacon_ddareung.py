@@ -1,7 +1,7 @@
 # keras17_val4_dacon_ddareung.py
 
 # https://dacon.io/competitions/open/235576/overview/description
-# [방법 1] train_test_split 을 2번 써서 x_val 을 직접 만들고 validation_data 로 넘기는 방식
+# [목적] 따릉이 데이터에 [방법 1] train_test_split 을 2번 써서 x_val 을 직접 만들고 validation_data 로 넘기는 방식
 
 import numpy as np
 from tensorflow.keras.models import Sequential

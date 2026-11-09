@@ -1,4 +1,9 @@
 # rag12_Chroma03_save.py 베이스
+#
+# [목적] rag12_Chroma03_save 에서 저장한 Chroma DB(Chroma12 / croma12) 를 불러와서 검색 (Day20)
+# [흐름] 불러오기 · 청킹 코드는 ''' ''' 로 막아 둠 → 같은 임베딩 모델 · 폴더 · 컬렉션으로 Chroma(...) 열기
+#        → similarity_search (기본 4 개) · as_retriever(k=2) 로 검색
+
 
 import os
 from langchain_community.document_loaders import TextLoader
@@ -82,6 +87,7 @@ DB_PATH = './_db/Chroma12/'
 #     collection_name='croma12',
 # )
 
+# from_documents(저장) 대신 Chroma(...) 로 이미 저장된 DB 를 연다
 vector_store = Chroma(
     embedding_function=embeddings,
     persist_directory=DB_PATH,
@@ -91,11 +97,13 @@ vector_store = Chroma(
 print(f'벡터 저장소에 저장된 문서 수: {vector_store._collection.count()}') # 벡터 저장소에 저장된 문서 수: 208 (52 × 4 : 저장 코드를 4번 실행해서 같은 청크가 4번씩 쌓였다 -> 검색하면 같은 청크가 겹쳐 나온다)
 
 query = '삼성전자의 창업자는 누구인가요?'
+# 질문과 벡터가 가장 가까운 청크 4 개 (k 기본값)
 result = vector_store.similarity_search(query)
 print(f'검색 결과의 길이: {len(result)}') # 검색 결과의 길이: 4 (default)
 
 #################### Retrievers ####################
 ###################### 검색기 #######################
+# 검색기(retriever) : invoke(질문) 하나로 검색, k=2 개
 retriever = vector_store.as_retriever(search_kwargs={'k':2})
 print(retriever) # tags=['Chroma', 'OpenAIEmbeddings'] vectorstore=<langchain_chroma.vectorstores.Chroma object at 0x000001DAFE45FF10> search_kwargs={'k': 2}
 aaa = retriever.invoke(query)

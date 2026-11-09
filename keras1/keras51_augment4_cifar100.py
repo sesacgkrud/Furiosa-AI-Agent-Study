@@ -1,5 +1,5 @@
 # keras51_augment4_cifar100.py
-# cifar100 데이터에 증폭(augmentation)을 적용해 훈련 데이터를 늘린다 - keras50_flow2_next.py 베이스
+# [목적] cifar100 데이터에 증폭(augmentation)을 적용해 훈련 데이터를 늘린다 - keras50_flow2_next.py 베이스
 #
 # [ 증폭의 흐름 ]
 #  1) 원본에서 augment_size 만큼 인덱스를 랜덤으로 뽑는다

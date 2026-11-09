@@ -1,4 +1,8 @@
 # rag21_Gradio_history.py 베이스
+#
+# [목적] rag21 챗봇이 답변할 때 실제로 어떤 문서를 검색해서 썼는지 터미널에 출력해 확인 (Day24)
+# [흐름] rag21 과 같은 체인 (k 4 → 2) → response['context'] 의 문서 출처 · 내용 출력 → 답변 반환
+
 # [변경] 답변을 만들 때 실제로 검색된 문서(response['context']) 를 터미널에 출력해서 확인한다
 
 import os

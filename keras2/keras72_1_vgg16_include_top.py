@@ -1,4 +1,4 @@
-# VGG16 : 미리 훈련된(pre-trained) 이미지 분류 모델을 불러와서 구조를 확인한다
+# [목적] VGG16 : 미리 훈련된(pre-trained) 이미지 분류 모델을 불러와서 구조를 확인한다
 #
 # VGG16 이란
 #  - 2014년 옥스퍼드 대학 VGG(Visual Geometry Group) 팀이 만든 CNN 모델

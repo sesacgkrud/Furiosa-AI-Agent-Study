@@ -1,3 +1,8 @@
+# keras42_cnn2_diabetes.py
+# [목적] 당뇨 (회귀) 정형 데이터의 컬럼 10 개를 (5, 2, 1) 모양으로 reshape 해서 이미지처럼 Conv2D 에 넣어 학습해 보고, Dense 모델 결과와 비교
+# [흐름] 데이터 → split → RobustScaler → reshape (데이터 수, 행, 열, 채널 1) → Conv2D 3 층 → Flatten → Dense → EarlyStopping + ModelCheckpoint → 평가
+# ※ 컬럼 순서에 공간적인 의미(이웃 픽셀 같은 관계) 가 없어서 Conv2D 가 Dense 보다 꼭 좋아지지는 않는다 (파일 아래 CPU / GPU / Conv2D 기록 비교)
+
 import numpy as np
 import time
 

@@ -1,4 +1,7 @@
 # keras58_kaggle_jena2.py 베이스 → LSTM 을 Bidirectional(LSTM) 으로 바꿔서 비교
+#
+# [목적] keras58_kaggle_jena2 의 LSTM(64) 를 Bidirectional(LSTM(64)) 로 바꿔 Jena 다음 하루 기온 예측 RMSE · 시간 비교
+
 
 import os
 os.environ['TF_GPU_ALLOCATOR'] = 'cuda_malloc_async'    # GPU 메모리 조각 모으기 (tensorflow import 전에 써야 한다)
@@ -135,7 +138,7 @@ print('걸린 시간 :', round(end_time - start_time, 2), '초')
 
 ########################### 결과 ###########################
 # loss : 3.2112793922424316
-# 2016.12.31 00:10 ~ 2017.01.01 00:00 풍향 RMSE : 4.803594697560632
+# 2016.12.31 00:10 ~ 2017.01.01 00:00 기온 RMSE : 4.803594697560632   (keras58 실행 결과 - 그 파일의 출력 문구는 '풍향' 으로 남아 있다)
 # 걸린 시간 : 484.4 초
 
 #################### Bidirectional 적용 ####################

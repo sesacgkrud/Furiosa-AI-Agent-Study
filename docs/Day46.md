@@ -248,4 +248,4 @@ model.fit(x_train, y_train, epochs=..., callbacks=[...], validation_split=...)  
 
 ---
 
-[⬅️ Day45](Day45.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day45](Day45.md) · [🏠 전체 목차](../README.md) · [Day47 ➡️](Day47.md)

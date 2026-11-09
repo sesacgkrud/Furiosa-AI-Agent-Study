@@ -1,3 +1,7 @@
+# keras68_Conv1D_12_fashion.py
+# [목적] fashion_mnist (다중 분류) 데이터를 Conv1D 로 학습 — 3차원 입력 (N, 28, 28) - 이미지 한 행(28 픽셀) 을 한 시점으로
+# [흐름] 데이터 → split → 스케일링 → reshape → Conv1D (padding='same') 층 → Flatten → Dense → EarlyStopping → 평가 (Conv2D · LSTM 결과와 비교)
+
 import numpy as np
 import pandas as pd
 import time

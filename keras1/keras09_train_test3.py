@@ -1,5 +1,5 @@
 # keras09_train_test3.py
-# train_test_split : 데이터를 섞은 뒤 train / test 비율대로 나눠 준다 (앞으로 계속 쓰는 방식)
+# [목적] train_test_split : 데이터를 섞은 뒤 train / test 비율대로 나눠 준다 (앞으로 계속 쓰는 방식)
 # random_state : 섞는 방식을 고정하는 번호 -> 같은 번호면 몇 번을 돌려도 같게 나뉜다
 
 import numpy as np
@@ -48,10 +48,12 @@ model.fit(x_train, y_train, epochs=500, batch_size=4)
 
 print("========== ========== ========== ========== ==========")
 
+# 처음 보는 test 데이터로 평가
 loss = model.evaluate(x_test, y_test)
 print("loss :", loss)
 
 #4. 평가 예측
+# 전체 데이터로 한 번 더 평가 (훈련 데이터가 섞여 있어 참고용)
 loss = model.evaluate(x, y)
 print("loss :", loss)
 result = model.predict(np.array([11]))

@@ -1,6 +1,7 @@
-# keras36_cnn4_fashion.py
-# fashion_mnist 의류 이미지 10종 분류 - padding='same' 과 strides 를 처음 적용한 파일 (목표 acc 0.92)
-# keras36_cnn3_mnist2.py 베이스
+# keras41_dnn2_fashion.py
+# [목적] fashion_mnist 이미지를 (60000, 784) 로 펴서 Dense 만(DNN) 으로 분류하고 CNN 결과와 비교 (목표 : CNN 을 이겨라)
+# keras41_dnn1_mnist.py 베이스 (모델 구성 같음)
+# 아래 설명 블록은 베이스 파일에서 복사된 내용 (이 파일에서 새로 바뀐 점은 바로 위 [목적] 참고)
 #
 # 새로 쓴 것
 #  padding='same'  : 커널이 지나가도 가로 세로가 줄지 않는다 (가장자리에 0 을 둘러준다)
@@ -71,9 +72,9 @@ model.add(Dropout(0.2))
 model.add(Dense(10, activation='softmax')) 
                        # 의류 10종 -> 출력 10개 + softmax
 model.summary()
-# Total params: 1,907,018
-#  -> 층 수는 mnist2(3,578,186)와 비슷한데 파라미터는 절반이다
-#     strides 로 크기를 일찍 줄여서 Flatten 이 12800 -> 6272 로 작아졌기 때문
+# Total params: 599,178  (이 파일의 층 구성으로 계산한 값)
+#  -> dnn1 과 같은 Dense 구성 (입력 784 → 512 → ... → 10)
+#     (Conv2D 를 쓰지 않으므로 padding / strides 설명은 해당 없음)
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam',

@@ -1,5 +1,5 @@
 # keras22_sigmoid_santander.py
-# 산탄데르 고객 거래 예측 (캐글) : keras21 의 이진 분류를 20만 행 x 200 컬럼짜리 실제 대회 데이터에 적용한다
+# [목적] 산탄데르 고객 거래 예측 (캐글) : keras21 의 이진 분류를 20만 행 x 200 컬럼짜리 실제 대회 데이터에 적용한다
 # 제출은 sigmoid 가 내놓은 확률값(0.22...) 을 그대로 저장한다
 
 # https://www.kaggle.com/competitions/santander-customer-transaction-prediction/data
@@ -43,11 +43,11 @@ x_train, x_test, y_train, y_test = train_test_split(
     stratify=y,
 )
 
-# print(np.unique(y_train, return_counts=True)) # (array([0, 1]), array([107941,  12059]))
-# print(np.unique(y_test, return_counts=True)) # (array([0, 1]), array([71961,  8039]))
+# print(np.unique(y_train, return_counts=True)) # (array([0, 1]), array([125931,  14069]))
+# print(np.unique(y_test, return_counts=True)) # (array([0, 1]), array([53971,  6029]))
 
-print(x_train.shape, x_test.shape) # (120000, 200) (80000, 200)
-print(y_train.shape, y_test.shape) # (120000,) (80000,)
+print(x_train.shape, x_test.shape) # (140000, 200) (60000, 200)  <- train_size=0.7
+print(y_train.shape, y_test.shape) # (140000,) (60000,)
 
 #2. 모델 구성
 model = Sequential()
@@ -90,6 +90,7 @@ acc_score = accuracy_score(y_test, y_predict)
 print('acc_score :', acc_score)
 
 submission = pd.read_csv(path + 'sample_submission.csv', index_col=0)
+# 제출용 test_csv 20만 행 예측 → sigmoid 확률(0 ~ 1) 을 반올림하지 않고 그대로 target 에 저장
 y_submit = model.predict(test_csv)
 submission['target'] = y_submit
 submission.to_csv(path + 'submit/' + 'submit_0908_1642.csv')

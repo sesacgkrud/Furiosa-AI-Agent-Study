@@ -1,5 +1,5 @@
 # keras71_trainable_weights2.py 베이스
-# [변경] 데이터를 x=1, y=1 하나로 줄이고 동결 X (trainable=True) 로 1000 epoch 훈련한 뒤,
+# [목적] [변경] 데이터를 x=1, y=1 하나로 줄이고 동결 X (trainable=True) 로 1000 epoch 훈련한 뒤,
 #        model.weights 로 꺼낸 가중치만으로 예측값을 손으로 계산해 본다 (맨 아래 수식 주석)
 #  - 층도 keras71_trainable_weights1 과 같은 Dense 3 → 2 → 1 로 줄여서 계산을 따라가기 쉽게 했다
 

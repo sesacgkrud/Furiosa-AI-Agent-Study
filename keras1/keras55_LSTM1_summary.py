@@ -1,5 +1,5 @@
 # keras55_LSTM1_summary.py
-# LSTM 의 파라미터 개수를 SimpleRNN 과 비교한다 - keras54_RNN2_summary.py 베이스
+# [목적] LSTM 의 파라미터 개수를 SimpleRNN 과 비교한다 - keras54_RNN2_summary.py 베이스
 #
 # [ 왜 LSTM 이 나왔나 ]
 #  SimpleRNN 은 앞 칸의 결과를 계속 곱해 가며 뒤로 넘긴다

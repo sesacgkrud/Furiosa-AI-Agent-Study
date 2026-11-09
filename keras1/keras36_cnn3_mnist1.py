@@ -1,5 +1,5 @@
 # keras36_cnn3_mnist1.py
-# mnist 손글씨 분류 - CNN 을 끝까지 돌려본 첫 모델 (스케일링 -> 4차원 reshape -> 원핫 -> Conv2D -> Flatten -> Dense)
+# [목적] mnist 손글씨 분류 - CNN 을 끝까지 돌려본 첫 모델 (스케일링 -> 4차원 reshape -> 원핫 -> Conv2D -> Flatten -> Dense)
 # keras36_cnn2_mnist_imshow.py 베이스
 #
 # 이미지 데이터 스케일링 : 픽셀값 0 ~ 255 를 그대로 넣지 않고 작은 범위로 줄인다
@@ -61,6 +61,7 @@ y_train = y_train.reshape(-1,1)
 y_test = y_test.reshape(-1,1)
 
 y_train = ohe.fit_transform(y_train)
+# test 에는 fit 없이 ohe.transform 을 쓰는 것이 원칙 (여기서는 0 ~ 9 가 모두 들어 있어서 결과는 같다)
 y_test = ohe.fit_transform(y_test)
 
 print(y_train.shape, y_test.shape) # (60000, 10) (10000, 10)

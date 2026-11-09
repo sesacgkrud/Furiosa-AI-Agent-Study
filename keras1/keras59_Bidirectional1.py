@@ -1,4 +1,8 @@
 # keras54_RNN1.py 베이스
+#
+# [목적] keras54_RNN1 의 SimpleRNN 을 Bidirectional(SimpleRNN) 으로 감싸 앞 → 뒤, 뒤 → 앞 두 방향으로 읽게 하고 파라미터 · 예측 비교
+# [흐름] x (7, 3, 1) → Bidirectional(SimpleRNN(10)) (None, 20) → Dense → 11 예측
+
 
 import numpy as np
 from tensorflow.keras.models import Sequential

@@ -1,5 +1,5 @@
 # keras20_EarlyStopping5_kaggle_bike.py
-# EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
+# [목적] EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
 # restore_best_weights=True : 멈춘 시점이 아니라 val_loss 가 가장 낮았던 epoch 의 가중치로 되돌린다
 
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
@@ -107,9 +107,11 @@ plt.plot(hist.history['loss'], c='red', label='loss') # y값만 넣으면 시간
 plt.plot(hist.history['val_loss'], c='blue', label='val_loss')
 
 plt.legend(loc='upper right') # 우측 상단에 라벨 표시
+# 제목 'California' 는 베이스 파일에서 남은 글자 (이 파일은 캐글 자전거 데이터)
 plt.title('California(캘리포니아) Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가

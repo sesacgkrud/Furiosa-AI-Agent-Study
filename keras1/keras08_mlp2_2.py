@@ -1,5 +1,5 @@
 # keras08_mlp2_2.py
-# range() 로 데이터를 만드는 연습 : np.array(range(1, 11)) -> 1 ~ 10
+# [목적] range() 로 데이터를 만드는 연습 : np.array(range(1, 11)) -> 1 ~ 10
 # [실습] 컬럼 3개를 넣어 [10, 31, 211] 의 예측값이 11 에 가까워지게 만든다
 
 import numpy as np
@@ -19,6 +19,7 @@ x = np.array(range(1, 11))
 # x = np.array([range(10), range(21, 31,), range(201, 211)])
 # print(x.shape) # (3, 10)
 
+# range 3 개를 행으로 쌓은 (3, 10) 을 .T 로 (10, 3) -> 컬럼 3 개짜리 데이터
 x = np.array([range(10), range(21, 31,), range(201, 211)]).T
 # print(x.shape) # (10, 3)
 

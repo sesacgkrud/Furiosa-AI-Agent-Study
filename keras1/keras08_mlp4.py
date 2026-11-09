@@ -1,5 +1,5 @@
 # keras08_mlp4.py
-# 입력 1개 -> 출력 3개 모델 : input_dim=1, 마지막 Dense(3)
+# [목적] 입력 1개 -> 출력 3개 모델 : input_dim=1, 마지막 Dense(3)
 # x.shape (10,) / y.shape (10, 3) 처럼 입력과 출력의 열 개수가 달라도 된다
 
 import numpy as np
@@ -28,6 +28,7 @@ model.fit(x, y, epochs=1000, batch_size=10)
 #4. 평가 예측
 loss = model.evaluate(x, y)
 print("loss :", loss)
+# x 10 하나를 넣으면 y 3 개 [11, 0, -1] 쪽 값이 나오는지 확인 (출력 문구의 [10, 0, -1] 은 입력이 아니라 기대값 메모)
 result = model.predict(np.array([10]))
 print("[10, 0, -1]의 예측값 :", result)
 

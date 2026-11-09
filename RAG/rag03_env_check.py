@@ -1,3 +1,7 @@
+# [목적] 코드에서 키를 등록하지 않고, 윈도우 시스템 환경 변수에 저장해 둔 OPENAI_API_KEY 로 호출되는지 확인 (Day19)
+# [흐름] (코드 밖에서 OPENAI_API_KEY 등록) → ChatOpenAI → invoke
+# ※ 3 행 주석처럼 코드에 키를 쓰지 않아도 실행되면 시스템 환경 변수에서 읽은 것
+
 from langchain_openai import ChatOpenAI
 import os
 # os.environ["OPENAI_API_KEY"] = "sk-proj-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"   # 실제 키 대신 예시 값 (본인 키는 .env 에 보관)
@@ -8,6 +12,7 @@ llm = ChatOpenAI(
     # openai_api_key=openai_api_key,
 )
 
+# 키를 찾지 못하면 여기서 인증 오류가 난다
 response = llm.invoke('안녕하세요.')
 print(response)
 '''

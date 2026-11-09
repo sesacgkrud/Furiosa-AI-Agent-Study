@@ -1,3 +1,11 @@
+# [목적] 역할 · 상황 · 출력 형식(FORMAT) 을 정한 여러 줄 템플릿으로 영어 회화 만들기 (Day19)
+# [흐름] 템플릿({question}) → prompt | model | StrOutputParser → invoke → 문자열 출력
+# ※ 템플릿 첫 줄 '당신의 영어를 가르치는' 은 '당신은 영어를 가르치는' 의 오타 (모델은 뜻을 알아듣고 답한다)
+# ※ input 은 { 키 : 값 } 딕셔너리가 아니라 쉼표로 쓴 { 값, 값 } 집합(set) 이다
+#   PromptTemplate 은 입력 변수가 1 개일 때 dict 가 아닌 값을 받으면 그 값을 통째로 변수에 넣어서 오류 없이 실행되지만,
+#   프롬프트에는 "{'topic', '...'}" 처럼 집합 모양 문자열이 그대로 들어간다 (순서도 실행마다 바뀔 수 있다)
+#   → 의도대로라면 {'키' : '값'} (rag08_LCEL02 처럼 콜론) 이어야 한다
+
 # LCEL = Langchain Expression Language
 # Chain = prompt | model | output_parser
 
@@ -24,9 +32,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# monorouter(사제 OpenAI 호환 서버) 키를 .env 에서 읽고 앞뒤 공백 · 줄바꿈 제거
 api_key = os.environ['MONOROUTER_API_KEY'].strip() # strip() 공백이나 줄바꿈을 무시 (오탈자로 인한 에러 방지용)
 base_url = 'https://monogpt.kr/api/monorouter/v1'
 
+# from_template(template=...) : 키워드 인자로 템플릿 지정
 prompt = PromptTemplate.from_template(template=template)
 
 model = ChatOpenAI(

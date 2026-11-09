@@ -1,5 +1,5 @@
 # keras20_EarlyStopping4_dacon_ddareung.py
-# EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
+# [목적] EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
 # restore_best_weights=True : 멈춘 시점이 아니라 val_loss 가 가장 낮았던 epoch 의 가중치로 되돌린다
 
 # https://dacon.io/competitions/open/235576/overview/description
@@ -109,6 +109,7 @@ import matplotlib.pyplot as plt
 plt.rcParams['font.family'] ='Malgun Gothic' # 글자 깨짐 해결
 
 plt.figure(figsize=(9,6))
+# [2:] : 처음 2 epoch 은 loss 가 너무 커서 빼고 그린다
 plt.plot(hist.history['loss'][2:], c='red', label='loss') # y값만 넣으면 시간 순으로 그림
 plt.plot(hist.history['val_loss'][2:], c='blue', label='val_loss')
 
@@ -116,6 +117,7 @@ plt.legend(loc='upper right') # 우측 상단에 라벨 표시
 plt.title('ddareung Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가

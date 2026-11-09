@@ -1,5 +1,5 @@
 # keras36_cnn3_mnist2.py
-# mnist 성능 올리기 - keras36_cnn3_mnist1.py 베이스로 모델을 더 깊게 쌓고 EarlyStopping 을 붙였다 (목표 acc 0.995)
+# [목적] mnist 성능 올리기 - keras36_cnn3_mnist1.py 베이스로 모델을 더 깊게 쌓고 EarlyStopping 을 붙였다 (목표 acc 0.995)
 #
 # mnist1 과 달라진 점
 #  1) Conv2D 를 7층으로 늘리고 필터 수를 32 -> 64 -> 128 로 키웠다 ((5,5) 커널을 섞어 크기를 빠르게 줄임)

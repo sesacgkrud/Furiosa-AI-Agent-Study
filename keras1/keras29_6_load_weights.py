@@ -1,5 +1,5 @@
 # keras29_6_load_weights.py
-# load_weights() : 가중치만 불러온다 -> 저장할 때와 똑같은 모델 구조를 먼저 만들어 둬야 한다
+# [목적] load_weights() : 가중치만 불러온다 -> 저장할 때와 똑같은 모델 구조를 먼저 만들어 둬야 한다
 # 구조가 다르면 불러오는 순간 에러가 난다
 # compile 은 필요하다 (evaluate 가 loss 를 계산해야 하므로). 다시 fit 할 필요는 없다
 
@@ -45,6 +45,8 @@ print('Min :', np.min(x_test), 'Max :', np.max(x_test))   # Min : -7.6732 Max : 
 
 # #2. 모델 구성
 model = Sequential()
+# ※ 아래 Dense 3 줄이 주석이라 지금은 층이 없는 빈 모델이다 → 이대로 load_weights 를 하면 구조가 달라 오류가 난다
+#    (실행할 때는 keras29_5 와 같은 Dense(100) · Dense(50) · Dense(1) 을 살려 둬야 한다)
 # model.add(Dense(100, input_dim=8))
 # model.add(Dense(50))
 # model.add(Dense(1))
@@ -61,7 +63,7 @@ path = './_save/keras29/'
 # model.load_weights(path + 'keras29_5_save1.weights.h5') # 에러 발생
 model.load_weights(path + 'keras29_5_save2.weights.h5')
 
-model.summary() # 아직 훈련 전이라 Total params 6,001 (가중치만)
+model.summary() # 훈련된 가중치를 불러왔지만 compile 전이라 옵티마이저 상태 없이 Total params 6,001
 
 # exit()
 
@@ -132,7 +134,7 @@ plt.grid() # 격자 표시 추가
 plt.show()
 
 # ===== 실행 결과 (2026-09-11) =====
-# loss : 1.7271162271499634
+# loss : 1.7271162271499634  <- 베이스에서 복사된 값 (이 파일의 실행 결과는 맨 아래 3.6324 = keras29_5 의 save2 가중치)
 # 가중치 초기값을 고정하지 않아서 돌릴 때마다 값이 달라진다. (관측값 1.1605 / 1.7271)
 # 저장 파일도 마지막 실행 것으로 덮어써지므로,
 # keras29_4 는 이 파일을 실행한 '직후'에 돌려야 같은 값이 나온다.

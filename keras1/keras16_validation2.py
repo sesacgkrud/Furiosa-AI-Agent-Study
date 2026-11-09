@@ -1,5 +1,5 @@
 # keras16_validation2.py
-# [실습] 1 ~ 16 을 슬라이싱으로 train 8개 / val 4개 / test 4개로 자른다
+# [목적] [실습] 1 ~ 16 을 슬라이싱으로 train 8개 / val 4개 / test 4개로 자른다
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -11,6 +11,7 @@ y = np.array(range(1,17))
 
 # 실습 8개 4개 4개 자르기
 x_train = x[:8]
+# y 대신 x 를 잘랐지만 x 와 y 가 같은 값이라 결과는 같다
 y_train = x[:8]
 
 x_val = x[8:12]

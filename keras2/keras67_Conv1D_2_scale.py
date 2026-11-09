@@ -1,4 +1,8 @@
 # keras55_LSTM2_scale.py 베이스
+#
+# [목적] keras55_LSTM2_scale 의 80 예측 문제를 Conv1D 로 다시 풀어 비교 (목표 80)
+# [흐름] x (13, 3, 1) → Conv1D 2 층 → Flatten → Dense → [50, 60, 70] 다음 값 예측
+
 
 import numpy as np
 
@@ -47,6 +51,7 @@ y_predict = model.predict(x_predict)
 
 print('[80] 예측 결과', y_predict)
 
+# 아래 2 줄은 베이스 keras55_LSTM2_scale (SimpleRNN) 의 결과, 'Conv1D 적용' 블록이 이 파일의 결과
 # 목표 : 79.5
 # loss : 0.115653857588768
 # [80] 예측 결과 [[78.97944]]

@@ -1,5 +1,5 @@
 # keras12_R2_RMSE_boston.py
-# keras11_3_boston_tf.py 와 같은 구성 (r2 / RMSE 를 붙이기 전의 베이스)
+# [목적] keras11_3_boston_tf.py 와 같은 구성 (r2 / RMSE 를 붙이기 전의 베이스)
 # r2 / mse / RMSE 까지 추가한 완성본은 keras12_R2_RMSE_01_boston.py
 
 from tensorflow.keras.models import Sequential

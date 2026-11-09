@@ -1,5 +1,5 @@
 # keras04_deep1.py
-# 딥러닝(deep) : Dense 층을 여러 개 쌓아서 입력 -> 은닉층 -> 출력으로 연결한다
+# [목적] 딥러닝(deep) : Dense 층을 여러 개 쌓아서 입력 -> 은닉층 -> 출력으로 연결한다
 # 앞 층의 출력 개수가 다음 층의 입력 개수가 된다 (500 -> 300 -> 1)
 
 from tensorflow.keras.models import Sequential
@@ -18,6 +18,7 @@ model = Sequential()
 # model.add(Dense(4, input_dim=5)) # 입력:5, 출력:4 의 의미
 # model.add(Dense(1, input_dim=4)) # 입력:4, 출력:1 의 의미
 
+# 은닉층 노드 수(500, 300) 는 정해진 답이 없다 -> 바꿔 가며 loss 를 비교하는 하이퍼파라미터
 model.add(Dense(500, input_dim=1))
 model.add(Dense(300, input_dim=500))
 model.add(Dense(1, input_dim=300))

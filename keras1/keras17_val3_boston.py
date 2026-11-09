@@ -1,5 +1,5 @@
 # keras17_val3_boston.py
-# [방법 2] validation_split 으로 fit 이 x_train 에서 알아서 val 을 떼어가게 하는 방식
+# [목적] [방법 2] validation_split 으로 fit 이 x_train 에서 알아서 val 을 떼어가게 하는 방식
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -35,8 +35,8 @@ print(y_train.shape, y_test.shape) # (404,) (102,)
 #
 #   ★ 주의점 (모르면 함정에 빠지는 부분)
 #   1) 비율의 기준은 전체가 아니라 x_train 이다.
-#      x_train 404개 -> 그 중 20% 인 80개가 val 로 빠지고,
-#      실제로 학습에 쓰는 건 324개가 된다. (x_test 102개는 건드리지 않는다)
+#      x_train 404개 -> int(404 x 0.8) = 323 에서 잘라서 뒤쪽 81개가 val 로 빠지고,
+#      실제로 학습에 쓰는 건 323개가 된다. (x_test 102개는 건드리지 않는다)
 #   2) 떼어가는 기준은 "x_train 의 맨 뒤에서부터" 이고, 섞지 않고 순서대로 자른다.
 #      (fit 의 shuffle=True 는 val 을 떼어낸 "뒤"에 train 부분만 섞는다)
 #      -> 데이터가 y값 순으로 정렬돼 있으면 val 이 한쪽으로 치우쳐서 val_loss 를 믿을 수 없다.
@@ -90,6 +90,6 @@ print("loss :", loss)
 #   loss ↓ , val_loss ↓  -> 아직 잘 학습되는 중
 #   loss ↓ , val_loss ↑  -> 과적합 시작. 여기부터는 훈련할수록 오히려 나빠진다.
 #
-# boston 은 학습에 쓰는 게 324개뿐인 작은 데이터라 epochs=1000 이면 과적합되기 쉽다.
+# boston 은 학습에 쓰는 게 323개뿐인 작은 데이터라 epochs=1000 이면 과적합되기 쉽다.
 # 훈련 로그에서 val_loss 가 더 이상 안 떨어지고 올라가기 시작하는 지점을 눈으로 찾아,
 # 그 근처 숫자로 epochs 를 줄여서 다시 돌려보면 된다.

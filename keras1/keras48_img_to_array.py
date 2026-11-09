@@ -1,5 +1,5 @@
 # keras48_img_to_array.py
-# 사진 한 장을 모델에 넣을 수 있는 형태로 바꿔서 npy 로 저장한다
+# [목적] 사진 한 장을 모델에 넣을 수 있는 형태로 바꿔서 npy 로 저장한다
 #
 # [ 왜 필요한가 ]
 #  keras44 ~ keras47 에서는 ImageDataGenerator 가 '폴더 전체' 를 읽어 x, y 를 만들어 줬다

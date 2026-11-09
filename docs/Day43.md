@@ -333,14 +333,14 @@ llm = LLM("Qwen/Qwen3-8B-FP8", fxb="/root/qwen3-8b-fp8.fxb")
 | `ml/m04_all_estimators2_regressor.py` | `all_estimators(type_filter="regressor")` 55개 diabetes R2 비교 |
 | `ml/m05_all_estimators1_kfold.py` | 분류 모델 전체 + KFold `cross_val_score` · `cross_val_predict` (iris) |
 | `ml/m05_all_estimators2_kfold.py` | 회귀 모델 전체 + KFold `cross_val_score` · `cross_val_predict` (diabetes) |
-| `rngd/f02_tutorial.py` | `furiosa_llm.LLM` + `SamplingParams` 로 Llama-3.1-8B 를 직접 올려 `llm.generate` |
-| `rngd/f03_tool_calling.py` | `furiosa-llm serve` Qwen3-8B 에 `tools` · `tool_choice` 로 Tool calling → `get_weather` 실행 |
-| `rngd/f04_fxb_direct_select.py` | `LLM(..., fxb=)` 로 컴파일된 fxb 파일을 직접 지정해 모델 불러오기 |
+| `furiosa01_rngd/f02_tutorial.py` | `furiosa_llm.LLM` + `SamplingParams` 로 Llama-3.1-8B 를 직접 올려 `llm.generate` |
+| `furiosa01_rngd/f03_tool_calling.py` | `furiosa-llm serve` Qwen3-8B 에 `tools` · `tool_choice` 로 Tool calling → `get_weather` 실행 |
+| `furiosa01_rngd/f04_fxb_direct_select.py` | `LLM(..., fxb=)` 로 컴파일된 fxb 파일을 직접 지정해 모델 불러오기 |
 | `ml/m02_kfold_00_iris.py` | `#3. 훈련, 평가` 섹션 이름 수정 (수정) |
 | `ml/m02_kfold_01_california.py` | `#3. 훈련, 평가` 섹션 이름 수정 (수정) |
 | `docs/Day43.md` | Day43 학습 기록 신규 작성 |
 | `docs/Day42.md` | 코드 예시의 섹션 이름 반영, 하단 nav에 Day43 링크 추가 (수정) |
-| `README.md` | 학습 일지 / 디렉토리 구조(ml/ · rngd/ Day43) / 진행도(43일, 54%) 갱신 (수정) |
+| `README.md` | 학습 일지 / 디렉토리 구조(ml/ · furiosa01_rngd/ Day43) / 진행도(43일, 54%) 갱신 (수정) |
 
 ---
 

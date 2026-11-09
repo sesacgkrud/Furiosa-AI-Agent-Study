@@ -1,4 +1,8 @@
 # rag15_Chroma_gradio.py 베이스
+#
+# [목적] rag15 Gradio 챗봇의 프롬프트를 더 엄격하게 바꿔 문서 밖 지식으로 답하지 않게 하는 실습 (Day20)
+# [흐름] rag15 와 같고, 프롬프트 규칙만 '컨텍스트 밖의 지식은 절대 쓰지 말고, 없으면 정확히 ... 만 출력' 으로 변경
+
 
 import os
 from langchain_community.document_loaders import TextLoader
@@ -74,6 +78,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_classic.chains import create_retrieval_chain
 
+# rag15 보다 강하게 : 문서에 없는 내용은 정해진 문장 하나만 답하게 한다
 prompt = ChatPromptTemplate.from_template('''
 
     다음 컨텍스트를 바탕으로 질문에 답변해 주세요.

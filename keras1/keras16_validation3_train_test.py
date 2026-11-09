@@ -1,5 +1,5 @@
 # keras16_validation3_train_test.py
-# [실습] train_test_split 을 두 번 써서 train / val / test 로 나눈다
+# [목적] [실습] train_test_split 을 두 번 써서 train / val / test 로 나눈다
 # 첫 번째로 train 과 나머지를 자르고, 남은 나머지를 다시 반으로 잘라 val 과 test 를 만든다
 
 from tensorflow.keras.models import Sequential
@@ -12,12 +12,14 @@ x = np.array(range(1,17))
 y = np.array(range(1,17))
 
 # [실습] train_test_split로 자르기
+# 16 개 → train 8 / 나머지 8
 x_train, x_test, y_train, y_test = train_test_split(
     x, y,
     test_size=0.5,
     random_state=42,
 )
 
+# 나머지 8 개 → val 4 / test 4
 x_val, x_test, y_val, y_test = train_test_split(
     x_test, y_test,
     test_size=0.5,

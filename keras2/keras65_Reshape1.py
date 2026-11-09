@@ -1,4 +1,8 @@
 # keras63_sparse1_mnist.py 베이스
+#
+# [목적] 데이터를 미리 4차원으로 reshape 하지 않고, 모델 안의 Reshape 층으로 모양을 바꿔 Conv2D 에 넣는 방법 (mnist)
+# [흐름] x (N, 28, 28) 그대로 → Dense(280) (N, 28, 280) → Reshape (28, 28, 10) → Conv2D ... → softmax 10 (sparse)
+
 
 import numpy as np
 import pandas as pd

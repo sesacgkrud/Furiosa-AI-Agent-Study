@@ -1,3 +1,7 @@
+# [목적] OpenAI 대신 수업용 사제 서버(monorouter) 키 · 주소로 ChatOpenAI 를 호출 (Day19)
+# [흐름] .env 의 MONOROUTER_API_KEY 읽기 → ChatOpenAI(api_key, base_url) → invoke
+# ※ OpenAI 호환 서버는 base_url 만 바꾸면 같은 ChatOpenAI 코드로 쓸 수 있다 (이후 RAG · LangGraph 파일의 기본 설정)
+
 from langchain_openai import ChatOpenAI
 import os
 
@@ -5,7 +9,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 api_key = os.environ['MONOROUTER_API_KEY'].strip() # strip() 공백이나 줄바꿈을 무시 (오탈자로 인한 에러 방지용)
+# 아래 줄은 base_url 없이 사제 키를 넣었을 때 OpenAI 서버가 돌려준 오류(invalid_api_key) 메시지
 # You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'
+# 요청을 보낼 서버 주소 (OpenAI 호환)
 base_url = 'https://monogpt.kr/api/monorouter/v1'
 
 llm = ChatOpenAI(

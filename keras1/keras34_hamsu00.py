@@ -1,4 +1,7 @@
 # keras34_hamsu00.py
+#
+# [목적] 같은 층 구성을 Sequential 과 함수형(Input · Model) 두 방식으로 만들어 summary 의 파라미터 수가 같은지 비교
+
 # 같은 모델을 Sequential(순차적) 과 함수형 두 가지 방법으로 만들어서 summary 를 비교한다
 # 함수형 : Input 으로 입력층을 만들고 '층(이전 층)' 형태로 연결한 뒤 Model(inputs, outputs) 로 범위를 정한다
 # 층 구성이 같으면 두 모델의 Total params 도 똑같다 (만드는 방법만 다르다)

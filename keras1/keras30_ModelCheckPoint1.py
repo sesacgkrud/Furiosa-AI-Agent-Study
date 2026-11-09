@@ -1,5 +1,5 @@
 # keras30_ModelCheckPoint1.py
-# ModelCheckpoint : 훈련 도중 val_loss 가 가장 좋았던 epoch 의 모델을 자동으로 파일에 저장한다
+# [목적] ModelCheckpoint : 훈련 도중 val_loss 가 가장 좋았던 epoch 의 모델을 자동으로 파일에 저장한다
 #  monitor='val_loss' / mode='auto'(=min) / save_best_only=True -> 기록이 갱신될 때만 덮어쓴다
 #  -> 훈련이 끝난 뒤 남아 있는 파일 = 가장 좋았던 epoch 의 모델
 # EarlyStopping 의 restore_best_weights 와 목적이 같지만, 이쪽은 "파일로" 남는다
@@ -54,7 +54,7 @@ model.add(Dense(50))
 model.add(Dense(1))
 
 #3. 컴파일, 훈련
-model.compile(loss='mse', optimizer='adam') # weights만 불러왔기 때문에 있어야 함
+model.compile(loss='mse', optimizer='adam') # 새로 만든 모델이라 compile 후 fit
 
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 es = EarlyStopping(
@@ -121,6 +121,7 @@ plt.xlabel('loss')
 plt.grid() # 격자 표시 추가
 plt.show()
 
+# 아래 124 ~ 135 행은 베이스(keras29) 에서 복사된 이전 실행 기록, 이 파일의 결과는 'ModelCheckPoint 적용 후' 블록 (2.1273)
 # ===== 실행 결과 (2026-09-11) =====
 # loss : 1.7271162271499634
 # 가중치 초기값을 고정하지 않아서 돌릴 때마다 값이 달라진다. (관측값 1.1605 / 1.7271)

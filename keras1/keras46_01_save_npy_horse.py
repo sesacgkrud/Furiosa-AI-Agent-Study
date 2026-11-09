@@ -1,5 +1,5 @@
 # keras46_01_save_npy_horse.py
-# horse-human 이미지 2종 분류 (말 / 사람)
+# [목적] horse-human 이미지 2종 분류 (말 / 사람)
 #
 # [ 이 파일이 하는 일 ]
 #  1) ImageDataGenerator 로 폴더의 이미지를 읽어 x, y 를 만든다   (keras44 에서 배운 방식)

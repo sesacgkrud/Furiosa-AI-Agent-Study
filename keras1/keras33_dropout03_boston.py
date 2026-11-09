@@ -1,4 +1,8 @@
 # keras33_dropout03_boston.py
+#
+# [목적] 보스턴 집값 (회귀) 모델의 은닉층 사이에 Dropout 을 넣어 과적합을 줄이고, ModelCheckpoint 로 최고 epoch 모델을 저장
+# [흐름] 데이터 → split → RobustScaler → Dense + Dropout 모델 → EarlyStopping + ModelCheckpoint → x_test 평가
+
 # 구조 : keras33_dropout01_california.py 기준 / 데이터, 모델 : keras31_MCP_save_03_boston.py + Dropout 적용
 # Dropout : 훈련할 때마다 층 출력의 일부 노드를 랜덤으로 꺼서(0 으로 만들어서) 특정 노드에만 의존하지 않게 한다 -> 과적합 방지
 #           evaluate / predict 때는 자동으로 꺼지고 모든 노드를 다 사용한다

@@ -1,5 +1,5 @@
 # keras12_R2_RMSE_01_boston.py
-# 회귀 평가지표 3종을 처음 정리한 파일 (한 줄씩 주석을 달아 둔 기준 파일)
+# [목적] 회귀 평가지표 3종을 처음 정리한 파일 (한 줄씩 주석을 달아 둔 기준 파일)
 # r2   : 1 에 가까울수록 좋다 (데이터가 달라도 서로 비교할 수 있다)
 # mse  : 오차를 제곱해서 평균 낸 값 -> loss='mse' 로 훈련했다면 evaluate 의 loss 와 같은 값이 나온다
 # RMSE : mse 에 루트를 씌운 값 -> 정답과 단위가 같아져서 "평균 몇 만큼 틀렸는지" 로 읽을 수 있다
@@ -66,8 +66,8 @@ model.fit(x_train, y_train, epochs=1000, batch_size=16)
 # epochs=1000
 # → 전체 학습 데이터를 1000번 반복해서 학습
 #
-# batch_size=64
-# → 한 번에 64개의 데이터를 사용하여 가중치를 업데이트
+# batch_size=16
+# → 한 번에 16개의 데이터를 사용하여 가중치를 업데이트 (404 개 → 1 epoch 에 26 번 갱신)
 
 print("========== ========== ========== ========== ==========")
 
@@ -107,7 +107,7 @@ y_predict = model.predict(x_test)
 from sklearn.metrics import r2_score, mean_squared_error # 평가할 때 주로 사용
 # scikit-learn에서 R²(결정계수)를 계산하는 함수를 가져옴
 
-r2 = r2_score(y_test, y_predict) # 원값과 예측값 비교 -> loss
+r2 = r2_score(y_test, y_predict) # 원값과 예측값 비교 -> R2 점수 (loss 가 아니라 평가지표)
 # 실제 정답값(y_test)과
 # 모델의 예측값(y_predict)을 비교해서
 # R² 점수를 계산함
@@ -128,6 +128,7 @@ def RMSE(y_test, y_predict): #RMSE 함수 정의
 rmse = RMSE(y_test, y_predict)
 print("RMSE :", rmse)
 
+# 다시 실행한 결과 (위 118 ~ 120 행과 실행마다 값이 다르다)
 # loss : 27.36833381652832
 # loss(mse) : 27.36833381652832
 # r2 : 0.6712269182342471

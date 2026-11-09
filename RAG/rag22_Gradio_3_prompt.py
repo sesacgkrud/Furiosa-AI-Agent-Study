@@ -1,4 +1,8 @@
 # rag22_Gradio_2_Similarity.py 베이스
+#
+# [목적] score_threshold 를 0.2 로 맞추고, 프롬프트 규칙을 바꿔 인사 · 이전 대화 질문에는 자연스럽게, 논문 질문은 문서로만 답하게 한다 (Day24)
+# [흐름] rag22_2 와 같은 체인, retriever 기준 0.2 + system 규칙 4 개 + 'if not context' 처리 삭제
+
 # [변경] 프롬프트 규칙을 바꿔서 인사 · 이전 대화 질문에는 자연스럽게 답하고, 논문 질문은 컨텍스트로만 답한다
 
 import os

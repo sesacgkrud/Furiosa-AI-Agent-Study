@@ -1,5 +1,5 @@
 # keras37_cnn_identify.py
-# keras36_cnn1.py 베이스 - Conv2D 에 넘긴 숫자들이 각각 무엇을 뜻하는지 하나씩 확인한다
+# [목적] keras36_cnn1.py 베이스 - Conv2D 에 넘긴 숫자들이 각각 무엇을 뜻하는지 하나씩 확인한다
 #
 # Conv2D(10, (2,2), input_shape=(5,5,1))
 #   10          = 필터(커널) 개수 -> 출력 채널 수가 된다

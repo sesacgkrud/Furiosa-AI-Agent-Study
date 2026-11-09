@@ -1,7 +1,7 @@
 # keras17_val5_kaggle_bike.py
 
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
-# [방법 2] validation_split 으로 fit 이 x_train 에서 알아서 val 을 떼어가게 하는 방식
+# [목적] 캐글 자전거 데이터에 [방법 2] validation_split 으로 fit 이 x_train 에서 알아서 val 을 떼어가게 하는 방식
 
 import numpy as np
 import pandas as pd
@@ -53,8 +53,8 @@ print(y, y.shape) # Name: count, Length: 10886, dtype: int64 (10886,)
 #
 #   ★ 주의점 (모르면 함정에 빠지는 부분)
 #   1) 비율의 기준은 전체(x)가 아니라 x_train 이다.
-#      전체 10886개 -> x_train 8708개 -> 그 중 20% 인 1741개가 val 로 빠진다.
-#      결국 fit 이 실제 학습에 쓰는 건 6967개.
+#      전체 10886개 -> x_train 8708개 -> int(8708 x 0.8) = 6966 에서 잘라서 1742개가 val 로 빠진다.
+#      결국 fit 이 실제 학습에 쓰는 건 6966개.
 #   2) 떼어가는 기준은 "x_train 의 맨 뒤에서부터" 이고, 섞지 않고 순서대로 자른다.
 #      (fit 의 shuffle=True 는 val 을 떼어낸 "뒤"에 train 부분만 섞는다)
 #      -> 이 데이터가 특히 위험한 케이스다. train.csv 는 datetime 순으로 정렬돼 있어서

@@ -1,5 +1,5 @@
 # keras61_Embedding03_ohe_to_categorical_LSTM.py
-# [목표] 단어 번호를 to_categorical 로 One-Hot 해서 (15, 5, 31) 로 만들고 LSTM 으로 분류한다.
+# [목적] 단어 번호를 to_categorical 로 One-Hot 해서 (15, 5, 31) 로 만들고 LSTM 으로 분류한다.
 #   - One-Hot -> 단어마다 자기 칸이 따로 있어서 번호 크기 문제가 사라짐 (바보 26 과 잘생겼다 28 이 완전히 다른 단어로 구별됨)
 #   - 대신 단어 하나가 31칸짜리 벡터가 됨 (단어 종류가 늘어날수록 칸 수도 그만큼 늘어남)
 #     자세한 이유와 01 ~ 04 를 이 순서로 진행한 의도는 keras61_Embedding04_important.py 맨 위에 정리

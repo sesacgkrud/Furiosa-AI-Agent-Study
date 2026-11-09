@@ -1,4 +1,8 @@
 # rag23_01_bm25_search.py 베이스
+#
+# [목적] rag23_01 의 BM25 키워드 검색과 같은 문서 · 질문으로 벡터(의미) 검색 결과를 비교 (Day25)
+# [흐름] texts 8 개 → OpenAIEmbeddings → Chroma.from_documents(Chroma12 / croma12) → as_retriever(k=3) → invoke
+
 # [변경] BM25 검색은 주석 처리하고, 같은 문서 · 같은 질문을 벡터 검색(Chroma + OpenAI 임베딩)으로 찾는다
 #   - BM25 는 글자가 같은 단어만 보지만, 벡터 검색은 문장을 임베딩 벡터로 바꿔 의미가 가까운 문서를 찾는다
 #     → '삼성전자의' / '삼성전자는' 처럼 조사가 달라도 의미가 같으면 가깝게 나온다

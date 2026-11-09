@@ -1,4 +1,9 @@
 # rag17_FAISS_1_save.py 베이스
+#
+# [목적] rag17_FAISS_1_save 에서 저장한 FAISS DB 를 load_local 로 불러와 내부 구조 확인 · 유사도 검색 (Day21)
+# [흐름] 저장 코드는 ''' ''' 로 막음 → FAISS.load_local → index_to_docstore_id (번호 → 문서 id)
+#        → docstore._dict (id → Document) → similarity_search(k=2)
+
 
 import os
 from langchain_community.document_loaders import TextLoader
@@ -82,15 +87,18 @@ DB_PATH = './_db/Faiss17'
 #     index_name='faiss_index17'
 # )
 
+# 저장한 폴더 · index_name · 같은 임베딩 모델로 불러온다
 db = FAISS.load_local(
     folder_path=DB_PATH,
     index_name='faiss_index17',
     embeddings=embeddings,
+    # pkl 파일을 읽는 것을 허용 (pickle 은 남이 만든 파일이면 위험하므로 직접 만든 파일일 때만 True)
     allow_dangerous_deserialization=True,
 )
 
 print('==============================')
 # 문서 저장소 ID 확인
+# FAISS 벡터 번호(0 ~ 17) → 문서 저장소 id
 print(db.index_to_docstore_id)
 # {0: '894417ce-b66b-4967-99b1-07dd4b0863a2', 1: '5a0c79d3-2b4c-47d2-ab22-16183b744679', 2: '22f3864d-8dd9-4978-8542-2170c1067520',
 #  3: '26e17e74-f0d7-46cc-9280-725a44ce56ce', 4: '174d60a5-122b-4035-bb66-59e88a6aa74f', 5: 'a8dca308-ec1d-4b84-bd43-f322dc711d7a',
@@ -100,6 +108,7 @@ print(db.index_to_docstore_id)
 #  15: '398f408b-a415-408e-95c8-afcb2e051f57', 16: '7d938225-23dc-42ed-94fd-b8a55512d949', 17: '779b4dd9-d2ee-4359-8b66-691525514302'}
 print('==============================')
 # 저장된 결과 확인
+# id → Document(page_content, metadata)
 print(db.docstore._dict)
 # {'894417ce-b66b-4967-99b1-07dd4b0863a2':
 #  Document(id='894417ce-b66b-4967-99b1-07dd4b0863a2',
@@ -116,6 +125,7 @@ print(db.docstore._dict)
 # }
 print('==============================')
 # 유사도 검색
+# 질문 벡터와 L2 거리가 가장 가까운 청크 2 개
 aaa = db.similarity_search('삼성전자 창업주에 대해 알려줘', k=2)
 print(aaa)
 # [Document(id='894417ce-b66b-4967-99b1-07dd4b0863a2', metadata={'source': './_data/rag_data/samsung_outlook.txt'}, page_content='삼성전자 사업 전망\n\n삼성전자는 메모리 반도체, 파운드리, 스마트폰, 디스플레이와 가전 사업을 운영하는 종합 전자기업이다. 여러 사업을 보유한 구조는 특정 시장의 부진을 다른 사업이 일부 보완할 수 있다는 장점이 있다. 다만 각 사업의 성장 요인과 위험이 다르므로, 회사의 전망을 살필 때에는 사업별 흐름을 구분하는 편이 정확하다.'), Document(id='c12938c5-88f2-4bfc-ab3a-9bb04f317b81', metadata={'source': './_data/rag_data/samsung_outlook.txt'}, page_content='삼성전자의 중장기 전망은 인공지능 메모리의 경쟁력, 첨단 공정의 수율 개선, 파운드리 고객 확대, 스마트폰의 제품 차별화에 달려 있다. 위험 요인으로는 반도체 가격 하락, 세계 경기 둔화, 공급망 차질, 환율 변동, 수출 규제와 경쟁 심화를 들 수 있다. 전망을 분석할 때에는 성장 산업에 참여하고 있다는 점과 그 기회가 실제 매출 및 이익으로 이어지는지를 함께 평가해야 한다. 이 문서는 RAG 실습을 위한 교육용 자료이며 투자 권유가 아니다.')]

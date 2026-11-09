@@ -1,6 +1,6 @@
 # keras20_EarlyStopping2_diabetes.py
 # keras19_overfit2_diabetes.py 베이스
-# EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
+# [목적] EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
 # restore_best_weights=True : 멈춘 시점이 아니라 val_loss 가 가장 낮았던 epoch 의 가중치로 되돌린다
 
 from sklearn.datasets import load_diabetes
@@ -22,6 +22,7 @@ x_train, x_test, y_train, y_test = train_test_split(
     random_state=77,
 )
 
+# x_val 을 만들었지만 아래 fit 은 validation_split=0.3 을 써서 x_val 은 사용되지 않는다
 x_train, x_val, y_train, y_val = train_test_split(
     x_train, y_train,
     train_size=0.7,
@@ -79,6 +80,7 @@ plt.legend(loc='upper right') # 우측 상단에 라벨 표시
 plt.title('Diabetes Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가

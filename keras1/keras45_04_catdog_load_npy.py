@@ -1,5 +1,5 @@
 # keras45_04_catdog_load_npy.py
-# keras45_03_catdog_save_npy.py 에서 저장한 npy 를 불러와 바로 훈련한다
+# [목적] keras45_03_catdog_save_npy.py 에서 저장한 npy 를 불러와 바로 훈련한다
 # ImageDataGenerator 로 폴더를 읽는 대신 np.load 로 불러온다
 # 두 방법의 시간을 한 번에 비교하려고 ImageDataGenerator 쪽도 같이 돌려서 시간을 잰다
 # (훈련에 쓰는 데이터는 npy 로 불러온 쪽이다)

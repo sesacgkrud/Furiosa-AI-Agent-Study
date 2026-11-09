@@ -1,3 +1,7 @@
+# keras57_02_rnn_flatten.py
+# [목적] return_sequences=True 의 3차원 출력 (None, 3, 10) 을 Flatten 으로 펴서 Dense 에 넘기는 구조 (모든 시점의 출력을 사용)
+# [흐름] x (13, 3, 1) → LSTM(10, return_sequences=True) → Flatten (None, 30) → Dense → 80 예측
+
 import numpy as np
 
 from tensorflow.keras.models import Sequential

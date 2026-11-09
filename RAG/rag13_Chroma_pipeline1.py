@@ -1,4 +1,9 @@
 # rag12_Chroma04_load.py 베이스
+#
+# [목적] Chroma 검색 결과를 LLM 질문에 직접 붙여 넣는 가장 단순한 RAG 흐름 (Day20)
+# [흐름] Chroma12 불러오기 → retriever 로 질문과 가까운 청크 검색 → ChatOpenAI 에 그냥 질문 vs 검색 청크 + 질문 비교
+# ※ 맨 아래 두 '응답' 주석은 query 를 삼성전자 창업자 → 엔비디아 로 바꿔 가며 실행한 각각의 결과
+
 
 import os
 from langchain_community.document_loaders import TextLoader
@@ -32,6 +37,7 @@ vector_store = Chroma(
 
 print(f'벡터 저장소에 저장된 문서 수: {vector_store._collection.count()}') # 벡터 저장소에 저장된 문서 수: 208
 
+# 이전에 쓴 질문
 # query = '삼성전자의 창업자는 누구인가요?'
 query = '엔비디아는 어떤 기업인가요?'
 result = vector_store.similarity_search(query)
@@ -48,6 +54,7 @@ print(f'첫번째 관련 문서 내용 미리보기: {aaa[0].page_content[:50]}'
 ##################### 모델 연결 #####################
 from langchain_openai import ChatOpenAI
 
+# 검색한 문서로 답을 만들 대화 모델
 model = ChatOpenAI(
     model='gpt-5-nano',
     temperature=0,      # 0 -> 있는 그대로 | 1 -> 다양하고 창의적으로
@@ -68,6 +75,7 @@ model = ChatOpenAI(
 
 # 추가로 더 알고 싶은 부분이 있으면 말씀해 주세요.
 
+# 검색 없이 모델 자체 지식으로만 답하기
 response = model.invoke('엔비디아는 어떤 기업인가요?')
 
 # model의 답변 : 엔비디아(NVIDIA, Incorporated)는 미국의 다국적 기술 기업으로, 주로 그래픽 처리 유닛(GPU) 개발로 유명합니다. 다음은 주요 특징들입니다:
@@ -99,11 +107,13 @@ print('model의 답변 :', response.content)
 
 
 print('===========================================')
+# f-string 으로 [검색된 청크] + [질문] 을 한 프롬프트에 넣는다 = RAG 의 기본 형태
 query_with_context = f'''
     {aaa[0].page_content}\n\n
     위 내용에 근거하여 다음 질문에 답변하세요. \n\n{query}
 '''
 
+# 검색 청크를 근거로 답하기
 response = model.invoke(query_with_context)
 print('model의 응답 :', response.content)
 # model의 응답 : 삼성전자의 창업자는 이병철(李秉喆)입니다. 그는 1938년에 삼성을 창립했고, 이후 삼성그룹의 다각화된 사업군을 이끌며 회사의 성장 기반을 마련했습니다.

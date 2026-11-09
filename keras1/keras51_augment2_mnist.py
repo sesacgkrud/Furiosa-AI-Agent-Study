@@ -1,5 +1,5 @@
 # keras51_augment2_mnist.py
-# mnist 데이터에 증폭(augmentation)을 적용해 훈련 데이터를 늘린다 - keras51_augment1_fashion.py 와 같은 흐름
+# [목적] mnist 데이터에 증폭(augmentation)을 적용해 훈련 데이터를 늘린다 - keras51_augment1_fashion.py 와 같은 흐름
 #
 # [ 증폭의 흐름 ]
 #  1) 원본 6만 장에서 4만 장을 랜덤으로 뽑는다

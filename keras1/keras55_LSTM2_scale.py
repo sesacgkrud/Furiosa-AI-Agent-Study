@@ -1,3 +1,8 @@
+# keras55_LSTM2_scale.py
+# [목적] 값 크기가 다른 시계열(+1 규칙 10 개 + +10 규칙 3 개) 로 다음 값 80 을 예측해 본다 (목표 79.5)
+# [흐름] x (13, 3) → reshape (13, 3, 1) → SimpleRNN(10) + Dense 6 층 → 훈련 데이터로 평가 → [50, 60, 70] 다음 값 예측
+# ※ 파일 이름은 LSTM 이지만 실제 사용한 층은 SimpleRNN 이다 (LSTM · GRU 는 import 만 되어 있음)
+
 import numpy as np
 
 from tensorflow.keras.models import Sequential

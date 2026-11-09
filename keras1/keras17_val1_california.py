@@ -1,5 +1,5 @@
 # keras17_val1_california.py
-# train 데이터 중 일부를 validation(검증)으로 떼어내서 val_loss 를 확인하는 실습
+# [목적] train 데이터 중 일부를 validation(검증)으로 떼어내서 val_loss 를 확인하는 실습
 
 from sklearn.datasets import fetch_california_housing
 
@@ -70,8 +70,8 @@ y = datasets.target
 #      -> 원본 데이터가 y값 순으로 정렬돼 있으면 val 이 한쪽으로 치우친다.
 #      -> 지금은 위 train_test_split 이 이미 섞어줬으므로 안전하다.
 #   2) 비율의 기준은 전체(x)가 아니라 x_train 이다.
-#      전체 20640개 -> x_train 16512개 -> 그 중 20%인 3302개가 val 로 빠진다.
-#      결국 fit 이 실제 학습에 쓰는 건 13210개.
+#      전체 20640개 -> x_train 16512개 -> 그 중 20%인 3303개가 val 로 빠진다 (int(16512 x 0.8) = 13209 에서 자른다).
+#      결국 fit 이 실제 학습에 쓰는 건 13209개.
 #   3) validation_data 와 validation_split 을 둘 다 쓰면 validation_data 가 이긴다.
 #      (validation_split 은 무시됨) 그래서 아래 fit 에서는 하나만 쓴다.
 # ---------------------------------------------------------------------------

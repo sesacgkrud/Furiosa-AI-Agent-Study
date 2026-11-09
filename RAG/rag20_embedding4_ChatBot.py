@@ -1,3 +1,10 @@
+# rag19_PyPDF_2_ChatBot.py 베이스
+#
+# [목적] rag19 의 PDF 논문 챗봇에서 임베딩만 OpenAI → 내 PC 의 Qwen3-Embedding-0.6B 로 바꾼다 (Day22)
+# [흐름] PyPDFLoader → 청킹(300 / 100) → HuggingFaceEmbeddings(Qwen3, CPU) → FAISS 저장(Faiss20) · 불러오기
+#        → score_threshold 0.2 로 거르기 → rag19 와 같은 챗봇 함수 · Gradio 화면
+# ※ [변경] 주석이 rag19 와 달라진 부분
+
 import os
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_openai import ChatOpenAI

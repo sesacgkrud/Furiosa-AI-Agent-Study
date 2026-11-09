@@ -1,5 +1,5 @@
 # keras28_Scaler09_fetch_covtype.py
-# 산림 피복 (다중 분류)
+# [목적] 산림 피복 (다중 분류) 데이터에 스케일러 4종을 적용해 비교
 # 스케일러 4종 비교 (MinMax / Standard / MaxAbs / Robust) - 파일 아래쪽에 스케일러별 결과를 기록해 둔다
 # 순서가 중요하다 : train_test_split 을 먼저 하고 -> scaler.fit(x_train) -> x_test 는 transform 만
 #  fit 은 변환 기준(Min/Max, 평균, 중앙값 등)을 구하는 단계라 x_train 으로만 해야 한다
@@ -54,12 +54,13 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
 from sklearn.preprocessing import RobustScaler
 scaler = RobustScaler()
 
-# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+# scaler.fit(x_train) # fit : 넣은 데이터로 컬럼별 변환 기준(Min/Max, 평균, 중앙값 등)을 계산해 scaler 안에 저장
+# x_train = scaler.transform(x_train) # 저장된 기준으로 값을 바꾼다 (MinMaxScaler 면 0~1 범위)
 x_train = scaler.fit_transform(x_train)
 
-x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_test = scaler.transform(x_test) # 저장된 기준으로 값을 바꾼다 (MinMaxScaler 면 0~1 범위)
 
+# 아래 Min / Max 출력 주석은 MinMaxScaler 로 실행했을 때의 값 (지금 활성화된 RobustScaler 는 0 ~ 1 로 맞추지 않는다)
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
 print('Min :', np.min(x_test), 'Max :', np.max(x_test)) # Min : 0.0 Max : 1.0050359712230217
 

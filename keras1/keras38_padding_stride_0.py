@@ -1,5 +1,5 @@
 # keras38_padding_stride_0.py
-# padding 과 strides 가 출력 크기를 어떻게 바꾸는지 summary 로만 확인하는 파일 (훈련 없음)
+# [목적] padding 과 strides 가 출력 크기를 어떻게 바꾸는지 summary 로만 확인하는 파일 (훈련 없음)
 #
 # padding : 이미지 가장자리에 0 을 둘러서 크기가 줄어드는 것을 막는 옵션
 #   'valid' (default) - 패딩 없음. 출력이 (입력 - 커널 + 1) 로 줄어든다

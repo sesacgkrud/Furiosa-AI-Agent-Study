@@ -1,5 +1,5 @@
 # keras52_optimizer15_man_woman.py
-# man_woman (이진 분류, CNN + npy) - optimizer 의 learning_rate 를 직접 지정해 본다
+# [목적] man_woman (이진 분류, CNN + npy) - optimizer 의 learning_rate 를 직접 지정해 본다
 # 여자만 증폭(keras51_augment5) 해 남 / 여를 1 : 1 로 맞춘 데이터에 learning_rate 만 바꿔 붙인다
 # val 은 증폭 전에 train_test_split 으로 떼어 둔 원본 그대로 쓴다
 #

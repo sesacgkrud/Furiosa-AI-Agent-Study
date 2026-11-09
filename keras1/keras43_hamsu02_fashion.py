@@ -1,5 +1,5 @@
 # keras43_hamsu02_fashion.py
-# keras41_dnn2_fashion.py (Sequential DNN) 를 함수형(Model) 으로 바꾼 파일
+# [목적] keras41_dnn2_fashion.py (Sequential DNN) 를 함수형(Model) 으로 바꾼 파일
 #
 # 함수형은 모델 종류(DNN / CNN)와 상관없이 '#2. 모델 구성' 을 쓰는 문법만 다르다
 #  Sequential : model.add() 로 위에서 아래로 자동 연결

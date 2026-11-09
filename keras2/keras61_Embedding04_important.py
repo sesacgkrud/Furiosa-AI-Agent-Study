@@ -1,5 +1,5 @@
 # keras61_Embedding04_important.py
-# [목표] Embedding 층의 사용법과 파라미터 수를 확인한다. (model.summary 까지 / 훈련은 다음 단계)
+# [목적] Embedding 층의 사용법과 파라미터 수를 확인한다. (model.summary 까지 / 훈련은 다음 단계)
 #   - Embedding : 단어 번호 (정수) 를 받아서, 그 단어만의 "학습되는 벡터" (output_dim 칸) 로 바꿔 주는 층
 #   - 입력 (15, 5) 단어 번호 그대로 -> 출력 (15, 5, 100) 단어 하나당 100칸짜리 벡터
 #

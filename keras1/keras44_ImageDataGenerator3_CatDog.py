@@ -1,4 +1,9 @@
 # keras44_ImageDataGenerator1.py 베이스
+#
+# [목적] Kaggle cat_dog 이미지 8005 장(훈련) · 2023 장(평가) 을 100 x 100 컬러로 읽어 Conv2D 이진 분류 (목표 acc 0.77)
+# [흐름] ImageDataGenerator → flow_from_directory(batch_size=전체 장수) → numpy 배열 → Conv2D + MaxPooling → sigmoid
+#        → EarlyStopping · ModelCheckpoint(val_acc 기준) → 평가
+
 
 import numpy as np
 import time
@@ -27,34 +32,34 @@ xy_train = train_datagen.flow_from_directory( # 해당 경로에서 가져오기
     path_train,               # 경로
     target_size=(100,100),    # 설정한 크기대로 이미지를 수정
     batch_size=8005,
-    class_mode='binary',      # 이진 분류 (ad, normal)
-    color_mode='rgb',         # 흑백 -> 출력 형태 : (batch, x, y, 1)
+    class_mode='binary',      # 이진 분류 (cat 0 / dog 1)
+    color_mode='rgb',         # 컬러 -> 출력 형태 : (batch, x, y, 3)
     shuffle=True,
 )
-# 실행 결과 : Found 160 images belonging to 2 classes
+# 실행 결과 : Found 8005 images belonging to 2 classes.
 
 xy_test = test_datagen.flow_from_directory(
     path_test,                # 경로
     target_size=(100,100),    # 설정한 크기대로 이미지를 수정
     batch_size=2023,
-    class_mode='binary',      # 이진 분류 (ad, normal)
-    color_mode='rgb',         # 흑백 -> 출력 형태 : (batch, x, y, 1)
+    class_mode='binary',      # 이진 분류 (cat 0 / dog 1)
+    color_mode='rgb',         # 컬러 -> 출력 형태 : (batch, x, y, 3)
     shuffle=False,            # train에서 했기 때문에 필요 없음
 )
-# 실행 결과 : Found 120 images belonging to 2 classes.
+# 실행 결과 : Found 2023 images belonging to 2 classes.
 
-print(xy_train[0][0].shape)   # (160, 100, 100, 3)
-print(xy_train[0][1].shape)   # (160,)  class_mode='binary' -> y 는 0(ad) / 1(normal) 한 칸
+print(xy_train[0][0].shape)   # (8005, 100, 100, 3)
+print(xy_train[0][1].shape)   # (8005,)  class_mode='binary' -> y 는 0(cat) / 1(dog) 한 칸
 
 x_train = xy_train[0][0]
 y_train = xy_train[0][1]
 x_test = xy_test[0][0]
 y_test = xy_test[0][1]
 
-print(x_train.shape, y_train.shape) # (160, 100, 100, 3) (160,)
-print(x_test.shape, y_test.shape)   # (120, 100, 100, 3) (120,)
+print(x_train.shape, y_train.shape) # (8005, 100, 100, 3) (8005,)
+print(x_test.shape, y_test.shape)   # (2023, 100, 100, 3) (2023,)
 
-# Dense 는 (샘플, 컬럼) 2차원 입력 -> 150 x 150 x 1 = 22500 개 컬럼으로 편다
+# (Dense 로 바꿀 때만 쓰는 reshape 메모 - 지금은 Conv2D 라 4차원 그대로 쓴다)
 # x_train = x_train.reshape(-1, 150*150)
 # x_test = x_test.reshape(-1, 150*150)
 print(x_train.shape, x_test.shape)  # (160, 100, 100, 3) (120, 100, 100, 3)
@@ -142,7 +147,7 @@ loss = model.evaluate(x_test, y_test, verbose=1)
 print('loss :', loss[0])
 print('acc :', loss[1])
 
-# predict 결과는 (120, 1) 짜리 sigmoid 확률 (0 ~ 1)
+# predict 결과는 (2023, 1) 짜리 sigmoid 확률 (0 ~ 1)
 y_predict = model.predict(x_test)
 y_predict = np.round(y_predict)   # 0.5 기준 반올림 -> 0 또는 1 (안 하면 accuracy_score 가 ValueError)
 
@@ -150,6 +155,7 @@ acc_score = accuracy_score(y_test, y_predict)
 print('accuracy_score :', acc_score)
 print('소요 시간 :', round(end_time - start_time, 2), '초')
 
+# loss 0.6931 = ln 2, acc 0.5 → 모든 사진을 같은 쪽으로 찍는 상태 (위 compile 주석의 learning_rate 설명 참고)
 # 목표 : acc 0.77
 # loss : 0.6931535005569458
 # acc : 0.5002471804618835

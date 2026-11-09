@@ -1,5 +1,5 @@
 # keras39_MaxPolling0.py
-# MaxPooling2D 를 summary 로만 확인하는 파일 (훈련 없음)
+# [목적] MaxPooling2D 를 summary 로만 확인하는 파일 (훈련 없음)
 # keras38_padding_stride_0.py 베이스
 #
 # MaxPooling2D : 정해진 크기의 구역에서 가장 큰 값 하나만 남기고 버려서 이미지를 줄이는 층

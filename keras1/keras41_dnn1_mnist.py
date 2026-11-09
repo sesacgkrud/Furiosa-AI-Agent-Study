@@ -1,6 +1,7 @@
 # keras41_dnn1_mnist.py
-# mnist 성능 올리기 - keras36_cnn3_mnist1.py 베이스로 모델을 더 깊게 쌓고 EarlyStopping 을 붙였다 (목표 acc 0.995)
+# [목적] mnist 이미지를 (60000, 784) 로 펴서 Conv2D 없이 Dense 만(DNN) 으로 분류하고 CNN 결과와 비교 (목표 : CNN 을 이겨라)
 #
+# 아래 설명 블록은 베이스 파일에서 복사된 내용 (이 파일에서 새로 바뀐 점은 바로 위 [목적] 참고)
 # mnist1 과 달라진 점
 #  1) Conv2D 를 7층으로 늘리고 필터 수를 32 -> 64 -> 128 로 키웠다 ((5,5) 커널을 섞어 크기를 빠르게 줄임)
 #  2) Dense 를 256 / 128 로 키우고 Dropout 을 0.25 ~ 0.4 로 올렸다
@@ -70,7 +71,7 @@ y_test = ohe.fit_transform(y_test)
 print(y_train.shape, y_test.shape) # (60000, 10) (10000, 10)
 
 #2. 모델 구성
-# padding 을 주지 않았으므로 (커널 크기 - 1) 만큼 가로 세로가 줄어든다 : (3,3) -> 2씩, (5,5) -> 4씩
+# Conv2D 없이 Dense 만 쌓는다 → 입력은 28 x 28 = 784 개 픽셀을 한 줄로 편 2차원 (60000, 784)
 model = Sequential()
 model.add(Dense(512, activation='relu', input_shape=(784,)))
 model.add(Dense(256, activation='relu'))
@@ -88,8 +89,8 @@ model.add(Dropout(0.2))
 model.add(Dense(10, activation='softmax'))
 
 model.summary()
-# Total params: 3,578,186
-#  -> flatten(12800) -> dense(256) 한 곳에서만 12800 x 256 + 256 = 3,277,056 개로 전체의 90% 를 차지한다
+# Total params: 599,178  (이 파일의 층 구성으로 계산한 값)
+#  -> 첫 층 784 x 512 + 512 = 401,920 이 가장 크다
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam',

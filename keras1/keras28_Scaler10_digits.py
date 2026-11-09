@@ -1,5 +1,5 @@
 # keras28_Scaler10_digits.py
-# 손글씨 숫자 (다중 분류)
+# [목적] 손글씨 숫자 (다중 분류) 데이터에 스케일러 4종을 적용해 비교
 # 스케일러 4종 비교 (MinMax / Standard / MaxAbs / Robust) - 파일 아래쪽에 스케일러별 결과를 기록해 둔다
 # 순서가 중요하다 : train_test_split 을 먼저 하고 -> scaler.fit(x_train) -> x_test 는 transform 만
 #  fit 은 변환 기준(Min/Max, 평균, 중앙값 등)을 구하는 단계라 x_train 으로만 해야 한다
@@ -49,12 +49,13 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
 from sklearn.preprocessing import RobustScaler
 scaler = RobustScaler()
 
-# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+# scaler.fit(x_train) # fit : 넣은 데이터로 컬럼별 변환 기준(Min/Max, 평균, 중앙값 등)을 계산해 scaler 안에 저장
+# x_train = scaler.transform(x_train) # 저장된 기준으로 값을 바꾼다 (MinMaxScaler 면 0~1 범위)
 x_train = scaler.fit_transform(x_train)
 
-x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_test = scaler.transform(x_test) # 저장된 기준으로 값을 바꾼다 (MinMaxScaler 면 0~1 범위)
 
+# 아래 Min / Max 출력 주석은 MinMaxScaler 로 실행했을 때의 값 (지금 활성화된 RobustScaler 는 0 ~ 1 로 맞추지 않는다)
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
 print('Min :', np.min(x_test), 'Max :', np.max(x_test)) # Min : 0.0 Max : 2.6666666666666665
 # [참고] x_test 의 Max 가 2.67 로 1 을 넘는데 이건 버그가 아니라 정상이다.
@@ -63,8 +64,8 @@ print('Min :', np.min(x_test), 'Max :', np.max(x_test)) # Min : 0.0 Max : 2.6666
 #        test 에 16 짜리 값이 나오면 16/6 = 2.67 이 된다.
 #        오히려 fit 을 x_train 에만 제대로 했다는 증거다. (전체 x 에 fit 했다면 절대 1 을 안 넘는다)
 
-print(x_train.shape, x_test.shape) # (1257, 64) (540, 64)
-print(y_train.shape, y_test.shape) # (1257, 10) (540, 10)
+print(x_train.shape, x_test.shape) # (1078, 64) (719, 64)  <- train_size=0.6
+print(y_train.shape, y_test.shape) # (1078, 10) (719, 10)
 
 #2. 모델 구성
 model = Sequential()
@@ -126,7 +127,7 @@ print('소요 시간 :', round(end_time - start_time), '초')
 # [결론] 0.9652 -> 0.9736. 예상대로 거의 변화가 없다.
 #        digits 는 모든 컬럼이 '픽셀 밝기 0~16' 으로 이미 단위가 같아서
 #        스케일링으로 바로잡을 컬럼 간 범위 차이가 애초에 없다.
-#        x_test 540개 기준으로 521개 -> 526개, 5개 차이라 실행할 때마다 생기는 편차 범위다.
+#        x_test 719개 기준으로 694개 -> 700개, 6개 차이라 실행할 때마다 생기는 편차 범위다.
 #        소요 시간도 34초로 동일하다.
 #        효과가 없는 것을 확인한 대조군 역할의 데이터다.
 

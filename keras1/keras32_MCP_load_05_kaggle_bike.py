@@ -1,4 +1,8 @@
 # keras32_MCP_load_05_kaggle_bike.py
+#
+# [목적] keras31 이 저장한 캐글 자전거 (회귀) 모델(keras31_mcp5.keras) 을 load_model 로 불러와 같은 전처리의 x_test 로 평가만 한다
+# [흐름] keras31 과 똑같은 데이터 · split · scaler → load_model → evaluate (compile · fit 없음)
+
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
 # 구조 : keras30_ModelCheckPoint2_load.py 기준
 # 짝 파일 : keras31_MCP_save_05_kaggle_bike.py -> 반드시 그 파일을 먼저 실행해서 keras31_mcp5.keras 를 만들어야 한다.

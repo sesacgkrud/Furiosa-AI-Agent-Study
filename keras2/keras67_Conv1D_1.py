@@ -1,4 +1,8 @@
 # keras54_RNN1.py 베이스
+#
+# [목적] Conv1D 입문 — 1 ~ 10 시계열 (7, 3, 1) 을 Conv1D 로 학습해 11 을 예측 (keras54_RNN1 의 SimpleRNN 자리를 Conv1D 로)
+# [흐름] x (7, 3, 1) → Conv1D 2 층 (padding='same') → Flatten → Dense → 11 예측
+
 
 import numpy as np
 from tensorflow.keras.models import Sequential

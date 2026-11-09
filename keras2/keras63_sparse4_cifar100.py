@@ -1,4 +1,8 @@
 # keras1/keras36_cnn6_cifar100.py 베이스
+#
+# [목적] cifar100 (100 클래스) 에 sparse_categorical_crossentropy 적용 — 원핫 (50000, 100) 을 만들지 않아 메모리를 아낀다
+# [흐름] MaxPooling 2 개 모델 (keras39_MaxPooling4 와 같은 구성) → OneHotEncoder 부분 삭제 → loss 만 sparse 로 변경
+
 
 import numpy as np
 import pandas as pd

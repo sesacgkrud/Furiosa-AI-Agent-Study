@@ -1,6 +1,7 @@
-# keras36_cnn4_fashion.py
-# fashion_mnist 의류 이미지 10종 분류 - padding='same' 과 strides 를 처음 적용한 파일 (목표 acc 0.92)
-# keras36_cnn3_mnist2.py 베이스
+# keras40_GAP02_fashion.py
+# [목적] keras39_MaxPooling2_fashion 의 Flatten 을 GlobalAveragePooling2D 로 바꿔 파라미터 수와 성능을 비교
+# keras39_MaxPooling2_fashion.py 베이스
+# 아래 설명 블록은 베이스 파일에서 복사된 내용 (이 파일에서 새로 바뀐 점은 바로 위 [목적] 참고)
 #
 # 새로 쓴 것
 #  padding='same'  : 커널이 지나가도 가로 세로가 줄지 않는다 (가장자리에 0 을 둘러준다)
@@ -78,6 +79,7 @@ model.add(Conv2D(128, kernel_size=(3,3), padding='same', activation='relu'))
 model.add(MaxPooling2D())
 model.add(Dropout(0.25))
 # model.add(Flatten())                                                # (7,7,128) -> 6272. 4차원을 2차원으로 펴준다 (값과 순서가 그대로라 reshape 와 같다)
+# GlobalAveragePooling2D : 채널마다 (가로 x 세로) 전체의 평균 1 개만 남긴다 → 채널 128 개 = 값 128 개 (Flatten 처럼 전부 펴지 않아 다음 Dense 파라미터가 크게 준다)
 model.add(GlobalAveragePooling2D())
 
 model.add(Dense(units=256, activation='relu'))                      # units = Dense 의 첫 번째 인자 이름 (Dense(256) 과 같다)
@@ -87,9 +89,9 @@ model.add(Dense(units=128, activation='relu'))
 
 model.add(Dense(10, activation='softmax'))                          # 의류 10종 -> 출력 10개 + softmax
 model.summary()
-# Total params: 1,907,018
-#  -> 층 수는 mnist2(3,578,186)와 비슷한데 파라미터는 절반이다
-#     strides 로 크기를 일찍 줄여서 Flatten 이 12800 -> 6272 로 작아졌기 때문
+# Total params: 334,154  (이 파일의 층 구성으로 계산한 값)
+#  -> 마지막 MaxPooling 뒤 크기가 (1, 1, 128) 이라 GAP 출력도 128 → Flatten 을 쓴 keras39_MaxPooling2 와 파라미터 수가 같다
+#     (위 '출력' 주석은 베이스 keras36_cnn4 기준, 실제 크기는 keras39_MaxPooling2_fashion 설명 참고)
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam',
@@ -158,6 +160,7 @@ print('소요 시간 :', round(end_time - start_time, 2), '초')
 # accuracy_score : 0.9248
 # 소요 시간 : 118.45 초
 
+# GlobalAveragePooling2D 적용 acc 0.9248 / GPU 118초 (아래 결론은 베이스 결과에 대한 설명)
 # 목표 : acc 0.92  -> 0.9262 로 달성
 # -> epochs 를 50 으로 고정해 훈련량이 같으므로 시간 비교가 된다. CPU 951초 / GPU 380초로 GPU 가 2.5배 빨랐다
 # -> acc 는 CPU 0.9262 / GPU 0.9258 로 거의 같다. 장치가 바뀌어도 결과는 같고 속도만 달라진다

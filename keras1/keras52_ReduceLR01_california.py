@@ -1,5 +1,5 @@
 # keras52_ReduceLR01_california.py
-# 캘리포니아 집값 (회귀) - ReduceLROnPlateau 로 훈련 도중 learning_rate 를 줄인다
+# [목적] 캘리포니아 집값 (회귀) - ReduceLROnPlateau 로 훈련 도중 learning_rate 를 줄인다
 # 스케일링은 keras27 그대로다 (split 전에 전체 x 로 fit 하는 방식이라 데이터 누수가 있다)
 #
 # [ 오늘 추가되는 곳은 콜백 하나다 ]
@@ -37,8 +37,8 @@ MinMaxScaler Algorithm
 
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler()
-scaler.fit(x) # sklearn 에서 fit -> 실행하다 로 생각
-x = scaler.transform(x) # x에 있는 모든 데이터는 0~1 사이로 수렴
+scaler.fit(x) # fit : 넣은 데이터로 컬럼별 변환 기준(Min/Max, 평균, 중앙값 등)을 계산해 scaler 안에 저장
+x = scaler.transform(x) # 저장된 기준으로 값을 바꾼다 (MinMaxScaler 면 0~1 범위)
 print(x)
 print('Min :', np.min(x), 'Max :', np.max(x)) # Min : 0.0 Max : 1.0000000000000002 -> 부동 소숫점 연산에 의한 오차 발생 (문제X)
 

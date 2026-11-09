@@ -1,11 +1,11 @@
 # keras43_hamsu03_cifar10.py
-# keras41_dnn3_cifar10.py (Sequential DNN) 를 함수형(Model) 으로 바꾼 파일
+# [목적] cifar10 을 (50000, 3072) 로 펴서 함수형(Model) DNN 으로 분류 (keras41_dnn3_cifar10 의 함수형 버전)
 #
 # 함수형은 모델 종류(DNN / CNN)와 상관없이 '#2. 모델 구성' 을 쓰는 문법만 다르다
 #  Sequential : model.add() 로 위에서 아래로 자동 연결
 #  함수형     : Input 층을 따로 만들고, 층마다 뒤에 (앞층) 을 붙여 직접 연결한 뒤
 #               Model(inputs=시작, outputs=끝) 으로 범위를 정해 완성
-# -> 층 구성을 그대로 옮겼으므로 keras41_dnn3 과 Total params 가 같아야 제대로 변환한 것
+# ※ 다만 이 파일의 층 구성은 keras41_dnn3(1024 시작 + BatchNormalization) 이 아니라 keras41_dnn1 과 같은 512 → 16 구성이다 (Total params 도 다르다)
 #
 # mnist / fashion 과 달라지는 점
 #  1) 32 x 32 x 3 컬러 -> 편면 컬럼이 784 가 아니라 3072 개
@@ -54,7 +54,7 @@ y_test = ohe.transform(y_test)         # test 는 그 기준으로 변환만
 
 print(y_train.shape, y_test.shape) # (50000, 10) (10000, 10)
 
-#2. 모델 구성 (함수형) - keras41_dnn3 과 층 / Dropout 위치가 똑같다
+#2. 모델 구성 (함수형) - keras41_dnn1 과 같은 Dense / Dropout 구성 (입력만 3072)
 # 변수 이름은 층마다 새로 붙인다 (dense1 / dense2 ...)
 # 앞 층과 같은 이름을 다시 쓰면 그 변수가 덮어써져서 해당 층이 모델 연결에서 빠진다
 input1 = Input(shape=(32*32*3,))                  # 입력층 : 컬럼 3072개 (Sequential 의 input_shape=(3072,))
@@ -80,7 +80,7 @@ output1 = Dense(10, activation='softmax')(drop3)
 model = Model(inputs=input1, outputs=output1)   # 시작(input1) ~ 끝(output1) 범위를 정해서 모델 완성
 
 model.summary()
-# Total params: 1,770,634  <- keras41_dnn3(Sequential) 과 같아야 제대로 변환한 것
+# Total params: 1,770,634  <- 입력 3072 짜리 dnn1 구성 기준 (keras41_dnn3 은 4,204,298 로 다르다)
 #  -> 첫 층 3072 x 512 + 512 = 1,573,376 으로 전체의 89% 를 차지한다
 
 #3. 컴파일, 훈련

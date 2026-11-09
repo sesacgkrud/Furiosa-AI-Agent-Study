@@ -1,5 +1,5 @@
 # keras24_kaggle_santander_categorical.py
-# keras22 에서 sigmoid(이진 분류)로 풀었던 산탄데르를 softmax(다중 분류) 방식으로 다시 푼다
+# [목적] keras22 에서 sigmoid(이진 분류)로 풀었던 산탄데르를 softmax(다중 분류) 방식으로 다시 푼다
 # 답이 0 / 1 두 개뿐이어도 원핫 + softmax(2칸) 으로 풀 수 있다 -> 두 방식의 캐글 점수를 비교하는 것이 목적
 # 제출 값도 달라진다 : sigmoid 는 확률(0.22...), 여기는 argmax 를 거친 0 또는 1
 
@@ -23,6 +23,7 @@ submission_csv = pd.read_csv(path + 'sample_submission.csv', index_col=0)
 x = train_csv.drop(['target'], axis=1)
 y = train_csv['target']
 
+# 클래스 개수 (0, 1 → 2)
 num_classes = len(np.unique(y))
 y = to_categorical(y, num_classes=num_classes)
 
@@ -31,6 +32,7 @@ x_train, x_test, y_train, y_test = train_test_split(
     y,
     train_size=0.7,
     random_state=777,
+    # stratify 에는 원핫(2 칸) 대신 argmax 로 되돌린 0 / 1 라벨을 넣는다
     stratify=np.argmax(y, axis=1)
 )
 

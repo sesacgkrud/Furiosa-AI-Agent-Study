@@ -1,5 +1,5 @@
 # keras19_overfit4_dacon_ddareung.py
-# 과적합 확인 : loss 와 val_loss 를 같이 그려서 val_loss 가 올라가기 시작하는 지점을 찾는다
+# [목적] 과적합 확인 : loss 와 val_loss 를 같이 그려서 val_loss 가 올라가기 시작하는 지점을 찾는다
 
 # https://dacon.io/competitions/open/235576/overview/description
 # [방법 1] train_test_split 을 2번 써서 x_val 을 직접 만들고 validation_data 로 넘기는 방식
@@ -101,9 +101,11 @@ plt.plot(hist.history['loss'], c='red', label='loss') # y값만 넣으면 시간
 plt.plot(hist.history['val_loss'], c='blue', label='val_loss')
 
 plt.legend(loc='upper right') # 우측 상단에 라벨 표시
+# 제목 'California' 는 베이스 파일에서 남은 글자 (이 파일은 따릉이 데이터)
 plt.title('California(캘리포니아) Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가

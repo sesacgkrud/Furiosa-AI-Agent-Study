@@ -1,5 +1,5 @@
 # keras29_5_save_weights.py
-# save_weights() : 가중치(숫자)만 저장한다. 모델 구조는 저장되지 않는다
+# [목적] save_weights() : 가중치(숫자)만 저장한다. 모델 구조는 저장되지 않는다
 # 확장자는 .weights.h5 로 끝나야 한다
 # fit 앞에서 저장하면 초기 가중치(save1), fit 뒤에서 저장하면 훈련된 가중치(save2)가 된다
 
@@ -51,10 +51,11 @@ model.add(Dense(1))
 
 # model.summary()
 
-########## [추가] 저장 위치를 훈련 '아래'로 옮긴다 ##########
-# keras29_1 은 여기서 save 를 했지만, 이 파일은 fit 아래에서 저장한다. (아래 save 주석 참고)
+########## [추가] fit 앞(save1) 과 fit 뒤(save2) 두 번 저장 ##########
+# 여기서 저장하는 save1 은 훈련 전 초기 가중치, 아래 fit 뒤의 save2 는 훈련된 가중치
 path = './_save/keras29/'
 # model.save(path + 'keras29_1_save_model.h5') # 예전 방식
+# 훈련 전 가중치 저장 (.weights.h5 로 끝나야 한다)
 model.save_weights(path + 'keras29_5_save1.weights.h5') # 최근 방식
 # model = load_model(path + 'keras29_1_save_model.keras')
 
@@ -82,7 +83,7 @@ hist = model.fit(x_train, y_train,
 
 ########## [추가] 훈련이 끝난 뒤에 저장 ##########
 # keras29_1 과 달리 save 가 fit '아래'에 있다.
-# 그래서 구조뿐 아니라 훈련된 가중치 + 옵티마이저 상태까지 저장된다. (6,001 -> 18,005)
+# save_weights 는 가중치 숫자만 저장한다 (구조 · 컴파일 정보 · 옵티마이저 상태는 저장하지 않는다 → 불러올 때 같은 구조를 먼저 만들어야 한다)
 # EarlyStopping 의 restore_best_weights=True 로 되돌린 '최적 가중치'가 저장되는 것이다.
 # model.save(path + 'keras29_3_save_model.keras')
 model.save_weights(path + 'keras29_5_save2.weights.h5')
@@ -129,7 +130,7 @@ plt.grid() # 격자 표시 추가
 plt.show()
 
 # ===== 실행 결과 (2026-09-11) =====
-# loss : 1.7271162271499634
+# loss : 1.7271162271499634  <- keras29_3 실행 결과를 베이스에서 복사해 둔 값 (이 파일의 실행 결과는 맨 아래 3.6324)
 # 가중치 초기값을 고정하지 않아서 돌릴 때마다 값이 달라진다. (관측값 1.1605 / 1.7271)
 # 저장 파일도 마지막 실행 것으로 덮어써지므로,
 # keras29_4 는 이 파일을 실행한 '직후'에 돌려야 같은 값이 나온다.

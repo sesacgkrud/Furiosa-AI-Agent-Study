@@ -1,5 +1,5 @@
 # keras52_optimizer04_dacon_ddareung.py
-# 따릉이 (회귀, [방법 1] - x_val 을 직접 만들어 validation_data 로 넘긴다) - learning_rate 직접 지정
+# [목적] 따릉이 (회귀, [방법 1] - x_val 을 직접 만들어 validation_data 로 넘긴다) - learning_rate 직접 지정
 # https://dacon.io/competitions/open/235576/overview/description
 # 스케일러는 keras28 에서 비교해 고른 RobustScaler 를 그대로 쓴다 (x_train / x_test / x_val 모두 변환)
 #
@@ -59,11 +59,11 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler
 from sklearn.preprocessing import RobustScaler
 scaler = RobustScaler()
 
-# scaler.fit(x_train) # sklearn 에서 fit -> 실행하다 로 생각
-# x_train = scaler.transform(x_train) # x에 있는 모든 데이터는 0~1 사이로 수렴
+# scaler.fit(x_train) # fit : 넣은 데이터로 컬럼별 변환 기준(Min/Max, 평균, 중앙값 등)을 계산해 scaler 안에 저장
+# x_train = scaler.transform(x_train) # 저장된 기준으로 값을 바꾼다 (MinMaxScaler 면 0~1 범위)
 x_train = scaler.fit_transform(x_train)
 
-x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_test = scaler.transform(x_test) # 저장된 기준으로 값을 바꾼다 (MinMaxScaler 면 0~1 범위)
 x_val = scaler.transform(x_val)
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
@@ -153,6 +153,7 @@ plt.legend(loc='upper right') # 우측 상단에 라벨 표시
 plt.title('ddareung Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가

@@ -1,7 +1,8 @@
-# keras36_cnn5_cifar10.py
-# cifar10 컬러 이미지 10종 분류 (비행기 / 자동차 / 새 / 고양이 ... ) - 컬러(3채널) 이미지를 처음 다뤘다 (목표 acc 0.67)
-# keras36_cnn3_mnist2.py 베이스
+# keras41_dnn3_cifar10.py
+# [목적] cifar10 컬러 이미지를 (50000, 3072) 로 펴서 Dense + BatchNormalization 만으로 분류하고 CNN 결과와 비교 (목표 : CNN 을 이겨라)
+# keras41_dnn1_mnist.py 베이스
 #
+# 아래 설명 블록은 베이스 파일에서 복사된 내용 (이 파일에서 새로 바뀐 점은 바로 위 [목적] 참고)
 # mnist / fashion 과 달라지는 점
 #  1) 32 x 32 x 3 컬러 -> load_data() 가 처음부터 (50000, 32, 32, 3) 4차원으로 준다
 #     => x 를 reshape 할 필요가 없다 (mnist 는 흑백이라 채널 1 을 직접 붙여야 했다)
@@ -52,8 +53,8 @@ y_test = ohe.transform(y_test)
 print(y_train.shape, y_test.shape) # (50000, 10) (10000, 10)
 
 #2. 모델 구성
-# mnist2 와 층 구성은 똑같지만 입력이 28x28 이 아니라 32x32 라 출력 크기가 전부 4씩 크다
-# padding 을 주지 않았으므로 (커널 크기 - 1) 만큼 줄어든다 : (3,3) -> 2씩, (5,5) -> 4씩
+# Conv2D 없이 Dense 를 두 개씩 묶고 묶음마다 BatchNormalization + Dropout
+# 입력은 32 x 32 x 3 = 3072 개 값을 한 줄로 편 2차원 (50000, 3072)
 model = Sequential()
 
 model.add(Dense(1024, activation='relu',input_shape=(3072,)))
@@ -83,8 +84,8 @@ model.add(Dense(32, activation='relu'))
 model.add(Dropout(0.2))
 model.add(Dense(10, activation='softmax'))                       # 10종 분류 -> 출력 10개 + softmax
 model.summary()
-# Total params: 6,724,490
-#  -> 입력이 4픽셀 커진 것뿐인데 Flatten 이 12800 -> 25088 로 두 배가 되면서 파라미터가 3,578,186 -> 6,724,490 이 됐다
+# Total params: 4,204,298  (이 파일의 층 구성으로 계산한 값)
+#  -> 첫 층 3072 x 1024 + 1024 = 3,146,752 가 대부분 (BatchNormalization 의 이동평균 · 이동분산 3,840 개는 Non-trainable)
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam',

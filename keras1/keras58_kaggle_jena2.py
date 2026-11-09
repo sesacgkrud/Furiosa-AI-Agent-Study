@@ -1,3 +1,9 @@
+# keras58_kaggle_jena2.py
+# [목적] keras58_kaggle_jena1 이 저장한 Jena npy 를 불러와, 직전 하루(144 시점 x 13 컬럼) 로 다음 하루 144 개의 기온 'T (degC)' 를 LSTM 으로 예측
+# [흐름] npy 로드 → StandardScaler (x 만) → split_x 로 (N, 144, 13) → train / test 분리 → LSTM(64) → Dense(144)
+#        → EarlyStopping + ModelCheckpoint → 마지막 하루 예측 RMSE
+# ※ 처음에는 y 를 풍향 'wd (deg)' 으로 실습했고 지금은 기온으로 바꿨다 (아래 '풍향' 이 들어간 주석 · 출력 문구는 그때 남은 것)
+
 import os
 os.environ['TF_GPU_ALLOCATOR'] = 'cuda_malloc_async'    # GPU 메모리 조각 모으기 (tensorflow import 전에 써야 한다)
 
@@ -25,7 +31,7 @@ y_cor = np.load(np_path + 'keras58_y_cor.npy')          # (144,)  정답 (채점
 #   2차원 (행, 13) 일 때 하면 reshape 없이 컬럼별로 바로 스케일링된다
 #   (split_x 후 3차원에서 하려면 reshape(-1, 13) → 스케일링 → 다시 reshape 해야 하고 메모리도 훨씬 많이 쓴다)
 #   fit 은 훈련 구간(x_data) 으로만 하고, x_predict 는 transform 만 한다 → 예측 구간 정보가 훈련에 새지 않는다
-#   y(풍향) 는 스케일링하지 않는다 → 예측값이 바로 0 ~ 360 도로 나온다
+#   y(기온 'T (degC)') 는 스케일링하지 않는다 → 예측값이 바로 섭씨 온도로 나온다
 scaler = StandardScaler()
 x_data = scaler.fit_transform(x_data)
 x_predict = scaler.transform(x_predict)
@@ -68,7 +74,7 @@ model = Sequential()
 model.add(LSTM(64, input_shape=(size, 13)))     # (None, 144, 13) → (None, 64)
 model.add(Dense(128, activation='relu'))
 model.add(Dense(64, activation='relu'))
-model.add(Dense(size))                          # 출력 144개 = 다음 하루 144개 시점의 풍향
+model.add(Dense(size))                          # 출력 144개 = 다음 하루 144개 시점의 기온
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
@@ -106,12 +112,14 @@ print('loss :', loss)
 y_predict = model.predict(x_predict)    # (1, 144)
 y_predict = y_predict.reshape(-1)       # (144,) → 정답 y_cor 와 모양을 맞춘다
 
-# RMSE : 예측값과 정답의 차이를 "원래 단위(도)" 로 보여준다
-#   mse 는 제곱이라 단위가 도² → 루트를 씌워 몇 도 정도 틀렸는지로 해석한다
+# RMSE : 예측값과 정답의 차이를 "원래 단위(℃)" 로 보여준다
+#   mse 는 제곱이라 단위가 ℃² → 루트를 씌워 몇 도 정도 틀렸는지로 해석한다
 rmse = np.sqrt(mean_squared_error(y_cor, y_predict))
+# 출력 문구의 '풍향' 은 y 를 풍향으로 실습하던 때 남은 글자 (지금 y 는 기온)
 print('2016.12.31 00:10 ~ 2017.01.01 00:00 풍향 RMSE :', rmse)
 print('걸린 시간 :', round(end_time - start_time, 2), '초')
 
+# 아래 3 블록 중 '참고' 와 첫 번째 결과는 y 가 풍향이던 첫 실행 기록, 맨 아래 '결과' 가 기온으로 바꾼 뒤의 기록
 # 참고) 풍향(deg) 은 0 도와 360 도가 같은 방향(북쪽)인 "원형" 값이다
 #   mse 는 359 도와 1 도를 358 도 차이로 계산하므로, 풍향은 원래 맞추기 어려운 타깃이다
 

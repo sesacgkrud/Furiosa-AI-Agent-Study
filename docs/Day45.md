@@ -578,16 +578,16 @@ for chunk in llm.stream("NPU와 GPU의 차이점을 설명해줘"):
 | `ml/m08_GridSearchCV_00.py` | iris `GridSearchCV` + `XGBClassifier` 42 조합 × `StratifiedKFold` 5 → `best_params_` · `best_score_` |
 | `ml/m08_GridSearchCV_01_digits.py` | digits `GridSearchCV` + `XGBClassifier` |
 | `ml/m08_GridSearchCV_02_diabetes.py` | diabetes `GridSearchCV` + `XGBRegressor` + `KFold` (R2) |
-| `rngd/f05_langchain.py` | `ChatOpenAI` 로 furiosa-llm 서버(Qwen3-4B-FP8) 호출 → `llm.invoke` |
-| `rngd/f06_tps.py` | `time.perf_counter` 로 추론 시간 측정 → 초당 토큰 수 계산 |
-| `rngd/f07_stream01.py` | OpenAI 클라이언트 `stream=True` → `delta.content` 스트리밍 출력 |
-| `rngd/f07_stream02_lc.py` | LangChain `llm.stream` 스트리밍 출력 |
-| `rngd/a_kingkeras.py` | `get_llm()` — `ChatOpenAI` 설정을 함수로 만든 모듈 |
-| `rngd/f08_pkg01_invoke.py` | `from a_kingkeras import get_llm` → 값을 바꿔 `invoke` |
-| `rngd/f08_pkg02_stream.py` | `get_llm()` 기본값으로 `stream` |
+| `furiosa01_rngd/f05_langchain.py` | `ChatOpenAI` 로 furiosa-llm 서버(Qwen3-4B-FP8) 호출 → `llm.invoke` |
+| `furiosa01_rngd/f06_tps.py` | `time.perf_counter` 로 추론 시간 측정 → 초당 토큰 수 계산 |
+| `furiosa01_rngd/f07_stream01.py` | OpenAI 클라이언트 `stream=True` → `delta.content` 스트리밍 출력 |
+| `furiosa01_rngd/f07_stream02_lc.py` | LangChain `llm.stream` 스트리밍 출력 |
+| `furiosa01_rngd/a_kingkeras.py` | `get_llm()` — `ChatOpenAI` 설정을 함수로 만든 모듈 |
+| `furiosa01_rngd/f08_pkg01_invoke.py` | `from a_kingkeras import get_llm` → 값을 바꿔 `invoke` |
+| `furiosa01_rngd/f08_pkg02_stream.py` | `get_llm()` 기본값으로 `stream` |
 | `docs/Day45.md` | Day45 학습 기록 신규 작성 |
 | `docs/Day44.md` | 하단 nav에 Day45 링크 추가 (수정) |
-| `README.md` | 학습 일지 / 디렉토리 구조(python/ · ml/ · rngd/ Day45) / 진행도(45일, 56%) 갱신 (수정) |
+| `README.md` | 학습 일지 / 디렉토리 구조(python/ · ml/ · furiosa01_rngd/ Day45) / 진행도(45일, 56%) 갱신 (수정) |
 
 ---
 

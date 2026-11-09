@@ -1,5 +1,5 @@
 # keras06_batch.py
-# batch_size : 데이터를 몇 개씩 잘라서 가중치를 갱신할지 정한다 (기본값 32)
+# [목적] batch_size : 데이터를 몇 개씩 잘라서 가중치를 갱신할지 정한다 (기본값 32)
 #              작게 자를수록 1 epoch 안에서 갱신 횟수가 늘어난다 -> 훈련은 촘촘해지지만 시간이 오래 걸린다
 
 from tensorflow.keras.models import Sequential
@@ -12,7 +12,7 @@ y = np.array([1,2,3,5,4,6])
 
 #2. 모델 구성
 model = Sequential()
-model.add(Dense(500, input_dim=1)) # input_dim=1 : 1개의 백터
+model.add(Dense(500, input_dim=1)) # input_dim=1 : 입력 컬럼(특성) 1개
 model.add(Dense(250)) # input_dim 생략 가능
 model.add(Dense(1)) # input_dim 생략 가능
 

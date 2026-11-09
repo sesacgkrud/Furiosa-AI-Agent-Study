@@ -1,4 +1,10 @@
 # rag11_Chroma01_save.py 베이스
+#
+# [목적] Chroma 대신 FAISS 벡터 DB 에 samsung · nvidia 청크를 저장 (Day21)
+# [흐름] TextLoader → RecursiveCharacterTextSplitter(300 / 100) → OpenAIEmbeddings → FAISS.from_documents → save_local
+# ※ 52 행의 faiss.IndexFlatL2 는 FAISS 가 내부에서 쓰는 인덱스(유클리드 거리) 를 직접 만들어 본 것이고,
+#   실제 저장에 쓰인 db 는 from_documents 가 인덱스를 새로 만든다 (faiss_index 는 사용되지 않음)
+
 
 import os
 from langchain_community.document_loaders import TextLoader
@@ -49,6 +55,7 @@ embeddings = OpenAIEmbeddings(
 )
 
 #05. FAISS
+# 임베딩 차원(1536) 짜리 L2(유클리드 거리) 인덱스
 faiss_index = faiss.IndexFlatL2(len(embeddings.embed_query('Hello World!'))) # 검색 기반 : 유클리드 거리
 # faiss_index = faiss.IndexFlatL2(1536)
 # print('FAISS 인덱스 초기화 준비 완료')
@@ -68,12 +75,14 @@ faiss_index = faiss.IndexFlatL2(len(embeddings.embed_query('Hello World!'))) # �
 
 #################### 준비 완료 ####################
 
+# 청크 18 개를 임베딩해서 FAISS 인덱스 + 문서 저장소를 한 번에 만든다
 db = FAISS.from_documents(
     documents=split_doc1 + split_doc2,
     embedding=embeddings,
 )
 
 DB_PATH = './_db/Faiss17'
+# 폴더에 index_name.faiss (벡터) 와 index_name.pkl (문서 · id) 두 파일로 저장
 db.save_local(
     folder_path=DB_PATH,
     index_name='faiss_index17'

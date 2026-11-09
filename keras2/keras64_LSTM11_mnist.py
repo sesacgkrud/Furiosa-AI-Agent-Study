@@ -1,4 +1,9 @@
 # keras1/keras43_hamsu01_mnist.py 베이스
+#
+# [목적] keras42 의 mnist (다중 분류, 함수형) Conv2D 모델을 LSTM 으로 바꿔, 컬럼(또는 이미지 행) 을 시점으로 순서대로 읽게 하고 결과 비교
+# [흐름] 데이터 → split → 스케일링 → reshape (N, 28, 28) - 28 x 28 이미지의 행 28 개를 시점으로 → LSTM → Dense → EarlyStopping (+ ModelCheckpoint) → 평가
+# ※ [LSTM] 표시 주석이 베이스(keras42 / keras43) 에서 바뀐 부분
+
 
 import numpy as np
 import time

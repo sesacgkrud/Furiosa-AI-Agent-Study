@@ -1,5 +1,5 @@
 # keras03.py
-# y 값을 [1,2,4,3,5] 로 바꿔서 일직선으로 못 맞추는 데이터를 준다 -> loss 가 0 까지 내려가지 않는다
+# [목적] y 값을 [1,2,4,3,5] 로 바꿔서 일직선으로 못 맞추는 데이터를 준다 -> loss 가 0 까지 내려가지 않는다
 # 이럴 때는 epochs 를 늘려가며 loss 를 목표치까지 낮추는 연습을 한다
 
 from tensorflow.keras.models import Sequential
@@ -16,6 +16,7 @@ model.add(Dense(1, input_dim=1))
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
+# epochs 를 늘려 가며 loss 목표(0.35) 에 맞춰 본다
 model.fit(x, y, epochs=900)
 
 #4. 평가, 예측

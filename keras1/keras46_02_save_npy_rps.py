@@ -1,5 +1,5 @@
 # keras46_02_save_npy_rps.py
-# rps(가위바위보) 이미지 3종 분류
+# [목적] rps(가위바위보) 이미지 3종 분류
 #
 # [ 이 파일이 하는 일 ]
 #  1) ImageDataGenerator 로 폴더의 이미지를 읽어 x, y 를 만든다

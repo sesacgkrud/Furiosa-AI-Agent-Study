@@ -1,5 +1,5 @@
 # keras52_ReduceLR03_boston.py
-# 보스턴 집값 (회귀) - ReduceLROnPlateau 로 훈련 도중 learning_rate 를 줄인다
+# [목적] 보스턴 집값 (회귀) - ReduceLROnPlateau 로 훈련 도중 learning_rate 를 줄인다
 # 스케일러(RobustScaler)와 learning_rate 후보는 keras52_optimizer 파일 그대로다
 #
 # [ 오늘 추가되는 곳은 콜백 하나다 ]
@@ -33,7 +33,7 @@ scaler = RobustScaler()
 
 x_train = scaler.fit_transform(x_train)
 
-x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_test = scaler.transform(x_test) # 저장된 기준으로 값을 바꾼다 (MinMaxScaler 면 0~1 범위)
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0000000000000002
 print('Min :', np.min(x_test), 'Max :', np.max(x_test)) # Min : -0.0019120458891013214 Max : 1.1478180091225068
@@ -113,6 +113,7 @@ plt.legend(loc='upper right') # 우측 상단에 라벨 표시
 plt.title('Boston Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가

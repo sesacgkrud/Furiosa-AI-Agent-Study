@@ -1,4 +1,9 @@
 # rag14_Chroma_pipeline2.py 베이스
+#
+# [목적] rag14 의 RAG 체인을 Gradio ChatInterface 웹 챗봇 화면으로 띄운다 (Day20)
+# [흐름] Chroma12 → retriever → rag_chain → answer_invoke(message, history) 에서 rag_chain.invoke → gr.ChatInterface → launch
+# ※ rag14 의 체인 실행 부분은 ''' ''' 로 막아 두었다
+
 
 import os
 from langchain_community.document_loaders import TextLoader
@@ -106,13 +111,17 @@ print(response['answer'])                                        # 주어진 정
 #################### Gradio 챗봇 ####################
 import gradio as gr
 
+# Gradio 가 부르는 함수 : message = 이번 입력, history = 지난 대화 (여기서는 사용하지 않음)
 def answer_invoke(message, history):
     response = rag_chain.invoke({'input' : message})
+    # 답변 문자열만 화면에 돌려준다
     return response['answer']
 
 # Gradio 인터페이스 생성
+# 채팅 화면 생성 (입력창 + 대화창)
 demo = gr.ChatInterface(fn=answer_invoke, title='AI Chat Bot')
 
 # Gradio 실행
+# 로컬 주소(http://127.0.0.1:7860) 로 웹 화면 실행
 demo.launch()
 # demo.launch(share=True) # 배포 URL 제공

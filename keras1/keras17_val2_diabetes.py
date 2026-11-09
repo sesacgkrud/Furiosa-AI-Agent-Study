@@ -1,5 +1,5 @@
 # keras17_val2_diabetes.py
-# [방법 1] train_test_split 을 2번 써서 x_val 을 직접 만들고 validation_data 로 넘기는 방식
+# [목적] [방법 1] train_test_split 을 2번 써서 x_val 을 직접 만들고 validation_data 로 넘기는 방식
 
 from sklearn.datasets import load_diabetes   # [변경] 안 쓰는 fetch_california_housing import 제거
 from tensorflow.keras.models import Sequential

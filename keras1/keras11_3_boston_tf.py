@@ -1,5 +1,5 @@
 # keras11_3_boston_tf.py
-# 보스턴 집값 데이터(회귀) : 케라스가 주는 데이터는 처음부터 train / test 로 나뉘어서 들어온다
+# [목적] 보스턴 집값 데이터(회귀) : 케라스가 주는 데이터는 처음부터 train / test 로 나뉘어서 들어온다
 # 그래서 train_test_split 없이 바로 쓴다
 
 from tensorflow.keras.models import Sequential
@@ -7,6 +7,7 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.datasets import boston_housing
 
 #1. 데이터
+# load_data() 가 ((x_train, y_train), (x_test, y_test)) 튜플 2 개를 돌려준다
 (x_train, y_train), (x_test, y_test) = boston_housing.load_data()
 print(x_train.shape, x_test.shape) # (404, 13) (102, 13)
 print(y_train.shape, y_test.shape) # (404,) (102,)

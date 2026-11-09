@@ -1,5 +1,5 @@
 # keras16_validation1.py
-# validation(검증) 데이터를 추가한다 : train 6개 / val 2개 / test 2개로 나눈다
+# [목적] validation(검증) 데이터를 추가한다 : train 6개 / val 2개 / test 2개로 나눈다
 # val_loss : 훈련 중에 매 epoch 마다 "안 배운 데이터" 로 재 보는 성적 -> 과적합을 미리 알아채는 기준이 된다
 # test 는 마지막 평가에만 쓰고, 훈련 중에는 절대 보지 않는다
 
@@ -34,9 +34,10 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam')
 model.fit(x_train, y_train, epochs=100, batch_size=4,
         #   verbose=0, # 훈련되는 과정 생략, 자원 절약을 위한 방법
-          verbose=1, # (deafult)
+          verbose=1, # (default)
         #   verbose=2, # (progress bar 생략)
         #   나머지 -> epoch만 표시
+          # 매 epoch 끝마다 val 데이터로 val_loss 를 계산해서 출력 (가중치 갱신에는 쓰지 않는다)
           validation_data=(x_val, y_val),
           )
 

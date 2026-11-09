@@ -1,5 +1,5 @@
 # keras45_03_catdog_save_npy.py
-# keras44_ImageDataGenerator3_CatDog.py 베이스 - cat_dog 데이터를 ImageDataGenerator 로 읽어 npy 로 저장한다
+# [목적] keras44_ImageDataGenerator3_CatDog.py 베이스 - cat_dog 데이터를 ImageDataGenerator 로 읽어 npy 로 저장한다
 # 8005 장을 폴더에서 읽는 데 시간이 오래 걸리므로, 한 번 읽은 결과를 npy 로 저장해 두고
 # 다음부터는 keras45_04 처럼 np.load 로 바로 불러 쓴다
 
@@ -30,8 +30,8 @@ xy_train = train_datagen.flow_from_directory( # 해당 경로에서 가져오기
     path_train,               # 경로
     target_size=(100,100),    # 설정한 크기대로 이미지를 수정
     batch_size=8005,
-    class_mode='binary',      # 이진 분류 (ad, normal)
-    color_mode='rgb',         # 흑백 -> 출력 형태 : (batch, x, y, 1)
+    class_mode='binary',      # 이진 분류 (cat 0 / dog 1)
+    color_mode='rgb',         # 컬러 -> 출력 형태 : (batch, x, y, 3)
     shuffle=True,
 )
 # 실행 결과 : Found 8005 images belonging to 2 classes.
@@ -40,8 +40,8 @@ xy_test = test_datagen.flow_from_directory(
     path_test,                # 경로
     target_size=(100,100),    # 설정한 크기대로 이미지를 수정
     batch_size=2023,
-    class_mode='binary',      # 이진 분류 (ad, normal)
-    color_mode='rgb',         # 흑백 -> 출력 형태 : (batch, x, y, 1)
+    class_mode='binary',      # 이진 분류 (cat 0 / dog 1)
+    color_mode='rgb',         # 컬러 -> 출력 형태 : (batch, x, y, 3)
     shuffle=False,            # train에서 했기 때문에 필요 없음
 )
 # 실행 결과 : Found 2023 images belonging to 2 classes.

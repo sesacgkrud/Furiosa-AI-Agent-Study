@@ -1,3 +1,7 @@
+# keras56_split1.py
+# [목적] split_x 함수로 1 ~ 10 시계열을 5 개씩 한 칸씩 밀며 잘라 (x 4 개 → y 1 개) LSTM 데이터를 만들고 11 을 예측
+# [흐름] split_x(a, 5) → (6, 5) → x = 앞 4 개 / y = 마지막 1 개 → reshape (6, 4, 1) → x / 10 스케일링 → LSTM(linear) → [7, 8, 9, 10] 다음 값 예측
+
 import numpy as np
 
 a = np.array(range(1, 11))

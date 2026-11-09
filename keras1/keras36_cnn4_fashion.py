@@ -1,5 +1,5 @@
 # keras36_cnn4_fashion.py
-# fashion_mnist 의류 이미지 10종 분류 - padding='same' 과 strides 를 처음 적용한 파일 (목표 acc 0.92)
+# [목적] fashion_mnist 의류 이미지 10종 분류 - padding='same' 과 strides 를 처음 적용한 파일 (목표 acc 0.92)
 # keras36_cnn3_mnist2.py 베이스
 #
 # 새로 쓴 것

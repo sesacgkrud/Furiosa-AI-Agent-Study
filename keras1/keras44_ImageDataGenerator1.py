@@ -1,3 +1,9 @@
+# keras44_ImageDataGenerator1.py
+# [목적] ImageDataGenerator 로 폴더(brain/train · test) 의 이미지를 읽어 오는 방법과, 읽어 온 데이터(DirectoryIterator) 의 구조를 확인
+# [흐름] ImageDataGenerator(rescale + 증폭 옵션) → flow_from_directory(경로, 크기, batch_size, class_mode, color_mode)
+#        → xy_train[배치 번호][0 = x / 1 = y] 로 꺼내 모양 · 타입 확인
+# ※ 폴더 이름(ad / normal) 이 알파벳 순서로 0 / 1 라벨이 된다
+
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator
 
@@ -5,9 +11,9 @@ train_datagen = ImageDataGenerator(
     rescale=1./255,           # 필수
     horizontal_flip=True,     # 수평 뒤집기 (필수x)
     vertical_flip=True,       # 수직 뒤집기 (필수x)
-    width_shift_range=0.1,    # 평형 이동 (필수x)
+    width_shift_range=0.1,    # 평행 이동 (필수x)
     height_shift_range=0.1,   # (필수x)
-    rotation_range=5,         # r각도 조절 (정해진 각도만큼 이미지 회전) (필수x)
+    rotation_range=5,         # 각도 조절 (정해진 각도만큼 이미지 회전) (필수x)
     zoom_range=1.2,           # (필수x)
     shear_range=0.7,          # 좌표 하나를 고정하고 다른 몇 개의 좌표를 이동 (필수x)
     fill_mode='nearest',      # (필수x)

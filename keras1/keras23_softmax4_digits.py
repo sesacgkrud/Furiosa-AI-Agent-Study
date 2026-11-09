@@ -1,5 +1,5 @@
 # keras23_softmax4_digits.py
-# 손글씨 숫자 0 ~ 9 분류 : 8 x 8 이미지를 펼친 64개 값이 특성이 된다
+# [목적] 손글씨 숫자 0 ~ 9 분류 : 8 x 8 이미지를 펼친 64개 값이 특성이 된다
 # 다중 분류 3종 세트
 #  1) y 를 원핫 인코딩 : 0, 1, 2 를 [1,0,0] [0,1,0] [0,0,1] 로 바꾼다 (숫자 크기에 순서 의미가 생기지 않게)
 #  2) 출력층 activation = softmax, 노드 수 = 클래스 개수 -> 칸별 확률이 나오고 다 더하면 1
@@ -20,7 +20,7 @@ from sklearn.datasets import load_digits
 #1. 데이터
 datasets = load_digits()
 # print(datasets.DESCR)
-# print(datasets.feature_names) # (1797, 64)
+# print(datasets.feature_names) # ['pixel_0_0', ..., 'pixel_7_7'] 64 개
 
 x = datasets.data
 y = datasets['target']
@@ -42,8 +42,8 @@ x_train, x_test, y_train, y_test = train_test_split(
     stratify=y,
 )
 
-print(x_train.shape, x_test.shape) # (1257, 64) (540, 64)
-print(y_train.shape, y_test.shape) # (1257, 10) (540, 10)
+print(x_train.shape, x_test.shape) # (1078, 64) (719, 64)  <- train_size=0.6
+print(y_train.shape, y_test.shape) # (1078, 10) (719, 10)
 
 #2. 모델 구성
 model = Sequential()

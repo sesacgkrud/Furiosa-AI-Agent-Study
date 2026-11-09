@@ -1,5 +1,5 @@
 # keras30_ModelCheckPoint3.py
-# MCP 저장 파일명에 날짜 + epoch + val_loss 를 넣어서 실행할 때마다 다른 이름으로 남긴다
+# [목적] MCP 저장 파일명에 날짜 + epoch + val_loss 를 넣어서 실행할 때마다 다른 이름으로 남긴다
 #  date = datetime.now().strftime('%m%d_%H%M')  -> 0914_1147
 #  filename = '{epoch:04d}_{val_loss:.4f}.keras' -> 케라스가 실제 값을 채워 준다 (0530_0.2634.keras)
 # -> 파일명만 보고 언제 돌린 몇 번째 epoch 인지, 그때 val_loss 가 얼마였는지 알 수 있다
@@ -53,7 +53,7 @@ model.add(Dense(50))
 model.add(Dense(1))
 
 #3. 컴파일, 훈련
-model.compile(loss='mse', optimizer='adam') # weights만 불러왔기 때문에 있어야 함
+model.compile(loss='mse', optimizer='adam') # 새로 만든 모델이라 compile 후 fit
 
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 es = EarlyStopping(
@@ -76,6 +76,7 @@ print(type(date)) # <class 'str'>
 
 path = './_save/keras30/'
 filename = '{epoch:04d}_{val_loss:.4f}.keras'
+# join : 리스트 안의 문자열을 '' (빈 문자열) 로 이어 붙인다 → ./_save/keras30/k30_0914_1147_{epoch:04d}_{val_loss:.4f}.keras
 filepath = ''.join([path, 'k30_', date, '_', filename])
 
 ## 내가 생각하는 파일명 예)
@@ -140,6 +141,7 @@ plt.xlabel('loss')
 plt.grid() # 격자 표시 추가
 plt.show()
 
+# 아래 결과는 베이스(keras30_ModelCheckPoint1) 에서 복사된 기록 (이 파일은 저장 파일 이름만 다르고 구조는 같다)
 # ===== 실행 결과 (2026-09-11) =====
 # loss : 1.7271162271499634
 # 가중치 초기값을 고정하지 않아서 돌릴 때마다 값이 달라진다. (관측값 1.1605 / 1.7271)

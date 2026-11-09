@@ -1,5 +1,5 @@
 # keras13_ddareung01.py
-# 따릉이 대여량 예측 (데이콘) : csv 파일로 된 실제 대회 데이터를 처음 다뤄 본다
+# [목적] 따릉이 대여량 예측 (데이콘) : csv 파일로 된 실제 대회 데이터를 처음 다뤄 본다
 # 핵심 3가지
 #  1) pd.read_csv(index_col=0) 로 id 열을 인덱스로 빼서 컬럼 수를 맞춘다
 #  2) 결측치(빈 칸)를 dropna() 로 지운다 -> 1459 행 -> 1328 행
@@ -36,7 +36,7 @@ submission = pd.read_csv(path + "submission.csv", index_col=0)
 # print(submission) # [715 rows x 1 columns]
 
 # print(train_csv.shape) # (1459, 10)
-# print(test_csv.shape) # (715, 9) evaluate 사용 불가, test 데이터로 submission을 맞추야 하기 위한 파일
+# print(test_csv.shape) # (715, 9) evaluate 사용 불가 (정답 count 가 없음), 예측값을 submission 에 채워 제출하기 위한 파일
 # print(submission.shape) # (715, 1)
 
 # print(train_csv.columns)
@@ -98,6 +98,7 @@ train_csv = train_csv.dropna()
 # print(train_csv) # [1328 rows x 10 columns]
 
 # ★★★ train_csv를 x와 y로 분리 ★★★
+# axis=1 : count 열(컬럼) 을 지운다 → 나머지 9 개 컬럼이 x
 x = train_csv.drop(['count'], axis=1)
 print(x)
 '''
@@ -159,12 +160,13 @@ print("========== ========== ========== ========== ==========")
 loss = model.evaluate(x_test, y_test, )
 
 print("loss(mse) :", loss)
+# .ravel() : (n, 1) 예측값을 1 차원 (n,) 으로 펴서 y_test 와 모양을 맞춘다
 y_predict = model.predict(x_test).ravel()
 
 from sklearn.metrics import r2_score, mean_squared_error # 평가할 때 주로 사용
 # scikit-learn에서 R²(결정계수)를 계산하는 함수를 가져옴
 
-r2 = r2_score(y_test, y_predict) # 원값과 예측값 비교 -> loss
+r2 = r2_score(y_test, y_predict) # 원값과 예측값 비교 -> R2 점수
 
 print("r2 :", r2)
 

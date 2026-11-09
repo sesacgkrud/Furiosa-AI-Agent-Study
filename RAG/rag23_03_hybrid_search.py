@@ -1,4 +1,8 @@
 # rag23_02_vector_search.py 베이스
+#
+# [목적] BM25(키워드) 와 벡터(의미) 검색기를 EnsembleRetriever 로 합친 hybrid 검색 (Day25)
+# [흐름] BM25Retriever(k=3) + Chroma12 불러온 vector_retriever(k=3) → EnsembleRetriever(weights 0.5 / 0.5) → invoke
+
 # [변경] BM25 검색기 + 벡터 검색기를 EnsembleRetriever 로 합쳐 hybrid 검색을 한다
 #   - BM25 (키워드가 글자 그대로 같은 문서) + 벡터 (의미가 가까운 문서) → 두 방식의 장점을 같이 쓴다
 #   - 벡터 DB 는 rag23_02 에서 저장한 Chroma12 를 Chroma(...) 로 불러온다 (from_documents 로 다시 저장하지 않는다)

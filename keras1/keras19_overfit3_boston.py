@@ -1,6 +1,6 @@
 # keras19_overfit3_boston.py
 # keras17_val3_boston.py 베이스
-# 과적합 확인 : loss 와 val_loss 를 같이 그려서 val_loss 가 올라가기 시작하는 지점을 찾는다
+# [목적] 과적합 확인 : loss 와 val_loss 를 같이 그려서 val_loss 가 올라가기 시작하는 지점을 찾는다
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -50,6 +50,7 @@ import matplotlib.pyplot as plt
 plt.rcParams['font.family'] ='Malgun Gothic' # 글자 깨짐 해결
 
 plt.figure(figsize=(9,6))
+# [10:] : 처음 10 epoch 은 loss 가 너무 커서 그래프가 납작해지므로 빼고 그린다
 plt.plot(hist.history['loss'][10:], c='red', label='loss') # y값만 넣으면 시간 순으로 그림
 plt.plot(hist.history['val_loss'][10:], c='blue', label='val_loss')
 
@@ -57,10 +58,12 @@ plt.legend(loc='upper right') # 우측 상단에 라벨 표시
 plt.title('Boston Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가
 plt.show()
 
+# 훈련 마지막 epoch 의 loss / val_loss, 그리고 x_test 평가 loss
 # loss: 5.4735 - val_loss: 19.2607
 # loss: 23.0719

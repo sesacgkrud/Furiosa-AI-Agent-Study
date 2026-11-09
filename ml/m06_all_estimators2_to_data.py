@@ -3,7 +3,7 @@
 # [목적]
 # m06_1 의 "여러 데이터셋 × all_estimators 전체 모델" 비교를 회귀 모델(regressor) 로 바꿔
 # california · diabetes 회귀 데이터에 적용하고, 데이터별 최고 모델을 찾는다
-# - all_estimators(type_filter="regressor") · load_california_housing · load_diabetes
+# - all_estimators(type_filter="regressor") · fetch_california_housing · load_diabetes
 # - 회귀라서 y 가 연속값 → train_test_split 의 stratify 를 빼고, StratifiedKFold 대신 KFold 를 쓴다
 #   (StratifiedKFold 는 클래스 비율을 맞추는 방식이라 연속값 y 에는 쓸 수 없다)
 # - 평가는 accuracy_score → r2_score

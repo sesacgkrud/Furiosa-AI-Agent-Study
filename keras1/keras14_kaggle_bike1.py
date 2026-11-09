@@ -1,5 +1,5 @@
 # keras14_kaggle_bike1.py
-# 캐글 자전거 대여량 예측 : 따릉이와 같은 흐름이지만 x 를 만들 때 지워야 할 컬럼이 더 있다
+# [목적] 캐글 자전거 대여량 예측 : 따릉이와 같은 흐름이지만 x 를 만들 때 지워야 할 컬럼이 더 있다
 # casual + registered = count 라서 둘을 x 에 남기면 정답을 그대로 알려 주는 셈이 된다 -> 3개를 같이 drop
 # 제출용 test.csv 에는 이 두 컬럼이 아예 없어서 컬럼 수(8개)를 맞추려면 반드시 지워야 한다
 
@@ -57,7 +57,7 @@ x_train, x_test, y_train, y_test = train_test_split(
 model = Sequential()
 model.add(Dense(32, input_dim=8, activation='relu'))
 model.add(Dense(16, activation='relu'))
-model.add(Dense(1, activation='relu')) # 통상적으로 마지막에는 relu 넣지 않음
+model.add(Dense(1, activation='relu')) # 회귀 출력층은 보통 활성화 없이(linear) 두지만, 대여량은 음수가 없어서 relu 로 음수 예측을 0 으로 막아 본 것 (4차 시도)
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
@@ -84,6 +84,7 @@ rmse = RMSE(y_test, y_predict)
 print("RMSE :", rmse)
 
 ##### submission.csv 만들기 // count 컬럼에 값 넣기 #####
+# test.csv (정답 없음) 6493 행을 예측 → sampleSubmission 의 count 에 채워 저장
 y_submit = model.predict(test_csv)
 
 submission['count'] = y_submit

@@ -140,10 +140,10 @@ print(response.choices[0].message.content)
 |---|---|
 | `ml/m02_kfold_00_iris.py` | iris 분류 `KFold(n_splits=5, shuffle=True)` + `cross_val_score` → fold별 accuracy · 평균 |
 | `ml/m02_kfold_01_california.py` | california 회귀 `DecisionTreeRegressor` + `cross_val_score` → fold별 R2 · 평균 |
-| `rngd/f01_furiosa_test.py` | RNGD 에 `furiosa-llm serve` 로 띄운 모델을 OpenAI 클라이언트(`base_url` 로컬 서버)로 호출 |
+| `furiosa01_rngd/f01_furiosa_test.py` | RNGD 에 `furiosa-llm serve` 로 띄운 모델을 OpenAI 클라이언트(`base_url` 로컬 서버)로 호출 |
 | `docs/Day42.md` | Day42 학습 기록 신규 작성 |
 | `docs/Day41.md` | 하단 nav에 Day42 링크 추가 (수정) |
-| `README.md` | 학습 일지 / 디렉토리 구조(ml/ · rngd/ Day42) / 진행도(42일, 53%) 갱신 (수정) |
+| `README.md` | 학습 일지 / 디렉토리 구조(ml/ · furiosa01_rngd/ Day42) / 진행도(42일, 53%) 갱신 (수정) |
 
 ---
 

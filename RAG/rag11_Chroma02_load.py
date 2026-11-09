@@ -30,8 +30,8 @@ base_url = 'https://monogpt.kr/api/monorouter/v1'
 #     separators=['\n\n', '\n', ' ', '']              # 통상적인 default
 # )
 
-# split_doc1 = loader1.load_and_split(text_splitter)  # 청크 300, 오버랩 100 (위에서 설정한) 기준으로 데이터 분 (samsung)
-# split_doc2 = loader2.load_and_split(text_splitter)  # 청크 300, 오버랩 100 (위에서 설정한) 기준으로 데이터 분 (nvidia)
+# split_doc1 = loader1.load_and_split(text_splitter)  # 청크 300, 오버랩 100 (위에서 설정한) 기준으로 데이터 분할 (samsung)
+# split_doc2 = loader2.load_and_split(text_splitter)  # 청크 300, 오버랩 100 (위에서 설정한) 기준으로 데이터 분할 (nvidia)
 
 #03. 문서 길이 확인
 # print(split_doc1)

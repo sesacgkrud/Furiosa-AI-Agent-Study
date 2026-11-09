@@ -1,5 +1,5 @@
 # keras11_1_california.py
-# 사이킷런이 주는 실제 데이터(캘리포니아 집값)로 처음 훈련해 본다 (회귀 : 집값이라는 숫자를 맞힌다)
+# [목적] 사이킷런이 주는 실제 데이터(캘리포니아 집값)로 처음 훈련해 본다 (회귀 : 집값이라는 숫자를 맞힌다)
 # datasets.data = x(특성 8개), datasets.target = y(정답) -> x 의 열 개수가 곧 input_dim
 
 from sklearn.datasets import fetch_california_housing
@@ -20,6 +20,7 @@ y = datasets.target
 
 # print(x.shape, y.shape) # (20640, 8) (20640,)
 
+# train_size 를 안 주면 기본 train 75% / test 25%
 x_train, x_test, y_train, y_test = train_test_split(
     x, y,
     random_state=100,
@@ -43,6 +44,7 @@ loss = model.evaluate(x_test, y_test)
 print("loss :", loss)
 
 #4. 평가 예측
+# 전체 데이터로 한 번 더 평가 (train 이 섞여 있어 참고용)
 loss = model.evaluate(x, y)
 print("loss :", loss)
 

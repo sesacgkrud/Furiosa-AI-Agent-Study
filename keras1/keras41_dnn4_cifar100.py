@@ -1,5 +1,5 @@
 # keras41_dnn4_cifar100.py
-# cifar100 컬러 이미지 100종 분류를 Conv2D 없이 Dense 만으로 (목표 : CNN 을 이겨라)
+# [목적] cifar100 컬러 이미지 100종 분류를 Conv2D 없이 Dense 만으로 (목표 : CNN 을 이겨라)
 # keras41_dnn3_cifar10.py 베이스 - 층 구성 / BatchNormalization 위치 / 훈련 조건을 똑같이 맞췄다
 #
 # dnn3 와 달라지는 점

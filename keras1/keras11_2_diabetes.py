@@ -1,5 +1,5 @@
 # keras11_2_diabetes.py
-# 당뇨 수치 데이터(회귀) : 특성 10개로 1년 뒤 병의 진행도를 예측한다
+# [목적] 당뇨 수치 데이터(회귀) : 특성 10개로 1년 뒤 병의 진행도를 예측한다
 # 데이터가 442개로 적어서 random_state 에 따라 loss 가 크게 흔들린다
 
 from sklearn.datasets import fetch_california_housing, load_diabetes
@@ -40,6 +40,7 @@ print("loss :", loss)
 loss = model.evaluate(x, y)
 print("loss :", loss)
 
+# random_state 를 바꿔 가며 실행한 결과 (test loss / 전체 loss)
 # loss : 2662.560546875
 # loss : 2879.285888671875
 

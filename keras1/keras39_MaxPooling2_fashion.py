@@ -1,6 +1,7 @@
-# keras36_cnn4_fashion.py
-# fashion_mnist 의류 이미지 10종 분류 - padding='same' 과 strides 를 처음 적용한 파일 (목표 acc 0.92)
-# keras36_cnn3_mnist2.py 베이스
+# keras39_MaxPooling2_fashion.py
+# [목적] keras36_cnn4_fashion 모델(padding='same' + strides) 에 MaxPooling2D 3 개를 더해 fashion_mnist 성능 · 시간 비교 (목표 acc 0.92)
+# keras36_cnn4_fashion.py 베이스
+# 아래 설명 블록은 베이스 파일에서 복사된 내용 (이 파일에서 새로 바뀐 점은 바로 위 [목적] 참고)
 #
 # 새로 쓴 것
 #  padding='same'  : 커널이 지나가도 가로 세로가 줄지 않는다 (가장자리에 0 을 둘러준다)
@@ -54,6 +55,7 @@ print(y_train.shape, y_test.shape) # (60000, 10) (10000, 10)
 
 #2. 모델 구성
 model = Sequential()
+# 아래 '출력' 주석은 베이스 기준 (MaxPooling 이 들어간 실제 크기는 summary 아래 설명 참고)
 # padding='same' -> 커널이 지나가도 가로 세로가 줄지 않는다 (28x28 유지) / strides=(2,2) -> 한 번에 두 칸씩 건너뛰어 크기를 절반으로 줄인다
 model.add(Conv2D(32, (3,3), padding='same', activation='relu', input_shape=(28, 28, 1)))
                                                                     # 출력 : (28, 28, 32)  same 이라 크기 그대로
@@ -85,9 +87,9 @@ model.add(Dense(units=128, activation='relu'))
 
 model.add(Dense(10, activation='softmax'))                          # 의류 10종 -> 출력 10개 + softmax
 model.summary()
-# Total params: 1,907,018
-#  -> 층 수는 mnist2(3,578,186)와 비슷한데 파라미터는 절반이다
-#     strides 로 크기를 일찍 줄여서 Flatten 이 12800 -> 6272 로 작아졌기 때문
+# Total params: 334,154  (이 파일의 층 구성으로 계산한 값)
+#  -> MaxPooling 3 개로 크기가 1 x 1 까지 줄어 Flatten 이 128 (베이스 keras36_cnn4 는 Flatten 6272, Total params 1,907,018)
+#     출력 크기 : 28 → 28 → 14(strides) → 7(MaxPool) → 7 → 7 → 4(strides) → 2(MaxPool) → 2 → 1(MaxPool)
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam',
@@ -141,6 +143,7 @@ print('소요 시간 :', round(end_time - start_time, 2), '초')
 # accuracy_score : 0.923
 # 소요 시간 : 116.61 초
 
+# 아래 결론은 베이스(MaxPooling 없음) 기준. MaxPooling 적용 후 acc 는 CPU 0.9279 / GPU 0.923, 시간은 CPU 763초 / GPU 117초
 # 목표 : acc 0.92  -> 0.9262 로 달성
 # -> epochs 를 50 으로 고정해 훈련량이 같으므로 시간 비교가 된다. CPU 951초 / GPU 380초로 GPU 가 2.5배 빨랐다
 # -> acc 는 CPU 0.9262 / GPU 0.9258 로 거의 같다. 장치가 바뀌어도 결과는 같고 속도만 달라진다

@@ -1,4 +1,8 @@
 # keras1/keras36_cnn3_mnist2.py 베이스
+#
+# [목적] mnist 의 y 를 원핫으로 바꾸지 않고 정답 숫자 그대로 쓰는 sparse_categorical_crossentropy 실습
+# [흐름] 원핫 인코딩 생략 → 출력층 softmax 10 그대로 → loss 만 sparse_categorical_crossentropy → 평가 때 y_test 는 argmax 하지 않는다
+
 
 import numpy as np
 import pandas as pd

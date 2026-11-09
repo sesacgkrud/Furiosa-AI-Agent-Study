@@ -1,6 +1,7 @@
 # keras39_MaxPooling1_mnist.py
-# mnist 성능 올리기 - keras36_cnn3_mnist1.py 베이스로 모델을 더 깊게 쌓고 EarlyStopping 을 붙였다 (목표 acc 0.995)
+# [목적] keras36_cnn3_mnist2 모델을 padding='same' 으로 바꾸고 MaxPooling2D 를 넣어 mnist 성능을 다시 잰다 (목표 acc 0.995)
 #
+# 아래 설명 블록은 베이스 파일에서 복사된 내용 (이 파일에서 새로 바뀐 점은 바로 위 [목적] 참고)
 # mnist1 과 달라진 점
 #  1) Conv2D 를 7층으로 늘리고 필터 수를 32 -> 64 -> 128 로 키웠다 ((5,5) 커널을 섞어 크기를 빠르게 줄임)
 #  2) Dense 를 256 / 128 로 키우고 Dropout 을 0.25 ~ 0.4 로 올렸다
@@ -68,7 +69,7 @@ y_test = ohe.fit_transform(y_test)
 print(y_train.shape, y_test.shape) # (60000, 10) (10000, 10)
 
 #2. 모델 구성
-# padding 을 주지 않았으므로 (커널 크기 - 1) 만큼 가로 세로가 줄어든다 : (3,3) -> 2씩, (5,5) -> 4씩
+# padding='same' 이라 Conv2D 를 지나도 가로 세로가 그대로이고, MaxPooling2D 에서만 절반으로 줄어든다 (28 → 14)
 model = Sequential()
 
 model.add(Conv2D(32, (3,3), activation='relu',
@@ -95,8 +96,8 @@ model.add(Dense(128, activation='relu'))
 model.add(Dense(10, activation='softmax'))
 
 model.summary()
-# Total params: 3,578,186
-#  -> flatten(12800) -> dense(256) 한 곳에서만 12800 x 256 + 256 = 3,277,056 개로 전체의 90% 를 차지한다
+# Total params: 6,723,914  (이 파일의 층 구성으로 계산한 값)
+#  -> Flatten 이 14 x 14 x 128 = 25088 이라 flatten -> dense(256) 한 곳이 25088 x 256 + 256 = 6,422,784 개
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam',
@@ -163,6 +164,7 @@ print('소요 시간 :', round(end_time - start_time, 2), '초')
 # 소요 시간 : 418.48 초
 
 # 목표 : acc 0.995
+# MaxPooling 적용 후 GPU 0.9953 으로 목표 0.995 를 넘었다 (아래 두 줄은 MaxPooling 적용 전 베이스 결과에 대한 설명)
 # -> mnist1 의 0.9893 에서 0.9938 까지 올렸지만 목표에는 못 미쳤다
 # -> 멈춘 epoch 가 CPU 54 / GPU 70 으로 달랐다. 시드를 고정하지 않아 훈련 경로가 달라진 것이라
 #    이 파일의 CPU 1861초 / GPU 322초는 훈련량이 같지 않아 순수한 속도 비교로는 쓸 수 없다

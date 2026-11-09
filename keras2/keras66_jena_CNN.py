@@ -1,4 +1,8 @@
 # keras58_kaggle_jena2.py 베이스 → LSTM 을 4차원 입력 Conv2D 로 바꿔서 비교
+#
+# [목적] Jena 다음 하루 기온 예측을 LSTM 대신 4차원 입력 Conv2D 로 풀어 RMSE · 시간 비교
+# [흐름] split_x 로 (N, 144, 13) → reshape (N, 144, 13, 1) → Conv2D 2 층 → Flatten → Dense(144)
+
 # y = 'T (degC)' 기온 (keras58_kaggle_jena1 에서 풍향 → 기온으로 바꿔 저장한 npy)
 
 import os

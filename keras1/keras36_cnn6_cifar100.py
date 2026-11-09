@@ -1,5 +1,5 @@
 # keras36_cnn6_cifar100.py
-# cifar100 컬러 이미지 100종 분류 (목표 acc 0.4)
+# [목적] cifar100 컬러 이미지 100종 분류 (목표 acc 0.4)
 # keras36_cnn5_cifar10.py 베이스 - 이미지는 cifar10 과 똑같이 32x32 컬러 5만 장이고 정답 종류만 10개 -> 100개
 #  - 클래스는 10배인데 장수는 그대로라 한 종류당 훈련 이미지가 5000장 -> 500장으로 줄어 훨씬 어렵다
 #  - 마지막 Dense 가 100 이 되고 원핫도 (50000, 100) 이 된다
@@ -56,6 +56,9 @@ print(y_train.shape, y_test.shape) # (50000, 100) (10000, 100)
 model = Sequential()
 model.add(Conv2D(32, (3,3), activation='relu', input_shape=(32, 32, 3)))    # 출력 : (30, 30, 32)  param 896 = (3x3x3+1)x32
 model.add(Conv2D(32, kernel_size=(3,3), activation='relu'))                 # 출력 : (28, 28, 32)
+                                                                            # ※ 이 파일 코드에는 MaxPooling2D 층이 없다 (import 만 남아 있음, MaxPooling 을 넣은 버전은 keras39_MaxPooling4_cifar100.py)
+                                                                            #   위 머리 설명 · 이 줄의 출력 크기 · Total params 627,972 는 MaxPooling 2 개가 있을 때 기준이고,
+                                                                            #   현재 코드대로 실행하면 출력이 30 → 28 → 26 → 24 → 22 → 20, Flatten 51200, Total params 13,440,260 이 된다
                                                                             # 출력 : (14, 14, 32)  2x2 중 최대값만 -> 절반, param 0
 model.add(Dropout(0.25))
 model.add(Conv2D(64, kernel_size=(3,3), activation='relu'))                 # 출력 : (12, 12, 64)
@@ -63,6 +66,7 @@ model.add(Conv2D(64, kernel_size=(3,3), activation='relu'))                 # �
 model.add(Dropout(0.25))
 model.add(Conv2D(128, kernel_size=(3,3), activation='relu'))                # 출력 : (8, 8, 128)
 model.add(Conv2D(128, kernel_size=(3,3), activation='relu'))                # 출력 : (6, 6, 128)
+                                                                            # ※ 여기도 MaxPooling2D 가 없다 (위 ※ 설명 참고)
                                                                             # 출력 : (3, 3, 128)
 model.add(Dropout(0.25))
 model.add(Flatten())                                                        # (3,3,128) -> 1152. 4차원을 2차원으로 펴준다 (값과 순서가 그대로라 reshape 와 같다)

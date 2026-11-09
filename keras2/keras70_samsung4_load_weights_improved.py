@@ -1,5 +1,5 @@
 # keras70_samsung4_load_weights_improved.py (개선용 : 가중치 불러와서 predict 만)
-# keras70_samsung3_ensemble_improved.py 가 저장한 _save/keras70/keras70_samsung_improved.weights.h5 를 불러온다
+# [목적] keras70_samsung3_ensemble_improved.py 가 저장한 _save/keras70/keras70_samsung_improved.weights.h5 를 불러와 predict 만 한다
 #
 # [같은 예측값이 나오는 조건]
 #   1) 모델 구조가 훈련 코드와 완전히 같아야 한다 → build_model() 을 그대로 복사

@@ -3,7 +3,7 @@
 # [목적]
 # XGBClassifier 하나만 남겨, xgboost 의 중요도 계산 방식 2가지 (F score / Gain score) 를 구분한다
 #   - F score (weight) : 그 컬럼이 트리 분기에 쓰인 횟수 (빈도수)
-#   - Gain score (gain) : 그 컬럼으로 분기했을 때 손실함수가 개선된 정도
+#   - Gain score (gain) : 그 컬럼으로 분기했을 때 손실함수가 개선된 정도 (분기 1 번당 평균)
 # - model.get_booster() : sklearn 형식 모델 안의 xgboost 원래 모델(Booster) 을 꺼낸다
 # - get_score(importance_type='gain') : 컬럼별 점수를 {'f0': ..., 'f1': ...} 딕셔너리로 반환 (f0 = 0번째 컬럼)
 

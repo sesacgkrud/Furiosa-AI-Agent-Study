@@ -1,4 +1,8 @@
 # keras31_MCP_save_05_kaggle_bike.py
+#
+# [목적] 캐글 자전거 (회귀) 데이터를 RobustScaler 로 전처리해 훈련하면서 ModelCheckpoint 로 val_loss 최고 epoch 모델을 keras31_mcp5.keras 로 저장
+# [흐름] 데이터 → split → RobustScaler → 모델 → EarlyStopping + ModelCheckpoint 로 fit → x_test 평가
+
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
 # 구조 : keras30_ModelCheckPoint1.py 기준 / 데이터, 모델 : keras28_Scaler05_kaggle_bike.py
 # 짝 파일 : keras32_MCP_load_05_kaggle_bike.py

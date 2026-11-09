@@ -1,5 +1,5 @@
 # keras52_optimizer02_diabetes.py
-# 당뇨 (회귀) - optimizer 의 learning_rate 를 직접 지정해 본다
+# [목적] 당뇨 (회귀) - optimizer 의 learning_rate 를 직접 지정해 본다
 # 스케일러는 keras28 에서 비교해 고른 RobustScaler 를 그대로 쓴다
 #
 # [ 오늘 바뀌는 곳은 compile 한 줄이다 ]
@@ -49,7 +49,7 @@ scaler = RobustScaler()
 
 x_train = scaler.fit_transform(x_train)
 
-x_test = scaler.transform(x_test) # x에 있는 모든 데이터는 0~1 사이로 수렴
+x_test = scaler.transform(x_test) # 저장된 기준으로 값을 바꾼다 (MinMaxScaler 면 0~1 범위)
 
 print('Min :', np.min(x_train), 'Max :', np.max(x_train)) # Min : 0.0 Max : 1.0
 print('Min :', np.min(x_test), 'Max :', np.max(x_test)) # Min : -0.051724137931034475 Max : 1.2758620689655171
@@ -114,6 +114,7 @@ plt.legend(loc='upper right') # 우측 상단에 라벨 표시
 plt.title('Diabetes Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가

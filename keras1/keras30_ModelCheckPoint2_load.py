@@ -1,5 +1,5 @@
 # keras30_ModelCheckPoint2_load.py
-# keras30_ModelCheckPoint1 이 저장한 mcp 파일을 load_model 로 불러와서 평가만 한다
+# [목적] keras30_ModelCheckPoint1 이 저장한 mcp 파일을 load_model 로 불러와서 평가만 한다
 # 모델 구성 / 컴파일 / 훈련 부분이 전부 주석 처리되어 있는 이유 : .keras 파일 하나에 다 들어있기 때문
 # -> 저장할 때의 loss 와 소수점까지 같으면 제대로 저장/복원된 것이다
 

@@ -1,5 +1,5 @@
 # keras18_time.py
-# 훈련에 걸린 시간 재기 : fit 앞뒤에서 time.time() 을 찍고 그 차이를 본다
+# [목적] 훈련에 걸린 시간 재기 : fit 앞뒤에서 time.time() 을 찍고 그 차이를 본다
 # 같은 데이터라도 batch_size / epochs / verbose 에 따라 시간이 달라진다
 
 # keras14_kaggle_bike1.py 베이스
@@ -64,6 +64,7 @@ model.add(Dense(1, activation='relu')) # 통상적으로 마지막에는 relu �
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
 start_time = time.time() # 현재 시간 반환(=시작 시간)
+# 시간 측정 확인용이라 epochs=2 로 짧게
 model.fit(x_train, y_train, epochs=2, batch_size=16)
 end_time = time.time() # 현재 시간 반환(=종료 시간)
 

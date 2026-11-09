@@ -1,5 +1,5 @@
 # keras52_optimizer14_cifar100.py
-# cifar100 (다중 분류, 함수형 DNN + BatchNormalization) - learning_rate 직접 지정
+# [목적] cifar100 (다중 분류, 함수형 DNN + BatchNormalization) - learning_rate 직접 지정
 # 증폭(keras51_augment4) 까지 끝낸 함수형 DNN 에 learning_rate 만 바꿔 붙인다
 #
 # [ 오늘 바뀌는 곳은 compile 한 줄이다 ]

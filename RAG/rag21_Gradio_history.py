@@ -1,4 +1,9 @@
 # rag20_embedding4_ChatBot.py 베이스
+#
+# [목적] 이전 대화를 메시지 리스트로 넘기고, create_history_aware_retriever 로 '그 층은?' 같은 질문을 혼자 이해되는 질문으로 바꿔 검색 (Day23)
+# [흐름] Faiss20 불러오기 → retriever(k=4) → 프롬프트에 MessagesPlaceholder('chat_history')
+#        → history_retriever (질문 다시 쓰기 → 검색) → create_retrieval_chain → Gradio history 를 HumanMessage / AIMessage 로 바꿔 invoke
+
 # [변경] 이전 대화를 문자열({history}) 대신 메시지 리스트(HumanMessage, AIMessage) 로 넘겨서 AI 가 이전 대화를 기억하고 답한다
 
 import os
@@ -33,6 +38,7 @@ pdf_splitter = RecursiveCharacterTextSplitter(
     separators=['\n\n', '\n', ' ', '']
 )
 
+# 아래 FAISS 를 불러오기만 하므로 청킹 결과(split_doc) 는 길이 출력에만 쓰인다
 split_doc = pdf_loader.load_and_split(pdf_splitter)
 
 #03. 문서 길이 확인

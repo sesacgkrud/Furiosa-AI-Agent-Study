@@ -1,5 +1,5 @@
 # keras51_augment5_man_woman_여자만.py
-# man_woman 데이터에서 '여자' 사진만 증폭해 남 / 여 장수를 맞춘다
+# [목적] man_woman 데이터에서 '여자' 사진만 증폭해 남 / 여 장수를 맞춘다
 #
 # [ 왜 한쪽만 증폭하는가 ]
 #  train 기준 man 14142 / woman 7591 로 남자가 약 2배 많다

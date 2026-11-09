@@ -1,3 +1,7 @@
+# keras56_split4.py
+# [목적] 1 ~ 100 을 2 개씩 묶어 (50, 2) 로 reshape 한 뒤 split_x 로 (45, 5, 2) 를 만들고, 다음 시점의 값 2 개 [106 107] 을 한 번에 예측
+# [흐름] reshape(-1, 2) → split_x(size 6) → x (45, 5, 2) / y (45, 2) → / 100 → LSTM(linear) → Dense(2) 출력
+
 import numpy as np
 
 from tensorflow.keras.models import Sequential

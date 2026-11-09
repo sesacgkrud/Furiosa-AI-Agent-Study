@@ -1,4 +1,8 @@
 # keras1/keras36_cnn4_fashion.py 베이스
+#
+# [목적] fashion_mnist 에 sparse_categorical_crossentropy 적용 (y 원핫 생략)
+# [흐름] keras36_cnn4_fashion 과 같은 모델 → OneHotEncoder 부분 삭제 → loss 만 sparse 로 변경
+
 
 import numpy as np
 import pandas as pd

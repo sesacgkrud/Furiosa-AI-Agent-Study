@@ -1,5 +1,5 @@
 # keras21_sigmoid_metrics_cancer.py
-# 이진 분류 첫 실습 (유방암 : 악성 0 / 양성 1) - 회귀와 달라지는 3가지
+# [목적] 이진 분류 첫 실습 (유방암 : 악성 0 / 양성 1) - 회귀와 달라지는 3가지
 #  1) 출력층 activation = sigmoid  -> 결과를 0 ~ 1 사이 확률로 눌러 준다
 #  2) loss = 'binary_crossentropy' -> 확률이 정답에서 멀수록 크게 벌점을 준다 (mse 대신)
 #  3) metrics=['acc']              -> 훈련 중에 정확도를 같이 찍어 본다 (loss 와 달리 훈련에는 영향 없음)
@@ -132,7 +132,7 @@ y_predict = np.round(y_predict)
 # exit()
 
 from sklearn.metrics import accuracy_score
-acc_score = accuracy_score(y_test, y_predict) # y_test -> 0, 1 / y_predict -> 0 ~ 1 (sigmoid 통과했기 때문)
-# ValueError: Classification metrics can't handle a mix of binary and continuous targets
+acc_score = accuracy_score(y_test, y_predict) # y_test 는 0 / 1, y_predict 도 위에서 np.round 로 0 / 1 로 바꿨기 때문에 비교 가능
+# (반올림 없이 0 ~ 1 확률값 그대로 넣으면) ValueError: Classification metrics can't handle a mix of binary and continuous targets
 
 print("acc_score :", acc_score) # acc_score : 0.9239766081871345

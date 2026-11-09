@@ -1,5 +1,5 @@
 # keras61_Embedding03_ohe_sklearn_LSTM.py
-# [목표] keras61_Embedding03_ohe_to_categorical_LSTM.py 와 같은 내용을 sklearn OneHotEncoder 로 만든다. (결과 shape 는 똑같이 (15, 5, 31))
+# [목적] keras61_Embedding03_ohe_to_categorical_LSTM.py 와 같은 내용을 sklearn OneHotEncoder 로 만든다. (결과 shape 는 똑같이 (15, 5, 31))
 #   - to_categorical 은 3차원 그대로 넣을 수 있지만, OneHotEncoder 는 2차원 (n, 1) 만 받음
 #     -> 단어 75개 (15문장 x 5) 를 한 줄로 세웠다가 One-Hot 후 다시 문장 단위 (15, 5, 31) 로 되돌림
 #   - OneHotEncoder 는 fit 할 때 본 값으로 칸을 정해 둠 -> 예측 문장은 transform 만 하면 같은 32칸으로 바뀜

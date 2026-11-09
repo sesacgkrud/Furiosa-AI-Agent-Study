@@ -1,5 +1,5 @@
 # keras10_scatter2.py
-# keras10_scatter1 보다 데이터를 20개로 늘리고 더 흩어지게 만들어서 예측선을 다시 그려 본다
+# [목적] keras10_scatter1 보다 데이터를 20개로 늘리고 더 흩어지게 만들어서 예측선을 다시 그려 본다
 # 데이터가 흩어질수록 loss 는 커지고, 모델은 점들의 가운데를 지나는 선을 찾는다
 
 import numpy as np

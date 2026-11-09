@@ -1,4 +1,8 @@
 # keras44_ImageDataGenerator1.py 베이스
+#
+# [목적] brain 이미지 160 장을 batch_size=160 으로 한 번에 읽어 numpy 배열로 꺼낸 뒤 Conv2D 이진 분류 (목표 acc 1.0)
+# [흐름] ImageDataGenerator(rescale 만) → flow_from_directory → xy_train[0][0] / [0][1] → Conv2D + MaxPooling → sigmoid
+
 
 import numpy as np
 import time
@@ -16,7 +20,7 @@ train_datagen = ImageDataGenerator(
     ######### 원 데이터 왜곡 없도록 주석 처리 #########
     # horizontal_flip=True,     # 수평 뒤집기 (필수x)
     # vertical_flip=True,       # 수직 뒤집기 (필수x)
-    # width_shift_range=0.1,    # 평형 이동 (필수x)
+    # width_shift_range=0.1,    # 평행 이동 (필수x)
     # height_shift_range=0.1,   # (필수x)
     # rotation_range=5,         # 각도 조절 (정해진 각도만큼 이미지 회전) (필수x)
     # zoom_range=1.2,           # (필수x)
@@ -62,10 +66,10 @@ y_test = xy_test[0][1]
 print(x_train.shape, y_train.shape) # (160, 150, 150, 1) (160,)
 print(x_test.shape, y_test.shape)   # (120, 150, 150, 1) (120,)
 
-# Dense 는 (샘플, 컬럼) 2차원 입력 -> 150 x 150 x 1 = 22500 개 컬럼으로 편다
+# (Dense 로 바꿀 때만 쓰는 reshape 메모 : 150 x 150 x 1 = 22500 개 컬럼으로 편다 - 지금은 Conv2D 라 주석)
 # x_train = x_train.reshape(-1, 150*150)
 # x_test = x_test.reshape(-1, 150*150)
-print(x_train.shape, x_test.shape)  # (160, 22500) (120, 22500)
+print(x_train.shape, x_test.shape)  # (160, 150, 150, 1) (120, 150, 150, 1)  <- 위 reshape 가 주석이라 4차원 그대로
 
 #2. 모델 구성
 model = Sequential()
@@ -88,8 +92,8 @@ model.add(Dropout(0.2))
 model.add(Dense(1, activation='sigmoid'))
 
 model.summary()
-# Total params: 11,717,617
-#  -> 첫 층 22500 x 512 + 512 = 11,520,512 로 전체의 98% 를 차지한다
+# Total params: 480,021  (이 파일의 Conv2D 구성으로 계산한 값)
+#  -> Flatten 36 x 36 x 32 = 41,472 → Dense(10) = 414,730 이 대부분 (150 → 148 → 74 → 74 → 72 → 36)
 
 #3. 컴파일, 훈련
 # 이진 분류라 loss 는 binary_crossentropy (softmax + categorical_crossentropy 자리)
@@ -100,7 +104,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam',
 #  - loss 는 낮을수록 좋고 acc 는 높을수록 좋으므로 mode 를 'max' 로 같이 바꿔야 한다
 es = EarlyStopping(
     monitor='val_acc',      # val_loss 기준이면 loss 가 가장 낮은 epoch 를 고르는데, 그 epoch 가 acc 최고점은 아니다
-    mode='auto',             # acc 는 높을수록 좋으므로 max
+    mode='auto',             # monitor 이름에 acc 가 들어 있으면 auto 가 max 로 동작한다
     patience=130,            # acc 는 들쭉날쭉해서 loss 기준보다 patience 를 넉넉히 준다
     restore_best_weights=True,
     verbose=1,

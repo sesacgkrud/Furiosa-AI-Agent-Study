@@ -1,5 +1,5 @@
-# keras36_cnn6_cifar100.py
-# cifar100 컬러 이미지 100종 분류 (목표 acc 0.4)
+# keras39_MaxPooling4_cifar100.py
+# [목적] cifar100 100종 분류에 MaxPooling2D 2 개를 넣어 Flatten 크기 · 파라미터를 줄이고 성능 비교 (목표 acc 0.4)
 # keras36_cnn5_cifar10.py 베이스 - 이미지는 cifar10 과 똑같이 32x32 컬러 5만 장이고 정답 종류만 10개 -> 100개
 #  - 클래스는 10배인데 장수는 그대로라 한 종류당 훈련 이미지가 5000장 -> 500장으로 줄어 훨씬 어렵다
 #  - 마지막 Dense 가 100 이 되고 원핫도 (50000, 100) 이 된다
@@ -129,4 +129,5 @@ print('소요 시간 :', round(end_time - start_time, 2), '초')
 # accuracy_score : 0.4371
 # 소요 시간 : 227.8 초
 
+# MaxPooling 적용(2차) acc 0.4371 로 목표 0.4 달성
 # 목표 : acc 0.4

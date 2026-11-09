@@ -1,5 +1,5 @@
 # keras61_Embedding03_ohe_pandas_LSTM.py
-# [목표] keras61_Embedding03_ohe_to_categorical_LSTM.py 와 같은 내용을 pandas get_dummies 로 만든다. (결과 shape 는 똑같이 (15, 5, 31))
+# [목적] keras61_Embedding03_ohe_to_categorical_LSTM.py 와 같은 내용을 pandas get_dummies 로 만든다. (결과 shape 는 똑같이 (15, 5, 31))
 #   - get_dummies 는 1차원 데이터만 받음 -> 단어 80개 (16문장 x 5) 를 한 줄로 세웠다가 One-Hot 후 다시 문장 단위로 되돌림
 #   - get_dummies 는 "실제로 나온 값" 만 열로 만듦 -> 예측 문장만 따로 넣으면 0, 25, 28 세 열만 생김
 #     -> to_categorical (03) 과 마찬가지로 훈련 데이터와 이어 붙여서 한 번에 바꾼 뒤 다시 나눔

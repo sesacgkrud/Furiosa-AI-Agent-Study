@@ -1,5 +1,5 @@
 # keras71_trainable_weights1.py 베이스
-# [변경] 동결한 모델을 실제로 compile · fit 해서, 동결 X / 동결 O 의 예측 결과를 비교한다
+# [목적] [변경] 동결한 모델을 실제로 compile · fit 해서, 동결 X / 동결 O 의 예측 결과를 비교한다
 #  - 층을 Dense 30 → 20 → 20 → 20 → 10 → 10 → 1 로 늘렸다
 #  - model.trainable = False 이면 fit 을 100 epoch 해도 가중치가 바뀌지 않는다
 

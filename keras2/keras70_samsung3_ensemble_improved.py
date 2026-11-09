@@ -1,5 +1,5 @@
 # keras70_samsung3_ensemble_improved.py (개선용 : 훈련 + 가중치 저장)
-# keras70_samsung1_ensemble.py (제출용) 과 같은 문제를 조금 더 "안전한" 방법으로 푼 버전
+# [목적] keras70_samsung1_ensemble.py (제출용) 과 같은 문제를 조금 더 "안전한" 방법으로 푼 버전
 #
 # [문제]
 #   아모레 · 하이닉스 (+ 삼성전자 과거) 데이터로 "다음 거래일 삼성전자 시가" 1개를 예측한다

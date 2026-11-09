@@ -1,5 +1,5 @@
 # keras54_RNN3_input_length.py
-# 입력 모양을 적는 두 가지 방법 - keras54_RNN1.py 베이스
+# [목적] 입력 모양을 적는 두 가지 방법 - keras54_RNN1.py 베이스
 #
 # [ 같은 뜻을 두 가지로 쓸 수 있다 ]
 #  input_shape=(3, 1)                 -> (timesteps, features) 를 묶어서 한 번에

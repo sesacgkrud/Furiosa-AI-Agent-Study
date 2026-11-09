@@ -1,5 +1,5 @@
 # keras43_hamsu04_cifar100.py
-# keras41_dnn4_cifar100.py (Sequential DNN) 을 함수형(Model) 으로 바꾼 파일
+# [목적] keras41_dnn4_cifar100.py (Sequential DNN) 을 함수형(Model) 으로 바꾼 파일
 # 층 구성을 그대로 옮겼으므로 keras41_dnn4 와 Total params 가 같아야 제대로 변환한 것
 #
 # keras41_dnn4 의 내용 (그대로 유지)

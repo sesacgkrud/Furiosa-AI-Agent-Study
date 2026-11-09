@@ -1,5 +1,5 @@
 # keras46_03_save_npy_man_woman.py
-# man_woman 이미지 2종 분류 (남 / 여)
+# [목적] man_woman 이미지 2종 분류 (남 / 여)
 #
 # [ 이 파일이 하는 일 ]
 #  ImageDataGenerator 로 폴더의 이미지를 읽어 train / test 로 나눈 뒤 npy 로 저장한다

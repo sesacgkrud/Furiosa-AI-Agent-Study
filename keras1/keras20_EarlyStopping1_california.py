@@ -1,5 +1,5 @@
 # keras20_EarlyStopping1_california.py
-# EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
+# [목적] EarlyStopping : val_loss 가 patience 번 동안 좋아지지 않으면 훈련을 멈춘다
 # restore_best_weights=True : 멈춘 시점이 아니라 val_loss 가 가장 낮았던 epoch 의 가중치로 되돌린다
 # -> 그래서 epochs 를 크게 줘도 과적합 직전에서 알아서 끊어 준다
 
@@ -53,6 +53,7 @@ loss = model.evaluate(x_test, y_test)
 print("loss :", loss)
 
 #4. 평가 예측
+# 전체 데이터(x) 평가는 훈련에 쓴 데이터가 섞여 있어 점수가 좋게 나온다 (참고용, 실제 평가는 위의 x_test)
 loss = model.evaluate(x, y)
 print("loss :", loss)
 
@@ -79,6 +80,7 @@ plt.legend(loc='upper right') # 우측 상단에 라벨 표시
 plt.title('California(캘리포니아) Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가

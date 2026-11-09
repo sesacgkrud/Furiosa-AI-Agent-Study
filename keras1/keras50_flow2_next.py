@@ -1,5 +1,5 @@
 # keras50_flow2_next.py
-# keras50_flow1.py 베이스 - 사진 한 장 대신 fashion_mnist 한 장을 100장으로 증폭한다
+# [목적] keras50_flow1.py 베이스 - 사진 한 장 대신 fashion_mnist 한 장을 100장으로 증폭한다
 #
 # [ keras50_flow1 과 달라지는 점 ]
 #  flow1 : 이미지 한 장을 batch_size=1 로 넣고 next 를 5번 불러 5장을 꺼냈다

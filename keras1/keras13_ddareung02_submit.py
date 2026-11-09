@@ -1,5 +1,5 @@
 # keras13_ddareung02_submit.py
-# keras13_ddareung01 에 제출(submission) 파일 만들기까지 추가한다
+# [목적] keras13_ddareung01 에 제출(submission) 파일 만들기까지 추가한다
 # 제출용 test_csv 는 정답(count)이 없어서 evaluate 를 못 쓴다 -> predict 결과를 submission 의 count 칸에 넣어 저장한다
 # 결측치 처리 2번째 방법 : fillna(평균값) -> test_csv 는 행을 지우면 제출 개수(715)가 안 맞으므로 지우지 않고 채운다
 
@@ -29,7 +29,7 @@ submission = pd.read_csv(path + "submission.csv", index_col=0)
 print(submission) # [715 rows x 1 columns]
 
 print(train_csv.shape) # (1459, 10) -> (None, 10)
-print(test_csv.shape) # (715, 9) evaluate 사용 불가, test 데이터로 submission을 맞추야 하기 위한 파일
+print(test_csv.shape) # (715, 9) evaluate 사용 불가 (정답 count 가 없음), 예측값을 submission 에 채워 제출하기 위한 파일
 print(submission.shape) # (715, 1)
 
 print(train_csv.columns)
@@ -62,6 +62,7 @@ print(test_csv.info())
 
 
 ######### 결측치 처리 2. 평균값 넣기 #########
+# test_csv 의 컬럼별 평균으로 빈 칸을 채운다 (행을 지우면 제출 개수 715 가 안 맞는다)
 test_csv = test_csv.fillna(test_csv.mean()) # pandas dataset
 print(test_csv.info()) # (715, 9)
 print(test_csv.shape) # (715, 9)
@@ -92,7 +93,7 @@ y_predict = model.predict(x_test).ravel() # 지표가 잘 맞는지 확인하기
 from sklearn.metrics import r2_score, mean_squared_error # 평가할 때 주로 사용
 # scikit-learn에서 R²(결정계수)를 계산하는 함수를 가져옴
 
-r2 = r2_score(y_test, y_predict) # 원값과 예측값 비교 -> loss
+r2 = r2_score(y_test, y_predict) # 원값과 예측값 비교 -> R2 점수
 
 print("r2 :", r2)
 
@@ -115,10 +116,11 @@ print("RMSE :", rmse)
 print(submission)
 y_submit = model.predict(test_csv)
 
-submission['count'] = y_submit # 최종 weight에 test_csv 적용?
+submission['count'] = y_submit # 훈련된 모델로 test_csv 를 예측한 값을 count 열에 넣는다
 print(submission) # 최종 정답지
 print(submission.shape) # (715, 1)
 
+# submit 폴더에 날짜_시간 이름으로 저장 → 데이콘에 업로드
 submission.to_csv(path + "submit/" + "submit_0904_1142.csv")
 
 ## 2번째

@@ -1,3 +1,13 @@
+# rag17_FAISS_2_load.py · rag16_chatbot_practice.py 베이스
+#
+# [목적] FAISS DB 를 쓰는 Gradio RAG 챗봇을 4 가지로 고도화 (Day21)
+#   [고도화 1] 관련 없는 질문 거르기 : similarity_score_threshold + 검색 결과가 없으면 모델을 부르지 않음 + 거절 표현 통일
+#   [고도화 2] 이전 대화 반영 : 프롬프트에 {history}, 검색어에 직전 질문을 붙임
+#   [고도화 3] 답변 아래에 출처 파일 이름 표시
+#   [고도화 4] Gradio 화면 꾸미기 (설명 · placeholder · 예시 질문 · 테마)
+# [흐름] FAISS 불러오기 → retriever(점수 거르기) → system / human 프롬프트 → docu_chain
+#        → answer_invoke : 검색 → (없으면 NO_ANSWER) → 답변 생성 → 거절 문장 정리 → 출처 붙이기
+
 import os
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS

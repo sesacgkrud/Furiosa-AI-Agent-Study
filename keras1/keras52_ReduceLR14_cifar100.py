@@ -1,5 +1,5 @@
 # keras52_ReduceLR14_cifar100.py
-# cifar100 (다중 분류, 함수형 DNN + BatchNormalization) - ReduceLROnPlateau 적용
+# [목적] cifar100 (다중 분류, 함수형 DNN + BatchNormalization) - ReduceLROnPlateau 적용
 # 증폭(keras51_augment4) 까지 끝낸 함수형 DNN 에 learning_rate + ReduceLROnPlateau 를 붙인다
 #
 # [ 오늘 추가되는 곳은 콜백 하나다 ]

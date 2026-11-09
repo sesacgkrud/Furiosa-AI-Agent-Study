@@ -1,4 +1,8 @@
 # keras34_hamsu05_kaggle_bike.py
+#
+# [목적] keras33 의 캐글 자전거 (회귀) Dropout 모델을 함수형(Input → 층(이전 층) → Model(inputs, outputs)) 으로 바꿔 만든다
+# [흐름] 데이터 · 전처리 · 훈련은 keras33 과 같고 #2 모델 구성만 함수형
+
 # https://www.kaggle.com/competitions/bike-sharing-demand/data
 # 구조 : keras34_hamsu00.py (함수형 모델) 기준 / 데이터, 모델 : keras33_dropout05_kaggle_bike.py 를 함수형으로 변환
 # 함수형 모델 : Input 으로 입력층을 만들고, '층(이전 층)' 형태로 하나씩 연결한 뒤 Model(inputs, outputs) 로 범위를 정한다

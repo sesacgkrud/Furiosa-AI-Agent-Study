@@ -1,7 +1,8 @@
-# keras36_cnn5_cifar10.py
-# cifar10 컬러 이미지 10종 분류 (비행기 / 자동차 / 새 / 고양이 ... ) - 컬러(3채널) 이미지를 처음 다뤘다 (목표 acc 0.67)
-# keras36_cnn3_mnist2.py 베이스
+# keras40_GAP03_cifar10.py
+# [목적] keras39_MaxPooling3_cifar10 의 Flatten 을 GlobalAveragePooling2D 로 바꿔 파라미터 수와 성능을 비교
+# keras39_MaxPooling3_cifar10.py 베이스
 #
+# 아래 설명 블록은 베이스 파일에서 복사된 내용 (이 파일에서 새로 바뀐 점은 바로 위 [목적] 참고)
 # mnist / fashion 과 달라지는 점
 #  1) 32 x 32 x 3 컬러 -> load_data() 가 처음부터 (50000, 32, 32, 3) 4차원으로 준다
 #     => x 를 reshape 할 필요가 없다 (mnist 는 흑백이라 채널 1 을 직접 붙여야 했다)
@@ -64,6 +65,7 @@ model.add(Dropout(0.25))
 model.add(Conv2D(128, kernel_size=(3,3), activation='relu'))                # 출력 : (14, 14, 128)
 model.add(Dropout(0.25))
 # model.add(Flatten())                                                # (14,14,128) -> 25088. 4차원을 2차원으로 펴준다
+# GlobalAveragePooling2D : 채널마다 (가로 x 세로) 전체의 평균 1 개만 남긴다 → 채널 128 개 = 값 128 개 (Flatten 처럼 전부 펴지 않아 다음 Dense 파라미터가 크게 준다)
 model.add(GlobalAveragePooling2D())
 
 model.add(Dense(units=256, activation='relu'))                      # units = Dense 의 첫 번째 인자 이름
@@ -72,8 +74,8 @@ model.add(Dense(units=128, activation='relu'))
 
 model.add(Dense(10, activation='softmax'))                          # 10종 분류 -> 출력 10개 + softmax
 model.summary()
-# Total params: 6,724,490
-#  -> 입력이 4픽셀 커진 것뿐인데 Flatten 이 12800 -> 25088 로 두 배가 되면서 파라미터가 3,578,186 -> 6,724,490 이 됐다
+# Total params: 334,730  (이 파일의 층 구성으로 계산한 값)
+#  -> 마지막 Conv2D 출력 (2, 2, 128) 을 GAP 로 평균 내어 128 → dense(256) = 33,024 (실제 크기는 keras39_MaxPooling3_cifar10 설명 참고)
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam',
@@ -132,6 +134,7 @@ print('소요 시간 :', round(end_time - start_time, 2), '초')
 # accuracy_score : 0.7727
 # 소요 시간 : 199.62 초
 
+# GlobalAveragePooling2D 적용 acc 0.7727 (아래 결론은 베이스 결과에 대한 설명)
 # 목표 : acc 0.67  -> 0.7267 로 달성
 # -> 같은 모델로 mnist 는 0.9938 이 나왔는데 cifar10 은 0.7267 이다.
 #    28x28 흑백 손글씨보다 32x32 컬러 사진이 훨씬 어려운 문제라는 뜻

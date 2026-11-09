@@ -1,6 +1,6 @@
 # keras19_overfit2_diabetes.py
 # keras17_val2_diabetes.py 베이스
-# 과적합 확인 : loss 와 val_loss 를 같이 그려서 val_loss 가 올라가기 시작하는 지점을 찾는다
+# [목적] 과적합 확인 : loss 와 val_loss 를 같이 그려서 val_loss 가 올라가기 시작하는 지점을 찾는다
 # 당뇨 데이터는 442개로 작아서 val_loss 가 크게 출렁인다
 
 from sklearn.datasets import load_diabetes
@@ -22,6 +22,7 @@ x_train, x_test, y_train, y_test = train_test_split(
     random_state=77,
 )
 
+# x_val 을 만들었지만 아래 fit 은 validation_data 대신 validation_split=0.3 을 써서 x_val 은 사용되지 않는다
 x_train, x_val, y_train, y_val = train_test_split(
     x_train, y_train,
     train_size=0.7,
@@ -61,6 +62,7 @@ import matplotlib.pyplot as plt
 plt.rcParams['font.family'] ='Malgun Gothic' # 글자 깨짐 해결
 
 plt.figure(figsize=(9,6))
+# [10:] : 처음 10 epoch 은 loss 가 너무 커서 그래프가 납작해지므로 빼고 그린다
 plt.plot(hist.history['loss'][10:], c='red', label='loss') # y값만 넣으면 시간 순으로 그림
 plt.plot(hist.history['val_loss'][10:], c='blue', label='val_loss')
 
@@ -68,6 +70,7 @@ plt.legend(loc='upper right') # 우측 상단에 라벨 표시
 plt.title('Diabetes Loss')
 
 plt.xlabel('epochs')
+# ※ 아래 두 번째 plt.xlabel('loss') 는 y축 이름이므로 plt.ylabel('loss') 이어야 한다 (지금은 x축 이름이 'loss' 로 덮어써지고 y축 이름은 비어 있다)
 plt.xlabel('loss')
 
 plt.grid() # 격자 표시 추가

@@ -1,4 +1,11 @@
 # rag13_Chroma_pipeline1.py 베이스
+#
+# [목적] rag13 에서 손으로 붙이던 '검색 결과 + 질문' 을 create_retrieval_chain 체인으로 자동화 (Day20)
+# [흐름] Chroma12 → retriever(k=2) → ChatPromptTemplate({context}, {input})
+#        → create_stuff_documents_chain(모델, 프롬프트) : 검색 문서를 {context} 에 채워 모델 호출
+#        → create_retrieval_chain(retriever, docu_chain) : 질문으로 검색 → docu_chain 실행
+#        → 결과 dict : input(질문) · context(검색 문서) · answer(답변)
+
 
 import os
 from langchain_community.document_loaders import TextLoader
@@ -74,6 +81,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_classic.chains import create_retrieval_chain
 
+# {context} 자리에 검색된 문서 내용, {input} 자리에 질문이 들어간다
 prompt = ChatPromptTemplate.from_template('''
 
     다음 컨텍스트를 바탕으로 질문에 답변해 주세요.
@@ -91,6 +99,7 @@ rag_chain = create_retrieval_chain(retriever, docu_chain) # 검색 | docu_chain
 
 # 체인 실행
 query = '삼성전자의 창업자는 누구인가요?'
+# 질문은 'input' 키로 넣는다
 response = rag_chain.invoke({'input' : query})
 
 print(response)
@@ -99,5 +108,6 @@ print(response.keys())                                           # dict_keys(['i
 print('====================== context =====================')
 print(response['context'][0].page_content)                       # 삼성전자는 메모리 반도체, 파운드리, 스마트폰, 디스플레이와 가전 사업을 운영하는 종합 전자기업이다. 여러 사업을 보유한 구조는 특정 시장의 부진을 다른 사업이 일부 보완할 수 있다는 장점이 있다. 다만 각 사업의 성장 요인과 위험이 다르므로, 회사의 전망을 살필 때에는 사업별 흐름을 구분하는 편이 정확하다.
 print('====================== answer =====================')
+# rag 문서(사업 전망) 에는 창업자 내용이 없어서 프롬프트 지시대로 '답변할 수 없습니다' 를 출력
 print(response['answer'])                                        # 주어진 정보로는 답변할 수 없습니다.
 

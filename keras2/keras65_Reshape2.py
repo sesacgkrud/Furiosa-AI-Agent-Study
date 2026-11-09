@@ -1,4 +1,8 @@
 # keras65_Reshape1.py 베이스
+#
+# [목적] Reshape 층으로 Conv2D(4차원) ↔ LSTM(3차원) 을 오가며 한 모델 안에서 섞어 쓰기 (mnist)
+# [흐름] Reshape (28, 28, 1) → Conv2D 3 층 (20, 20, 32) → Reshape (400, 32) → LSTM(return_sequences) → Reshape (20, 20, 10) → Conv2D → Dense
+
 
 import numpy as np
 import pandas as pd

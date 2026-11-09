@@ -1,4 +1,8 @@
 # keras31_MCP_save_08_wine.py
+#
+# [목적] 와인 (다중 분류) 데이터를 RobustScaler 로 전처리해 훈련하면서 ModelCheckpoint 로 val_loss 최고 epoch 모델을 keras31_mcp8.keras 로 저장
+# [흐름] 데이터 → split → RobustScaler → 모델 → EarlyStopping + ModelCheckpoint 로 fit → x_test 평가
+
 # 구조 : keras30_ModelCheckPoint1.py 기준 / 데이터, 모델 : keras28_Scaler08_wine.py
 # 짝 파일 : keras32_MCP_load_08_wine.py
 #   이 파일이 저장한 keras31_mcp8.keras 를 keras32 가 불러와서 평가하면 아래 결과와 소수점까지 같아야 한다.

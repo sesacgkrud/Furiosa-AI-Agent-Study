@@ -1,5 +1,5 @@
 # keras23_softmax1_OneHot_iris.py
-# 다중 분류 첫 실습 (붓꽃 3종 : setosa / versicolor / virginica)
+# [목적] 다중 분류 첫 실습 (붓꽃 3종 : setosa / versicolor / virginica)
 # 다중 분류 3종 세트
 #  1) y 를 원핫 인코딩 : 0, 1, 2 를 [1,0,0] [0,1,0] [0,0,1] 로 바꾼다 (숫자 크기에 순서 의미가 생기지 않게)
 #  2) 출력층 activation = softmax, 노드 수 = 클래스 개수 -> 칸별 확률이 나오고 다 더하면 1
@@ -22,8 +22,8 @@ from sklearn.datasets import load_iris
 #1. 데이터
 datasets = load_iris() # load_iris()를 실행하면 Iris 데이터셋이 들어있는 객체가 만들어진다.
 print(datasets)
-print(datasets.data) # -> 입력 데이터(x) dictionary
-print(datasets.target) #  -> 정답 데이터(y) list
+print(datasets.data) # -> 입력 데이터(x), numpy 배열 (150, 4)
+print(datasets.target) #  -> 정답 데이터(y), numpy 배열 (150,) 값 0 / 1 / 2
 
 print(datasets.DESCR) # # Iris 데이터셋에 대한 설명을 출력
 print(datasets.feature_names) # 입력 데이터의 컬럼 이름을 출력
@@ -44,6 +44,7 @@ y = datasets['target'] # 정답 데이터 -> Iris는 3개의 종류를 분류
 
 # print(np.unique(y, return_counts=True)) # (array([0, 1, 2]), array([50, 50, 50])) -> 0, 1, 2라는 클래스가 존재하고 각각 50개씩 있음 (pandas의 value_counts()와 비슷한 역할)
 
+# 아래 예시는 남자=0, 여자=1, 외계인=2 → [1,0,0] 이 남자, [0,1,0] 이 여자 (문자열 안의 '여자' / '남자' 설명은 서로 바뀌어 있다)
 '''
 남자, 여자, 외계인
 [0,0,1,1,2] # (5,)
@@ -97,7 +98,7 @@ ohe = OneHotEncoder(sparse_output=False)
 # 2차원 형태로 넣어야 함
 # y = y.reshape(150,1) # (150,) -> (150,1)
 # print(y, y.shape) # (150,1)
-y = y.reshape(-1, 1) # 가장 마지막 값까지
+y = y.reshape(-1, 1) # -1 : 행 개수는 알아서 계산 (150) -> (150, 1)
 
 # One-Hot Encoding
 y = ohe.fit_transform(y)
@@ -116,8 +117,8 @@ x_train, x_test, y_train, y_test = train_test_split(
     stratify=y,
 )
 
-print(x_train.shape, x_test.shape) # (120, 4) (30, 4)
-print(y_train.shape, y_test.shape) # (120, 3) (30, 3)
+print(x_train.shape, x_test.shape) # (105, 4) (45, 4)  <- train_size=0.7 : 150 x 0.7 = 105 / 45
+print(y_train.shape, y_test.shape) # (105, 3) (45, 3)
 
 # exit()
 
@@ -161,6 +162,7 @@ y_predict = model.predict(x_test) # test 데이터의 정답을 모델에게 알
 y_test_arg = np.argmax(y_test, axis=1) # argmax : 확률값 -> 클래스 번호로 변경 (y_test는 One-Hot 형태로 가장 큰 값 위치를 찾음)
 y_predict_arg = np.argmax(y_predict, axis=1) # 예측도 위와 동일
 
+# 변수 이름을 함수 이름과 같은 accuracy_score 로 덮어써서, 이 줄 이후에는 accuracy_score() 함수를 다시 부를 수 없다
 accuracy_score = accuracy_score(y_test_arg, y_predict_arg) # 실제 정답과 모델 예측 비교 (accuracy_score: 모델 예측 / 실제 정답)
 print('accuracy_score :', accuracy_score)
 print('소요 시간 :', round(end_time - start_time), '초')

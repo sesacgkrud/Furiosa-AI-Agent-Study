@@ -1,5 +1,5 @@
 # keras45_02_brain_load_npy.py
-# keras45_01_brain_save_npy.py 에서 저장한 npy 를 불러와 바로 훈련한다
+# [목적] keras45_01_brain_save_npy.py 에서 저장한 npy 를 불러와 바로 훈련한다
 # ImageDataGenerator 로 폴더를 읽는 대신 np.load 로 불러온다
 # 두 방법의 시간을 한 번에 비교하려고 ImageDataGenerator 쪽도 같이 돌려서 시간을 잰다
 # (훈련에 쓰는 데이터는 npy 로 불러온 쪽이다)
@@ -23,7 +23,7 @@ train_datagen = ImageDataGenerator(
     ######### 원 데이터 왜곡 없도록 주석 처리 #########
     # horizontal_flip=True,     # 수평 뒤집기 (필수x)
     # vertical_flip=True,       # 수직 뒤집기 (필수x)
-    # width_shift_range=0.1,    # 평형 이동 (필수x)
+    # width_shift_range=0.1,    # 평행 이동 (필수x)
     # height_shift_range=0.1,   # (필수x)
     # rotation_range=5,         # 각도 조절 (정해진 각도만큼 이미지 회전) (필수x)
     # zoom_range=1.2,           # (필수x)

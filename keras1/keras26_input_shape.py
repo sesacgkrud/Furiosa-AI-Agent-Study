@@ -1,5 +1,5 @@
 # keras26_input_shape.py
-# input_dim 대신 input_shape 를 쓴다
+# [목적] input_dim 대신 input_shape 를 쓴다
 #  input_dim=4  -> 컬럼 개수만 쓸 수 있다 (2차원 데이터 전용)
 #  input_shape=(4,) -> 행 개수를 뺀 나머지 모양을 그대로 적는다
 # 이미지처럼 차원이 늘어나면(예: (28, 28, 1)) input_dim 으로는 표현할 수 없어서 input_shape 를 써야 한다
@@ -21,8 +21,8 @@ from sklearn.datasets import load_iris
 #1. 데이터
 datasets = load_iris() # load_iris()를 실행하면 Iris 데이터셋이 들어있는 객체가 만들어진다.
 print(datasets)
-print(datasets.data) # -> 입력 데이터(x) dictionary
-print(datasets.target) #  -> 정답 데이터(y) list
+print(datasets.data) # -> 입력 데이터(x), numpy 배열 (150, 4)
+print(datasets.target) #  -> 정답 데이터(y), numpy 배열 (150,) 값 0 / 1 / 2
 
 print(datasets.DESCR) # # Iris 데이터셋에 대한 설명을 출력
 print(datasets.feature_names) # 입력 데이터의 컬럼 이름을 출력
@@ -81,7 +81,7 @@ ohe = OneHotEncoder(sparse_output=False)
 # 2차원 형태로 넣어야 함
 # y = y.reshape(150,1) # (150,) -> (150,1)
 # print(y, y.shape) # (150,1)
-y = y.reshape(-1, 1) # 가장 마지막 값까지
+y = y.reshape(-1, 1) # -1 : 행 개수는 알아서 계산 (150) -> (150, 1)
 
 # One-Hot Encoding
 y = ohe.fit_transform(y)
@@ -98,8 +98,8 @@ x_train, x_test, y_train, y_test = train_test_split(
     stratify=y,
 )
 
-print(x_train.shape, x_test.shape) # (120, 4) (30, 4)
-print(y_train.shape, y_test.shape) # (120, 3) (30, 3)
+print(x_train.shape, x_test.shape) # (105, 4) (45, 4)  <- train_size=0.7 : 150 x 0.7 = 105 / 45
+print(y_train.shape, y_test.shape) # (105, 3) (45, 3)
 
 #2. 모델 구성
 model = Sequential()
