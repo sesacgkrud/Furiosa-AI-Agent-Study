@@ -2,7 +2,7 @@
 
 **학습 기간:** 2026-11-05
 
-> 파이썬 파일(.py) 하나가 모듈이라는 것부터 시작해, `import 모듈` · `from 모듈 import 함수` 로 다른 파일의 함수를 불러 쓰고, `__name__` 과 `if __name__ == "__main__":` 으로 **직접 실행할 때와 import 될 때를 구분**했다. 이어서 `machine` 폴더(패키지)와 그 하위 폴더 `machine/test` 안의 모듈을 `import 폴더.모듈` · `from 폴더 import 모듈` 로 불러왔다(python/).
+> 파이썬 파일(.py) 하나가 모듈이라는 것부터 시작해, `import 모듈` · `from 모듈 import 함수` 로 다른 파일의 함수를 불러 쓰고, `__name__` 과 `if __name__ == "__main__":` 으로 **직접 실행할 때와 import 될 때를 구분**했다. 이어서 `machine` 폴더(패키지)와 그 하위 폴더 `machine/test` 안의 모듈을 `import 폴더.모듈` · `from 폴더 import 모듈` 로 불러왔다(python_pkg/).
 >
 > 머신러닝에서는 Day43 의 all_estimators + 교차 검증을 **여러 데이터셋에 한 번에** 돌려 데이터마다 최고 모델을 찾았다(분류 4 개 · 회귀 2 개, m06). 그다음 하이퍼파라미터 조합을 **이중 for 문으로 직접 바꿔 가며** 최고 점수와 최적 매개변수를 찾았고(m07), 이를 `GridSearchCV` 로 바꿔 파라미터 42 조합을 교차 검증으로 자동 탐색했다(iris · digits · diabetes, m08).
 >
@@ -142,7 +142,7 @@ test()          # x :  111   ← test 는 p31_sample 의 x 를 쓴다
 ### 5. 패키지(폴더) 안의 모듈 import (p41 · p42 · p51, machine/)
 
 ```
-python/
+python_pkg/
 ├── machine/
 │   ├── car.py          def drive() → "machine 운전하다"
 │   ├── tv.py           def watch() → "machine 시청하다"
@@ -558,20 +558,20 @@ for chunk in llm.stream("NPU와 GPU의 차이점을 설명해줘"):
 
 | 파일 | 내용 |
 |---|---|
-| `python/p01_car.py` · `python/p02_tv.py` | `drive()` · `watch()` 함수를 만들고 호출하는 모듈 |
-| `python/p03_do.py` | `import p01_car` · `import p02_tv` → `모듈.함수()` 호출 |
-| `python/p11_car.py` · `python/p12_tv.py` | 직접 실행 시 `__name__` = `"__main__"` |
-| `python/p13_do.py` | import 된 모듈의 `__name__` = 파일 이름 |
-| `python/p21_car.py` · `python/p22_tv.py` | `if __name__ == "__main__":` |
-| `python/p23_main_do.py` | import 때 if 안의 호출은 실행되지 않는 것 확인 |
-| `python/p31_sample.py` | 변수 `x = 111` · `test()` 만 있는 모듈 |
-| `python/p32_main_func.py` | 모듈마다 따로인 변수 (`x` 222 / 111) |
-| `python/p33_from.py` | `from p31_sample import test` |
-| `python/machine/car.py` · `python/machine/tv.py` | 패키지(machine 폴더) 안의 모듈 |
-| `python/machine/test/car.py` · `python/machine/test/tv.py` | 하위 폴더(machine/test) 안의 모듈 |
-| `python/p41_import_module.py` | `import machine.car` → `machine.car.drive()` |
-| `python/p42_from_module.py` | `from machine.car import drive` · `from machine import car, tv` |
-| `python/p51_from_module.py` | `from machine.test import car, tv` (하위 폴더) |
+| `python_pkg/p01_car.py` · `python_pkg/p02_tv.py` | `drive()` · `watch()` 함수를 만들고 호출하는 모듈 |
+| `python_pkg/p03_do.py` | `import p01_car` · `import p02_tv` → `모듈.함수()` 호출 |
+| `python_pkg/p11_car.py` · `python_pkg/p12_tv.py` | 직접 실행 시 `__name__` = `"__main__"` |
+| `python_pkg/p13_do.py` | import 된 모듈의 `__name__` = 파일 이름 |
+| `python_pkg/p21_car.py` · `python_pkg/p22_tv.py` | `if __name__ == "__main__":` |
+| `python_pkg/p23_main_do.py` | import 때 if 안의 호출은 실행되지 않는 것 확인 |
+| `python_pkg/p31_sample.py` | 변수 `x = 111` · `test()` 만 있는 모듈 |
+| `python_pkg/p32_main_func.py` | 모듈마다 따로인 변수 (`x` 222 / 111) |
+| `python_pkg/p33_from.py` | `from p31_sample import test` |
+| `python_pkg/machine/car.py` · `python_pkg/machine/tv.py` | 패키지(machine 폴더) 안의 모듈 |
+| `python_pkg/machine/test/car.py` · `python_pkg/machine/test/tv.py` | 하위 폴더(machine/test) 안의 모듈 |
+| `python_pkg/p41_import_module.py` | `import machine.car` → `machine.car.drive()` |
+| `python_pkg/p42_from_module.py` | `from machine.car import drive` · `from machine import car, tv` |
+| `python_pkg/p51_from_module.py` | `from machine.test import car, tv` (하위 폴더) |
 | `ml/m06_all_estimators1_to_data.py` | iris · cancer · wine · digits × 분류 모델 전체 + `StratifiedKFold` → 데이터별 최고 모델 |
 | `ml/m06_all_estimators2_to_data.py` | california · diabetes × 회귀 모델 전체 + `KFold` → 데이터별 최고 모델 |
 | `ml/m07_for_parameter_tuning.py` | 이중 for 문으로 `learning_rate` × `max_depth` 36 조합 튜닝 |

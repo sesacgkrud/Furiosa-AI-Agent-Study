@@ -351,4 +351,4 @@ TPS (초당 토큰 수)   : output_tokens / latency → response.usage_metadata[
 
 ---
 
-[⬅️ Day46](Day46.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day46](Day46.md) · [🏠 전체 목차](../README.md) · [Day48 ➡️](Day48.md)

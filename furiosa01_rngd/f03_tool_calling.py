@@ -7,7 +7,7 @@
 
 """
 furiosa-llm serve furiosa-ai/Qwen3-8B-FP8 \
-    --devices npu:1 \
+    --devices npu:0 \
     --host 0.0.0.0 \
     --port 8000
 """

@@ -254,7 +254,7 @@ f01 처럼 `furiosa-llm serve` 서버에 OpenAI 클라이언트로 요청하면�
 
 ```
 furiosa-llm serve furiosa-ai/Qwen3-8B-FP8 \
-    --devices npu:1 \
+    --devices npu:0 \
     --host 0.0.0.0 \
     --port 8000
 ```

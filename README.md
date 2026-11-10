@@ -55,6 +55,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day45](docs/Day45.md)** | 파이썬 모듈 · 패키지 import & 데이터셋별 all_estimators 최고 모델 비교 & for 문 하이퍼파라미터 튜닝 · GridSearchCV & furiosa-llm LangChain 연결 · 스트리밍 | 2026-11-05 | import, from ~ import, \_\_name\_\_, StratifiedKFold, GridSearchCV, best_params_, best_score_, llm.stream, stream=True, time.perf_counter |
 | **[Day46](docs/Day46.md)** | RandomizedSearchCV 하이퍼파라미터 탐색 & KerasRegressor 신경망 하이퍼파라미터 튜닝 | 2026-11-06 | RandomizedSearchCV, param_distributions, n_iter, KerasRegressor |
 | **[Day47](docs/Day47.md)** | HalvingGridSearchCV 단계별 후보 축소 하이퍼파라미터 탐색 & RNGD 응답 시간 · TTFC · TPS 측정 & 전체 실습 코드 주석 정리 | 2026-11-09 | HalvingGridSearchCV, min_resources, max_resources, n_candidates · n_resources, usage_metadata, TTFC, prefill · decode, next(iter()) |
+| **[Day48](docs/Day48.md)** | RNGD 동시 요청 Continuous Batching 처리량 비교 & KV Cache · Prefix Cache 확인 (/metrics) & 파이썬 map · lambda | 2026-11-10 | ThreadPoolExecutor, max_workers, pool.map, lambda, statistics.mean, continuous batching, KV Cache, Prefix Cache, /metrics, map |
 
 ---
 
@@ -120,9 +121,12 @@ C:\furiosa_study\
 │   ├── f01_furiosa_test.py                                           (Day42)
 │   ├── f02_tutorial.py ~ f04_fxb_direct_select.py                    (Day43)
 │   └── f05_langchain.py ~ f08_pkg02_stream.py · a_kingkeras.py       (Day45)
-├─── furiosa02_rngd/                                                  (Furiosa RNGD 실습 2 - 응답 시간 · TTFC · TPS)
-│   └── f11_basic.py ~ f18_compare.py · kingkeras.py                  (Day47)
-├─── python/                                                          (파이썬 모듈 · 패키지 실습)
+├─── furiosa02_rngd/                                                  (Furiosa RNGD 실습 2 - 응답 시간 · TTFC · TPS · 동시 요청 · KV Cache)
+│   ├── f11_basic.py ~ f18_compare.py · kingkeras.py                  (Day47)
+│   └── f21_continuous_batching1.py ~ f22_kv_cache2.py · kingkeras.py (Day48)
+├─── python/                                                          (파이썬 map · lambda 실습)
+│   └── p01_map.py ~ p03_lambda3.py                                   (Day48)
+├─── python_pkg/                                                      (파이썬 모듈 · 패키지 실습)
 │   ├── p01_car.py ~ p51_from_module.py                               (Day45)
 │   └── machine/ · machine/test/                                      (Day45 패키지 실습 모듈)
 ├─── _save/                                                           (저장한 모델 / 가중치 - .gitignore 제외)
@@ -161,7 +165,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day47.md
+│   └── ... Day48.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -174,11 +178,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 47일 (Day01 ~ Day47)  
-**완료 시간:** 376시간  
-**완료율: 59%**
+**완료:** 48일 (Day01 ~ Day48)  
+**완료 시간:** 384시간  
+**완료율: 60%**
 
 ---
 
-**마지막 업데이트:** 2026-11-09  
-**최근 학습:** [Day47 - HalvingGridSearchCV 단계별 후보 축소 하이퍼파라미터 탐색 & RNGD 응답 시간 · TTFC · TPS 측정 & 전체 실습 코드 주석 정리](docs/Day47.md)
+**마지막 업데이트:** 2026-11-10  
+**최근 학습:** [Day48 - RNGD 동시 요청 Continuous Batching 처리량 비교 & KV Cache · Prefix Cache 확인 (/metrics) & 파이썬 map · lambda](docs/Day48.md)
