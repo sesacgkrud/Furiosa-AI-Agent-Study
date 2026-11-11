@@ -349,4 +349,4 @@ list(map(lambda x: ..., 리스트)) → 한 번 쓸 함수를 바로 넣어 리�
 
 ---
 
-[⬅️ Day47](Day47.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day47](Day47.md) · [🏠 전체 목차](../README.md) · [Day49 ➡️](Day49.md)
