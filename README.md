@@ -57,6 +57,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day47](docs/Day47.md)** | HalvingGridSearchCV 단계별 후보 축소 하이퍼파라미터 탐색 & RNGD 응답 시간 · TTFC · TPS 측정 & 전체 실습 코드 주석 정리 | 2026-11-09 | HalvingGridSearchCV, min_resources, max_resources, n_candidates · n_resources, usage_metadata, TTFC, prefill · decode, next(iter()) |
 | **[Day48](docs/Day48.md)** | RNGD 동시 요청 Continuous Batching 처리량 비교 & KV Cache · Prefix Cache 확인 (/metrics) & 파이썬 map · lambda | 2026-11-10 | ThreadPoolExecutor, max_workers, pool.map, lambda, statistics.mean, continuous batching, KV Cache, Prefix Cache, /metrics, map |
 | **[Day49](docs/Day49.md)** | RNGD 순차 · 동시 요청 처리량 비교 (RPS · Output TPS) & submit 으로 요청별 완료 순서 확인 & Prefix Cache 적중 측정 & 서버 /metrics 지표 확인 | 2026-11-11 | pool.submit, Future.result, time.sleep, RPS, Output TPS, requests.get, raise_for_status, num_requests_running, num_requests_waiting |
+| **[Day50](docs/Day50.md)** | 활성화 함수 직접 구현 · 시각화 (sigmoid · tanh · ReLU · SiLU · Mish · ELU · SELU · Leaky ReLU) & R-CNN · Fast R-CNN · Faster R-CNN · Mask R-CNN 논문 발표 | 2026-11-12 | sigmoid, tanh, ReLU, SiLU, Mish, ELU, SELU, Leaky ReLU, np.arange, R-CNN · Fast · Faster · Mask R-CNN |
 
 ---
 
@@ -87,7 +88,7 @@ C:\furiosa_study\
 │   ├── keras55_LSTM2_scale.py ~ keras56_split2_samcode.py            (Day19)
 │   ├── keras56_split3.py ~ keras58_kaggle_jena2.py                   (Day20)
 │   └── keras59_Bidirectional1.py ~ keras59_Bidirectional3_jena.py    (Day21)
-├─── keras2/                                                          (Day22 ~ Day29 · Day46 Keras 실습)
+├─── keras2/                                                          (Day22 ~ Day29 · Day46 · Day50 Keras 실습)
 │   ├── keras60_Tokenizer1.py ~ keras61_Embedding04_important.py      (Day22)
 │   ├── keras62_1_reuters.py ~ keras65_Reshape2.py                    (Day23)
 │   ├── keras66_jena_CNN.py ~ keras67_Conv1D_3_jena.py                (Day24)
@@ -96,7 +97,8 @@ C:\furiosa_study\
 │   ├── keras69_ensemble4.py ~ keras70_samsung4_...py                 (Day27)
 │   ├── keras71_trainable_weights1.py ~ keras73_vgg16_02_cifar100.py  (Day28)
 │   ├── keras73_vgg16_03_man_horse.py ~ keras76_all_T_06_cat_dog.py   (Day29)
-│   └── keras77_hyperParameter02_diabets.py                           (Day46)
+│   ├── keras77_hyperParameter02_diabets.py                           (Day46)
+│   └── keras78_01_sigmoid.py ~ keras78_08_leaky_relu.py              (Day50)
 ├─── RAG/                                                             (LangChain 실습)
 │   ├── rag01_key_insert.py ~ rag09_out_parser02.py                   (Day21)
 │   ├── rag10_Embedding01.py ~ rag10_Embedding02.py                   (Day22)
@@ -167,7 +169,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day49.md
+│   └── ... Day50.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -180,11 +182,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 49일 (Day01 ~ Day49)  
-**완료 시간:** 392시간  
-**완료율: 61%**
+**완료:** 50일 (Day01 ~ Day50)  
+**완료 시간:** 400시간  
+**완료율: 63%**
 
 ---
 
-**마지막 업데이트:** 2026-11-11  
-**최근 학습:** [Day49 - RNGD 순차 · 동시 요청 처리량 비교 (RPS · Output TPS) & submit 으로 요청별 완료 순서 확인 & Prefix Cache 적중 측정 & 서버 /metrics 지표 확인](docs/Day49.md)
+**마지막 업데이트:** 2026-11-12  
+**최근 학습:** [Day50 - 활성화 함수 직접 구현 · 시각화 (sigmoid · tanh · ReLU · SiLU · Mish · ELU · SELU · Leaky ReLU) & R-CNN · Fast · Faster · Mask R-CNN 논문 발표](docs/Day50.md)

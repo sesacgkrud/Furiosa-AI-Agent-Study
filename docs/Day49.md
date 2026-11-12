@@ -298,4 +298,4 @@ after  = get_cache_metrics()   → 요청 후 누적값
 
 ---
 
-[⬅️ Day48](Day48.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day48](Day48.md) · [🏠 전체 목차](../README.md) · [Day50 ➡️](Day50.md)
