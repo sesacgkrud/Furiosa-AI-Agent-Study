@@ -1,14 +1,14 @@
-# Day36 - Hermes Agent 설치
+# Day36 - Hermes Agent 설치 (미니 프로젝트와 별도 수업 진도)
 
 **학습 기간:** 2026-10-23
 
-> Hermes Agent 를 설치한 날이다.
+> 미니 프로젝트 기간(Day31 ~ Day40) 중이지만, 프로젝트와는 별도로 수업 시간에 진도를 나가 Hermes Agent 를 설치한 날이다.
 
 ---
 
 ## 📖 핵심 학습 내용
 
-- Hermes Agent 설치
+- (수업) Hermes Agent 설치 — 미니 프로젝트 주제가 아니라 수업 진도
 
 ---
 

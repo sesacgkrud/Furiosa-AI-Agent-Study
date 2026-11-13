@@ -2,6 +2,8 @@
 
 AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그날의 상세 학습 내용(핵심 개념, 학습 파일, 코드 예제)으로 이동합니다.
 
+학습 내용 · 핵심 키워드에서 `/ (퓨리오사 NPU)` 뒤는 Furiosa AI RNGD NPU 를 사용하며 공부 · 실습한 내용입니다 (Day41 ~).
+
 ---
 
 ## 📚 학습 일지
@@ -43,21 +45,22 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day33](docs/Day33.md)** | LangGraph Tool Calling (TavilySearch · DuckDuckGo 웹 검색 & ToolNode · tools_condition 조건부 Edge & 그래프 이미지 저장) | 2026-10-20 | bind_tools, TavilySearch, DuckDuckGoSearchRun, ToolNode, tools_condition, add_conditional_edges, get_graph, draw_mermaid_png |
 | **[Day34](docs/Day34.md)** | LangGraph 그래프 이미지 출력 & InMemorySaver 대화 메모리 & 병렬 실행 (Parallel Execution) | 2026-10-21 | BytesIO, Image.open, InMemorySaver, checkpointer, thread_id, Parallel Execution |
 | **[Day35](docs/Day35.md)** | LangGraph 병렬 결과 LLM 통합 (merge) & 머신러닝 트리 모델 feature_importances_ & XGBoost F score / Gain score | 2026-10-22 | DecisionTreeClassifier, RandomForestClassifier, GradientBoostingClassifier, XGBClassifier, XGBRegressor, model.score, feature_importances_, get_score, plot_importance |
-| **[Day36](docs/Day36.md)** | Hermes Agent 설치 | 2026-10-23 | Hermes Agent |
-| **[Day37](docs/Day37.md)** | Hermes 텔레그램 연동 & 미니 프로젝트 진행 | 2026-10-26 | Hermes, 텔레그램 연동 |
+| **[Day36](docs/Day36.md)** | Hermes Agent 설치 (미니 프로젝트와 별도 수업 진도) | 2026-10-23 | Hermes Agent |
+| **[Day37](docs/Day37.md)** | Hermes Agent 텔레그램 연동 (미니 프로젝트와 별도 수업 진도) & 미니 프로젝트 진행 | 2026-10-26 | Hermes Agent, 텔레그램 연동 |
 | **[Day38](docs/Day38.md)** | 미니 프로젝트 진행 | 2026-10-27 | - |
 | **[Day39](docs/Day39.md)** | 미니 프로젝트 진행 | 2026-10-28 | - |
 | **[Day40](docs/Day40.md)** | 미니 프로젝트 발표 | 2026-10-29 | - |
-| **[Day41](docs/Day41.md)** | Furiosa AI RNGD WSL 설치 & Miniconda 연결 | 2026-10-30 | RNGD, WSL, Miniconda |
-| **[Day42](docs/Day42.md)** | KFold 교차 검증 & cross_val_score (iris 분류 · california 회귀) · RNGD furiosa-llm 서빙 | 2026-11-02 | KFold, cross_val_score, furiosa-llm serve |
-| **[Day43](docs/Day43.md)** | KFold 교차 검증 Kaggle 데이터 적용 & train_test_split + cross_val_predict & all_estimators 전체 모델 비교 (KFold) · furiosa-llm LLM · Tool calling | 2026-11-03 | cross_val_predict, all_estimators, type_filter, LLM, SamplingParams, tools, tool_choice, fxb |
+| **[Day41](docs/Day41.md)** | (퓨리오사 NPU) Furiosa AI RNGD WSL 설치 & Miniconda 연결 | 2026-10-30 | (퓨리오사 NPU) RNGD, WSL, Miniconda |
+| **[Day42](docs/Day42.md)** | KFold 교차 검증 & cross_val_score (iris 분류 · california 회귀) / (퓨리오사 NPU) RNGD furiosa-llm 서빙 | 2026-11-02 | KFold, cross_val_score / (퓨리오사 NPU) furiosa-llm serve |
+| **[Day43](docs/Day43.md)** | KFold 교차 검증 Kaggle 데이터 적용 & train_test_split + cross_val_predict & all_estimators 전체 모델 비교 (KFold) / (퓨리오사 NPU) furiosa-llm LLM · Tool calling | 2026-11-03 | cross_val_predict, all_estimators, type_filter / (퓨리오사 NPU) LLM, SamplingParams, tools, tool_choice, fxb |
 | **[Day44](docs/Day44.md)** | Ollama 설치 & Gemma4 E2B · Qwen3-4B 양자화 실행 | 2026-11-04 | Ollama, Gemma4 E2B, Qwen3-4B, 양자화 |
-| **[Day45](docs/Day45.md)** | 파이썬 모듈 · 패키지 import & 데이터셋별 all_estimators 최고 모델 비교 & for 문 하이퍼파라미터 튜닝 · GridSearchCV & furiosa-llm LangChain 연결 · 스트리밍 | 2026-11-05 | import, from ~ import, \_\_name\_\_, StratifiedKFold, GridSearchCV, best_params_, best_score_, llm.stream, stream=True, time.perf_counter |
+| **[Day45](docs/Day45.md)** | 파이썬 모듈 · 패키지 import & 데이터셋별 all_estimators 최고 모델 비교 & for 문 하이퍼파라미터 튜닝 · GridSearchCV / (퓨리오사 NPU) furiosa-llm LangChain 연결 · 스트리밍 | 2026-11-05 | import, from ~ import, \_\_name\_\_, StratifiedKFold, GridSearchCV, best_params_, best_score_ / (퓨리오사 NPU) llm.stream, stream=True, time.perf_counter |
 | **[Day46](docs/Day46.md)** | RandomizedSearchCV 하이퍼파라미터 탐색 & KerasRegressor 신경망 하이퍼파라미터 튜닝 | 2026-11-06 | RandomizedSearchCV, param_distributions, n_iter, KerasRegressor |
-| **[Day47](docs/Day47.md)** | HalvingGridSearchCV 단계별 후보 축소 하이퍼파라미터 탐색 & RNGD 응답 시간 · TTFC · TPS 측정 & 전체 실습 코드 주석 정리 | 2026-11-09 | HalvingGridSearchCV, min_resources, max_resources, n_candidates · n_resources, usage_metadata, TTFC, prefill · decode, next(iter()) |
-| **[Day48](docs/Day48.md)** | RNGD 동시 요청 Continuous Batching 처리량 비교 & KV Cache · Prefix Cache 확인 (/metrics) & 파이썬 map · lambda | 2026-11-10 | ThreadPoolExecutor, max_workers, pool.map, lambda, statistics.mean, continuous batching, KV Cache, Prefix Cache, /metrics, map |
-| **[Day49](docs/Day49.md)** | RNGD 순차 · 동시 요청 처리량 비교 (RPS · Output TPS) & submit 으로 요청별 완료 순서 확인 & Prefix Cache 적중 측정 & 서버 /metrics 지표 확인 | 2026-11-11 | pool.submit, Future.result, time.sleep, RPS, Output TPS, requests.get, raise_for_status, num_requests_running, num_requests_waiting |
+| **[Day47](docs/Day47.md)** | HalvingGridSearchCV 단계별 후보 축소 하이퍼파라미터 탐색 & 전체 실습 코드 주석 정리 / (퓨리오사 NPU) RNGD 응답 시간 · TTFC · TPS 측정 | 2026-11-09 | HalvingGridSearchCV, min_resources, max_resources, n_candidates · n_resources / (퓨리오사 NPU) usage_metadata, TTFC, prefill · decode, next(iter()) |
+| **[Day48](docs/Day48.md)** | 파이썬 map · lambda / (퓨리오사 NPU) RNGD 동시 요청 Continuous Batching 처리량 비교 & KV Cache · Prefix Cache 확인 (/metrics) | 2026-11-10 | map, lambda / (퓨리오사 NPU) ThreadPoolExecutor, max_workers, pool.map, statistics.mean, continuous batching, KV Cache, Prefix Cache, /metrics |
+| **[Day49](docs/Day49.md)** | (퓨리오사 NPU) RNGD 순차 · 동시 요청 처리량 비교 (RPS · Output TPS) & submit 으로 요청별 완료 순서 확인 & Prefix Cache 적중 측정 & 서버 /metrics 지표 확인 | 2026-11-11 | (퓨리오사 NPU) pool.submit, Future.result, time.sleep, RPS, Output TPS, requests.get, raise_for_status, num_requests_running, num_requests_waiting |
 | **[Day50](docs/Day50.md)** | 활성화 함수 직접 구현 · 시각화 (sigmoid · tanh · ReLU · SiLU · Mish · ELU · SELU · Leaky ReLU) & R-CNN · Fast R-CNN · Faster R-CNN · Mask R-CNN 논문 발표 | 2026-11-12 | sigmoid, tanh, ReLU, SiLU, Mish, ELU, SELU, Leaky ReLU, np.arange, R-CNN · Fast · Faster · Mask R-CNN |
+| **[Day51](docs/Day51.md)** | softmax 직접 구현 · 원그래프 & 경사 하강법(gradient descent) 직접 구현 & learning rate 가중치 갱신 & TensorBoard 콜백 / (퓨리오사 NPU) RNGD eager · overlap 스케줄링 처리량 비교 | 2026-11-13 | softmax, plt.pie, np.linspace, 경사 하강법, gradient, TensorBoard, log_dir, histogram_freq, write_graph, write_images / (퓨리오사 NPU) --enable-overlap-scheduling, eager, overlap scheduling |
 
 ---
 
@@ -88,7 +91,7 @@ C:\furiosa_study\
 │   ├── keras55_LSTM2_scale.py ~ keras56_split2_samcode.py            (Day19)
 │   ├── keras56_split3.py ~ keras58_kaggle_jena2.py                   (Day20)
 │   └── keras59_Bidirectional1.py ~ keras59_Bidirectional3_jena.py    (Day21)
-├─── keras2/                                                          (Day22 ~ Day29 · Day46 · Day50 Keras 실습)
+├─── keras2/                                                          (Day22 ~ Day29 · Day46 · Day50 ~ Day51 Keras 실습)
 │   ├── keras60_Tokenizer1.py ~ keras61_Embedding04_important.py      (Day22)
 │   ├── keras62_1_reuters.py ~ keras65_Reshape2.py                    (Day23)
 │   ├── keras66_jena_CNN.py ~ keras67_Conv1D_3_jena.py                (Day24)
@@ -98,7 +101,8 @@ C:\furiosa_study\
 │   ├── keras71_trainable_weights1.py ~ keras73_vgg16_02_cifar100.py  (Day28)
 │   ├── keras73_vgg16_03_man_horse.py ~ keras76_all_T_06_cat_dog.py   (Day29)
 │   ├── keras77_hyperParameter02_diabets.py                           (Day46)
-│   └── keras78_01_sigmoid.py ~ keras78_08_leaky_relu.py              (Day50)
+│   ├── keras78_01_sigmoid.py ~ keras78_08_leaky_relu.py              (Day50)
+│   └── keras78_09_softmax.py ~ keras80_Tensorboard.py                (Day51)
 ├─── RAG/                                                             (LangChain 실습)
 │   ├── rag01_key_insert.py ~ rag09_out_parser02.py                   (Day21)
 │   ├── rag10_Embedding01.py ~ rag10_Embedding02.py                   (Day22)
@@ -124,10 +128,11 @@ C:\furiosa_study\
 │   ├── f01_furiosa_test.py                                           (Day42)
 │   ├── f02_tutorial.py ~ f04_fxb_direct_select.py                    (Day43)
 │   └── f05_langchain.py ~ f08_pkg02_stream.py · a_kingkeras.py       (Day45)
-├─── furiosa02_rngd/                                                  (Furiosa RNGD 실습 2 - 응답 시간 · TTFC · TPS · 동시 요청 · KV Cache · RPS)
+├─── furiosa02_rngd/                                                  (Furiosa RNGD 실습 2 - 응답 시간 · TTFC · TPS · 동시 요청 · KV Cache · RPS · overlap 스케줄링)
 │   ├── f11_basic.py ~ f18_compare.py · kingkeras.py                  (Day47)
 │   ├── f21_continuous_batching1.py ~ f22_kv_cache2.py · kingkeras.py (Day48)
-│   └── f21_..._batching3.py · f23_prefix_cache1.py ~ f29_...py       (Day49)
+│   ├── f21_..._batching3.py · f23_prefix_cache1.py ~ f29_...py       (Day49)
+│   └── f30_overlap_eager1.py ~ f30_overlap_eager2.py                 (Day51)
 ├─── python/                                                          (파이썬 map · lambda 실습)
 │   └── p01_map.py ~ p03_lambda3.py                                   (Day48)
 ├─── python_pkg/                                                      (파이썬 모듈 · 패키지 실습)
@@ -149,6 +154,7 @@ C:\furiosa_study\
 │   ├── keras68/                                                      (표 · 이미지 데이터 Conv1D MCP 저장 파일)
 │   ├── keras70/                                                      (삼성전자 시가 앙상블 save_weights 가중치)
 │   ├── keras73/                                                      (VGG16 전이학습 이미지 데이터셋 MCP 저장 파일)
+│   ├── tensorboard/                                                  (TensorBoard 로그 - keras80 _keras80/ train · validation)
 │   └── image/                                                        (LangGraph 그래프 구조 PNG - lg07)
 ├─── _data/
 │   ├── rag_data/                                                     (RAG 실습용 텍스트 - samsung / nvidia / AI for All)
@@ -169,7 +175,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day50.md
+│   └── ... Day51.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -182,11 +188,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 50일 (Day01 ~ Day50)  
-**완료 시간:** 400시간  
-**완료율: 63%**
+**완료:** 51일 (Day01 ~ Day51)  
+**완료 시간:** 408시간  
+**완료율: 64%**
 
 ---
 
-**마지막 업데이트:** 2026-11-12  
-**최근 학습:** [Day50 - 활성화 함수 직접 구현 · 시각화 (sigmoid · tanh · ReLU · SiLU · Mish · ELU · SELU · Leaky ReLU) & R-CNN · Fast · Faster · Mask R-CNN 논문 발표](docs/Day50.md)
+**마지막 업데이트:** 2026-11-13  
+**최근 학습:** [Day51 - softmax 직접 구현 · 원그래프 & 경사 하강법 직접 구현 & learning rate 가중치 갱신 & TensorBoard 콜백 · RNGD eager · overlap 스케줄링 처리량 비교](docs/Day51.md)
