@@ -293,4 +293,4 @@ overlap : 배치 계산(NPU) 중에 다음 배치 스케줄링(CPU) 을 겹쳐 �
 
 ---
 
-[⬅️ Day50](Day50.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day50](Day50.md) · [🏠 전체 목차](../README.md) · [Day52 ➡️](Day52.md)

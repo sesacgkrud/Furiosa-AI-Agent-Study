@@ -61,6 +61,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day49](docs/Day49.md)** | (퓨리오사 NPU) RNGD 순차 · 동시 요청 처리량 비교 (RPS · Output TPS) & submit 으로 요청별 완료 순서 확인 & Prefix Cache 적중 측정 & 서버 /metrics 지표 확인 | 2026-11-11 | (퓨리오사 NPU) pool.submit, Future.result, time.sleep, RPS, Output TPS, requests.get, raise_for_status, num_requests_running, num_requests_waiting |
 | **[Day50](docs/Day50.md)** | 활성화 함수 직접 구현 · 시각화 (sigmoid · tanh · ReLU · SiLU · Mish · ELU · SELU · Leaky ReLU) & R-CNN · Fast R-CNN · Faster R-CNN · Mask R-CNN 논문 발표 | 2026-11-12 | sigmoid, tanh, ReLU, SiLU, Mish, ELU, SELU, Leaky ReLU, np.arange, R-CNN · Fast · Faster · Mask R-CNN |
 | **[Day51](docs/Day51.md)** | softmax 직접 구현 · 원그래프 & 경사 하강법(gradient descent) 직접 구현 & learning rate 가중치 갱신 & TensorBoard 콜백 / (퓨리오사 NPU) RNGD eager · overlap 스케줄링 처리량 비교 | 2026-11-13 | softmax, plt.pie, np.linspace, 경사 하강법, gradient, TensorBoard, log_dir, histogram_freq, write_graph, write_images / (퓨리오사 NPU) --enable-overlap-scheduling, eager, overlap scheduling |
+| **[Day52](docs/Day52.md)** | 결측치 처리 (interpolate 보간 · fillna · ffill · bfill) & sklearn SimpleImputer · KNNImputer · IterativeImputer & pandas loc · iloc 행 · 열 선택 | 2026-11-16 | interpolate, to_datetime, ffill, bfill, SimpleImputer, KNNImputer, IterativeImputer, n_iter_, loc |
 
 ---
 
@@ -138,6 +139,8 @@ C:\furiosa_study\
 ├─── python_pkg/                                                      (파이썬 모듈 · 패키지 실습)
 │   ├── p01_car.py ~ p51_from_module.py                               (Day45)
 │   └── machine/ · machine/test/                                      (Day45 패키지 실습 모듈)
+├─── pandas/                                                          (pandas 결측치 처리 · loc · iloc 실습)
+│   └── pd01_bogan1_interpolate.py ~ pd06_loc_iloc2_range.py          (Day52)
 ├─── _save/                                                           (저장한 모델 / 가중치 - .gitignore 제외)
 │   ├── keras29/ ~ keras34/                                           (model.save / save_weights / ModelCheckpoint 저장 파일)
 │   ├── keras44/                                                      (cat_dog MCP 저장 파일)
@@ -175,7 +178,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day51.md
+│   └── ... Day52.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -188,11 +191,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 51일 (Day01 ~ Day51)  
-**완료 시간:** 408시간  
-**완료율: 64%**
+**완료:** 52일 (Day01 ~ Day52)  
+**완료 시간:** 416시간  
+**완료율: 65%**
 
 ---
 
-**마지막 업데이트:** 2026-11-13  
-**최근 학습:** [Day51 - softmax 직접 구현 · 원그래프 & 경사 하강법 직접 구현 & learning rate 가중치 갱신 & TensorBoard 콜백 · RNGD eager · overlap 스케줄링 처리량 비교](docs/Day51.md)
+**마지막 업데이트:** 2026-11-16  
+**최근 학습:** [Day52 - 결측치 처리 (interpolate 보간 · fillna · ffill · bfill) & sklearn SimpleImputer · KNNImputer · IterativeImputer & pandas loc · iloc 행 · 열 선택](docs/Day52.md)
