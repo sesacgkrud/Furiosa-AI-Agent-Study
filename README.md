@@ -62,6 +62,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day50](docs/Day50.md)** | 활성화 함수 직접 구현 · 시각화 (sigmoid · tanh · ReLU · SiLU · Mish · ELU · SELU · Leaky ReLU) & R-CNN · Fast R-CNN · Faster R-CNN · Mask R-CNN 논문 발표 | 2026-11-12 | sigmoid, tanh, ReLU, SiLU, Mish, ELU, SELU, Leaky ReLU, np.arange, R-CNN · Fast · Faster · Mask R-CNN |
 | **[Day51](docs/Day51.md)** | softmax 직접 구현 · 원그래프 & 경사 하강법(gradient descent) 직접 구현 & learning rate 가중치 갱신 & TensorBoard 콜백 / (퓨리오사 NPU) RNGD eager · overlap 스케줄링 처리량 비교 | 2026-11-13 | softmax, plt.pie, np.linspace, 경사 하강법, gradient, TensorBoard, log_dir, histogram_freq, write_graph, write_images / (퓨리오사 NPU) --enable-overlap-scheduling, eager, overlap scheduling |
 | **[Day52](docs/Day52.md)** | 결측치 처리 (interpolate 보간 · fillna · ffill · bfill) & sklearn SimpleImputer · KNNImputer · IterativeImputer & pandas loc · iloc 행 · 열 선택 | 2026-11-16 | interpolate, to_datetime, ffill, bfill, SimpleImputer, KNNImputer, IterativeImputer, n_iter_, loc |
+| **[Day53](docs/Day53.md)** | pandas 조건 행 선택 (불리언 인덱싱) & IQR 이상치 탐지 (np.percentile · boxplot) & 이상치 처리 (NaN 후 결측치 처리 · np.clip) | 2026-11-17 | 불리언 인덱싱, IQR, np.percentile, 사분위, lower · upper bound, boxplot, axhline, np.clip |
 
 ---
 
@@ -139,8 +140,9 @@ C:\furiosa_study\
 ├─── python_pkg/                                                      (파이썬 모듈 · 패키지 실습)
 │   ├── p01_car.py ~ p51_from_module.py                               (Day45)
 │   └── machine/ · machine/test/                                      (Day45 패키지 실습 모듈)
-├─── pandas/                                                          (pandas 결측치 처리 · loc · iloc 실습)
-│   └── pd01_bogan1_interpolate.py ~ pd06_loc_iloc2_range.py          (Day52)
+├─── pandas/                                                          (pandas 결측치 · 이상치 처리 · loc · iloc 실습)
+│   ├── pd01_bogan1_interpolate.py ~ pd06_loc_iloc2_range.py          (Day52)
+│   └── pd06_loc_iloc3_conditions.py ~ pd07_outlier2.py               (Day53)
 ├─── _save/                                                           (저장한 모델 / 가중치 - .gitignore 제외)
 │   ├── keras29/ ~ keras34/                                           (model.save / save_weights / ModelCheckpoint 저장 파일)
 │   ├── keras44/                                                      (cat_dog MCP 저장 파일)
@@ -178,7 +180,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day52.md
+│   └── ... Day53.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -191,11 +193,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 52일 (Day01 ~ Day52)  
-**완료 시간:** 416시간  
-**완료율: 65%**
+**완료:** 53일 (Day01 ~ Day53)  
+**완료 시간:** 424시간  
+**완료율: 66%**
 
 ---
 
-**마지막 업데이트:** 2026-11-16  
-**최근 학습:** [Day52 - 결측치 처리 (interpolate 보간 · fillna · ffill · bfill) & sklearn SimpleImputer · KNNImputer · IterativeImputer & pandas loc · iloc 행 · 열 선택](docs/Day52.md)
+**마지막 업데이트:** 2026-11-17  
+**최근 학습:** [Day53 - pandas 조건 행 선택 (불리언 인덱싱) & IQR 이상치 탐지 (np.percentile · boxplot) & 이상치 처리 (NaN 후 결측치 처리 · np.clip)](docs/Day53.md)

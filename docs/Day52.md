@@ -282,4 +282,4 @@ Series.loc["이름"] / Series.iloc[위치]
 
 ---
 
-[⬅️ Day51](Day51.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day51](Day51.md) · [🏠 전체 목차](../README.md) · [Day53 ➡️](Day53.md)
