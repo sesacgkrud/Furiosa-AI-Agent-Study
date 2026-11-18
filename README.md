@@ -63,6 +63,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day51](docs/Day51.md)** | softmax 직접 구현 · 원그래프 & 경사 하강법(gradient descent) 직접 구현 & learning rate 가중치 갱신 & TensorBoard 콜백 / (퓨리오사 NPU) RNGD eager · overlap 스케줄링 처리량 비교 | 2026-11-13 | softmax, plt.pie, np.linspace, 경사 하강법, gradient, TensorBoard, log_dir, histogram_freq, write_graph, write_images / (퓨리오사 NPU) --enable-overlap-scheduling, eager, overlap scheduling |
 | **[Day52](docs/Day52.md)** | 결측치 처리 (interpolate 보간 · fillna · ffill · bfill) & sklearn SimpleImputer · KNNImputer · IterativeImputer & pandas loc · iloc 행 · 열 선택 | 2026-11-16 | interpolate, to_datetime, ffill, bfill, SimpleImputer, KNNImputer, IterativeImputer, n_iter_, loc |
 | **[Day53](docs/Day53.md)** | pandas 조건 행 선택 (불리언 인덱싱) & IQR 이상치 탐지 (np.percentile · boxplot) & 이상치 처리 (NaN 후 결측치 처리 · np.clip) | 2026-11-17 | 불리언 인덱싱, IQR, np.percentile, 사분위, lower · upper bound, boxplot, axhline, np.clip |
+| **[Day54](docs/Day54.md)** | 파이썬 데코레이터 (Decorator) 기본 구조 · @ 문법 & 함수 실행 시간 측정 timer 데코레이터 / (퓨리오사 NPU) RNGD LangChain Tool Calling (@tool · bind_tools · tool_calls 도구 실행 · 도구 여러 개 선택) | 2026-11-18 | Decorator, @, wrapper, 함수를 인자로 전달, timer / (퓨리오사 NPU) @tool, tool_calls, tool.invoke, tool_map, --enable-auto-tool-choice, --tool-call-parser |
 
 ---
 
@@ -130,13 +131,15 @@ C:\furiosa_study\
 │   ├── f01_furiosa_test.py                                           (Day42)
 │   ├── f02_tutorial.py ~ f04_fxb_direct_select.py                    (Day43)
 │   └── f05_langchain.py ~ f08_pkg02_stream.py · a_kingkeras.py       (Day45)
-├─── furiosa02_rngd/                                                  (Furiosa RNGD 실습 2 - 응답 시간 · TTFC · TPS · 동시 요청 · KV Cache · RPS · overlap 스케줄링)
+├─── furiosa02_rngd/                                                  (Furiosa RNGD 실습 2 - 응답 시간 · TTFC · TPS · 동시 요청 · KV Cache · RPS · overlap 스케줄링 · Tool Calling)
 │   ├── f11_basic.py ~ f18_compare.py · kingkeras.py                  (Day47)
 │   ├── f21_continuous_batching1.py ~ f22_kv_cache2.py · kingkeras.py (Day48)
 │   ├── f21_..._batching3.py · f23_prefix_cache1.py ~ f29_...py       (Day49)
-│   └── f30_overlap_eager1.py ~ f30_overlap_eager2.py                 (Day51)
-├─── python/                                                          (파이썬 map · lambda 실습)
-│   └── p01_map.py ~ p03_lambda3.py                                   (Day48)
+│   ├── f30_overlap_eager1.py ~ f30_overlap_eager2.py                 (Day51)
+│   └── f31_tool_test.py ~ f34_multi_tools.py · kingkeras.py          (Day54)
+├─── python/                                                          (파이썬 map · lambda · 데코레이터 실습)
+│   ├── p01_map.py ~ p02_lambda3.py                                   (Day48)
+│   └── p03_Decorator.py ~ p04_Deco_timer.py                          (Day54)
 ├─── python_pkg/                                                      (파이썬 모듈 · 패키지 실습)
 │   ├── p01_car.py ~ p51_from_module.py                               (Day45)
 │   └── machine/ · machine/test/                                      (Day45 패키지 실습 모듈)
@@ -180,7 +183,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day53.md
+│   └── ... Day54.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -193,11 +196,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 53일 (Day01 ~ Day53)  
-**완료 시간:** 424시간  
-**완료율: 66%**
+**완료:** 54일 (Day01 ~ Day54)  
+**완료 시간:** 432시간  
+**완료율: 68%**
 
 ---
 
-**마지막 업데이트:** 2026-11-17  
-**최근 학습:** [Day53 - pandas 조건 행 선택 (불리언 인덱싱) & IQR 이상치 탐지 (np.percentile · boxplot) & 이상치 처리 (NaN 후 결측치 처리 · np.clip)](docs/Day53.md)
+**마지막 업데이트:** 2026-11-18  
+**최근 학습:** [Day54 - 파이썬 데코레이터 (Decorator) 기본 구조 · @ 문법 & 함수 실행 시간 측정 timer 데코레이터 · RNGD LangChain Tool Calling](docs/Day54.md)

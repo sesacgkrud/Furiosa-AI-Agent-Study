@@ -194,4 +194,4 @@ np.where((data > 상한) | (data < 하한))  : 이상치 위치
 
 ---
 
-[⬅️ Day52](Day52.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day52](Day52.md) · [🏠 전체 목차](../README.md) · [Day54 ➡️](Day54.md)

@@ -1,17 +1,24 @@
 # [목적] furiosa02_rngd 실습 파일들이 공통으로 import 하는 LLM 모듈 (Day47 · Day48)
 #        Day47 : get_llm (Day45 의 a_kingkeras.py 와 같은 역할, 기본값을 None 으로 바꿨다)
 #        Day48 : run_once (요청 1 번 + 시간 · 토큰 수 측정), get_cache_metrics (서버 /metrics 로 캐시 상태 확인) 추가
+#        Day54 : 서버 실행 명령에 overlap 스케줄링 · Tool Calling 옵션 추가 (f31 ~ f34)
 # [흐름] get_llm(max_tokens, temperature, top_p) → furiosa-llm 서버(127.0.0.1:8000) 에 붙는 ChatOpenAI 반환
 #        run_once(prompt, max_tokens) → invoke 앞뒤 시간 + usage_metadata 토큰 수를 dict 로 반환
 #        get_cache_metrics() → Prefix Cache 조회 · 적중 횟수 · 적중률, KV Cache 사용률 출력 후 dict 로 반환
 # ※ None = 값을 정하지 않음 → 요청에 넣지 않아 서버(모델) 기본 설정을 따른다
 
 # 서버 실행 명령 (NPU 0 번에 Qwen3-8B-FP8 을 띄운다)
+#   --enable-overlap-scheduling : NPU 계산 중에 CPU 가 다음 배치를 미리 스케줄링 (Day51 f30)
+#   --enable-auto-tool-choice   : 모델이 도구 호출 여부를 스스로 고르게 허용 (bind_tools 로 보낸 도구 사용)
+#   --tool-call-parser hermes   : 모델 출력의 도구 호출을 OpenAI 형식 tool_calls 로 바꾸는 파서 (--enable-auto-tool-choice 에 필수)
 """
 furiosa-llm serve furiosa-ai/Qwen3-8B-FP8 \
     --devices npu:0 \
     --host 0.0.0.0 \
-    --port 8000
+    --port 8000 \
+    --enable-overlap-scheduling \
+    --enable-auto-tool-choice \
+    --tool-call-parser hermes
 """
 
 import time

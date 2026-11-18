@@ -231,7 +231,7 @@ print(aaa(3, 4)) # 7
 - 변수에 담으면 일반 함수처럼 호출할 수 있고, 매개변수가 여러 개면 `,` 로 구분한다
 
 ```python
-# p03_lambda3.py
+# p02_lambda3.py
 score = [85, 45, 70, 55, 95]
 results = list(map(lambda x: "합격" if x >=60 else "불합격", score))
 print(results) # ['합격', '불합격', '합격', '불합격', '합격']
@@ -258,7 +258,7 @@ print(results) # ['합격', '불합격', '합격', '불합격', '합격']
 | `furiosa02_rngd/f22_kv_cache2.py` | 입력 길이를 늘려 가며 요청마다 `get_cache_metrics()` 로 Prefix Cache · KV Cache 상태 출력 |
 | `python/p01_map.py` | `map(multiply, numbers)` → map 객체 · `list()` 로 결과 확인 |
 | `python/p02_lambda1.py` · `python/p02_lambda2.py` | `def` 함수와 같은 `lambda` · 매개변수 2 개 lambda |
-| `python/p03_lambda3.py` | `list(map(lambda x: "합격" if x >= 60 else "불합격", score))` |
+| `python/p02_lambda3.py` | `list(map(lambda x: "합격" if x >= 60 else "불합격", score))` |
 | `python_pkg/` | Day45 의 `python/` 모듈 · 패키지 실습 파일 폴더 이름 변경 (내용 같음) |
 | `furiosa01_rngd/f03_tool_calling.py` | 서버 실행 명령 주석 `--devices npu:0` (수정) |
 | `docs/Day43.md` | furiosa-llm serve 명령 `--devices npu:0` (수정) |
