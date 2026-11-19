@@ -64,6 +64,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day52](docs/Day52.md)** | 결측치 처리 (interpolate 보간 · fillna · ffill · bfill) & sklearn SimpleImputer · KNNImputer · IterativeImputer & pandas loc · iloc 행 · 열 선택 | 2026-11-16 | interpolate, to_datetime, ffill, bfill, SimpleImputer, KNNImputer, IterativeImputer, n_iter_, loc |
 | **[Day53](docs/Day53.md)** | pandas 조건 행 선택 (불리언 인덱싱) & IQR 이상치 탐지 (np.percentile · boxplot) & 이상치 처리 (NaN 후 결측치 처리 · np.clip) | 2026-11-17 | 불리언 인덱싱, IQR, np.percentile, 사분위, lower · upper bound, boxplot, axhline, np.clip |
 | **[Day54](docs/Day54.md)** | 파이썬 데코레이터 (Decorator) 기본 구조 · @ 문법 & 함수 실행 시간 측정 timer 데코레이터 / (퓨리오사 NPU) RNGD LangChain Tool Calling (@tool · bind_tools · tool_calls 도구 실행 · 도구 여러 개 선택) | 2026-11-18 | Decorator, @, wrapper, 함수를 인자로 전달, timer / (퓨리오사 NPU) @tool, tool_calls, tool.invoke, tool_map, --enable-auto-tool-choice, --tool-call-parser |
+| **Day55** | Attention Is All You Need (Transformer) 논문 발표 | 2026-11-19 | Attention Is All You Need, Transformer |
 
 ---
 
@@ -196,11 +197,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 54일 (Day01 ~ Day54)  
-**완료 시간:** 432시간  
-**완료율: 68%**
+**완료:** 55일 (Day01 ~ Day55)  
+**완료 시간:** 440시간  
+**완료율: 69%**
 
 ---
 
-**마지막 업데이트:** 2026-11-18  
-**최근 학습:** [Day54 - 파이썬 데코레이터 (Decorator) 기본 구조 · @ 문법 & 함수 실행 시간 측정 timer 데코레이터 · RNGD LangChain Tool Calling](docs/Day54.md)
+**마지막 업데이트:** 2026-11-19  
+**최근 학습:** Day55 - Attention Is All You Need (Transformer) 논문 발표
