@@ -249,4 +249,4 @@ time.sleep(1)            : 1 초 멈춤
 
 ---
 
-[⬅️ Day53](Day53.md) · [🏠 전체 목차](../README.md)
+[⬅️ Day53](Day53.md) · [🏠 전체 목차](../README.md) · [Day56 ➡️](Day56.md)

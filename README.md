@@ -65,6 +65,7 @@ AI 개발자 양성 과정 학습 기록입니다. 각 Day를 클릭하면 그�
 | **[Day53](docs/Day53.md)** | pandas 조건 행 선택 (불리언 인덱싱) & IQR 이상치 탐지 (np.percentile · boxplot) & 이상치 처리 (NaN 후 결측치 처리 · np.clip) | 2026-11-17 | 불리언 인덱싱, IQR, np.percentile, 사분위, lower · upper bound, boxplot, axhline, np.clip |
 | **[Day54](docs/Day54.md)** | 파이썬 데코레이터 (Decorator) 기본 구조 · @ 문법 & 함수 실행 시간 측정 timer 데코레이터 / (퓨리오사 NPU) RNGD LangChain Tool Calling (@tool · bind_tools · tool_calls 도구 실행 · 도구 여러 개 선택) | 2026-11-18 | Decorator, @, wrapper, 함수를 인자로 전달, timer / (퓨리오사 NPU) @tool, tool_calls, tool.invoke, tool_map, --enable-auto-tool-choice, --tool-call-parser |
 | **Day55** | Attention Is All You Need (Transformer) 논문 발표 | 2026-11-19 | Attention Is All You Need, Transformer |
+| **[Day56](docs/Day56.md)** | BatchNormalization 위치 비교 (없음 · keras 방식 · 2015 논문 방식) & 논리 게이트 AND · OR · XOR & XOR 문제 해결 (다층 퍼셉트론 · DecisionTree) | 2026-11-20 | BatchNormalization 위치, Activation, use_bias, Perceptron, LinearSVC, XOR 문제, 다층 퍼셉트론 |
 
 ---
 
@@ -95,7 +96,7 @@ C:\furiosa_study\
 │   ├── keras55_LSTM2_scale.py ~ keras56_split2_samcode.py            (Day19)
 │   ├── keras56_split3.py ~ keras58_kaggle_jena2.py                   (Day20)
 │   └── keras59_Bidirectional1.py ~ keras59_Bidirectional3_jena.py    (Day21)
-├─── keras2/                                                          (Day22 ~ Day29 · Day46 · Day50 ~ Day51 Keras 실습)
+├─── keras2/                                                          (Day22 ~ Day29 · Day46 · Day50 ~ Day51 · Day56 Keras 실습)
 │   ├── keras60_Tokenizer1.py ~ keras61_Embedding04_important.py      (Day22)
 │   ├── keras62_1_reuters.py ~ keras65_Reshape2.py                    (Day23)
 │   ├── keras66_jena_CNN.py ~ keras67_Conv1D_3_jena.py                (Day24)
@@ -106,7 +107,8 @@ C:\furiosa_study\
 │   ├── keras73_vgg16_03_man_horse.py ~ keras76_all_T_06_cat_dog.py   (Day29)
 │   ├── keras77_hyperParameter02_diabets.py                           (Day46)
 │   ├── keras78_01_sigmoid.py ~ keras78_08_leaky_relu.py              (Day50)
-│   └── keras78_09_softmax.py ~ keras80_Tensorboard.py                (Day51)
+│   ├── keras78_09_softmax.py ~ keras80_Tensorboard.py                (Day51)
+│   └── keras81_batchNormalization1.py ~ keras81_..._3.py             (Day56)
 ├─── RAG/                                                             (LangChain 실습)
 │   ├── rag01_key_insert.py ~ rag09_out_parser02.py                   (Day21)
 │   ├── rag10_Embedding01.py ~ rag10_Embedding02.py                   (Day22)
@@ -127,7 +129,8 @@ C:\furiosa_study\
 │   ├── m02_kfold_05_kaggle_bike.py ~ m05_all_estimators2_kfold.py    (Day43)
 │   ├── m06_all_estimators1_to_data.py ~ m08_GridSearchCV_02_...py    (Day45)
 │   ├── m09_RandomSearchCV_00.py ~ m09_RandomSearchCV_02_diabetes.py  (Day46)
-│   └── m10_HalvingGridSearchCV.py                                    (Day47)
+│   ├── m10_HalvingGridSearchCV.py                                    (Day47)
+│   └── m11_1_and.py ~ m14_5_xor_resolved2.py                         (Day56)
 ├─── furiosa01_rngd/                                                  (Furiosa RNGD 실습 1)
 │   ├── f01_furiosa_test.py                                           (Day42)
 │   ├── f02_tutorial.py ~ f04_fxb_direct_select.py                    (Day43)
@@ -184,7 +187,7 @@ C:\furiosa_study\
 ├─── docs/                                                            (Day별 상세 학습 기록)
 │   ├── Day01.md
 │   ├── Day02.md
-│   └── ... Day54.md
+│   └── ... Day56.md
 ├─── README.md                                                        (전체 목차)
 ├─── .env                                                             (API 키 - .gitignore 제외)
 ├─── .gitignore
@@ -197,11 +200,11 @@ C:\furiosa_study\
 
 **기간:** 2026-08-31 ~ 2026-12-24 (토요일, 일요일, 법정 공휴일 제외: 추석 3일, 한글날 1일, 대체공휴일 1일)  
 **총 수업일:** 80일 (640시간)  
-**완료:** 55일 (Day01 ~ Day55)  
-**완료 시간:** 440시간  
-**완료율: 69%**
+**완료:** 56일 (Day01 ~ Day56)  
+**완료 시간:** 448시간  
+**완료율: 70%**
 
 ---
 
-**마지막 업데이트:** 2026-11-19  
-**최근 학습:** Day55 - Attention Is All You Need (Transformer) 논문 발표
+**마지막 업데이트:** 2026-11-20  
+**최근 학습:** [Day56](docs/Day56.md) - BatchNormalization 위치 비교 & 논리 게이트 AND · OR · XOR & XOR 문제 해결 (다층 퍼셉트론 · DecisionTree)
